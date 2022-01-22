@@ -1,18 +1,65 @@
 import styled from 'styled-components';
+import Input from '../Input/Input';
+import Button from '../Button/Button';
 
 const Container = styled.div`
-  font-size: 16px;
-  color: white;
-  display: flex;
-  position: relative;
-  right: 0;
-  width: 100%;
-  background-color: #3415B0;
-  padding: 20px 0;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+`
+
+const LoginForm = styled.form`
+    width: 400px;
+    height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--white);
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+    display: none;
+}
+`
+
+const LoginInput = styled(Input)`
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: 0 auto;
+    margin-top: 10px;
+    max-width: 70%;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      display: none;
+      -webkit-appearance: none;
+      margin: 0; 
+    }
 `
 
 export const Login = () => (
     <Container>
-
+      <LoginForm>
+        <LoginInput labelValue="Логин" name="email" type="email" onChangeValue=''/>
+        <LoginInput labelValue="Пароль" name="password" type="password" onChangeValue=''/>
+        <Button parentClassName="login" textButton="Войти" />
+      </LoginForm>
     </Container>
 );

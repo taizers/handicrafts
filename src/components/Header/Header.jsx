@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { pathToSignIn } from '../../constants';
 
+const signedIn= false;
+
 const Container = styled.div`
   font-size: 16px;
   color: white;
