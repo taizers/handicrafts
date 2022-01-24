@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { pathToSignIn } from '../../constants';
-
-const signedIn= false;
+import { 
+    pathToSignIn,
+    pathToSignUp,
+    pathToProfile,
+    pathToHandicrafts,
+    pathToMap,
+    pathToHome,
+} from '../../constants';
+import { useState } from 'react';
+import { styledButton } from '../../styles/button';
+import Icons from '../Icons/Icons';
 
 const Container = styled.div`
   font-size: 16px;
@@ -38,37 +46,98 @@ const ListItem = styled(Link)`
   }
 `
 
-const SignInButton = styled(ListItem)`
-  font-weight: 700;
-  margin-right: 40px;
-  margin-left: 100px;
-  padding: 10px 20px;
-  border-color: white;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 30%;
+const SignInButton = styled(styledButton)`
+    margin-left: 100px;
+    margin-right: 110px;
+    min-width: 0;
+    border-radius: 25%;
 
-  &:hover {
-      border-color: red;
-      text-decoration: none;
-  }
+    &:hover {
+        color: var(--main-blue);
+        background-color: var(--white);
+    }
 `
 
-export const Header = () => (
-    <Container>
-        <MainMenuList>
-            <ListItem to=''>
-                Ремёсла
-            </ListItem>
-            <ListItem to=''>
-                Изделия
-            </ListItem>
-            <ListItem to=''>
-                Карта
-            </ListItem>
-            <SignInButton to={pathToSignIn}>
-                Войти
+const UserFeaturesList = styled.ul`
+    position: absolute;
+    right: 40px;
+    top: 80px;
+`
+
+const UserFeaturesItem = styled.li`
+    padding: 5px 10px;
+    background-color: white;
+    color: #437DD4;
+    text-align: center;
+
+    &:hover {
+        background-color: #6A94D4;
+        color: white;
+    }
+`
+
+const UserFeaturesLink = styled(Link)`
+
+`
+
+const returnUserFeatures = (signedIn) => {
+    if (signedIn) {
+        return (
+            <UserFeaturesList>
+                <UserFeaturesItem>
+                    <UserFeaturesLink to={pathToProfile}>
+                        Профиль
+                    </UserFeaturesLink>
+                </UserFeaturesItem>
+                <UserFeaturesItem>
+                    <UserFeaturesLink to="">
+                        Зарегистрироваться
+                    </UserFeaturesLink>
+                </UserFeaturesItem>
+            </UserFeaturesList>
+        );
+    } else {
+        return (
+            <UserFeaturesList>
+                <UserFeaturesItem>
+                    <UserFeaturesLink to={pathToSignIn}>
+                        Войти
+                    </UserFeaturesLink>
+                </UserFeaturesItem>
+                <UserFeaturesItem>
+                    <UserFeaturesLink to={pathToSignUp}>
+                        Зарегистрироваться
+                    </UserFeaturesLink>
+                </UserFeaturesItem>
+            </UserFeaturesList>
+        );
+    }
+};
+
+export const Header = () => {
+    const [isActivUserFeatures, setActivFeatures] = useState(false);
+
+    return (
+        <Container>
+            <MainMenuList>
+                <ListItem to={pathToHome}>
+                    Главная
+                </ListItem>
+                <ListItem to={pathToHandicrafts}>
+                    Ремёсла
+                </ListItem>
+                <ListItem to=''>
+                    Изделия
+                </ListItem>
+                <ListItem to={pathToMap}>
+                    Карта
+                </ListItem>
+            </MainMenuList>
+            
+            <SignInButton type='button' onClick={()=>(setActivFeatures(!isActivUserFeatures))}>
+                <Icons name='non-auth-user' size='32' />
             </SignInButton>
-        </MainMenuList>
-    </Container>
-);
+            {isActivUserFeatures &&  returnUserFeatures(true)}
+        </Container>
+    );
+};

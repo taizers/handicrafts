@@ -1,3 +1,11 @@
 import { Login } from "./Login";
+import { connect } from 'react-redux';
+import { signInRequest } from '../../actions/users';
 
-export default Login;
+const mapDispathToProps = (dispath) => {
+    return {
+        signIn: (data) => dispath(signInRequest(data)),
+    }
+};
+
+export default connect(null, mapDispathToProps)(Login);

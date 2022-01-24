@@ -1,8 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
 import styled from 'styled-components';
 
-const LocaleButton = styled.button`
+export const styledButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,18 +34,3 @@ const LocaleButton = styled.button`
         cursor: default;
     }
 `
-
-const Button = ({ textButton, type = "submit", onClick = null, isDisabled = false, }) => (
-        <LocaleButton disabled={isDisabled} type={type}  onClick={onClick} >
-            {textButton}
-        </LocaleButton>
-);
-
-Button.propTypes = {
-    textButton: PropTypes.string,
-    type: PropTypes.string,
-    onClick: PropTypes.func,
-    isDisabled: PropTypes.bool,
-};
-
-export default Button;

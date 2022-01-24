@@ -1,16 +1,16 @@
-import { GET_USER_REQUEST, GET_USER_SUCCESSED, GET_USER_FAILED } from "../constants";
+import { SIGN_IN_REQUEST, SIGN_IN_SUCCESSED, SIGN_IN_FAILED } from "../constants";
 
-export const getUserRequest = (data) => ({
-    type: GET_USER_REQUEST,
+export const signInRequest = (data) => ({
+    type: SIGN_IN_REQUEST,
     payload: data,
 });
 
-export const getUserSuccessed = (data) => ({
-    type: GET_USER_SUCCESSED,
+export const signInSuccessed = (data) => ({
+    type: SIGN_IN_SUCCESSED,
     payload: data,
 });
 
-export const getUserFailed = (data) => ({
-    type: GET_USER_FAILED,
+export const signInFailed = (data) => ({
+    type: SIGN_IN_FAILED,
     payload: data,
 });

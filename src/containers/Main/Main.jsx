@@ -1,8 +1,13 @@
 import styled from 'styled-components';
-import { Route, Routes } from 'react-router-dom';
-import { pathToSignIn } from '../../constants';
-import Login from '../../components/Login/index';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { 
+  pathToHome,
+  pathToMap,
+  pathToHandicrafts,
+} from '../../constants';
+import Home from '../../components/Home/index';
 import Header from '../../components/Header/index'
+import Handicrafts from '../../components/Handicrafts';
 const Container = styled.div`
   font-size: 16px;
   color: white;
@@ -14,11 +19,13 @@ const Container = styled.div`
   padding: 20px 0;
 `
 
-export const Main = () => (
-    <Container>
+export const Main = () => {
+  return <Container>
         <Header/>
-        <Routes>
-          <Route path={pathToSignIn} element={<Login />}/>
-        </Routes>
+        <Switch>
+          <Route path={pathToHome}><Home /></Route>
+          <Route exact path={pathToMap}><Home /></Route>
+          <Route exact path={pathToHandicrafts}><Handicrafts /></Route>
+        </Switch>
     </Container>
-);
+};

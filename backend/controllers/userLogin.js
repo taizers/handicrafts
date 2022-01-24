@@ -1,11 +1,11 @@
 const UserLogin = require('../models/userLogin');
 
 exports.signIn = (req, res) => {
-    const body = req.body.body;
-
+    const body = req.body;
+    console.log(body);
     UserLogin.findOne({ login: body.login, password: body.password })
-    .then((user) => res.json({login: user._doc.login, role: user._doc.role}))
-    .catch(err => res.status(400).json('Error: ' + err));
+    .then((user) => res.json(user))
+    .catch(err => res.status(400));
 };
 
 exports.signUp = (req, res) => {

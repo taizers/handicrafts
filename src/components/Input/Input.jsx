@@ -75,14 +75,13 @@ const LocaleInput = styled.input`
 const Input = ({ value, name, onChangeValue = null, type = "text", labelValue = false }) => {
     return (
         <LocaleContainer>
-            {labelValue ? <LocaleLabel htmlFor={value + name}>{labelValue}</LocaleLabel> : null}
-            <LocaleInput type={type} id={value + name} name={name} defaultValue={value} onChange={onChangeValue} />
+            {labelValue ? <LocaleLabel htmlFor={value + '-' + name}>{labelValue}</LocaleLabel> : null}
+            <LocaleInput type={type} id={value + '-' + name} name={name} onChange={onChangeValue} />
         </LocaleContainer>
     );
 };
 
 Input.propTypes = {
-    parentClassName: PropTypes.string.isRequired,
     name: PropTypes.string,
     value: PropTypes.string,
     onChangeValue: PropTypes.func,

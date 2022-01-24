@@ -1,4 +1,4 @@
-import { GET_USER_REQUEST, GET_USER_SUCCESSED, GET_USER_FAILED } from "../constants";
+import { SIGN_IN_REQUEST, SIGN_IN_SUCCESSED, SIGN_IN_FAILED } from "../constants";
 
 const initialState = {
     signedIn: false,
@@ -9,18 +9,19 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_USER_REQUEST:
+        case SIGN_IN_REQUEST:
             return {
                 ...state,
                 lading: true,
             };
-        case GET_USER_SUCCESSED:
+        case SIGN_IN_SUCCESSED:
             return {
                 ...state,
                 user: action.payload,
                 lading: false,
+                signedIn: true,
             };
-        case GET_USER_FAILED:
+        case SIGN_IN_FAILED:
             return {
                 ...state,
                 lading: false,

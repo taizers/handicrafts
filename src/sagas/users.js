@@ -1,18 +1,18 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { getUser } from '../api/users';
-import { getUserSuccessed, getUserFailed } from '../actions/users';
+import { signIn } from '../api/users';
+import { signInSuccessed, signInFailed } from '../actions/users';
 
-function* watchFindData() {
-    yield takeEvery('FIND_USER', findUserDataAsync);
+function* watchSignIn() {
+    yield takeEvery('SIGN_IN_REQUEST', findUserDataAsync);
 }
 
 function* findUserDataAsync({ payload }) {
     try {
-        const userData = yield call(getUser, payload);
-        yield put(getUserSuccessed(userData));
+        const userData = yield call(signIn, payload);
+        yield put(signInSuccessed(userData));
     } catch (error) {
-        yield put(getUserFailed(error.message));
+        yield put(signInFailed(error.message));
     }
 }
 
-export default watchFindData;
+export default watchSignIn;

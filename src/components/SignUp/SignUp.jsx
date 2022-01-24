@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import CryptoJS from 'crypto-js';
 import Input from '../Input/Input';
-import { styledButton } from '../../styles/button';
+import Button from '../Button/Button';
 
 const Container = styled.div`
     position: fixed;
@@ -14,7 +13,7 @@ const Container = styled.div`
 
 const LoginForm = styled.form`
     width: 400px;
-    height: 500px;
+    height: calc(100vh - 200px);
     display: flex;
     flex-direction: column;
     padding: 20px 30px;
@@ -55,29 +54,14 @@ const LoginInput = styled(Input)`
     }
 `
 
-const LoginButton = styled(styledButton)`
-  margin-top: 40px;
-`
-
-export const Login = ({signIn}) => {
-  const onSubmitLogin = (evt) => {
-    evt.preventDefault();
-
-    const data = {
-      email: evt.target.elements.email.value,
-      password: CryptoJS.MD5(evt.target.elements.password.value).toString(),
-    };
-    signIn(data);
-    console.log(data);
-
-  }
-
+export const SignUp = () => {
   return (
     <Container>
-      <LoginForm onSubmit={onSubmitLogin}>
-        <LoginInput labelValue="Логин" name="email" type="email" value="login" />
-        <LoginInput labelValue="Пароль" name="password" type="password" value="login" />
-        <LoginButton>Войти</LoginButton>
+      <LoginForm>
+        <LoginInput labelValue="Логин" name="email" type="email" onChangeValue=''/>
+        <LoginInput labelValue="Пароль" name="password" type="password" onChangeValue=''/>
+        <LoginInput labelValue="Повторите пароль" name="password" type="password" onChangeValue=''/>
+        <Button textButton="Войти" />
       </LoginForm>
     </Container>
   );
