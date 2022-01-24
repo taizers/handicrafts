@@ -4,10 +4,12 @@ import {
   pathToHome,
   pathToMap,
   pathToHandicrafts,
+  pathToMainPage,
 } from '../../constants';
 import Home from '../../components/Home/index';
 import Header from '../../components/Header/index'
 import Handicrafts from '../../components/Handicrafts';
+
 const Container = styled.div`
   font-size: 16px;
   color: white;
@@ -20,12 +22,13 @@ const Container = styled.div`
 `
 
 export const Main = () => {
+  let { path, url } = useRouteMatch();
   return <Container>
         <Header/>
         <Switch>
-          <Route path={pathToHome}><Home /></Route>
-          <Route exact path={pathToMap}><Home /></Route>
-          <Route exact path={pathToHandicrafts}><Handicrafts /></Route>
+          <Route path={path + pathToHome}><Home /></Route>
+          <Route exact path={path + pathToMap}><Home /></Route>
+          <Route exact path={path + pathToHandicrafts}><Handicrafts /></Route>
         </Switch>
     </Container>
 };

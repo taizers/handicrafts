@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { 
     pathToSignIn,
     pathToSignUp,
@@ -117,19 +117,21 @@ const returnUserFeatures = (signedIn) => {
 export const Header = () => {
     const [isActivUserFeatures, setActivFeatures] = useState(false);
 
+    let { path, url } = useRouteMatch();
+
     return (
         <Container>
             <MainMenuList>
-                <ListItem to={pathToHome}>
+                <ListItem to={url + pathToHome}>
                     Главная
                 </ListItem>
-                <ListItem to={pathToHandicrafts}>
+                <ListItem to={url + pathToHandicrafts}>
                     Ремёсла
                 </ListItem>
                 <ListItem to=''>
                     Изделия
                 </ListItem>
-                <ListItem to={pathToMap}>
+                <ListItem to={url + pathToMap}>
                     Карта
                 </ListItem>
             </MainMenuList>

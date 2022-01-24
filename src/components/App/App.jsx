@@ -10,6 +10,7 @@ export const App = ({signedIn}) => {
       <Route path={pathToMainPage}><Main /></Route>
       <Route exact path={pathToSignIn}><Login /></Route>
       <Route exact path={pathToSignUp}><SignUp /></Route>
+      <Redirect from="*" to={pathToMainPage} />
       {signedIn ? <Redirect from="*" to={pathToMainPage} /> : <Redirect from="*" to={pathToSignIn} />}
     </Switch>
 

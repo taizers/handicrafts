@@ -2,7 +2,7 @@ const UserLogin = require('../models/userLogin');
 
 exports.signIn = (req, res) => {
     const body = req.body;
-    console.log(body);
+    
     UserLogin.findOne({ login: body.login, password: body.password })
     .then((user) => res.json(user))
     .catch(err => res.status(400));
