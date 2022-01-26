@@ -19,9 +19,11 @@ mongoose.connection.once('open', () => { console.log('connect db') })
 
 const usersRouter = require('./routes/users');
 const usersLoginRouter = require('./routes/userLogin');
+const handicraftsRouter = require('./routes/handicrafts');
 
 app.use('/login', usersLoginRouter);
 app.use('/users', usersRouter);
+app.use('/handicrafts', handicraftsRouter);
 
 app.listen(port, () => {
     console.log(`server is running on port: ${port}`);

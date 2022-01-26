@@ -1,7 +1,7 @@
-import { SIGN_IN_REQUEST, SIGN_IN_SUCCESSED, SIGN_IN_FAILED } from "../constants";
+import { SIGN_IN, SIGN_IN_SUCCESSED, SIGN_IN_FAILED } from "../constants";
 
 export const signInRequest = (data) => ({
-    type: SIGN_IN_REQUEST,
+    type: SIGN_IN,
     payload: data,
 });
 

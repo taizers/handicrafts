@@ -3,7 +3,7 @@ import { signIn } from '../api/users';
 import { signInSuccessed, signInFailed } from '../actions/users';
 
 function* watchSignIn() {
-    yield takeEvery('SIGN_IN_REQUEST', findUserDataAsync);
+    yield takeEvery('SIGN_IN', findUserDataAsync);
 }
 
 function* findUserDataAsync({ payload }) {

@@ -12,7 +12,7 @@ import { useState } from 'react';
 import { styledButton } from '../../styles/button';
 import Icons from '../Icons/Icons';
 
-const Container = styled.div`
+const Container = styled.header`
   font-size: 16px;
   color: white;
   display: flex;
@@ -62,6 +62,7 @@ const UserFeaturesList = styled.ul`
     position: absolute;
     right: 40px;
     top: 80px;
+    z-index: 5;
 `
 
 const UserFeaturesItem = styled.li`

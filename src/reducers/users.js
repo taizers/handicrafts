@@ -1,4 +1,4 @@
-import { SIGN_IN_REQUEST, SIGN_IN_SUCCESSED, SIGN_IN_FAILED } from "../constants";
+import { SIGN_IN, SIGN_IN_SUCCESSED, SIGN_IN_FAILED } from "../constants";
 
 const initialState = {
     signedIn: false,
@@ -9,7 +9,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case SIGN_IN_REQUEST:
+        case SIGN_IN:
             return {
                 ...state,
                 lading: true,
