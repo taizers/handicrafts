@@ -60,7 +60,7 @@ export const HandicraftsList = ({getHandicraftsList, handicraftsList}) => {
     console.log(handicraftsList);
     return <Container className="container">
         <List>
-            { handicraftsList.map( (item, index) => <HandicraftItem key={index + item.url} id={index} title={item.title} url={item.url} /> ) }
+            { handicraftsList.map( (item, index) => <HandicraftItem key={index + item.url} id={item._id} title={item.title} url={item.url} /> ) }
         </List>
     </Container>
 };

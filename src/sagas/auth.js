@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeEvery, all, fork } from "redux-saga/effects";
 import { signIn } from '../api/users';
 import { signInSuccessed, signInFailed } from '../actions/users';
 
@@ -15,4 +15,8 @@ function* findUserDataAsync({ payload }) {
     }
 }
 
-export default watchSignIn;
+export default function* rootSaga() {
+    yield all([
+      fork(watchSignIn),
+    ]);
+}

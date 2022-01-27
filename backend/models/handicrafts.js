@@ -6,9 +6,10 @@ const handicraftsSchema = new Schema({
     url: { type: String, required: true, trim: true, },
     title: { type: String, required: true, trim: true, },
     subTitle: { type: String, trim: true, },
-    text: { type: Array, trim: true, },
-    usefullLinks: { type: Array, trim: true, },
-    location: { type: Array, trim: true, },
+    text: { type: Array, required: true, },
+    usefullLinks: { type: Array, required: true, },
+    location: { type: Array, required: true, },
+    comments: { type: Array }
 }, {
     timestamps: true,
 });

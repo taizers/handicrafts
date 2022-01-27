@@ -6,15 +6,13 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from '@redux-saga/core';
 import reducer from './store/store';
-import watchSignIn from './sagas/users';
-import watchGetHandicraftsList from './sagas/handicrafts';
+import rootSaga from './sagas/index';
 
 const init = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 
-  sagaMiddleware.run(watchSignIn);
-  sagaMiddleware.run(watchGetHandicraftsList);
+  sagaMiddleware.run(rootSaga);
 
   ReactDOM.render(
     <Provider store={store}>

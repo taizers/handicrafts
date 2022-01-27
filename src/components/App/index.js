@@ -1,6 +1,6 @@
 import { App } from "./App";
 import { connect } from 'react-redux';
-import { selectUserSignedIn } from '../../selectors/users';
+import { selectUserSignedIn } from '../../selectors/auth';
 
 const mapStateToProps = (store, ownProps) => {
     return {

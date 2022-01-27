@@ -1,9 +1,9 @@
 const Handicrafts = require('../models/handicrafts');
 
-exports.getHandicraftItem = (req,res) => {
+exports.getHandicraft = (req,res) => {
     const id = req.params.id;
-
-    Handicrafts.findOne({ id: id })
+    console.log(id);
+    Handicrafts.findOne({ _id: id })
     .then(user => res.json(user))
     .catch(err => res.status(400));
 };
