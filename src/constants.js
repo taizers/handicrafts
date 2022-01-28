@@ -1,6 +1,7 @@
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_IN_SUCCESSED = 'SIGN_IN_SUCCESSED';
 export const SIGN_IN_FAILED = 'SIGN_IN_FAILED';
+export const SET_SIGN_IN_LOADING = 'SET_SIGN_IN_LOADING';
 
 export const GET_HANDICRAFTS_LIST = 'GET_HANDICRAFTS_LIST';
 export const GET_HANDICRAFTS_LIST_SUCCESSED = 'GET_HANDICRAFTS_LIST_SUCCESSED';
@@ -17,6 +18,7 @@ export const pathToHome = '/home';
 export const pathToSignIn = '/login';
 export const pathToSignUp = '/signUp';
 export const pathToProfile = '/profile';
-export const pathToHandicrafts = '/hadnicrafts/';
+export const pathToManageComments = '/manageComments';
+export const pathToHandicrafts = '/hadnicrafts';
 export const pathToHandicraftItem = '/hadnicrafts/:id';
 export const pathToMap = '/map';

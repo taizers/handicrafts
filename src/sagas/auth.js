@@ -1,6 +1,6 @@
 import { call, put, takeEvery, all, fork } from "redux-saga/effects";
 import { signIn } from '../api/users';
-import { signInSuccessed, signInFailed } from '../actions/users';
+import { signInSuccessed, signInFailed } from '../actions/auth';
 
 function* watchSignIn() {
     yield takeEvery('SIGN_IN', findUserDataAsync);

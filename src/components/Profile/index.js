@@ -1,4 +1,4 @@
-import { Login } from "./Login";
+import { Profile } from "./Profile";
 import { connect } from 'react-redux';
 import { signInRequest } from '../../actions/auth';
 
@@ -8,4 +8,4 @@ const mapDispathToProps = (dispath) => {
     }
 };
 
-export default connect(null, mapDispathToProps)(Login);
+export default connect(null, mapDispathToProps)(Profile);

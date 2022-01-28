@@ -8,12 +8,11 @@ import NonAuthorizedRoute from '../../Routes/NonAuthorizedRoute/index';
 export const App = ({signedIn}) => {
   console.log(signedIn);
   return <Switch>
-      <Redirect exact from='/' to={pathToMainPage} />
       <Route path={pathToMainPage}><Main /></Route>
-      <NonAuthorizedRoute patch={pathToSignIn}  component={Login} />
-      <NonAuthorizedRoute patch={pathToSignUp}  component={SignUp} />
+      <Redirect exact from='/' to={pathToMainPage} />
+      <NonAuthorizedRoute exact patch={pathToSignIn}  component={Login} />
+      <NonAuthorizedRoute exact patch={pathToSignUp}  component={SignUp} />
       <Redirect to='/' />
-      {signedIn ? <Redirect to={pathToMainPage} /> : <Redirect to={pathToSignIn} />}
     </Switch>
 
 };

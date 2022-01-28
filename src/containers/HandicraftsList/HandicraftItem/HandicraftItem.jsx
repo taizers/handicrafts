@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 const Item = styled.li`
     max-width: 250px;
@@ -22,8 +22,10 @@ const ItemLink = styled(Link)`
 `
 
 export const HandicraftItem = ({id, title, url}) => {
+    let { path } = useRouteMatch();
+
     return <Item>
-            <ItemLink to={id.toString()}>
+            <ItemLink to={path + '/' + id.toString()}>
                 <ItemImage src={url} alt="handicraft" height='100' width='200' />
                 <ItemTitle>{title}</ItemTitle>
             </ItemLink>

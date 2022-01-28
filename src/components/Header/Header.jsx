@@ -51,6 +51,7 @@ const SignInButton = styled(styledButton)`
     margin-right: 110px;
     min-width: 0;
     border-radius: 25%;
+    position: relative;
 
     &:hover {
         color: var(--main-blue);
@@ -60,8 +61,8 @@ const SignInButton = styled(styledButton)`
 
 const UserFeaturesList = styled.ul`
     position: absolute;
-    right: 40px;
-    top: 80px;
+    right: -100;
+    top: 60px;
     z-index: 5;
 `
 
@@ -81,18 +82,28 @@ const UserFeaturesLink = styled(Link)`
 
 `
 
-const returnUserFeatures = (signedIn) => {
+const returnUserFeatures = (signedIn, url) => {
     if (signedIn) {
         return (
             <UserFeaturesList>
                 <UserFeaturesItem>
-                    <UserFeaturesLink to={pathToProfile}>
+                    <UserFeaturesLink to={url + pathToProfile}>
                         Профиль
                     </UserFeaturesLink>
                 </UserFeaturesItem>
                 <UserFeaturesItem>
                     <UserFeaturesLink to="">
-                        Зарегистрироваться
+                        Модерация
+                    </UserFeaturesLink>
+                </UserFeaturesItem>
+                <UserFeaturesItem>
+                    <UserFeaturesLink to="">
+                        Создать
+                    </UserFeaturesLink>
+                </UserFeaturesItem>
+                <UserFeaturesItem>
+                    <UserFeaturesLink to="/hc">
+                        Выход
                     </UserFeaturesLink>
                 </UserFeaturesItem>
             </UserFeaturesList>
@@ -115,11 +126,11 @@ const returnUserFeatures = (signedIn) => {
     }
 };
 
-export const Header = () => {
+export const Header = ({signedIn}) => {
     const [isActivUserFeatures, setActivFeatures] = useState(false);
 
     let { path, url } = useRouteMatch();
-
+    console.log(url);
     return (
         <Container>
             <MainMenuList>
@@ -139,8 +150,9 @@ export const Header = () => {
             
             <SignInButton type='button' onClick={()=>(setActivFeatures(!isActivUserFeatures))}>
                 <Icons name='non-auth-user' size='32' />
+                {isActivUserFeatures &&  returnUserFeatures(signedIn, url)}
             </SignInButton>
-            {isActivUserFeatures &&  returnUserFeatures(true)}
+            
         </Container>
     );
 };

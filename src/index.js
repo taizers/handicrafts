@@ -7,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from '@redux-saga/core';
 import reducer from './store/store';
 import rootSaga from './sagas/index';
+import history from "./history";
 
 const init = () => {
   const sagaMiddleware = createSagaMiddleware();
@@ -16,7 +17,7 @@ const init = () => {
 
   ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter history={history}>
         <App />
       </BrowserRouter>
     </Provider>,

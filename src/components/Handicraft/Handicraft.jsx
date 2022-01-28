@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import{ useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import Comment from './Comment/index';
+import UsefullLink from './UsefullLink/index';
 
 const Container = styled.div`
     position: relative;
@@ -12,42 +13,30 @@ const Container = styled.div`
     margin: auto;
 `
 const Title = styled.h2`
-
+  font-size: 30px;
 `
 const SubTitle = styled.h3`
-
+  font-size: 18px;
+  font-weight: bold;
+  margin: 20px 0;
 `
 const TextContainer = styled.div`
 
 `
 const Text = styled.p`
-
+  text-indent: 40px;
+  margin: 10px 0;
+  font-size: 17px;
 `
 
 const UsefullLinks = styled.ul`
 
 `
 
-const UsefullLinksItem = styled.li`
-
-`
-
-const UsefullLink = styled.a`
-  &:hover {
-    color: red;
-    text-transform: underline;
-  }
-`
-
 const Comments = styled.ul`
-
+  text-align: center;
+  margin: 30px 0;
 `
-
-const getUsefullLinks = (links) => {
-  return <UsefullLinks>
-      {links.map( (item, index) => <UsefullLinksItem key={'link' + index}><UsefullLink target='_blank' href={item} key={'handicraftUsefullLink' + index}>{item}</UsefullLink></UsefullLinksItem>)}
-    </UsefullLinks>
-}
 
 const getText = (textList) => {
   return <TextContainer>
@@ -68,12 +57,19 @@ export const Handicraft = ({getHandicraft, handicraft}) => {
     <Container className="container">
       <Title>{title}</Title>
       <SubTitle>{sub_title}</SubTitle>
-      {getText(text)}
-      {getUsefullLinks(usefullLinks)}
-      {<Comments>
-        {comments.map( (item, index) => <Comment comment={item} key={'comment' + index} /> )}
-      </Comments>}
-      
+    
+      {text && getText(text)}
+      <SubTitle>Полезные ссылки</SubTitle>
+      {usefullLinks && 
+        <UsefullLinks>
+          {usefullLinks.map( (item, index) => <UsefullLink link={item} key={"link" + index} />)}
+        </UsefullLinks>
+      }
+      <SubTitle>Комментарии</SubTitle>
+      {comments &&
+        <Comments>
+          {comments.map( (item, index) => <Comment comment={item} key={'comment' + index} /> )}
+        </Comments>}
     </Container>
   );
 }

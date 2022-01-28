@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_IN_SUCCESSED, SIGN_IN_FAILED } from "../constants";
+import { SET_SIGN_IN_LOADING, SIGN_IN_SUCCESSED, SIGN_IN_FAILED } from "../constants";
 
 const initialState = {
     signedIn: false,
@@ -9,23 +9,21 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case SIGN_IN:
-            return {
-                ...state,
-                loading: true,
-            };
         case SIGN_IN_SUCCESSED:
             return {
                 ...state,
                 user: action.payload,
-                loading: false,
                 signedIn: true,
             };
         case SIGN_IN_FAILED:
             return {
                 ...state,
-                loading: false,
                 error: action.payload,
+            };
+        case SET_SIGN_IN_LOADING:
+            return {
+                ...state,
+                loading: action.payload.isLoading,
             };
         default:
             return state;
