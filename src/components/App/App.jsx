@@ -5,13 +5,12 @@ import { pathToMainPage, pathToSignIn, pathToSignUp } from '../../constants';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import NonAuthorizedRoute from '../../Routes/NonAuthorizedRoute/index';
 
-export const App = ({signedIn}) => {
-  console.log(signedIn);
+export const App = () => {
   return <Switch>
       <Route path={pathToMainPage}><Main /></Route>
       <Redirect exact from='/' to={pathToMainPage} />
-      <NonAuthorizedRoute exact patch={pathToSignIn}  component={Login} />
-      <NonAuthorizedRoute exact patch={pathToSignUp}  component={SignUp} />
+      <NonAuthorizedRoute patch={pathToSignIn}  component={Login} exact />
+      <NonAuthorizedRoute patch={pathToSignUp}  component={SignUp} exact />
       <Redirect to='/' />
     </Switch>
 

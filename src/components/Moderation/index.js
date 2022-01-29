@@ -1,4 +1,4 @@
-import { Map } from "./Map";
+import { Moderation } from "./Moderation";
 import { connect } from 'react-redux';
 import { signIn } from '../../actions/auth';
 
@@ -8,4 +8,4 @@ const mapDispathToProps = (dispath) => {
     }
 };
 
-export default connect(null, mapDispathToProps)(Map);
+export default connect(null, mapDispathToProps)(Moderation);

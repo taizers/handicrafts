@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Input from '../Input/Input';
-import Button from '../Button/Button';
+import { styledButton } from '../../styles/button';
+import CryptoJS from 'crypto-js';
 
 const Container = styled.div`
     position: fixed;
@@ -11,7 +12,7 @@ const Container = styled.div`
     margin: auto;
 `
 
-const LoginForm = styled.form`
+const SignUpForm = styled.form`
     width: 400px;
     height: calc(100vh - 200px);
     display: flex;
@@ -35,7 +36,7 @@ const LoginForm = styled.form`
 }
 `
 
-const LoginInput = styled(Input)`
+const SignUpInput = styled(Input)`
     position: fixed;
     top: 0;
     bottom: 0;
@@ -54,15 +55,35 @@ const LoginInput = styled(Input)`
     }
 `
 
-export const SignUp = () => {
+const SignUpButton = styled(styledButton)`
+  margin-top: 40px;
+`
+
+export const SignUp = ({ signUp }) => {
+  const onSubmitSignIn = (evt) => {
+    evt.preventDefault();
+
+    if (evt.target.elements.firstPassword.value === evt.target.elements.secondPassword.value ) {
+      const data = {
+        login: evt.target.elements.email.value,
+        password: CryptoJS.MD5(evt.target.elements.firstPassword.value).toString(),
+        role: 'user',
+      };
+      signUp(data);
+      console.log(data);
+    }
+    
+    
+  }
+
   return (
     <Container>
-      <LoginForm>
-        <LoginInput labelValue="Логин" name="email" type="email" onChangeValue=''/>
-        <LoginInput labelValue="Пароль" name="password" type="password" onChangeValue=''/>
-        <LoginInput labelValue="Повторите пароль" name="password" type="password" onChangeValue=''/>
-        <Button textButton="Войти" />
-      </LoginForm>
+      <SignUpForm onSubmit={onSubmitSignIn}>
+        <SignUpInput labelValue="Логин" name="email" type="email" onChangeValue=''/>
+        <SignUpInput labelValue="Пароль" name="firstPassword" type="password" onChangeValue=''/>
+        <SignUpInput labelValue="Повторите пароль" name="secondPassword" type="password" onChangeValue=''/>
+        <SignUpButton>Зарегистрироваться</SignUpButton>
+      </SignUpForm>
     </Container>
   );
 }

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { styledButton } from '../../../styles/button';
 
 const Text = styled.p`
-
+    text-align: left;
 `
 
 const IsEdited = styled.p`
@@ -54,16 +54,18 @@ const CommentButtonsContainer = styled.div`
     gap: 20px;
 `
 
-export const Comment = ({comment}) => {
-  return (
-    <CommentItem>
-        <IsEdited>Редактировано</IsEdited>
-        <CommentImage src="https://reqres.in/img/faces/2-image.jpg" height="100" weight="100" ></CommentImage>
-        <Text>{comment.comment}</Text>
-        {true && <CommentButtonsContainer>
-            {true && <EditCommentButton>Редактировать</EditCommentButton>}
-            {true && <DeleteCommentButton>Удалить </DeleteCommentButton>}
-        </CommentButtonsContainer>}
-    </CommentItem>
-  );
+export const Comment = ({ comment, currentUserId, currentUserRole, signedIn }) => {
+    const { text, userId, isEdited } = comment;
+
+    return (
+        <CommentItem>
+            {isEdited && <IsEdited>Редактировано</IsEdited>}
+            <CommentImage src="https://reqres.in/img/faces/2-image.jpg" height="100" weight="100" ></CommentImage>
+            <Text>{text}</Text>
+            {signedIn && <CommentButtonsContainer>
+                {(userId === currentUserId) && <EditCommentButton>Редактировать</EditCommentButton>}
+                {((currentUserRole === 'admin') || (userId === currentUserId)) && <DeleteCommentButton>Удалить </DeleteCommentButton>}
+            </CommentButtonsContainer>}
+        </CommentItem>
+    );
 }

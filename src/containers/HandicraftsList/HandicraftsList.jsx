@@ -57,10 +57,10 @@ export const HandicraftsList = ({getHandicraftsList, handicraftsList}) => {
         getHandicraftsList();
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
-    console.log(handicraftsList);
+
     return <Container className="container">
         <List>
-            { handicraftsList.map( (item, index) => <HandicraftItem key={index + item.url} id={item._id} title={item.title} url={item.url} /> ) }
+            { handicraftsList.map( (item, index) => <HandicraftItem key={index + item.url} handicraft={item} /> ) }
         </List>
     </Container>
 };

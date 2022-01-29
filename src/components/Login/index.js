@@ -1,10 +1,10 @@
 import { Login } from "./Login";
 import { connect } from 'react-redux';
-import { signInRequest } from '../../actions/auth';
+import { signIn } from '../../actions/auth';
 
 const mapDispathToProps = (dispath) => {
     return {
-        signIn: (data) => dispath(signInRequest(data)),
+        signIn: (data) => dispath(signIn(data)),
     }
 };
 

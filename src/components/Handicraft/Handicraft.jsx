@@ -35,7 +35,7 @@ const UsefullLinks = styled.ul`
 
 const Comments = styled.ul`
   text-align: center;
-  margin: 30px 0;
+  margin: 20px 0;
 `
 
 const getText = (textList) => {
@@ -44,13 +44,13 @@ const getText = (textList) => {
     </TextContainer>
 }
 
-export const Handicraft = ({getHandicraft, handicraft}) => {
-    const { title, sub_title, text, usefullLinks, comments} = handicraft;
+export const Handicraft = ({getHandicraft, getComments, handicraft, comments}) => {
+    const { title, sub_title, text, usefullLinks} = handicraft;
 
-    console.log(comments);
     let { id } = useParams(); 
     useEffect(() => {
       getHandicraft(id);
+      getComments(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
   return (

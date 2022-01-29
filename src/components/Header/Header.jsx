@@ -7,6 +7,7 @@ import {
     pathToHandicrafts,
     pathToMap,
     pathToHome,
+    pathToModeration,
 } from '../../constants';
 import { useState } from 'react';
 import { styledButton } from '../../styles/button';
@@ -50,7 +51,7 @@ const SignInButton = styled(styledButton)`
     margin-left: 100px;
     margin-right: 110px;
     min-width: 0;
-    border-radius: 25%;
+    border-radius: 15px;
     position: relative;
 
     &:hover {
@@ -92,7 +93,7 @@ const returnUserFeatures = (signedIn, url) => {
                     </UserFeaturesLink>
                 </UserFeaturesItem>
                 <UserFeaturesItem>
-                    <UserFeaturesLink to="">
+                    <UserFeaturesLink to={url + pathToModeration}>
                         Модерация
                     </UserFeaturesLink>
                 </UserFeaturesItem>
@@ -130,7 +131,7 @@ export const Header = ({signedIn}) => {
     const [isActivUserFeatures, setActivFeatures] = useState(false);
 
     let { path, url } = useRouteMatch();
-    console.log(url);
+
     return (
         <Container>
             <MainMenuList>

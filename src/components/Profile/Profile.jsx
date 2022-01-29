@@ -33,10 +33,10 @@ const UserDisplaiedName = styled.p`
 export const Profile = ({user}) => {
     return (
         <Container>
-            <UserImage src="https://reqres.in/img/faces/2-image.jpg"  height="150" width="150" />
+            <UserImage src={user?.avatar}  height="150" width="150" />
             <UserLogin>Логин: {user?.login}</UserLogin>
-            <UserDisplaiedName>Отображаемое имя: {user?.displaiedName}</UserDisplaiedName>
+            <UserDisplaiedName>Отображаемое имя: {user?.displayedName}</UserDisplaiedName>
             <UserDisplaiedName>Роль: {user?.role}</UserDisplaiedName>
         </Container>
     );
-}
+};

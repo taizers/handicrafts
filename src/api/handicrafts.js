@@ -6,7 +6,6 @@ export const getHandicraftsListApi = async () => {
 };
 
 export const getHandicraftApi = async (id) => {
-    console.log(id);
     return await axios.get("http://localhost:5000/handicraft/" + id)
     .then(response => response.data)
 };

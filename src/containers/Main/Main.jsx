@@ -7,6 +7,7 @@ import {
   pathToHandicraftItem,
   pathToProfile,
   pathToMainPage,
+  pathToModeration,
 } from '../../constants';
 import Home from '../../components/Home/index';
 import Header from '../../components/Header/index'
@@ -14,6 +15,7 @@ import HandicraftsList from '../HandicraftsList/index';
 import Handicraft from '../../components/Handicraft/index';
 import Map from '../../components/Map/index';
 import Profile from '../../components/Profile/index';
+import Moderation from '../../components/Moderation/index';
 import AuthorizedRoute from '../../Routes/AuthorizedRoute/index';
 
 const Container = styled.div`
@@ -24,7 +26,7 @@ const Container = styled.div`
 
 export const Main = () => {
   let { path, url } = useRouteMatch();
-  console.log(path + pathToProfile);
+
   return <Container>
         <Header/>
         <Switch>
@@ -33,7 +35,8 @@ export const Main = () => {
           <Route path={path + pathToMap}><Map /></Route>
           <Route exact path={path + pathToHandicrafts}><HandicraftsList /></Route>
           <Route exact path={path + pathToHandicraftItem}><Handicraft /></Route>
-          <AuthorizedRoute patch={path + pathToProfile}  component={Profile} />
+          <Route exact path={path + pathToModeration}><Moderation /></Route>
+          <AuthorizedRoute patch={path + pathToProfile}  component={Profile} exact />
         </Switch>
     </Container>
 };

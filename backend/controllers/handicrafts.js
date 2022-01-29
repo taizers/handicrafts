@@ -2,7 +2,7 @@ const Handicrafts = require('../models/handicrafts');
 
 exports.getHandicraft = (req,res) => {
     const id = req.params.id;
-    console.log(id);
+
     Handicrafts.findOne({ _id: id })
     .then(user => res.json(user))
     .catch(err => res.status(400));
@@ -10,7 +10,9 @@ exports.getHandicraft = (req,res) => {
 
 exports.getHandicraftsList = (req,res) => {
     Handicrafts.find()
-    .then(list => res.json(list))
+    .then(list => 
+        res.json(list.map(item => ({id: item._id, img: item.url, title: item.title})))
+    )
     .catch(err => res.status(400));
 /*    const pageOptions = {
         page: +req.query.page-1,

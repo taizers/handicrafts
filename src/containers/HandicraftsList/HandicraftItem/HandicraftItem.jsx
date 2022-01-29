@@ -21,12 +21,14 @@ const ItemLink = styled(Link)`
     width: 250px;
 `
 
-export const HandicraftItem = ({id, title, url}) => {
+export const HandicraftItem = ({handicraft}) => {
     let { path } = useRouteMatch();
+    
+    const {id, img, title} = handicraft;
 
     return <Item>
-            <ItemLink to={path + '/' + id.toString()}>
-                <ItemImage src={url} alt="handicraft" height='100' width='200' />
+            <ItemLink to={path + '/' + id}>
+                <ItemImage src={img} alt="handicraft image" height='100' width='200' />
                 <ItemTitle>{title}</ItemTitle>
             </ItemLink>
         </Item>

@@ -1,3 +1,11 @@
 import { SignUp } from "./SignUp";
+import { connect } from 'react-redux';
+import { signUp } from '../../actions/auth';
 
-export default SignUp;
+const mapDispathToProps = (dispath) => {
+    return {
+        signUp: (data) => dispath(signUp(data)),
+    }
+};
+
+export default connect(null, mapDispathToProps)(SignUp);

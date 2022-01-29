@@ -1,11 +1,11 @@
 import { Profile } from "./Profile";
 import { connect } from 'react-redux';
-import { signInRequest } from '../../actions/auth';
+import { selectUser } from '../../selectors/auth';
 
-const mapDispathToProps = (dispath) => {
+const mapStateToProps = (store) => {
     return {
-        signIn: (data) => dispath(signInRequest(data)),
-    }
+        user: selectUser(store),
+    };
 };
 
-export default connect(null, mapDispathToProps)(Profile);
+export default connect(mapStateToProps)(Profile);

@@ -64,7 +64,7 @@ export const Login = ({signIn}) => {
     evt.preventDefault();
 
     const data = {
-      email: evt.target.elements.email.value,
+      login: evt.target.elements.email.value,
       password: CryptoJS.MD5(evt.target.elements.password.value).toString(),
     };
     signIn(data);
