@@ -5,6 +5,7 @@ import { styledButton } from '../../../styles/button';
 
 const Text = styled.p`
     text-align: left;
+    text-indent: 20px;
 `
 
 const IsEdited = styled.p`
@@ -54,6 +55,14 @@ const CommentButtonsContainer = styled.div`
     gap: 20px;
 `
 
+const onEditButtonClick = () => {
+
+};
+
+const onDeleteButtonClick = () => {
+
+};
+
 export const Comment = ({ comment, currentUserId, currentUserRole, signedIn }) => {
     const { text, userId, isEdited } = comment;
 
@@ -63,8 +72,8 @@ export const Comment = ({ comment, currentUserId, currentUserRole, signedIn }) =
             <CommentImage src="https://reqres.in/img/faces/2-image.jpg" height="100" weight="100" ></CommentImage>
             <Text>{text}</Text>
             {signedIn && <CommentButtonsContainer>
-                {(userId === currentUserId) && <EditCommentButton>Редактировать</EditCommentButton>}
-                {((currentUserRole === 'admin') || (userId === currentUserId)) && <DeleteCommentButton>Удалить </DeleteCommentButton>}
+                {(userId === currentUserId) && <EditCommentButton onClick={onEditButtonClick}>Редактировать</EditCommentButton>}
+                {((currentUserRole === 'admin') || (userId === currentUserId)) && <DeleteCommentButton onClick={onDeleteButtonClick}>Удалить </DeleteCommentButton>}
             </CommentButtonsContainer>}
         </CommentItem>
     );

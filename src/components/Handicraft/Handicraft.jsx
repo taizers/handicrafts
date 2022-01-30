@@ -69,6 +69,7 @@ export const Handicraft = ({getHandicraft, getComments, handicraft, comments}) =
       {comments &&
         <Comments>
           {comments.map( (item, index) => <Comment comment={item} key={'comment' + index} /> )}
+          
         </Comments>}
     </Container>
   );
