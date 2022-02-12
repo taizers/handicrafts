@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import{ useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import Comment from './Comment/index';
 import UsefullLink from './UsefullLink/index';
+import Comments from './Comments/index';
 
 const Container = styled.div`
     position: relative;
@@ -33,10 +33,6 @@ const UsefullLinks = styled.ul`
 
 `
 
-const Comments = styled.ul`
-  text-align: center;
-  margin: 20px 0;
-`
 
 const getText = (textList) => {
   return <TextContainer>
@@ -45,9 +41,10 @@ const getText = (textList) => {
 }
 
 export const Handicraft = ({getHandicraft, getComments, handicraft, comments}) => {
-    const { title, sub_title, text, usefullLinks} = handicraft;
+    const { title, sub_title, text, usefullLinks } = handicraft;
 
     let { id } = useParams(); 
+
     useEffect(() => {
       getHandicraft(id);
       getComments(id);
@@ -66,11 +63,7 @@ export const Handicraft = ({getHandicraft, getComments, handicraft, comments}) =
         </UsefullLinks>
       }
       <SubTitle>Комментарии</SubTitle>
-      {comments &&
-        <Comments>
-          {comments.map( (item, index) => <Comment comment={item} key={'comment' + index} /> )}
-          
-        </Comments>}
+      <Comments comments={comments} postId={handicraft._id} />
     </Container>
   );
 }

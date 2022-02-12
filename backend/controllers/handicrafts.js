@@ -11,7 +11,7 @@ exports.getHandicraft = (req,res) => {
 exports.getHandicraftsList = (req,res) => {
     Handicrafts.find()
     .then(list => 
-        res.json(list.map(item => ({id: item._id, img: item.url, title: item.title})))
+        res.json(list.map(item => ({id: item._id, img: item.url, title: item.title, location: item.location})))
     )
     .catch(err => res.status(400));
 /*    const pageOptions = {

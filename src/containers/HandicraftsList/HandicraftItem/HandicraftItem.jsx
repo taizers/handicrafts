@@ -4,6 +4,13 @@ import { Link, useRouteMatch } from 'react-router-dom';
 const Item = styled.li`
     max-width: 250px;
     word-wrap: break-word;
+    margin-right: 30px;
+
+    &:hover {
+        -webkit-transform: scale(0.95);
+        -ms-transform: scale(0.95);
+        transform: scale(0.95);
+    }
 `
 
 const ItemTitle = styled.h3`

@@ -3,6 +3,8 @@ import {
     GET_COMMENTS_FAILED,
     SET_COMMENTS_LOADING,
     CLEAR_COMMENTS,
+    DELETE_COMMENT_SUCCESSED,
+    CREATE_COMMENT_SUCCESSED,
 } from "../constants";
 
 const initialState = {

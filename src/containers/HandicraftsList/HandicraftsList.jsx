@@ -14,43 +14,9 @@ const List = styled.ul`
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 20px;
-    justify-content: space-around;
+    margin-bottom: 20px;
+    margin-right: -30px;
 `
-
-const list = [
-    {
-        url: "https://reqres.in/img/faces/2-image.jpg",
-        title: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16",
-    },
-    {
-        url: "https://reqres.in/img/faces/2-image.jpg",
-        title: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16",
-    },
-    {
-        url: "https://reqres.in/img/faces/2-image.jpg",
-        title: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16",
-    },
-    {
-        url: "https://reqres.in/img/faces/2-image.jpg",
-        title: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16",
-    },
-    {
-        url: "https://reqres.in/img/faces/2-image.jpg",
-        title: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16",
-    },
-    {
-        url: "https://reqres.in/img/faces/2-image.jpg",
-        title: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16",
-    },
-    {
-        url: "https://reqres.in/img/faces/2-image.jpg",
-        title: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16",
-    },
-    {
-        url: "https://reqres.in/img/faces/2-image.jpg",
-        title: "1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16",
-    },
-]
 
 export const HandicraftsList = ({getHandicraftsList, handicraftsList}) => {
     useEffect(() => {

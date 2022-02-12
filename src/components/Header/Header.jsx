@@ -12,27 +12,35 @@ import {
 import { useState } from 'react';
 import { styledButton } from '../../styles/button';
 import Icons from '../Icons/Icons';
+import Avatar from '@atlaskit/avatar';
+import DropdownMenu, { DropdownItem, DropdownItemGroup } from '@atlaskit/dropdown-menu';
 
-const Container = styled.header`
+const HeaderItem = styled.header`
   font-size: 16px;
   color: white;
   display: flex;
-  position: relative;
-  right: 0;
-  width: 100%;
   background-color: #3415B0;
   padding: 20px 0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin:0 auto;
+  }
+`
+const Container = styled.div`
 `
 
 const MainMenuList = styled.ul`
   font-size: 16px;
-  padding-left: 0;
-  min-width: 50%;
   color: white;
-  list-style: none;
   display: flex;
-  justify-content: space-between;
-  margin-left: auto;
+  margin-left: -40px;
+  margin-right: auto;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin:0 auto;
+  }
 `
 
 const ListItem = styled(Link)`
@@ -40,6 +48,7 @@ const ListItem = styled(Link)`
   font-weight: 500;
   color: white;
   align-self: center;
+  margin-left: 40px;
 
   &:hover {
       color: red;
@@ -47,113 +56,49 @@ const ListItem = styled(Link)`
   }
 `
 
-const SignInButton = styled(styledButton)`
-    margin-left: 100px;
-    margin-right: 110px;
-    min-width: 0;
-    border-radius: 15px;
-    position: relative;
-
-    &:hover {
-        color: var(--main-blue);
-        background-color: var(--white);
-    }
-`
-
-const UserFeaturesList = styled.ul`
-    position: absolute;
-    right: -100;
-    top: 60px;
-    z-index: 5;
-`
-
-const UserFeaturesItem = styled.li`
-    padding: 5px 10px;
-    background-color: white;
-    color: #437DD4;
-    text-align: center;
-
-    &:hover {
-        background-color: #6A94D4;
-        color: white;
-    }
-`
-
-const UserFeaturesLink = styled(Link)`
-
-`
-
-const returnUserFeatures = (signedIn, url) => {
-    if (signedIn) {
-        return (
-            <UserFeaturesList>
-                <UserFeaturesItem>
-                    <UserFeaturesLink to={url + pathToProfile}>
-                        Профиль
-                    </UserFeaturesLink>
-                </UserFeaturesItem>
-                <UserFeaturesItem>
-                    <UserFeaturesLink to={url + pathToModeration}>
-                        Модерация
-                    </UserFeaturesLink>
-                </UserFeaturesItem>
-                <UserFeaturesItem>
-                    <UserFeaturesLink to="">
-                        Создать
-                    </UserFeaturesLink>
-                </UserFeaturesItem>
-                <UserFeaturesItem>
-                    <UserFeaturesLink to="/hc">
-                        Выход
-                    </UserFeaturesLink>
-                </UserFeaturesItem>
-            </UserFeaturesList>
-        );
-    } else {
-        return (
-            <UserFeaturesList>
-                <UserFeaturesItem>
-                    <UserFeaturesLink to={pathToSignIn}>
-                        Войти
-                    </UserFeaturesLink>
-                </UserFeaturesItem>
-                <UserFeaturesItem>
-                    <UserFeaturesLink to={pathToSignUp}>
-                        Зарегистрироваться
-                    </UserFeaturesLink>
-                </UserFeaturesItem>
-            </UserFeaturesList>
-        );
-    }
-};
-
 export const Header = ({signedIn}) => {
-    const [isActivUserFeatures, setActivFeatures] = useState(false);
-
     let { path, url } = useRouteMatch();
 
     return (
-        <Container>
-            <MainMenuList>
-                <ListItem to={url + pathToHome}>
-                    Главная
-                </ListItem>
-                <ListItem to={url + pathToHandicrafts}>
-                    Ремёсла
-                </ListItem>
-                <ListItem to=''>
-                    Изделия
-                </ListItem>
-                <ListItem to={url + pathToMap}>
-                    Карта
-                </ListItem>
-            </MainMenuList>
-            
-            <SignInButton type='button' onClick={()=>(setActivFeatures(!isActivUserFeatures))}>
-                <Icons name='non-auth-user' size='32' />
-                {isActivUserFeatures &&  returnUserFeatures(signedIn, url)}
-            </SignInButton>
-            
+        <Container className="container">
+            <HeaderItem>
+                <MainMenuList>
+                    <ListItem to={url + pathToHome}>
+                        Главная
+                    </ListItem>
+                    <ListItem to={url + pathToHandicrafts}>
+                        Ремёсла
+                    </ListItem>
+                    <ListItem to=''>
+                        Изделия
+                    </ListItem>
+                    <ListItem to={url + pathToMap}>
+                        Карта
+                    </ListItem>
+                </MainMenuList>
+                <DropdownMenu
+                    placement="bottom"
+                    trigger={({ triggerRef, ...props }) => (
+                        <Avatar
+                            {...props}
+                            ref={triggerRef}
+                            appearance="circle"
+                            src={signedIn && "https://pbs.twimg.com/profile_images/803832195970433027/aaoG6PJI_400x400.jpg"}
+                            size="large"
+                            name="John Doe"
+                        />
+                    )}
+                    >
+                    <DropdownItemGroup>
+                        {signedIn && <DropdownItem><Link to={url + pathToProfile}>Профиль</Link></DropdownItem>}
+                        {signedIn && <DropdownItem><Link to={url + pathToModeration}>Модерация</Link></DropdownItem>}
+                        {signedIn && <DropdownItem><Link to="">Создать</Link></DropdownItem>}
+                        {signedIn && <DropdownItem><Link to="/hc">Выход</Link></DropdownItem>}
+                        {!signedIn && <DropdownItem><Link to={pathToSignIn}>Войти</Link></DropdownItem>}
+                        {!signedIn && <DropdownItem><Link to={pathToSignUp}>Зарегестрироваться</Link></DropdownItem>}
+                    </DropdownItemGroup>
+                </DropdownMenu>    
+            </HeaderItem>
         </Container>
     );
 };

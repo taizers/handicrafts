@@ -30,9 +30,9 @@ export const getCommentsFailed = (error) => ({
     payload: error,
 });
 
-export const editComment = (id) => ({
+export const editComment = (comment) => ({
     type: EDIT_COMMENT,
-    payload: id,
+    payload: comment,
 });
 
 export const editCommentSuccessed = () => ({
@@ -58,9 +58,9 @@ export const deleteCommentFailed = (error) => ({
     payload: error,
 });
 
-export const createComment = (data) => ({
+export const createComment = (comment) => ({
     type: CREATE_COMMENT,
-    payload: data,
+    payload: comment,
 });
 
 export const createCommentSuccessed = () => ({

@@ -13,7 +13,7 @@ import Home from '../../components/Home/index';
 import Header from '../../components/Header/index'
 import HandicraftsList from '../HandicraftsList/index';
 import Handicraft from '../../components/Handicraft/index';
-import Map from '../../components/Map/index';
+import MapContainer from '../../components/MapContainer/index';
 import Profile from '../../components/Profile/index';
 import Moderation from '../../components/Moderation/index';
 import AuthorizedRoute from '../../Routes/AuthorizedRoute/index';
@@ -32,7 +32,7 @@ export const Main = () => {
         <Switch>
           <Redirect exact from={pathToMainPage} to={path + pathToHome} />
           <Route path={path + pathToHome}><Home /></Route>
-          <Route path={path + pathToMap}><Map /></Route>
+          <Route path={path + pathToMap}><MapContainer /></Route>
           <Route exact path={path + pathToHandicrafts}><HandicraftsList /></Route>
           <Route exact path={path + pathToHandicraftItem}><Handicraft /></Route>
           <Route exact path={path + pathToModeration}><Moderation /></Route>

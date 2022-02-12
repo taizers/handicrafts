@@ -3,20 +3,22 @@ import { getCommentsApi, deleteCommentApi, editCommentApi, createCommentApi } fr
 import {
     getCommentsSuccessed,
     getCommentsFailed,
-    deleteCommentSuccessed,
     deleteCommentFailed,
     editCommentSuccessed,
-    editCommentFailed,
+    deleteCommentSuccessed,
     createCommentSuccessed,
+    editCommentFailed,
+    getComments as getCommentsRequest,
     createCommentFailed,
 } from '../actions/comments';
-import { GET_COMMENTS, DELETE_COMMENT, EDIT_COMMENT } from '../constants';
+import { GET_COMMENTS, DELETE_COMMENT, EDIT_COMMENT, CREATE_COMMENT } from '../constants';
 
 function* watchGetComments() {
     yield takeEvery(GET_COMMENTS, getComments);
 }
 
 function* getComments({ payload }) {
+    console.log(payload);
     try {
         const comments = yield call(getCommentsApi, payload);
 
@@ -32,9 +34,8 @@ function* watchDeleteComment() {
 
 function* deleteComment({ payload }) {
     try {
-        const comments = yield call(deleteCommentApi, payload);
-
-        yield put(deleteCommentSuccessed(comments));
+        yield call(deleteCommentApi, payload);
+        yield put(deleteCommentSuccessed(payload));
     } catch (error) {
         yield put(deleteCommentFailed(error.message));
     }
@@ -46,24 +47,25 @@ function* watchEditComment() {
 
 function* editComment({ payload }) {
     try {
-        const comments = yield call(editCommentApi, payload);
+        yield call(editCommentApi, payload);
 
-        yield put(editCommentSuccessed(comments));
     } catch (error) {
         yield put(editCommentFailed(error.message));
     }
 }
 
 function* watchCreateComment() {
-    yield takeEvery(EDIT_COMMENT, createComment);
+    yield takeEvery(CREATE_COMMENT, createComment);
 }
 
-function* createComment(payload) {
+function* createComment({ payload }) {
+    yield console.log(payload);
     try {
-        const comments = yield call(createCommentApi, payload);
-
-        yield put(createCommentSuccessed(comments));
+        yield call(createCommentApi, payload);
+        yield put(getCommentsRequest(payload.postId));
+        yield put(createCommentSuccessed(payload));
     } catch (error) {
+        yield console.log(error);
         yield put(createCommentFailed(error.message));
     }
 }
