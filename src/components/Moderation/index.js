@@ -1,11 +1,18 @@
 import { Moderation } from "./Moderation";
 import { connect } from 'react-redux';
-import { signIn } from '../../actions/auth';
+import { getComments } from '../../actions/comments';
+import { selectComments } from '../../selectors/comments';
 
 const mapDispathToProps = (dispath) => {
     return {
-        signIn: (data) => dispath(signIn(data)),
+        getComments: () => dispath(getComments()),
     }
 };
 
-export default connect(null, mapDispathToProps)(Moderation);
+const mapStateToProps = (store) => {
+    return {
+        comments: selectComments(store),
+    };
+};
+
+export default connect(mapStateToProps, mapDispathToProps)(Moderation);

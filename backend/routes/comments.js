@@ -3,6 +3,8 @@ const commentsController = require('../controllers/comments');
 
 router.route('/:id').get(commentsController.getComments);
 
+router.route('/').get(commentsController.getAllComments);
+
 router.route('/').post(commentsController.createComment);
 
 router.route('/:id').put(commentsController.updateComment);

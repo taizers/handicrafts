@@ -18,10 +18,8 @@ function* watchGetComments() {
 }
 
 function* getComments({ payload }) {
-    console.log(payload);
     try {
         const comments = yield call(getCommentsApi, payload);
-
         yield put(getCommentsSuccessed(comments));
     } catch (error) {
         yield put(getCommentsFailed(error.message));

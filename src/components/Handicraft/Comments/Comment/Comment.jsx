@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import{ useParams } from 'react-router-dom';
-import { useState } from 'react';
-import { styledButton } from '../../../../styles/button';
 
 import Button from '@atlaskit/button/standard-button';
 import MoreVerticalIcon from '@atlaskit/icon/glyph/more-vertical';
@@ -35,13 +32,6 @@ const IsEdited = styled.p`
 	user-select: none;
 `
 
-const CommentImage = styled.img`
-    height: 100px;
-    weight: 100px;
-    margin-right: 20px;
-    border-radius: 50%;
-`
-
 const CommentItem = styled.li`
     background-color: white;
     color: black;
@@ -57,67 +47,14 @@ const DropContainer = styled.div`
     right: 10px;
 `
 
-const DeleteCommentButton = styled(styledButton)`
-`
-
-const SettingsCommentButton = styled.button`
-    transform: rotate(90deg);
-    font-size: 20px;
-    position: absolute;
-    top: 5px;
-    right: -1px;
-
-    &:hover {
-        font-size: 20px;
-    }
-`
-
-const CommentButtonsContainer = styled.div`
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    max-height: 40px;
-    display: flex;
-    gap: 20px;
-`
-
-const SettingsList = styled.ul`
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    max-height: 40px;
-`
-
-const SettingsItem = styled.li`
-    background-color: gray;
-    padding: 5px 10px;
-    font-size: 14px;
-    color: white;
-
-    -webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-
-    &:hover {
-        color: gray;
-        background-color: white;
-    }
-`
-
-export const Comment = ({ comment, currentUserId, currentUserRole, signedIn, deleteComment, editingComment }) => {
-    const { text, userId, isEdited, _id } = comment;
-    const [isCommentSettingsActive, setCommentSettingsActive] = useState(false);
+export const Comment = ({ comment, currentUserId, currentUserRole, signedIn, deleteComment, moderateComment, editingComment, isNotEdit }) => {
+    const { text, userId, isEdited, _id, moderated } = comment;
 
     const onDeleteButtonClick = () => {
         deleteComment(_id);
-        setCommentSettingsActive(!isCommentSettingsActive);
     };
 
     const onEditButtonClick = () => {
-        setCommentSettingsActive(!isCommentSettingsActive);
         const commentData = {
             id: _id,
             text: text,
@@ -125,9 +62,15 @@ export const Comment = ({ comment, currentUserId, currentUserRole, signedIn, del
         editingComment(commentData);
     };
 
+    const onModeratedButtonClick = () => {
+        const commentData = {
+            moderated: true,
+        }
+        moderateComment(commentData);
+    };
+
     const onCopyButtonClick = () => {
         navigator.clipboard.writeText(text);
-        setCommentSettingsActive(!isCommentSettingsActive);
     };
 
     return (
@@ -146,25 +89,13 @@ export const Comment = ({ comment, currentUserId, currentUserRole, signedIn, del
                 >
                     <DropdownItemGroup size="small">
                         <DropdownItem size="small" onClick={onCopyButtonClick}>Копировать</DropdownItem>
-                        {(userId === currentUserId) && <DropdownItem onClick={onEditButtonClick}>Изменить</DropdownItem>}
+                        {((userId === currentUserId) && !isNotEdit) && <DropdownItem onClick={onEditButtonClick}>Изменить</DropdownItem>}
                         {((currentUserRole === 'admin') || (currentUserRole === 'owner') || (userId === currentUserId)) && <DropdownItem onClick={onDeleteButtonClick}>Удалить</DropdownItem>}
+                        {(((currentUserRole === 'admin') || (currentUserRole === 'owner')) && !moderated) && <DropdownItem onClick={onModeratedButtonClick}>Одобрить</DropdownItem>}
                     </DropdownItemGroup>
                 </DropdownMenu>    
             </DropContainer>
-            
-            {/* <SettingsCommentButton onClick={() => setCommentSettingsActive(!isCommentSettingsActive)}>...</SettingsCommentButton> */}
-            
-{/*             {isCommentSettingsActive && <SettingsList>
-                <SettingsItem onClick={onCopyButtonClick}>
-                    Копировать
-                </SettingsItem>
-                {(userId === currentUserId) && <SettingsItem onClick={onEditButtonClick}>
-                    Изменить
-                </SettingsItem>}
-               {((currentUserRole === 'admin') || (currentUserRole === 'owner') || (userId === currentUserId)) && <SettingsItem onClick={onDeleteButtonClick}>
-                    Удалить
-                </SettingsItem>}
-            </SettingsList> } */}
+
             <Avatar src="https://reqres.in/img/faces/2-image.jpg" size="xlarge" />
             <Text>{text}</Text>
 

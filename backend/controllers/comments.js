@@ -8,6 +8,12 @@ exports.getComments = (req, res) => {
         .catch(err => res.status(400));
 };
 
+exports.getAllComments = (req, res) => {
+    Comments.find()
+        .then(comments => res.json(comments))
+        .catch(err => res.status(400));
+};
+
 exports.createComment = (req,res) => {
     const body = req.body.payload;
     console.log(body);

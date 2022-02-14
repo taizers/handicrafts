@@ -7,7 +7,8 @@ const commentsSchema = new Schema({
     postId: { type: String, required: true, trim: true, },
     text: { type: String, required: true, trim: true, },
     icon: { type: String, trim: true, },
-    isEdited: { type: Boolean, },
+    isEdited: { type: Boolean, required: true,},
+    moderated: { type: Boolean, required: true,}
 }, {
     timestamps: true,
 });

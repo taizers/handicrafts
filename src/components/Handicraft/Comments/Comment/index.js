@@ -14,6 +14,7 @@ const mapStateToProps = (store) => {
 const mapDispathToProps = (dispath) => {
     return {
         deleteComment: (id) => dispath(deleteComment(id)),
+        moderateComment: (comment) => dispath(editComment(comment)),
     }
 };
 
