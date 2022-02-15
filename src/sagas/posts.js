@@ -19,8 +19,8 @@ import {
     GET_POSTS,
     GET_POST,
     GET_POSTS_FROM_TYPE,
-    DELETE_POST,
     UPDATE_POST,
+    DELETE_POST,
 } from '../constants';
 
 function* watchGetPosts() {

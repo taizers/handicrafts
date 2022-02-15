@@ -1,12 +1,11 @@
 import { 
     SIGN_IN,
-    SIGN_IN_SUCCESSED,
-    SIGN_IN_FAILED,
+    AUTH_SUCCESSED,
+    AUTH_FAILED,
     SET_SIGN_IN_LOADING,
     SIGN_UP,
-    SIGN_UP_SUCCESSED,
-    SIGN_UP_FAILED,
-    CLEAR_USER,
+    LOG_OUT,
+    GET_USER,
 } from "../constants";
 
 export const signIn = (data) => ({
@@ -14,14 +13,9 @@ export const signIn = (data) => ({
     payload: data,
 });
 
-export const signInSuccessed = (data) => ({
-    type: SIGN_IN_SUCCESSED,
-    payload: data,
-});
-
-export const signInFailed = (data) => ({
-    type: SIGN_IN_FAILED,
-    payload: data,
+export const getUser = (accessToken) => ({
+    type: GET_USER,
+    payload: accessToken,
 });
 
 export const signUp = (data) => ({
@@ -29,21 +23,21 @@ export const signUp = (data) => ({
     payload: data,
 });
 
-export const signUpSuccessed = (data) => ({
-    type: SIGN_UP_SUCCESSED,
+export const authFailed = (data) => ({
+    type: AUTH_FAILED,
     payload: data,
 });
 
-export const signUpFailed = (data) => ({
-    type: SIGN_UP_FAILED,
-    payload: data,
+export const authSuccessed = (user) => ({
+    type: AUTH_SUCCESSED,
+    payload: user,
 });
 
-export const clearUser = () => ({
-    type: CLEAR_USER,
+export const logOut = () => ({
+    type: LOG_OUT,
 });
 
-export const setSignInLoading = (isLoading) => ({
+export const setAuthLoading = (isLoading) => ({
     type: SET_SIGN_IN_LOADING,
     payload: { isLoading },
 });

@@ -1,29 +1,29 @@
 import axios from 'axios';
+import { API_URL } from "../constants";
 
 export const getCommentsApi = async (payload) => {
     if (payload) {
-        return await axios.get("http://localhost:5000/comments/" + payload)
+        return await axios.get(API_URL + "comments/" + payload)
         .then(response => response.data)
     } else {
-        return await axios.get("http://localhost:5000/comments/")
+        return await axios.get( API_URL + "comments/")
         .then(response => response.data)
     }
     
 };
 
 export const deleteCommentApi = async (payload) => {
-    return await axios.delete("http://localhost:5000/comments/" + payload)
+    return await axios.delete(API_URL + "comments/" + payload)
     .then(response => response.data)
 };
 
 export const editCommentApi = async (payload) => {
     const { id, comment } = payload
-    return await axios.put("http://localhost:5000/comments/" + id, { comment })
+    return await axios.put(API_URL + "comments/" + id, { comment })
     .then(response => response.data)
 };
 
 export const createCommentApi = async (payload) => {
-    console.log(payload);
-    return await axios.post("http://localhost:5000/comments/",{payload})
+    return await axios.post(API_URL + "comments/",{payload})
     .then(response => response.data)
 };

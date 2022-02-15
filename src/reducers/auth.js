@@ -1,53 +1,40 @@
-import { 
-    SET_SIGN_IN_LOADING,
-    SIGN_IN_SUCCESSED,
-    SIGN_IN_FAILED,
-    SIGN_UP_SUCCESSED,
-    SIGN_UP_FAILED,
-    CLEAR_USER,
+import {
+    SET_AUTH_LOADING,
+    AUTH_FAILED,
+    LOG_OUT,
+    AUTH_SUCCESSED,
 } from "../constants";
 
 const initialState = {
     signedIn: false,
-    loading: false,
+    isLoading: false,
     error: null,
     user: {},
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case SIGN_IN_SUCCESSED:
-            return {
-                ...state,
-                user: action.payload,
-                signedIn: true,
-            };
-        case SIGN_IN_FAILED:
+        case AUTH_FAILED:
             return {
                 ...state,
                 error: action.payload,
             };
-        case SET_SIGN_IN_LOADING:
+        case SET_AUTH_LOADING:
             return {
                 ...state,
-                loading: action.payload.isLoading,
+                isLoading: action.payload.isLoading,
             };
-        case SIGN_UP_SUCCESSED:
-            return {
-                ...state,
-                user: action.payload,
-                signedIn: true,
-            };
-        case SIGN_UP_FAILED:
-            return {
-                ...state,
-                error: action.payload,
-            };
-        case CLEAR_USER:
+        case LOG_OUT:
             return {
                 ...state,
                 signedIn: false,
                 user: null,
+            };
+        case AUTH_SUCCESSED:
+            return {
+                ...state,
+                user: action.payload,
+                signedIn: true,
             };
         default:
             return state;

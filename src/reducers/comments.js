@@ -3,13 +3,11 @@ import {
     GET_COMMENTS_FAILED,
     SET_COMMENTS_LOADING,
     CLEAR_COMMENTS,
-    DELETE_COMMENT_SUCCESSED,
-    CREATE_COMMENT_SUCCESSED,
 } from "../constants";
 
 const initialState = {
-    comments: [],
-    loading: false,
+    comments: null,
+    isLoading: false,
     error: false,
 };
 
@@ -28,7 +26,7 @@ const reducer = (state = initialState, action) => {
         case SET_COMMENTS_LOADING:
             return {
                 ...state,
-                loading: action.payload.isLoading,
+                isLoading: action.payload.isLoading,
             };
         case CLEAR_COMMENTS:
             return {

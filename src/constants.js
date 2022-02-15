@@ -1,7 +1,4 @@
-export const SIGN_IN = 'SIGN_IN';
-export const SIGN_IN_SUCCESSED = 'SIGN_IN_SUCCESSED';
-export const SIGN_IN_FAILED = 'SIGN_IN_FAILED';
-export const SET_SIGN_IN_LOADING = 'SET_SIGN_IN_LOADING';
+export const API_URL = 'http://localhost:5000/';
 
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POSTS_FROM_TYPE = 'GET_POSTS_FROM_TYPE';
@@ -15,11 +12,14 @@ export const DELETE_POST = 'DELETE_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 
 export const SIGN_UP = 'SIGN_UP';
-export const SIGN_UP_SUCCESSED = 'SIGN_UP_SUCCESSED';
-export const SIGN_UP_FAILED = 'SIGN_UP_FAILED';
-export const SET_SIGN_UP_LOADING = 'SET_SIGN_UP_LOADING';
+export const SET_AUTH_LOADING = 'SET_AUTH_LOADING';
+export const GET_USER = 'GET_USER';
+export const AUTH_SUCCESSED = 'AUTH_SUCCESSED';
+export const SIGN_IN = 'SIGN_IN';
+export const AUTH_FAILED = 'SIGN_IN_FAILED';
+export const SET_SIGN_IN_LOADING = 'SET_SIGN_IN_LOADING';
 
-export const CLEAR_USER = 'CLEAR_USER';
+export const LOG_OUT = 'LOG_OUT';
 
 export const GET_HANDICRAFTS_LIST = 'GET_HANDICRAFTS_LIST';
 export const GET_HANDICRAFTS_LIST_SUCCESSED = 'GET_HANDICRAFTS_LIST_SUCCESSED';

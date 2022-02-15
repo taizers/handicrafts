@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Main from '../../containers/Main';
 import Login from '../Login/index';
@@ -14,8 +14,13 @@ import { token } from '@atlaskit/tokens';
 
 import { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';
 
-export const App = () => {
+export const App = ({ getUser }) => {
   const [flags, setFlags] = React.useState([1,2]);
+
+  useEffect(()=>{
+    const token = document.cookie.match(/token=(.+?)(;|$)/);
+    token && getUser(token);
+  },[])
 
   const addFlag = () => {
     const newFlagId = flags.length + 1;

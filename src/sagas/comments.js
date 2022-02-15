@@ -3,13 +3,10 @@ import { getCommentsApi, deleteCommentApi, editCommentApi, createCommentApi } fr
 import {
     getCommentsSuccessed,
     getCommentsFailed,
-    deleteCommentFailed,
-    editCommentSuccessed,
     deleteCommentSuccessed,
     createCommentSuccessed,
-    editCommentFailed,
+    setCommentsLoading,
     getComments as getCommentsRequest,
-    createCommentFailed,
 } from '../actions/comments';
 import { GET_COMMENTS, DELETE_COMMENT, EDIT_COMMENT, CREATE_COMMENT } from '../constants';
 
@@ -18,11 +15,14 @@ function* watchGetComments() {
 }
 
 function* getComments({ payload }) {
+    yield put(setCommentsLoading(true));
     try {
         const comments = yield call(getCommentsApi, payload);
         yield put(getCommentsSuccessed(comments));
     } catch (error) {
         yield put(getCommentsFailed(error.message));
+    } finally {
+        yield put(setCommentsLoading(false));
     }
 }
 
@@ -31,11 +31,14 @@ function* watchDeleteComment() {
 }
 
 function* deleteComment({ payload }) {
+    yield put(setCommentsLoading(true));
     try {
         yield call(deleteCommentApi, payload);
         yield put(deleteCommentSuccessed(payload));
     } catch (error) {
-        yield put(deleteCommentFailed(error.message));
+        yield put(getCommentsFailed(error.message));
+    } finally {
+        yield put(setCommentsLoading(false));
     }
 }
 
@@ -44,11 +47,14 @@ function* watchEditComment() {
 }
 
 function* editComment({ payload }) {
+    yield put(setCommentsLoading(true));
     try {
         yield call(editCommentApi, payload);
 
     } catch (error) {
-        yield put(editCommentFailed(error.message));
+        yield put(getCommentsFailed(error.message));
+    } finally {
+        yield put(setCommentsLoading(false));
     }
 }
 
@@ -57,14 +63,15 @@ function* watchCreateComment() {
 }
 
 function* createComment({ payload }) {
-    yield console.log(payload);
+    yield put(setCommentsLoading(true));
     try {
         yield call(createCommentApi, payload);
         yield put(getCommentsRequest(payload.postId));
         yield put(createCommentSuccessed(payload));
     } catch (error) {
-        yield console.log(error);
-        yield put(createCommentFailed(error.message));
+        yield put(getCommentsFailed(error.message));
+    } finally {
+        yield put(setCommentsLoading(false));
     }
 }
 
