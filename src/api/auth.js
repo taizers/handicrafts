@@ -11,12 +11,22 @@ export const signUp = async (payload) => {
     .then(response => response.data)
 };
 
-export const getUserApi = async ({token}) => {
-    return await axios.get( API_URL + "user/", { headers: { Authorization: `Bearer ${token}` } })
+export const getUsersApi = async () => {
+    return await axios.get( API_URL + "user/",)
     .then(response => response.data)
 };
 
-export const logOutApi = async () => {
-    return await axios.post( API_URL + "logout/",)
+export const createUserApi = async ({ user }) => {
+    return await axios.post( API_URL + "user/", user)
+    .then(response => response.data)
+};
+
+export const deleteUserApi = async ({ id }) => {
+    return await axios.delete( API_URL + "user/" + id)
+    .then(response => response.data)
+};
+
+export const logOutApi = async ({ token }) => {
+    return await axios.post( API_URL + "logout/", { headers: { Authorization: `Bearer ${token}` } })
     .then(response => response.data)
 };

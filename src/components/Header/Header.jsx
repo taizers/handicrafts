@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import React, { Ref } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import { 
     pathToSignIn,
@@ -8,32 +9,34 @@ import {
     pathToMap,
     pathToHome,
     pathToModeration,
+    pathToPosts,
+    pathToPost,
 } from '../../constants';
 import { useState } from 'react';
 import { styledButton } from '../../styles/button';
 import Icons from '../Icons/Icons';
 import Avatar from '@atlaskit/avatar';
+import Button from '@atlaskit/button';
 import DropdownMenu, { DropdownItem, DropdownItemGroup } from '@atlaskit/dropdown-menu';
+import {POSTS_TYPES} from "../../constants";
 
 const HeaderItem = styled.header`
   font-size: 16px;
-  color: white;
-  display: flex;
-  background-color: #3415B0;
   padding: 20px 0;
-
+`
+const Container = styled.div`
+  display: flex;
+  
   @media (max-width: 768px) {
     flex-direction: column;
     margin:0 auto;
   }
 `
-const Container = styled.div`
-`
 
 const MainMenuList = styled.ul`
   font-size: 16px;
-  color: white;
   display: flex;
+  align-items: center;
   margin-left: -40px;
   margin-right: auto;
 
@@ -43,37 +46,65 @@ const MainMenuList = styled.ul`
   }
 `
 
-const ListItem = styled(Link)`
+const ListLink = styled(Link)`
   font-size: 16px;
   font-weight: 500;
-  color: white;
-  align-self: center;
+  color: black;
   margin-left: 40px;
 
   &:hover {
-      color: red;
       text-decoration: underline;
   }
+`
+
+const MenuLink = styled(ListLink)`
+    color: black;
+    margin-left: 0;
+`
+
+const ListItem = styled.li`
+`
+
+const ListMenu = styled.p`
+    
+`
+
+const ListGroupItem = styled.li`
+  font-size: 16px;
+  font-weight: 500;
+  align-self: center;
+  margin-left: 40px;
 `
 
 export const Header = ({signedIn}) => {
     let { path, url } = useRouteMatch();
 
     return (
-        <Container className="container">
-            <HeaderItem>
+        <HeaderItem>
+            <Container className="container">
                 <MainMenuList>
-                    <ListItem to={url + pathToHome}>
-                        Главная
+                    <ListItem>
+                        <ListLink to={url + pathToHome}>Главная</ListLink>
                     </ListItem>
-                    <ListItem to={url + pathToHandicrafts}>
-                        Ремёсла
+                    <ListItem>
+                        <DropdownMenu
+                            placement="bottom"
+                            trigger={({ triggerRef, isSelected, testId, ...providedProps }) => (
+                                <ListLink
+                                    {...providedProps}
+                                    ref={triggerRef}
+                                >
+                                    Посты
+                                </ListLink>
+                            )}
+                        >
+                            <DropdownItemGroup>
+                                {POSTS_TYPES.map((item)=>(<DropdownItem><MenuLink to={url + pathToPosts + item.type}>{item.name}</MenuLink></DropdownItem>))}
+                            </DropdownItemGroup>
+                        </DropdownMenu>
                     </ListItem>
-                    <ListItem to=''>
-                        Изделия
-                    </ListItem>
-                    <ListItem to={url + pathToMap}>
-                        Карта
+                    <ListItem>
+                        <ListLink to={url + pathToMap}>Карта</ListLink>
                     </ListItem>
                 </MainMenuList>
                 <DropdownMenu
@@ -98,7 +129,7 @@ export const Header = ({signedIn}) => {
                         {!signedIn && <DropdownItem><Link to={pathToSignUp}>Зарегестрироваться</Link></DropdownItem>}
                     </DropdownItemGroup>
                 </DropdownMenu>    
-            </HeaderItem>
-        </Container>
+            </Container>
+        </HeaderItem>
     );
 };

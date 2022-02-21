@@ -6,16 +6,19 @@ import {
     SIGN_UP,
     LOG_OUT,
     GET_USER,
+    GET_USERS,
+    GET_USERS_SUCCESSED,
+    CREATE_USER,
+    CREATE_USER_SUCCESSED,
+    DELETE_USER,
+    DELETE_USER_SUCCESSED,
+    SET_CREATE_MODAL_LOADING,
+    SET_CREATE_MODAL_VISIBLE,
 } from "../constants";
 
 export const signIn = (data) => ({
     type: SIGN_IN,
     payload: data,
-});
-
-export const getUser = (accessToken) => ({
-    type: GET_USER,
-    payload: accessToken,
 });
 
 export const signUp = (data) => ({
@@ -31,6 +34,43 @@ export const authFailed = (data) => ({
 export const authSuccessed = (user) => ({
     type: AUTH_SUCCESSED,
     payload: user,
+});
+
+export const getUsers = () => ({
+    type: GET_USERS,
+});
+
+export const setCreateModalVisible = (isVisible) => ({
+    type: SET_CREATE_MODAL_VISIBLE,
+    payload: isVisible,
+});
+
+export const setCreateModalLoading = (isLoading) => ({
+    type: SET_CREATE_MODAL_VISIBLE,
+    payload: isLoading,
+});
+
+export const getUsersSuccessed = (users) => ({
+    type: GET_USERS_SUCCESSED,
+    payload: users,
+});
+
+export const createUser = (user) => ({
+    type: CREATE_USER,
+    payload: user,
+});
+
+export const createUserSuccessed = () => ({
+    type: CREATE_USER_SUCCESSED,
+});
+
+export const deleteUser = (id) => ({
+    type: DELETE_USER,
+    payload: id,
+});
+
+export const deleteUserSuccessed = () => ({
+    type: DELETE_USER_SUCCESSED,
 });
 
 export const logOut = () => ({

@@ -14,8 +14,16 @@ export const UPDATE_POST = 'UPDATE_POST';
 export const SIGN_UP = 'SIGN_UP';
 export const SET_AUTH_LOADING = 'SET_AUTH_LOADING';
 export const GET_USER = 'GET_USER';
+export const GET_USERS = 'GET_USERS';
+export const CREATE_USER = 'CREATE_USER';
+export const CREATE_USER_SUCCESSED = 'CREATE_USER_SUCCESSED';
+export const DELETE_USER = 'DELETE_USER';
+export const DELETE_USER_SUCCESSED = 'DELETE_USER_SUCCESSED';
+export const GET_USERS_SUCCESSED = 'GET_USERS_SUCCESSED';
 export const AUTH_SUCCESSED = 'AUTH_SUCCESSED';
 export const SIGN_IN = 'SIGN_IN';
+export const SET_CREATE_MODAL_VISIBLE = 'SHOW_CREATE_MODAL';
+export const SET_CREATE_MODAL_LOADING = 'SET_CREATE_MODAL_LOADING';
 export const AUTH_FAILED = 'SIGN_IN_FAILED';
 export const SET_SIGN_IN_LOADING = 'SET_SIGN_IN_LOADING';
 
@@ -56,6 +64,19 @@ export const pathToSignIn = '/login';
 export const pathToSignUp = '/signUp';
 export const pathToProfile = '/profile';
 export const pathToModeration = '/moderation';
-export const pathToHandicrafts = '/hadnicrafts';
-export const pathToHandicraftItem = '/hadnicrafts/:id';
+export const pathToHandicrafts = '/handicrafts';
+export const pathToHandicraftItem = '/handicrafts/:id';
+export const pathToPosts= '/posts/';
+export const pathToPost= '/post/';
 export const pathToMap = '/map';
+
+export const POSTS_TYPES = [
+    {
+        name: 'Ремёсла',
+        type: 'handicrafts',
+    },
+    {
+        name: 'Изделия',
+        type: 'goods',
+    },
+];

@@ -7,8 +7,6 @@ import SelectClearIcon from '@atlaskit/icon/glyph/select-clear'
 
 const Container = styled.div`
     padding: 20px;
-    padding-left: 0;
-    display: flex;
 `
 const TextContainer = styled.div`
     display: flex;

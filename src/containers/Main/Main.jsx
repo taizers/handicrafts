@@ -20,8 +20,8 @@ import AuthorizedRoute from '../../Routes/AuthorizedRoute/index';
 
 const Container = styled.div`
   font-size: 16px;
-  color: white;
-  background-color: #3415B0;
+  color: var(--main-text);
+  background-color: var(--bg-gray);
 `
 
 export const Main = () => {
