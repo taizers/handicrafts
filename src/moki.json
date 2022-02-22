@@ -1,0 +1,112 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "login": "test1@test.ru",
+      "password": "test1",
+      "name": "Петя",
+      "avatar": "https://ibb.co/nkrkJWf"
+    },
+    {
+      "id": 2,
+      "login": "test2@test.ru",
+      "password": "test2",
+      "name": "Коля",
+      "avatar": ""
+    },
+    {
+      "id": 3,
+      "login": "test3@test.ru",
+      "password": "test3",
+      "name": "Вася",
+      "avatar": "https://ibb.co/wdYVNZc"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "Title of the post1",
+      "subTitle": "subTitle of the post1",
+      "text": "text text text",
+      "createdAt": "2021-1-1",
+      "icon": "https://ibb.co/nkrkJWf",
+      "images": [
+        "https://ibb.co/nkrkJWf",
+        "https://ibb.co/nkrkJWf",
+        "https://ibb.co/nkrkJWf"
+      ],
+      "type": "handicrafts",
+      "useFullLinks": [3,2]
+    },
+    {
+      "id": 2,
+      "title": "Title of the post2",
+      "subTitle": "subTitle of the post2",
+      "text": "text text text text text text/*Enter*/text text text text text",
+      "createdAt": "2022-2-2",
+      "icon": "https://ibb.co/nkrkJWf",
+      "images": [
+        "https://ibb.co/nkrkJWf",
+        "https://ibb.co/nkrkJWf",
+        "https://ibb.co/nkrkJWf"
+      ],
+      "type": "goods",
+      "useFullLinks": [1,3]
+    },
+    {
+      "id": 3,
+      "title": "Title of the post3",
+      "subTitle": "subTitle of the post3",
+      "text": "text text text text text text/*Enter*/text text text text text",
+      "createdAt": "2022-3-3",
+      "icon": "https://ibb.co/nkrkJWf",
+      "images": [
+        "https://ibb.co/nkrkJWf",
+        "https://ibb.co/nkrkJWf",
+        "https://ibb.co/nkrkJWf"
+      ],
+      "type": "handicrafts",
+      "useFullLinks": [1,2]
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "userId": 1,
+      "postId": 1,
+      "isEdited": false,
+      "createdAt": "2021-1-1",
+      "text": "text text text text text text text/*Enter*/text text text text text "
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "postId": 1,
+      "isEdited": false,
+      "createdAt": "2021-1-1",
+      "text": "text text text text text text text text text text text text "
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "postId": 1,
+      "isEdited": true,
+      "createdAt": "2021-1-1",
+      "text": "text text text text text text text "
+    }
+  ],
+  "useFullLinks": [
+    {
+      "id": 1,
+      "link": "link1"
+    },
+    {
+      "id": 2,
+      "link": "link2"
+    },
+    {
+      "id": 3,
+      "link": "link3"
+    }
+  ]
+}

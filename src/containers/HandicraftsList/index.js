@@ -1,17 +1,17 @@
 import { HandicraftsList } from "./HandicraftsList";
 import { connect } from 'react-redux';
-import { getHandicraftsList } from '../../actions/handicrafts';
-import { selectHandicraftsList } from '../../selectors/handicrafts';
+import { getPostsFromType } from '../../actions/posts';
+import { selectPosts } from '../../selectors/posts';
 
 const mapStateToProps = (store) => {
     return {
-        handicraftsList: selectHandicraftsList(store),
+        posts: selectPosts(store),
     };
 };
 
 const mapDispathToProps = (dispath) => {
     return {
-        getHandicraftsList: () => dispath(getHandicraftsList()),
+        getPosts: (type) => dispath(getPostsFromType(type)),
     }
 };
 

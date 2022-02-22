@@ -38,7 +38,7 @@ export const PostItem = ({post, selectPost}) => {
             <Image src={post.icon} alt={post.title} />
             <TextContainer>
                 <Title>{post.title}</Title>
-                <Date>{post.date}</Date>
+                <Date>{post.createdAt}</Date>
             </TextContainer>
         </ListItem>
     );

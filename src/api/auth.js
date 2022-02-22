@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL } from '../constants';
+import data from '../moki.json';
 
 export const signIn = async (payload) => {
     return await axios.put(API_URL + "login/", {...payload})
@@ -12,8 +13,15 @@ export const signUp = async (payload) => {
 };
 
 export const getUsersApi = async () => {
-    return await axios.get( API_URL + "user/",)
-    .then(response => response.data)
+    return data.users
+/*    return await axios.get( API_URL + "user/",)
+        .then(response => response.data)*/
+};
+
+export const getUserApi = async () => {
+    return data.users[0]
+/*    return await axios.get( API_URL + "user/", { headers: { Authorization: `Bearer ${token}` } })
+        .then(response => response.data)*/
 };
 
 export const createUserApi = async ({ user }) => {

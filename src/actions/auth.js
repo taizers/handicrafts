@@ -14,6 +14,7 @@ import {
     DELETE_USER_SUCCESSED,
     SET_CREATE_MODAL_LOADING,
     SET_CREATE_MODAL_VISIBLE,
+    GET_USER_SUCCESSED,
 } from "../constants";
 
 export const signIn = (data) => ({
@@ -38,6 +39,15 @@ export const authSuccessed = (user) => ({
 
 export const getUsers = () => ({
     type: GET_USERS,
+});
+
+export const getUser = (token) => ({
+    type: GET_USER,
+    payload: token,
+});
+
+export const getUserSuccessed = () => ({
+    type: GET_USER_SUCCESSED,
 });
 
 export const setCreateModalVisible = (isVisible) => ({

@@ -117,6 +117,21 @@ function* logOut({ payload }) {
     }
 }
 
+function* watchGetUser() {
+    yield takeEvery(GET_USER, getUser);
+}
+
+function* getUser({ payload }) {
+    yield put(setAuthLoading(true));
+    try {
+        yield call(getUserApi, payload);
+    } catch (error) {
+        yield put(authFailed(error.message));
+    } finally {
+        yield put(setAuthLoading(false));
+    }
+}
+
 export default function* rootSaga() {
     yield all([
       fork(watchSignIn),
@@ -125,5 +140,6 @@ export default function* rootSaga() {
       fork(watchGetUsers),
       fork(watchCreateUser),
       fork(watchDeleteUser),
+      fork(watchGetUser),
     ]);
 }

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import { styledButton } from '../../styles/button';
 import Icons from '../../components/Icons/Icons';
 import HandicraftItem from './HandicraftItem/index';
@@ -18,15 +18,18 @@ const List = styled.ul`
     margin-right: -30px;
 `
 
-export const HandicraftsList = ({getHandicraftsList, handicraftsList}) => {
+export const HandicraftsList = ({ getPosts, posts }) => {
+    let { type } = useParams();
     useEffect(() => {
-        getHandicraftsList();
+        console.log(type);
+        getPosts(type);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
+
     return <Container className="container">
         <List>
-            { handicraftsList.map( (item, index) => <HandicraftItem key={index + item.url} handicraft={item} /> ) }
+            {posts && posts.map( (item, index) => <HandicraftItem key={index + item.url} post={item} /> ) }
         </List>
     </Container>
 };

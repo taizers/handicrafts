@@ -53,7 +53,25 @@ const ListLink = styled(Link)`
   margin-left: 40px;
 
   &:hover {
-      text-decoration: underline;
+    text-decoration: underline;
+  }
+`
+
+const ListLinks = styled.a`
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+  margin-left: 40px;
+  position: relative;
+
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  &::after {
+    content: '>';
+    rigth: 10px;
+    transform: rotate(90deg);
   }
 `
 
@@ -90,16 +108,16 @@ export const Header = ({signedIn}) => {
                         <DropdownMenu
                             placement="bottom"
                             trigger={({ triggerRef, isSelected, testId, ...providedProps }) => (
-                                <ListLink
+                                <ListLinks
                                     {...providedProps}
                                     ref={triggerRef}
                                 >
                                     Посты
-                                </ListLink>
+                                </ListLinks>
                             )}
                         >
                             <DropdownItemGroup>
-                                {POSTS_TYPES.map((item)=>(<DropdownItem><MenuLink to={url + pathToPosts + item.type}>{item.name}</MenuLink></DropdownItem>))}
+                                {POSTS_TYPES.map((item)=>(<DropdownItem key={item.name}><MenuLink key={item.name + 'link'} to={'posts/' + item.type}>{item.name}</MenuLink></DropdownItem>))}
                             </DropdownItemGroup>
                         </DropdownMenu>
                     </ListItem>

@@ -3,8 +3,8 @@ import { Route, Switch, useRouteMatch, Redirect } from 'react-router-dom';
 import { 
   pathToHome,
   pathToMap,
-  pathToHandicrafts,
-  pathToHandicraftItem,
+  pathToPosts,
+  pathToPost,
   pathToProfile,
   pathToMainPage,
   pathToModeration,
@@ -33,8 +33,8 @@ export const Main = () => {
           <Redirect exact from={pathToMainPage} to={path + pathToHome} />
           <Route path={path + pathToHome}><Home /></Route>
           <Route path={path + pathToMap}><MapContainer /></Route>
-          <Route exact path={path + pathToHandicrafts}><HandicraftsList /></Route>
-          <Route exact path={path + pathToHandicraftItem}><Handicraft /></Route>
+          <Route exact path={path + pathToPosts}><HandicraftsList /></Route>
+          <Route exact path={path + pathToPost}><Handicraft /></Route>
           <Route exact path={path + pathToModeration}><Moderation /></Route>
           <AuthorizedRoute patch={path + pathToProfile}  component={Profile} exact />
         </Switch>

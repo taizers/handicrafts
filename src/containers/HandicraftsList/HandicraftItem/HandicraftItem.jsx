@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link, useRouteMatch } from 'react-router-dom';
+import {  } from '../../../constants';
 
 const Item = styled.li`
     max-width: 250px;
@@ -28,14 +29,14 @@ const ItemLink = styled(Link)`
     width: 250px;
 `
 
-export const HandicraftItem = ({handicraft}) => {
+export const HandicraftItem = ({ post }) => {
     let { path } = useRouteMatch();
     
-    const {id, img, title} = handicraft;
+    const {id, icon, title} = post;
 
     return <Item>
-            <ItemLink to={path + '/' + id}>
-                <ItemImage src={img} alt="handicraft image" height='100' width='200' />
+            <ItemLink to={'post/' + id}>
+                <ItemImage src={icon} alt="post image" height='100' width='200' />
                 <ItemTitle>{title}</ItemTitle>
             </ItemLink>
         </Item>

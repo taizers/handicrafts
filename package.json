@@ -21,7 +21,6 @@
     "@atlaskit/tag-group": "^10.0.10",
     "@atlaskit/textfield": "^5.1.6",
     "@atlaskit/theme": "^12.1.2",
-    "@emotion/core": "^10.0.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",

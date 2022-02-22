@@ -6,6 +6,7 @@ import {
     GET_USERS_SUCCESSED,
     SET_CREATE_MODAL_VISIBLE,
     SET_CREATE_MODAL_LOADING,
+    GET_USER,
 } from "../constants";
 
 const initialState = {
@@ -31,6 +32,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: action.payload.isLoading,
+            };
+        case GET_USER:
+            return {
+                ...state,
+                user: action.payload,
+                signedIn: true,
             };
         case LOG_OUT:
             return {
