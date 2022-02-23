@@ -27,10 +27,10 @@ function* watchGetPosts() {
     yield takeEvery(GET_POSTS, getPosts);
 }
 
-function* getPosts() {
+function* getPosts({ payload }) {
     yield setPostsLoading(true);
     try {
-        const data = yield call(getPostsApi);
+        const data = yield call(getPostsApi, payload);
         yield put(getPostsSuccessed(data));
     } catch (error) {
         yield getPostFailed(error.message);
@@ -48,22 +48,6 @@ function* getPost({ payload }) {
     try {
         const data = yield call(getPostApi, payload);
         yield put(getPostSuccessed(data));
-    } catch (error) {
-        yield getPostFailed(error.message);
-    } finally {
-        yield setPostsLoading(false);
-    }
-}
-
-function* watchGetPostsFromType() {
-    yield takeEvery(GET_POSTS_FROM_TYPE, getPostsFromType);
-}
-
-function* getPostsFromType({ payload }) {
-    yield setPostsLoading(true);
-    try {
-        const data = yield call(getPostsFromTypeApi, payload);
-        yield put(getPostsFromTypeSuccessed(data));
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
@@ -107,7 +91,6 @@ export default function* rootSaga() {
     yield all([
         fork(watchGetPosts),
         fork(watchGetPost),
-        fork(watchGetPostsFromType),
         fork(watchDeletePost),
         fork(watchUpdatePost),
     ]);

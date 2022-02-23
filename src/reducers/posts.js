@@ -7,9 +7,8 @@ import {
 } from "../constants";
 
 const initialState = {
-    allPosts: null,
-    post: null,
-    postsFromCurrentType: null,
+    posts: [],
+    post: {},
     isLoading: false,
     error: null,
 };
@@ -35,12 +34,7 @@ const reducer = (state = initialState, action) => {
         case GET_POSTS_SUCCESSED:
             return {
                 ...state,
-                allPosts: action.payload,
-            };
-        case GET_POSTS_FROM_TYPE_SUCCESSED:
-            return {
-                ...state,
-                postsFromCurrentType: action.payload,
+                posts: action.payload,
             };
         default:
             return state;

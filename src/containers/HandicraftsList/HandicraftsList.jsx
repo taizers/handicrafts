@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {Link, useParams} from 'react-router-dom';
+import { map } from 'lodash';
 import { styledButton } from '../../styles/button';
 import Icons from '../../components/Icons/Icons';
 import HandicraftItem from './HandicraftItem/index';
@@ -21,7 +22,6 @@ const List = styled.ul`
 export const HandicraftsList = ({ getPosts, posts }) => {
     let { type } = useParams();
     useEffect(() => {
-        console.log(type);
         getPosts(type);
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
@@ -29,7 +29,7 @@ export const HandicraftsList = ({ getPosts, posts }) => {
 
     return <Container className="container">
         <List>
-            {posts && posts.map( (item, index) => <HandicraftItem key={index + item.url} post={item} /> ) }
+            {map(posts, (item, index) => <HandicraftItem key={index + item.title} post={item}/>)}
         </List>
     </Container>
 };

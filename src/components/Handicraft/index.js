@@ -1,20 +1,20 @@
 import { Handicraft } from "./Handicraft";
 import { connect } from 'react-redux';
-import { getHandicraft } from '../../actions/handicrafts';
 import { getComments } from '../../actions/comments';
-import { selectHandicraft } from '../../selectors/handicrafts';
 import { selectComments } from '../../selectors/comments';
+import { getPost } from "../../actions/posts";
+import {selectPost} from "../../selectors/posts";
 
 const mapStateToProps = (store) => {
     return {
-        handicraft: selectHandicraft(store),
+        post: selectPost(store),
         comments: selectComments(store),
     };
 };
 
 const mapDispathToProps = (dispath) => {
     return {
-        getHandicraft: (id) => dispath(getHandicraft(id)),
+        getPost: (id) => dispath(getPost(id)),
         getComments: (postId) => dispath(getComments(postId)),
     }
 };

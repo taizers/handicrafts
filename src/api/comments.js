@@ -1,14 +1,56 @@
 import axios from 'axios';
-import { API_URL } from "../constants";
+import {API_URL} from "../constants";
+import data from '../moki.json';
+import {filter, forIn, isArray} from "lodash";
 
 export const getCommentsApi = async (payload) => {
-    if (payload) {
+
+
+        let commentsArr = [];
+
+        data.comments.forEach((comment) => {
+            const users = data.users.map((user) => {
+                if (user.id === comment.userId) {
+                    return user
+                }
+            });
+            const posts = data.posts.map((post) => {
+                if (post.id === comment.postId) {
+                    return post
+                }
+            });
+
+            const post = posts[0];
+            const user = users[0];
+            let mas = [];
+            let mas2 = [];
+
+            forIn(user, (value, key) => {
+                mas.push(value);
+            })
+            forIn(post, (value, key) => {
+                mas2.push(value);
+            })
+            console.log(mas[1]);
+            commentsArr.push({
+                ...comment,
+                avatar: mas[4],
+                postTitle: mas2[1],
+                userName: mas[3],
+                userLogin: mas[1],
+            });
+        });
+        console.log(commentsArr)
+        return  commentsArr;
+
+
+/*    if (payload) {
         return await axios.get(API_URL + "comments/" + payload)
         .then(response => response.data)
     } else {
         return await axios.get( API_URL + "comments/")
         .then(response => response.data)
-    }
+    } */
     
 };
 

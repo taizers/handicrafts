@@ -35,35 +35,36 @@ const UsefullLinks = styled.ul`
 
 
 const getText = (textList) => {
+    const text = textList.split('/*Enter*/')
   return <TextContainer>
-      {textList.map( (item, index) => <Text key={'text' + index}>{item}</Text> )}
+      {text.map( (item, index) => <Text key={'text' + index}>{item}</Text> )}
     </TextContainer>
 }
 
-export const Handicraft = ({getHandicraft, getComments, handicraft, comments}) => {
-    const { title, sub_title, text, usefullLinks } = handicraft;
+export const Handicraft = ({getPost, getComments, post, comments}) => {
+    const { title, subTitle, text, useFullLinks } = post;
 
     let { id } = useParams(); 
 
     useEffect(() => {
-      getHandicraft(id);
+      getPost(id);
       getComments(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
   return (
     <Container className="container">
       <Title>{title}</Title>
-      <SubTitle>{sub_title}</SubTitle>
+      <SubTitle>{subTitle}</SubTitle>
     
       {text && getText(text)}
       <SubTitle>Полезные ссылки</SubTitle>
-      {usefullLinks && 
+      {useFullLinks &&
         <UsefullLinks>
-          {usefullLinks.map( (item, index) => <UsefullLink link={item} key={"link" + index} />)}
+          {useFullLinks.map( (item, index) => <UsefullLink link={item} key={"link" + index} />)}
         </UsefullLinks>
       }
       <SubTitle>Комментарии</SubTitle>
-      <Comments comments={comments} postId={handicraft._id} />
+      <Comments comments={comments} postId={post.id} />
     </Container>
   );
 }

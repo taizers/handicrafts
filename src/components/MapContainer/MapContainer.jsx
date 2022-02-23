@@ -27,29 +27,28 @@ const EditViewContainer = styled.div`
     position: 'relative';
 `
 
-export const MapContainer = ({handicrafts, getHandicraftsList}) => {
+export const MapContainer = ({posts, getPosts}) => {
     const [editValue, setEditValue] = useState([]);
     const [locateValues, setLocateValues] = useState([]);
     const [isRoutesActive, setRoutesActive] = useState(false);
 
     useEffect(() => {
-        getHandicraftsList();
+        getPosts();
       // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
 
-    const selectOptions = handicrafts.map((item) => ({ label: item.title, value: item.location }));
+    const selectOptions = posts.map((item) => ({ label: item.title, value: item.location }));
 
-    const onConfirm = (value) => {
-        if (!value) {
+    const onConfirm = (values) => {
+        if (!values) {
         return;
         }
-
-        setEditValue(value);
-        console.log(value.length);
-        if (value.length > 1) {
-            setLocateValues(value.map((item) => item.value));
+        console.log(selectOptions);
+        setEditValue(values);
+        console.log(values.length);
+        if (values.length > 1) {
+            setLocateValues(values.map((item) => item.value));
             setRoutesActive(true);
-            console.log('fdf');
         }
 
     };

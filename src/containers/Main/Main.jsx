@@ -34,7 +34,7 @@ export const Main = () => {
           <Route path={path + pathToHome}><Home /></Route>
           <Route path={path + pathToMap}><MapContainer /></Route>
           <Route exact path={path + pathToPosts}><HandicraftsList /></Route>
-          <Route exact path={path + pathToPost}><Handicraft /></Route>
+          <Route exact path={pathToPost}><Handicraft /></Route>
           <Route exact path={path + pathToModeration}><Moderation /></Route>
           <AuthorizedRoute patch={path + pathToProfile}  component={Profile} exact />
         </Switch>

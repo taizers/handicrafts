@@ -6,7 +6,7 @@ import {
 } from "../constants";
 
 const initialState = {
-    comments: null,
+    comments: [],
     isLoading: false,
     error: false,
 };

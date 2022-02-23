@@ -1,19 +1,17 @@
 import { MapContainer } from "./MapContainer";
 import { connect } from 'react-redux';
-import { signIn } from '../../actions/auth';
-import { selectHandicraftsList } from '../../selectors/handicrafts';
-import { getHandicraftsList } from '../../actions/handicrafts';
+import {selectPosts} from "../../selectors/posts";
+import {getPosts} from "../../actions/posts";
 
 const mapDispathToProps = (dispath) => {
     return {
-        signIn: (data) => dispath(signIn(data)),
-        getHandicraftsList: () => dispath(getHandicraftsList()),
+        getPosts: () => dispath(getPosts()),
     }
 };
 
 const mapStateToProps = (store) => {
     return {
-        handicrafts: selectHandicraftsList(store),
+        posts: selectPosts(store),
     };
 };
 

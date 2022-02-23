@@ -23,7 +23,7 @@ export const Map = ({locations, isRoutesActive}) => {
   const [end, setEnd] = useState([37.7749, -122.4194])
 
   const points = [[55.75, 37.6167],[53.6710182,23.8227669]];
-  console.log(locations);
+
   return (
     <>
       <MapContainer
