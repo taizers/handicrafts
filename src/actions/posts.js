@@ -2,7 +2,8 @@ import {
     GET_POSTS,
     GET_POSTS_FAILED,
     GET_POSTS_SUCCESSED,
-    GET_POSTS_FROM_TYPE_SUCCESSED,
+    CREATE_POST,
+    CREATE_POST_SUCCESSED,
     GET_POST,
     GET_POST_SUCCESSED,
     SET_POSTS_LOADING,
@@ -25,6 +26,16 @@ export const getPost = (id) => ({
 export const deletePost = (id) => ({
     type: DELETE_POST,
     payload: id,
+});
+
+export const createPost = (post) => ({
+    type: CREATE_POST,
+    payload: post,
+});
+
+export const createPostSuccessed = (data) => ({
+    type: CREATE_POST_SUCCESSED,
+    payload: data,
 });
 
 export const updatePost = (id, data) => ({
@@ -62,7 +73,7 @@ export const setPostsLoading = (isLoading) => ({
 
 export const setCreatePostVisible = (isVisible) => ({
     type: SET_CREATE_POST_VISIBLE,
-    payload: {isVisible},
+    payload: isVisible,
 });
 
 export const setCreatePostLoading = (isLoading) => ({

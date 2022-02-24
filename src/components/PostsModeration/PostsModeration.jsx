@@ -34,7 +34,7 @@ const Post = styled.div`
   height: 100%;
 `
 
-export const PostsModeration = ({ posts, getPosts, setVisible, isVisible }) => {
+export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, createPost }) => {
     const [selectedPost, setSelectedPost] = useState();
 
     useEffect(() =>{
@@ -44,7 +44,7 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible }) => {
     const onShowModal = () => {
         setVisible(true);
     };
-    console.log(isVisible);
+
     return (
         <Container className="container">
             <Button
@@ -59,7 +59,7 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible }) => {
                 </PostsList>
                 <Post>{selectedPost && <Posts post={selectedPost}/>}</Post>
             </ContainerInner>
-            <CreateModal setVisible={setVisible} isVisible={isVisible} type='post'/>
+            <CreateModal setVisible={setVisible} isVisible={isVisible} createPost={createPost} type='post'/>
         </Container>
     );
 }

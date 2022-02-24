@@ -57,7 +57,7 @@ const data = {
     },
 };
 
-export const CreateModal = ({setVisible, createUser, type, isVisible}) => {
+export const CreateModal = ({ setVisible, createUser, type, isVisible, createPost }) => {
     const modalvalues = data[type];
 
     const onCloseModal = () => {
@@ -67,9 +67,17 @@ export const CreateModal = ({setVisible, createUser, type, isVisible}) => {
     const onSubmitForm = () => {
         const user = {
 
-        }
+        };
+        const post = {
 
-        createUser(user);
+        };
+        if (type === 'post') {
+            createPost(post)
+        } else
+            if (type === 'user') {
+                createUser(user);
+            }
+
     }
 
    return (

@@ -5,12 +5,12 @@ import {
     getPostsApi,
     deletePostApi,
     updatePostApi,
+    createPostApi,
 } from '../api/posts';
 
 import {
     getPostsSuccessed,
     getPostSuccessed,
-    getPostsFromTypeSuccessed,
     setPostsLoading,
     getPostFailed,
 } from '../actions/posts';
@@ -18,7 +18,7 @@ import {
 import {
     GET_POSTS,
     GET_POST,
-    GET_POSTS_FROM_TYPE,
+    CREATE_POST,
     UPDATE_POST,
     DELETE_POST,
 } from '../constants';
@@ -85,6 +85,21 @@ function* updatePost({ payload }) {
     }
 }
 
+function* watchCreatePost() {
+    yield takeEvery(CREATE_POST, createPost);
+}
+
+function* createPost({ payload }) {
+    yield setPostsLoading(true);
+    try {
+        yield call(createPostApi, payload);
+    } catch (error) {
+        yield getPostFailed(error.message);
+    } finally {
+        yield setPostsLoading(false);
+    }
+}
+
 //export default watchGetHandicraftList;
 
 export default function* rootSaga() {
@@ -93,5 +108,6 @@ export default function* rootSaga() {
         fork(watchGetPost),
         fork(watchDeletePost),
         fork(watchUpdatePost),
+        fork(watchCreatePost),
     ]);
 }

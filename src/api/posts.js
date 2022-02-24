@@ -13,8 +13,7 @@ export const getPostsApi = async ( type ) => {
         return await axios.get(API_URL + "posts/")
             .then(response => response.data)
     }
-/*    return await axios.get(API_URL + "posts/")
-        .then(response => response.data)*/
+*/
 };
 
 export const getPostApi = async (id) => {
@@ -23,23 +22,13 @@ export const getPostApi = async (id) => {
         .then(response => response.data)*/
 };
 
-export const getPostsFromTypeApi = async (type) => {
-    console.log(map(data.posts, post => {
-        if (post.type === type) {
-            return post
-        }
-    }));
-    return map(data.posts, post => {
-        if (post.type === type) {
-            return post
-        }
-    });
-/*    return await axios.get(API_URL + "posts/?type=" + type)
-        .then(response => response.data)*/
-};
-
 export const deletePostApi = async (id) => {
     return await axios.delete(API_URL + "posts/" + id)
+        .then(response => response.data)
+};
+
+export const createPostApi = async (post) => {
+    return await axios.post(API_URL + "posts/", {post})
         .then(response => response.data)
 };
 
