@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { map, isEmpty, isObject } from 'lodash';
 import { useEffect } from 'react';
 import {Link} from "react-router-dom";
+import Avatar from "@atlaskit/avatar";
+import Button from "@atlaskit/button";
+import CheckIcon from '@atlaskit/icon/glyph/check'
+import TrashIcon from '@atlaskit/icon/glyph/trash'
 import {isString} from "lodash/lang";
 
 const Item = styled.li`
@@ -10,6 +14,9 @@ const Item = styled.li`
 `
 
 const Image = styled.img`
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
 `
 
 const Login = styled.h3`
@@ -17,29 +24,80 @@ const Login = styled.h3`
 `
 
 const Name = styled.p`
+    font-size: 20px;
+    font-weight: 600;
 `
 
 const TextContainer = styled.div`
+    margin-left: 15px;
+    width: 100%;
+`
+
+const ButtonsContainer = styled.div`
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
     
 `
 
 const Text = styled.p`
+  text-align: left;
+  text-indent: 20px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `
 
 const LinkToPost = styled(Link)`
   margin-top: 10px;
   margin-bottom: 20px;
+  display: inline-block;
+  color: blue;
+  &:hover {
+    text-decoration: underline;
+  }
 `
 
-export const Comment = ({ comment }) => {
+const getText = (text) => {
+    const textList = text.split('/*Enter*/');
+    return textList.map((elem, index) => <Text key={elem+index}>{elem}</Text>)
+}
+
+export const Comment = ({ comment, deleteComment, editComment }) => {
+
+    const onDeleteButtonClick = () => {
+        deleteComment(comment.id);
+    };
+
+    const onAproveButtonClick = () => {
+        editComment({isEdited: true});
+    };
+
     return (
         <Item>
-            <Image src={comment.avatar} />
+            <Avatar src={comment.avatar} size="large"/>
             <TextContainer>
                 <Name>{`${comment.userName || ''} ${`(${comment.userLogin})` || ''}`}</Name>
                 <LinkToPost to={'post/' + comment.postId}>{comment.postTitle}</LinkToPost>
-                <Text>{comment.text}</Text>
+                {comment.text && getText(comment.text)}
             </TextContainer>
+            <ButtonsContainer>
+                <Button
+                    style={{
+                        marginBottom: '15px',
+                    }}
+                    iconBefore={<CheckIcon size="large" appearance="primary" primaryColor="green"/>}
+                    onClick={onAproveButtonClick}
+                ></Button>
+                <Button
+                    iconBefore={<TrashIcon size="large" appearance="primary"/>}
+                    onClick={onDeleteButtonClick}
+                ></Button>
+            </ButtonsContainer>
         </Item>
     );
 }

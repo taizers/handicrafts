@@ -7,14 +7,15 @@ import CrossCircleIcon from '@atlaskit/icon/glyph/cross-circle'
 const Container = styled.li`
   display: flex;
   align-items: center;
+  margin: 15px 0;
 `;
 
 const TextContainer = styled.div`
-  align-self: flex-start;
+  margin-left: 10px;
 `;
 
 const Login = styled.h3`
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 `;
 
 const DisplayedName = styled.p`
@@ -32,7 +33,7 @@ export const User = ({ user, role, deleteUser }) => {
         <Container>
             <Avatar
                 appearance="circle"
-                src={"https://pbs.twimg.com/profile_images/803832195970433027/aaoG6PJI_400x400.jpg"}
+                src={user.avatar}
                 size="medium"
                 name="John Doe"
             />
@@ -41,9 +42,9 @@ export const User = ({ user, role, deleteUser }) => {
                 <DisplayedName>{user.name}</DisplayedName>
             </TextContainer>
             {role === 'owner' && <Button
-    iconAfter={<CrossCircleIcon size="medium"/>}
-    onClick={onDeleteUser}
-    />}
+                iconAfter={<CrossCircleIcon size="medium"/>}
+                onClick={onDeleteUser}
+            />}
         </Container>
     );
 }

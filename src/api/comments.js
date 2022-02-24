@@ -31,7 +31,6 @@ export const getCommentsApi = async (payload) => {
             forIn(post, (value, key) => {
                 mas2.push(value);
             })
-            console.log(mas[1]);
             commentsArr.push({
                 ...comment,
                 avatar: mas[4],
@@ -40,7 +39,7 @@ export const getCommentsApi = async (payload) => {
                 userLogin: mas[1],
             });
         });
-        console.log(commentsArr)
+
         return  commentsArr;
 
 

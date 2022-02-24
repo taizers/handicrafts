@@ -1,17 +1,17 @@
 import { PostsModeration } from "./PostsModeration";
 import { connect } from 'react-redux';
-import { getHandicraftsList } from '../../actions/handicrafts';
-import { selectHandicraftsList } from '../../selectors/handicrafts';
+import { getPosts } from "../../actions/posts";
+import { selectPosts } from "../../selectors/posts";
 
 const mapDispathToProps = (dispath) => {
     return {
-        getPosts: () => dispath(getHandicraftsList()),
+        getPosts: () => dispath(getPosts()),
     }
 };
 
 const mapStateToProps = (store) => {
     return {
-        posts: selectHandicraftsList(store),
+        posts: selectPosts(store),
     };
 };
 

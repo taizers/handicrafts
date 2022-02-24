@@ -9,7 +9,6 @@ const CommentEditorArea = styled.textarea`
   margin-bottom: 5px;
   background-color: transparent;
   border-color: white;
-  color: #BDC1C6;
   padding: 10px 10px;
 `
 
@@ -45,8 +44,6 @@ export const CommentEditor = ({ comment, postId, createComment, editComment, cur
         text: commentText,
         isEdited: true,
       };
-
-      console.log(changedComment);
 
       editComment(changedComment);
     };

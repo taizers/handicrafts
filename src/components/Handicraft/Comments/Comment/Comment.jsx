@@ -48,15 +48,15 @@ const DropContainer = styled.div`
 `
 
 export const Comment = ({ comment, currentUserId, currentUserRole, signedIn, deleteComment, moderateComment, editingComment, isNotEdit }) => {
-    const { text, userId, isEdited, _id, moderated } = comment;
+    const { text, userId, isEdited, id, moderated } = comment;
 
     const onDeleteButtonClick = () => {
-        deleteComment(_id);
+        deleteComment(id);
     };
 
     const onEditButtonClick = () => {
         const commentData = {
-            id: _id,
+            id: id,
             text: text,
         }
         editingComment(commentData);

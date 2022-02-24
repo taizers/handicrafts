@@ -11,12 +11,8 @@ import {
     UPDATE_POST,
 } from '../constants';
 
-export const getPosts = () => ({
+export const getPosts = (type) => ({
     type: GET_POSTS,
-});
-
-export const getPostsFromType = (type) => ({
-    type: GET_POSTS_FROM_TYPE,
     payload: type,
 });
 

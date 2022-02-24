@@ -12,6 +12,7 @@ import { token } from '@atlaskit/tokens';
 import Tabs, { Tab, TabList, TabPanel } from '@atlaskit/tabs';
 import CommentModeration from '../CommentModeration/index';
 import PostsModeration from "../PostsModeration/index";
+import UsersModeration from "../UsersModeration/index";
 
 const Container = styled.div`
 `
@@ -37,7 +38,7 @@ export const Moderation = () => {
                     {activeTab === 1 && <PostsModeration />}
                 </TabPanel>
                 <TabPanel>
-
+                    {activeTab === 2 && <UsersModeration />}
                 </TabPanel>
             </Tabs>
         </Container>

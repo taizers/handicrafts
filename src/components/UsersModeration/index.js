@@ -7,7 +7,7 @@ const mapDispathToProps = (dispath) => {
     return {
         getUsers: () => dispath(getUsers()),
         deleteUser: () => dispath(deleteUser()),
-        setVisible: () => dispath(setCreateModalVisible()),
+        setVisible: (value) => dispath(setCreateModalVisible(value)),
         createUser: () => dispath(createUser()),
     }
 };

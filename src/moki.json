@@ -5,7 +5,7 @@
       "login": "test1@test.ru",
       "password": "test1",
       "name": "Петя",
-      "avatar": "https://ibb.co/nkrkJWf"
+      "avatar": "https://pbs.twimg.com/profile_images/568401563538841600/2eTVtXXO_400x400.jpeg"
     },
     {
       "id": 2,
@@ -19,7 +19,7 @@
       "login": "test3@t est.ru",
       "password": "test3",
       "name": "Вася",
-      "avatar": "https://ibb.co/wdYVNZc"
+      "avatar": "https://pbs.twimg.com/profile_images/568401563538841600/2eTVtXXO_400x400.jpeg"
     }
   ],
   "posts": [
@@ -31,9 +31,9 @@
       "createdAt": "2021-1-1",
       "icon": "https://ibb.co/nkrkJWf",
       "images": [
-        "https://ibb.co/nkrkJWf",
-        "https://ibb.co/nkrkJWf",
-        "https://ibb.co/nkrkJWf"
+        "https://pbs.twimg.com/profile_images/803832195970433027/aaoG6PJI_400x400.jpg",
+        "https://pbs.twimg.com/profile_images/803832195970433027/aaoG6PJI_400x400.jpg",
+        "https://pbs.twimg.com/profile_images/803832195970433027/aaoG6PJI_400x400.jpg"
       ],
       "type": "handicrafts",
       "useFullLinks": [3,2]
@@ -46,9 +46,9 @@
       "createdAt": "2022-2-2",
       "icon": "https://ibb.co/nkrkJWf",
       "images": [
-        "https://ibb.co/nkrkJWf",
-        "https://ibb.co/nkrkJWf",
-        "https://ibb.co/nkrkJWf"
+        "https://pbs.twimg.com/profile_images/803832195970433027/aaoG6PJI_400x400.jpg",
+        "https://pbs.twimg.com/profile_images/803832195970433027/aaoG6PJI_400x400.jpg",
+        "https://pbs.twimg.com/profile_images/803832195970433027/aaoG6PJI_400x400.jpg"
       ],
       "type": "goods",
       "useFullLinks": [1,3]

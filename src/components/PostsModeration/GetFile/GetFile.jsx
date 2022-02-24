@@ -15,7 +15,7 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 const Container = styled.div`
     background-color: white;
     color: white;
-    min-width: 500px;
+    position: relative;
 `
 
 export const GetFile = () => {

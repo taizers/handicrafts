@@ -22,6 +22,8 @@ const Container = styled.div`
   font-size: 16px;
   color: var(--main-text);
   background-color: var(--bg-gray);
+  height: 100vh;
+  overflow-y: auto;
 `
 
 export const Main = () => {

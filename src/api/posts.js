@@ -4,8 +4,9 @@ import data from '../moki.json';
 import { findLast, map } from 'lodash';
 
 export const getPostsApi = async ( type ) => {
+    console.log(data.posts);
     return data.posts;
-    if (type) {
+/*    if (type) {
         return await axios.get(API_URL + "posts/?type=" + type)
             .then(response => response.data)
     }else {
@@ -17,7 +18,6 @@ export const getPostsApi = async ( type ) => {
 };
 
 export const getPostApi = async (id) => {
-    console.log(data.posts[0]);
     return data.posts[0];
 /*    return await axios.get(API_URL + "posts/" + id)
         .then(response => response.data)*/

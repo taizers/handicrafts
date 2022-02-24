@@ -4,16 +4,17 @@ import { useEffect } from 'react';
 import Comment from './Comment/index'
 
 const List = styled.ul`
+    width: 100%;
 `
 
-export const CommentModeration = ({ comments, getComments }) => {
+export const CommentModeration = ({ comments, getComments, deleteComment, editComment }) => {
     useEffect(() => {
         getComments();
     }, [])
-    console.log(comments);
+
     return (
         <List>
-            {map((comments), (comment) => <Comment comment={comment} key={comment.id} />)}
+            {map((comments), (comment) => <Comment comment={comment} key={comment.id} deleteComment={deleteComment} editComment={editComment} />)}
         </List>
     );
 }
