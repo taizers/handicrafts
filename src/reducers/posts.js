@@ -1,9 +1,10 @@
 import {
     GET_POST_SUCCESSED,
-    GET_POSTS_FROM_TYPE_SUCCESSED,
     GET_POSTS_SUCCESSED,
     GET_POSTS_FAILED,
     SET_POSTS_LOADING,
+    SET_CREATE_POST_LOADING,
+    SET_CREATE_POST_VISIBLE,
 } from "../constants";
 
 const initialState = {
@@ -11,6 +12,10 @@ const initialState = {
     post: {},
     isLoading: false,
     error: null,
+    modal: {
+        isVisible: false,
+        isLoading: false,
+    }
 };
 
 const reducer = (state = initialState, action) => {
@@ -35,6 +40,22 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: action.payload,
+            };
+        case SET_CREATE_POST_LOADING:
+            return {
+                ...state,
+                modal: {
+                    ...state.modal,
+                    isLoading: action.payload,
+                },
+            };
+        case SET_CREATE_POST_VISIBLE:
+            return {
+                ...state,
+                modal: {
+                    ...state.modal,
+                    isVisible: action.payload,
+                },
             };
         default:
             return state;

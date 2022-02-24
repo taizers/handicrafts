@@ -12,6 +12,7 @@ import Modal, {
 } from '@atlaskit/modal-dialog';
 import Form, { Field, HelperMessage, FormFooter } from '@atlaskit/form';
 import Textfield from '@atlaskit/textfield';
+import CreateModal from "../PostsModeration/CreateModal";
 
 const Container = styled.div`
   padding: 20px;
@@ -36,99 +37,18 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
       setVisible(true);
   };
 
-  const onCloseModal = () => {
-      setVisible(false);
-  };
-
-  const onSubmitForm = () => {
-      const user = {
-          login: login,
-          password: password,
-          name: name,
-      }
-
-      createUser(user);
-  }
-
   return (
     <Container>
-          <Button
-              iconBefore={<AddIcon size="small"/>}
-              onClick={onShowModal}
-          >
-              Создать Администратора
-          </Button>
-          <List>
-            {users?.map((item)=> <User key={item.login} user={item} role={role} deleteUser={deleteUser} />)}
-          </List>
-            <ModalTransition>
-                {isVisible && (
-                    <Modal onClose={onCloseModal}>
-                        <ModalHeader>
-                            <ModalTitle>Создать администратора</ModalTitle>
-                        </ModalHeader>
-                        <ModalBody>
-                            <Form
-                                onSubmit={onSubmitForm}
-                            >
-                                {({ formProps }) => (
-                                    <form {...formProps}>
-                                        <Field label="Email" name="email">
-                                            {({ fieldProps }) => (
-                                                <Fragment>
-                                                    <Textfield
-                                                        placeholder="example@example.com"
-                                                        {...fieldProps}
-                                                    />
-                                                    <HelperMessage>
-                                                        Логин
-                                                    </HelperMessage>
-                                                </Fragment>
-                                            )}
-                                        </Field>
-                                        <Field label="Password" name="password">
-                                            {({ fieldProps }) => (
-                                                <Fragment>
-                                                    <Textfield
-                                                        placeholder="Пароль"
-                                                        type="password"
-                                                        {...fieldProps}
-                                                    />
-                                                    <HelperMessage>
-                                                        Пароль
-                                                    </HelperMessage>
-                                                </Fragment>
-                                            )}
-                                        </Field>
-                                        <Field label="Name" name="name">
-                                            {({ fieldProps }) => (
-                                                <Fragment>
-                                                    <Textfield
-                                                        placeholder="Имя"
-                                                        {...fieldProps}
-                                                    />
-                                                    <HelperMessage>
-                                                        Ошибка
-                                                    </HelperMessage>
-                                                </Fragment>
-                                            )}
-                                        </Field>
-                                        <FormFooter>
-                                            <Button appearance="subtle" onClick={onCloseModal}>Закрыть</Button>
-                                            <Button type="submit" appearance="primary" autoFocus>
-                                                Создать
-                                            </Button>
-                                        </FormFooter>
-                                    </form>
-                                )}
-                            </Form>
-                            <ModalFooter>
-                                * Обязательный параметр
-                            </ModalFooter>
-                        </ModalBody>
-                    </Modal>
-                )}
-            </ModalTransition>
+              <Button
+                  iconBefore={<AddIcon size="small"/>}
+                  onClick={onShowModal}
+              >
+                  Создать Администратора
+              </Button>
+              <List>
+                {users?.map((item)=> <User key={item.login} user={item} role={role} deleteUser={deleteUser} />)}
+              </List>
+                <CreateModal setVisible={setVisible} isVisible={isVisible} type='user'/>
     </Container>
   );
 }

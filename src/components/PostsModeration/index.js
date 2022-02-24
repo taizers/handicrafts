@@ -1,17 +1,19 @@
 import { PostsModeration } from "./PostsModeration";
 import { connect } from 'react-redux';
-import { getPosts } from "../../actions/posts";
-import { selectPosts } from "../../selectors/posts";
+import { getPosts, setCreatePostVisible } from "../../actions/posts";
+import { selectPosts, selectCreateUserPostIsVisible } from "../../selectors/posts";
 
 const mapDispathToProps = (dispath) => {
     return {
         getPosts: () => dispath(getPosts()),
+        setVisible: (data) => dispath(setCreatePostVisible()),
     }
 };
 
 const mapStateToProps = (store) => {
     return {
         posts: selectPosts(store),
+        isVisible: selectCreateUserPostIsVisible(store),
     };
 };
 
