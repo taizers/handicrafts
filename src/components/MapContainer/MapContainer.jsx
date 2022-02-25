@@ -23,7 +23,7 @@ const ReadViewContainer = styled.div`
     max-width: '100%';
 `
 const EditViewContainer = styled.div`
-    z-index: 300;
+    z-index: 1;
     position: 'relative';
 `
 
@@ -59,7 +59,7 @@ export const MapContainer = ({posts, getPosts}) => {
             className="container"
             style={{
                 padding: `${gridSize}px ${gridSize}px ${gridSize * 6}px`,
-                zIndex: "9999999",
+                zIndex: "500",
             }}
             >
             <InlineEdit

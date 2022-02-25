@@ -1,22 +1,16 @@
 import styled from 'styled-components';
-import React, { Ref } from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import React from 'react';
+import {generatePath, Link, useRouteMatch} from 'react-router-dom';
 import { 
     pathToSignIn,
     pathToSignUp,
     pathToProfile,
-    pathToHandicrafts,
     pathToMap,
     pathToHome,
     pathToModeration,
     pathToPosts,
-    pathToPost,
 } from '../../constants';
-import { useState } from 'react';
-import { styledButton } from '../../styles/button';
-import Icons from '../Icons/Icons';
 import Avatar from '@atlaskit/avatar';
-import Button from '@atlaskit/button';
 import DropdownMenu, { DropdownItem, DropdownItemGroup } from '@atlaskit/dropdown-menu';
 import {POSTS_TYPES} from "../../constants";
 
@@ -106,6 +100,9 @@ export const Header = ({signedIn}) => {
                     </ListItem>
                     <ListItem>
                         <DropdownMenu
+                            style={{
+                                zIndex: 501,
+                            }}
                             placement="bottom"
                             trigger={({ triggerRef, isSelected, testId, ...providedProps }) => (
                                 <ListLinks
@@ -117,7 +114,7 @@ export const Header = ({signedIn}) => {
                             )}
                         >
                             <DropdownItemGroup>
-                                {POSTS_TYPES.map((item)=>(<DropdownItem key={item.name}><MenuLink key={item.name + 'link'} to={'posts/' + item.type}>{item.name}</MenuLink></DropdownItem>))}
+                                {POSTS_TYPES.map((item)=>(<DropdownItem key={item.name}><MenuLink key={item.name + 'link'} to={generatePath(pathToPosts, {type: item.type})}>{item.name}</MenuLink></DropdownItem>))}
                             </DropdownItemGroup>
                         </DropdownMenu>
                     </ListItem>

@@ -75,6 +75,7 @@
       "userId": 1,
       "postId": 1,
       "isEdited": false,
+      "isApproved": false,
       "createdAt": "2021-1-1",
       "text": "text text text text text text text/*Enter*/text text text text text "
     },
@@ -83,6 +84,7 @@
       "userId": 2,
       "postId": 1,
       "isEdited": false,
+      "isApproved": true,
       "createdAt": "2021-1-1",
       "text": "text text text text text text text text text text text text "
     },
@@ -91,6 +93,7 @@
       "userId": 1,
       "postId": 1,
       "isEdited": true,
+      "isApproved": true,
       "createdAt": "2021-1-1",
       "text": "text text text text text text text "
     }

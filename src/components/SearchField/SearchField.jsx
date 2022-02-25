@@ -5,11 +5,7 @@ import Textfield from '@atlaskit/textfield';
 
 const Container = styled.div`
     display: flex;
-    width: 100%;
-  
-  &:first-child {
-        
-  }
+  width: 80%;
 `
 
 export const SearchField = ({ search }) => {
@@ -21,8 +17,21 @@ export const SearchField = ({ search }) => {
 
     return (
         <Container>
-            <Textfield style={{margin: "0 20px"}} name="search" aria-label="default text field" onChange={(evt) => setSearchText(evt.currentTarget.value)} />
-            <Button appearance="primary" onClick={onSearchClick}>Найти</Button>
+            <Textfield
+                style={{
+                    marginRight: '20px',
+                }}
+                name="search"
+                aria-label="default text field"
+                onChange={(evt) => setSearchText(evt.currentTarget.value)} />
+            <Button
+                appearance="primary"
+                onClick={onSearchClick}
+                style={{
+                    marginLeft: '20px',
+                    alignSelf: 'center',
+                }}
+            >Найти</Button>
         </Container>
     );
 }

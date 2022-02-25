@@ -9,7 +9,6 @@ import NonAuthorizedRoute from '../../Routes/NonAuthorizedRoute/index';
 
 import SuccessIcon from '@atlaskit/icon/glyph/check-circle';
 import { G300 } from '@atlaskit/theme/colors';
-import { gridSize } from '@atlaskit/theme/constants';
 import { token } from '@atlaskit/tokens';
 
 import { AutoDismissFlag, FlagGroup } from '@atlaskit/flag';

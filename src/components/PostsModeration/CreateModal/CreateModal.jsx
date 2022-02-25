@@ -3,7 +3,6 @@ import Form, {Field, FormFooter, HelperMessage, ErrorMessage} from "@atlaskit/fo
 import React, {Fragment} from "react";
 import Textfield from "@atlaskit/textfield";
 import Button from "@atlaskit/button";
-import { isEmpty } from "lodash";
 
 const data = {
     user: {

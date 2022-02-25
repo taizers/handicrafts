@@ -1,12 +1,9 @@
 import styled from "styled-components";
-import { map, isEmpty, isObject } from 'lodash';
-import { useEffect } from 'react';
 import {Link} from "react-router-dom";
 import Avatar from "@atlaskit/avatar";
 import Button from "@atlaskit/button";
 import CheckIcon from '@atlaskit/icon/glyph/check'
 import TrashIcon from '@atlaskit/icon/glyph/trash'
-import {isString} from "lodash/lang";
 
 const Item = styled.li`
   padding: 10px;
@@ -73,8 +70,8 @@ export const Comment = ({ comment, deleteComment, editComment }) => {
         deleteComment(comment.id);
     };
 
-    const onAproveButtonClick = () => {
-        editComment({isEdited: true});
+    const onApproveButtonClick = () => {
+        editComment({isApproved: true});
     };
 
     return (
@@ -86,13 +83,15 @@ export const Comment = ({ comment, deleteComment, editComment }) => {
                 {comment.text && getText(comment.text)}
             </TextContainer>
             <ButtonsContainer>
-                <Button
-                    style={{
-                        marginBottom: '15px',
-                    }}
-                    iconBefore={<CheckIcon size="large" appearance="primary" primaryColor="green"/>}
-                    onClick={onAproveButtonClick}
-                ></Button>
+                {!comment.isApproved &&
+                    <Button
+                        style={{
+                            marginBottom: '15px',
+                        }}
+                        iconBefore={<CheckIcon size="large" appearance="primary" primaryColor="green"/>}
+                        onClick={onApproveButtonClick}
+                    ></Button>
+                }
                 <Button
                     iconBefore={<TrashIcon size="large" appearance="primary"/>}
                     onClick={onDeleteButtonClick}

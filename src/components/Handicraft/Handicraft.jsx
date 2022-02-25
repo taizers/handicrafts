@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import{ useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import UsefullLink from './UsefullLink/index';
 import Comments from './Comments/index';
+import SwiftSlider from "react-swift-slider";
+import {map} from "lodash";
 
 const Container = styled.div`
     position: relative;
@@ -42,7 +44,7 @@ const getText = (textList) => {
 }
 
 export const Handicraft = ({getPost, getComments, post, comments}) => {
-    const { title, subTitle, text, useFullLinks } = post;
+    const { title, subTitle, text, useFullLinks, images } = post;
 
     let { id } = useParams(); 
 
@@ -51,7 +53,9 @@ export const Handicraft = ({getPost, getComments, post, comments}) => {
       getComments(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    
+
+    const imagesList = map(images, (item, index)=> ({id: index, src: item}));
+
   return (
     <Container className="container">
       <Title>{title}</Title>
@@ -65,6 +69,7 @@ export const Handicraft = ({getPost, getComments, post, comments}) => {
         </UsefullLinks>
       }
       <SubTitle>Комментарии</SubTitle>
+        <SwiftSlider data={imagesList} height={600} />
       <Comments comments={comments} postId={post.id} />
     </Container>
   );

@@ -69,8 +69,7 @@ export const pathToSignIn = '/login';
 export const pathToSignUp = '/signUp';
 export const pathToProfile = '/profile';
 export const pathToModeration = '/moderation';
-export const pathToHandicrafts = '/handicrafts';
-export const pathToPosts= '/posts/:type';
+export const pathToPosts= '/hc/posts/:type';
 export const pathToPost= '/hc/post/:id';
 export const pathToMap = '/map';
 

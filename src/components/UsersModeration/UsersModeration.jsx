@@ -19,7 +19,6 @@ const List = styled.ul`
 
 const HeadContainer = styled.div`
   display: flex;
-  width: 100%;
 `;
 
 export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, setVisible, createUser }) => {
@@ -55,6 +54,7 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
                     onClick={onShowModal}
                     style={{
                         alignSelf: 'center',
+                        marginRight: '20px',
                     }}
                 >
                     Создать Администратора

@@ -13,9 +13,9 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     overflow-y: auto;
-  padding-bottom: 100px;
-  display: flex;
-  flex-direction: column;
+      padding-bottom: 100px;
+      display: flex;
+      flex-direction: column;
 `
 const TextContainer = styled.div`
     display: flex;
@@ -24,12 +24,11 @@ const TextContainer = styled.div`
     word-break: break-word;
     height: 100%;
     width: 100%;
-    position: relative;
 `
 const ButtonsContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding-left: 5px;
+    margin-top: 100px;
 `
 
 const Title = styled.h3`
@@ -88,18 +87,19 @@ export const Posts = ({post, deletePost}) => {
                 <Date>{moment(created_at, "YYYYMMDD").locale('ru').fromNow()}</Date>
                 {post.text && getText(post.text)}
                 <SwiftSlider data={imagesList} height={400} />
+                <ButtonsContainer>
+                    <Button
+                        style={{
+                            alignSelf: 'flex-end',
+                            justifySelf: 'flex-end',
+                        }}
+                        iconAfter={<SelectClearIcon size="medium" />}
+                        onClick={onDeletePost}
+                    ></Button>
+                    <GetFile />
+                </ButtonsContainer>
+
             </TextContainer>
-            <ButtonsContainer>
-                <Button
-                    style={{
-                        alignSelf: 'flex-end',
-                        justifySelf: 'flex-end',
-                    }}
-                    iconAfter={<SelectClearIcon size="medium" />}
-                    onClick={onDeletePost}
-                ></Button>
-                <GetFile />
-            </ButtonsContainer>
 
         </Container>
     );

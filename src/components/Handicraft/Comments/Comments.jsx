@@ -7,6 +7,7 @@ const CommentsList = styled.ul`
     text-align: center;
     margin: 20px auto;
     max-width: 800px;
+    margin-top: 100px;
 `
 
 export const Comments = ({ comments, postId }) => {

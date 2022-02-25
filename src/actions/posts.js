@@ -51,11 +51,6 @@ export const getPostsSuccessed = (data) => ({
     payload: data,
 });
 
-export const getPostsFromTypeSuccessed = (data) => ({
-    type: GET_POSTS_FROM_TYPE_SUCCESSED,
-    payload: data,
-});
-
 export const getPostSuccessed = (data) => ({
     type: GET_POST_SUCCESSED,
     payload: data,

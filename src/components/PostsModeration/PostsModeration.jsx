@@ -11,12 +11,12 @@ import AddIcon from "@atlaskit/icon/glyph/add";
 const Container = styled.div`
   padding: 15px;
   width: 100%;
-  height: 60vh;
+  height: 75vh;
 `
 
 const ContainerInner = styled(Container)`
   display: flex;
-  margin-top: 30px;
+  margin-top: 20px;
 `
 
 const PostsList = styled.ul`

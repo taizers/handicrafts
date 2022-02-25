@@ -16,23 +16,31 @@ const Item = styled.li`
 
 const ItemTitle = styled.h3`
     font-weight: 700;
-    margin-top: 10px;
     max-width: 100%;
 `
 const ItemImage = styled.img`
     height: 150px;
     width: 250px;
 `
+const Date = styled.p`
+  color: #3c3f41;
+  font-size: 14px;
+`
+
+const TextContainer = styled.p`
+  padding: 10px
+`
 
 export const HandicraftItem = ({ post }) => {
-    let { path, url } = useRouteMatch();
-    
-    const {id, icon, title} = post;
-    console.log(path, url);
+    const {id, images, title, createdAt} = post;
+
     return <Item>
-            <Link to={generatePath(pathToPost, {id: id})} replace>
-                <ItemImage src={icon} alt="post image" height='100' width='200' />
-                <ItemTitle>{title}</ItemTitle>
+            <Link to={generatePath(pathToPost, {id: id})}>
+                <ItemImage src={images[0]} alt={title} height='100' width='200' />
+                <TextContainer>
+                    <ItemTitle>{title}</ItemTitle>
+                    <Date>{createdAt}</Date>
+                </TextContainer>
             </Link>
         </Item>
 };
