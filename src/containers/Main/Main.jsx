@@ -32,13 +32,13 @@ export const Main = () => {
   return <Container>
         <Header/>
         <Switch>
-          <Redirect exact from={pathToMainPage} to={path + pathToHome} />
-          <Route path={path + pathToHome}><Home /></Route>
-          <Route path={path + pathToMap}><MapContainer /></Route>
+          <Route exact path={pathToMap}><MapContainer /></Route>
           <Route exact path={pathToPosts}><HandicraftsList /></Route>
           <Route exact path={pathToPost}><Handicraft /></Route>
-          <Route exact path={path + pathToModeration}><Moderation /></Route>
-          <AuthorizedRoute patch={path + pathToProfile}  component={Profile} exact />
+          <Route exact path={pathToModeration}><Moderation /></Route>
+          <Route exact path={pathToProfile}><Profile /></Route>
+          <Route exact path={pathToHome}><Home /></Route>
+          <Redirect exact from='/' to={pathToHome}/>
         </Switch>
     </Container>
 };

@@ -7,6 +7,7 @@ import {
     SET_CREATE_MODAL_VISIBLE,
     SET_CREATE_MODAL_LOADING,
     GET_USER,
+    GET_USER_SUCCESSED,
 } from "../constants";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
     isLoading: false,
     error: null,
     user: null,
+    currentUser: null,
     users: null,
     modal: {
         isVisible: false,
@@ -55,6 +57,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: action.payload,
+            };
+        case GET_USER_SUCCESSED:
+            return {
+                ...state,
+                user: action.payload,
             };
         case SET_CREATE_MODAL_LOADING:
             return {

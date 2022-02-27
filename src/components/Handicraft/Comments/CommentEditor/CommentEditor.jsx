@@ -34,8 +34,6 @@ export const CommentEditor = ({ comment, postId, createComment, editComment, cur
         userId: currentUserId,
       };
 
-      console.log(createdComment);
-
       createComment(createdComment);
     };
 

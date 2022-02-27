@@ -28,7 +28,7 @@ const TextContainer = styled.div`
 const ButtonsContainer = styled.div`
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
+    margin-top: 50px;
 `
 
 const Title = styled.h3`
@@ -89,14 +89,9 @@ export const Posts = ({post, deletePost}) => {
                 <SwiftSlider data={imagesList} height={400} />
                 <ButtonsContainer>
                     <Button
-                        style={{
-                            alignSelf: 'flex-end',
-                            justifySelf: 'flex-end',
-                        }}
-                        iconAfter={<SelectClearIcon size="medium" />}
                         onClick={onDeletePost}
-                    ></Button>
-                    <GetFile />
+                        appearance="primary"
+                    >Удалить</Button>
                 </ButtonsContainer>
 
             </TextContainer>

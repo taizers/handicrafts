@@ -5,6 +5,7 @@
       "login": "test1@test.ru",
       "password": "test1",
       "name": "Петя",
+      "role": "user",
       "avatar": "https://pbs.twimg.com/profile_images/568401563538841600/2eTVtXXO_400x400.jpeg"
     },
     {
@@ -12,13 +13,15 @@
       "login": "test2@test.ru",
       "password": "test2",
       "name": "Коля",
+      "role": "admin",
       "avatar": ""
     },
     {
       "id": 3,
-      "login": "test3@t est.ru",
+      "login": "test3@test.ru",
       "password": "test3",
       "name": "Вася",
+      "role": "owner",
       "avatar": "https://pbs.twimg.com/profile_images/568401563538841600/2eTVtXXO_400x400.jpeg"
     }
   ],
@@ -28,7 +31,7 @@
       "title": "Title of the post1",
       "subTitle": "subTitle of the post1",
       "text": "text text text",
-      "createdAt": "2021-1-1",
+      "createdAt": "2022-02-27",
       "icon": "https://ibb.co/nkrkJWf",
       "images": [
         "https://i.ibb.co/zfsfvkb/bg-Cat-1x-21f0b493fe1be72a8bc7bcba4986aeac.jpg",
@@ -43,7 +46,7 @@
       "title": "Title of the post2",
       "subTitle": "subTitle of the post2",
       "text": "text text text text text text/*Enter*/text text text text text",
-      "createdAt": "2022-2-2",
+      "createdAt": "2022-02-26",
       "icon": "https://ibb.co/nkrkJWf",
       "images": [
         "https://pbs.twimg.com/profile_images/803832195970433027/aaoG6PJI_400x400.jpg",
@@ -58,7 +61,7 @@
       "title": "Title of the post3",
       "subTitle": "subTitle of the post3",
       "text": "text text text text text text/*Enter*/text text text text text",
-      "createdAt": "2022-3-3",
+      "createdAt": "2022-02-27",
       "icon": "https://ibb.co/nkrkJWf",
       "images": [
         "https://i.ibb.co/zfsfvkb/bg-Cat-1x-21f0b493fe1be72a8bc7bcba4986aeac.jpg",

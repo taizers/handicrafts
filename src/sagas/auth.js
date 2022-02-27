@@ -9,6 +9,7 @@ import {
     deleteUserSuccessed,
     setCreateModalVisible,
     setCreateModalLoading,
+    getUserSuccessed,
 } from '../actions/auth';
 import {
     SIGN_IN,
@@ -124,7 +125,8 @@ function* watchGetUser() {
 function* getUser({ payload }) {
     yield put(setAuthLoading(true));
     try {
-        yield call(getUserApi, payload);
+        const userData = yield call(getUserApi, payload);
+        yield put(getUserSuccessed(userData));
     } catch (error) {
         yield put(authFailed(error.message));
     } finally {

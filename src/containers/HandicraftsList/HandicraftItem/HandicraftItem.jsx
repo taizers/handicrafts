@@ -27,7 +27,7 @@ const Date = styled.p`
   font-size: 14px;
 `
 
-const TextContainer = styled.p`
+const TextContainer = styled.div`
   padding: 10px
 `
 

@@ -70,7 +70,6 @@ export const SignUp = ({ signUp }) => {
         role: 'user',
       };
       signUp(data);
-      console.log(data);
     }
     
     

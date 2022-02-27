@@ -3,9 +3,8 @@ import React, { useEffect } from 'react';
 import Main from '../../containers/Main';
 import Login from '../Login/index';
 import SignUp from '../SignUp/index';
-import { pathToMainPage, pathToSignIn, pathToSignUp } from '../../constants';
+import { pathToHome, pathToSignIn, pathToSignUp } from '../../constants';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import NonAuthorizedRoute from '../../Routes/NonAuthorizedRoute/index';
 
 import SuccessIcon from '@atlaskit/icon/glyph/check-circle';
 import { G300 } from '@atlaskit/theme/colors';
@@ -36,11 +35,13 @@ export const App = ({ getUser }) => {
   return (
     <>
       <Switch>
-        <Route path={pathToMainPage}><Main /></Route>
-        <Redirect exact from='/' to={pathToMainPage} />
-        <NonAuthorizedRoute patch={pathToSignIn}  component={Login} exact />
-        <NonAuthorizedRoute patch={pathToSignUp}  component={SignUp} exact />
-        <Redirect to='/' />
+
+
+        <Route exact path={pathToSignIn}><Login /></Route>
+        <Route exact path={pathToSignUp}><SignUp /></Route>
+
+        <Route path='/'><Main /></Route>
+
       </Switch>
       <FlagGroup onDismissed={handleDismiss}>
         {flags.map((flagId) => {

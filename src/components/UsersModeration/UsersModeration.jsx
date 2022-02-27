@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import User from './User/index';
 import Button from "@atlaskit/button";
 import AddIcon from '@atlaskit/icon/glyph/add';
-import { toLower, isEmpty, values } from 'lodash';
+import {toLower, isEmpty, values, filter, indexOf} from 'lodash';
 
 import CreateModal from "../PostsModeration/CreateModal";
 import SearchField from "../SearchField/index";
@@ -38,8 +38,16 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
   };
 
   const onSearchUsers = (query) => {
-      const arr = users.filter(el =>
-          toLower(el.login).indexOf(toLower(query)) !== -1 || toLower(el.name).indexOf(toLower(query)) !== -1);
+
+      const arr = filter(users, user => {
+          if (
+              ((query.login !== "") ? indexOf(toLower(user.login), toLower(query.login)) !== -1 : true ) &&
+              ((query.role !== "") ? user.role  === query.role : true ) &&
+              ((query.name !== "") ? indexOf(toLower(user.name), toLower(query.name)) !== -1 : true )
+          ) {
+              return user;
+          }
+      });
 
       setUsersList(arr);
   };
@@ -51,10 +59,12 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
             <HeadContainer>
                 <Button
                     iconBefore={<AddIcon size="small"/>}
+                    appearance="primary"
                     onClick={onShowModal}
                     style={{
-                        alignSelf: 'center',
+                        alignSelf: 'flex-end',
                         marginRight: '20px',
+
                     }}
                 >
                     Создать Администратора

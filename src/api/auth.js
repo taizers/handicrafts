@@ -18,8 +18,8 @@ export const getUsersApi = async () => {
         .then(response => response.data)*/
 };
 
-export const getUserApi = async () => {
-    return data.users[0]
+export const getUserApi = async (id) => {
+    return data.users[id];
 /*    return await axios.get( API_URL + "user/", { headers: { Authorization: `Bearer ${token}` } })
         .then(response => response.data)*/
 };

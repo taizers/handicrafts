@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import React from 'react';
-import {generatePath, Link, useRouteMatch} from 'react-router-dom';
-import { 
+import { generatePath, Link, useRouteMatch } from 'react-router-dom';
+import {
     pathToSignIn,
     pathToSignUp,
     pathToProfile,
     pathToMap,
     pathToHome,
     pathToModeration,
-    pathToPosts,
+    pathToPosts, pathToMainPage,
 } from '../../constants';
 import Avatar from '@atlaskit/avatar';
 import DropdownMenu, { DropdownItem, DropdownItemGroup } from '@atlaskit/dropdown-menu';
@@ -88,7 +88,7 @@ const ListGroupItem = styled.li`
   margin-left: 40px;
 `
 
-export const Header = ({signedIn}) => {
+export const Header = ({ signedIn, userId }) => {
     let { path, url } = useRouteMatch();
 
     return (
@@ -96,7 +96,7 @@ export const Header = ({signedIn}) => {
             <Container className="container">
                 <MainMenuList>
                     <ListItem>
-                        <ListLink to={url + pathToHome}>Главная</ListLink>
+                        <ListLink to={pathToHome}>Главная</ListLink>
                     </ListItem>
                     <ListItem>
                         <DropdownMenu
@@ -114,12 +114,12 @@ export const Header = ({signedIn}) => {
                             )}
                         >
                             <DropdownItemGroup>
-                                {POSTS_TYPES.map((item)=>(<DropdownItem key={item.name}><MenuLink key={item.name + 'link'} to={generatePath(pathToPosts, {type: item.type})}>{item.name}</MenuLink></DropdownItem>))}
+                                {POSTS_TYPES.map((item)=>(<DropdownItem key={item.value}><MenuLink key={item.value + 'link'} to={generatePath(pathToPosts, {type: item.value})}>{item.label}</MenuLink></DropdownItem>))}
                             </DropdownItemGroup>
                         </DropdownMenu>
                     </ListItem>
                     <ListItem>
-                        <ListLink to={url + pathToMap}>Карта</ListLink>
+                        <ListLink to={pathToMap}>Карта</ListLink>
                     </ListItem>
                 </MainMenuList>
                 <DropdownMenu
@@ -136,8 +136,8 @@ export const Header = ({signedIn}) => {
                     )}
                     >
                     <DropdownItemGroup>
-                        {signedIn && <DropdownItem><Link to={url + pathToProfile}>Профиль</Link></DropdownItem>}
-                        {signedIn && <DropdownItem><Link to={url + pathToModeration}>Модерация</Link></DropdownItem>}
+                        {signedIn && <DropdownItem><Link to={''/*generatePath(pathToProfile, {id: userId})*/}>Профиль</Link></DropdownItem>}
+                        {signedIn && <DropdownItem><Link to={pathToModeration}>Модерация</Link></DropdownItem>}
                         {signedIn && <DropdownItem><Link to="">Создать</Link></DropdownItem>}
                         {signedIn && <DropdownItem><Link to="/hc">Выход</Link></DropdownItem>}
                         {!signedIn && <DropdownItem><Link to={pathToSignIn}>Войти</Link></DropdownItem>}

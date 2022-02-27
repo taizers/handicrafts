@@ -1,6 +1,7 @@
 import { Profile } from "./Profile";
 import { connect } from 'react-redux';
 import { selectUser } from '../../selectors/auth';
+import { getUser } from "../../actions/auth";
 
 const mapStateToProps = (store) => {
     return {
@@ -8,4 +9,11 @@ const mapStateToProps = (store) => {
     };
 };
 
-export default connect(mapStateToProps)(Profile);
+const mapDispathToProps = (dispath) => {
+    return {
+        getUser: (id) => dispath(getUser(id)),
+    }
+};
+
+
+export default connect(mapStateToProps, mapDispathToProps)(Profile);

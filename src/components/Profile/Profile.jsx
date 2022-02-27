@@ -1,3 +1,5 @@
+import React, { useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -30,12 +32,18 @@ const UserDisplaiedName = styled.p`
     display: block;
 `
 
-export const Profile = ({user}) => {
+export const Profile = ({ user, getUser }) => {
+    let { id } = useParams();
+
+    useEffect(()=>{
+        getUser(id);
+    }, []);
+
     return (
         <Container>
             <UserImage src={user?.avatar}  height="150" width="150" />
             <UserLogin>Логин: {user?.login}</UserLogin>
-            <UserDisplaiedName>Отображаемое имя: {user?.displayedName}</UserDisplaiedName>
+            <UserDisplaiedName>Отображаемое имя: {user?.name}</UserDisplaiedName>
             <UserDisplaiedName>Роль: {user?.role}</UserDisplaiedName>
         </Container>
     );

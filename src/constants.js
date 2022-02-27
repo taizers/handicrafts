@@ -63,23 +63,23 @@ export const CLEAR_COMMENTS = 'CLEAR_COMMENTS';
 
 export const SET_MAIN_PAGE_LOADING = 'SET_MAIN_PAGE_LOADING';
 
-export const pathToMainPage = '/hc';
+export const pathToMainPage = '/';
 export const pathToHome = '/home';
 export const pathToSignIn = '/login';
 export const pathToSignUp = '/signUp';
-export const pathToProfile = '/profile';
+export const pathToProfile = '/profile/:id';
 export const pathToModeration = '/moderation';
-export const pathToPosts= '/hc/posts/:type';
-export const pathToPost= '/hc/post/:id';
+export const pathToPosts= '/posts/:type';
+export const pathToPost= '/post/:id';
 export const pathToMap = '/map';
 
 export const POSTS_TYPES = [
     {
-        name: 'Ремёсла',
-        type: 'handicrafts',
+        label: 'Ремёсла',
+        value: 'handicrafts',
     },
     {
-        name: 'Изделия',
-        type: 'goods',
+        label: 'Изделия',
+        value: 'goods',
     },
 ];

@@ -43,16 +43,16 @@ export const MapContainer = ({posts, getPosts}) => {
         if (!values) {
         return;
         }
-        console.log(selectOptions);
+
         setEditValue(values);
-        console.log(values.length);
+
         if (values.length > 1) {
             setLocateValues(values.map((item) => item.value));
             setRoutesActive(true);
         }
 
     };
-    console.log(locateValues);
+
     return (
         <Container>
             <Container

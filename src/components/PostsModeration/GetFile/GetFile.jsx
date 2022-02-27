@@ -16,10 +16,11 @@ const Container = styled.div`
     background-color: white;
     color: white;
     position: relative;
+    margin-top: 20px;
 `
 
-export const GetFile = () => {
-    const [files, setFiles] = useState([]);
+export const GetFile = ({files, setFiles}) => {
+
 
     return (
         <Container>

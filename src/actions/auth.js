@@ -41,13 +41,14 @@ export const getUsers = () => ({
     type: GET_USERS,
 });
 
-export const getUser = (token) => ({
+export const getUser = (id) => ({
     type: GET_USER,
-    payload: token,
+    payload: id,
 });
 
-export const getUserSuccessed = () => ({
+export const getUserSuccessed = (user) => ({
     type: GET_USER_SUCCESSED,
+    payload: user,
 });
 
 export const setCreateModalVisible = (isVisible) => ({
