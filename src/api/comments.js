@@ -31,9 +31,10 @@ export const getCommentsApi = async (payload) => {
             forIn(post, (value, key) => {
                 mas2.push(value);
             })
+
             commentsArr.push({
                 ...comment,
-                avatar: mas[4],
+                avatar: mas[5],
                 postTitle: mas2[1],
                 userName: mas[3],
                 userLogin: mas[1],

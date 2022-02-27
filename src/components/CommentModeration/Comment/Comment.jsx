@@ -2,8 +2,8 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 import Avatar from "@atlaskit/avatar";
 import Button from "@atlaskit/button";
-import CheckIcon from '@atlaskit/icon/glyph/check'
-import TrashIcon from '@atlaskit/icon/glyph/trash'
+import CheckIcon from '@atlaskit/icon/glyph/check';
+import TrashIcon from '@atlaskit/icon/glyph/trash';
 
 const Item = styled.li`
   padding: 10px;
@@ -65,7 +65,6 @@ const getText = (text) => {
 }
 
 export const Comment = ({ comment, deleteComment, editComment }) => {
-
     const onDeleteButtonClick = () => {
         deleteComment(comment.id);
     };
@@ -76,9 +75,9 @@ export const Comment = ({ comment, deleteComment, editComment }) => {
 
     return (
         <Item>
-            <Avatar src={comment.avatar} size="large"/>
+            <Avatar src={comment?.avatar} size="large"/>
             <TextContainer>
-                <Name>{`${comment.userName || ''} ${`(${comment.userLogin})` || ''}`}</Name>
+                <Name>{`${comment.userLogin || ''} ${`(${comment.userName})` || ''} `}</Name>
                 <LinkToPost to={'post/' + comment.postId}>{comment.postTitle}</LinkToPost>
                 {comment.text && getText(comment.text)}
             </TextContainer>
@@ -92,6 +91,7 @@ export const Comment = ({ comment, deleteComment, editComment }) => {
                         onClick={onApproveButtonClick}
                     ></Button>
                 }
+                {console.log(comment)}
                 <Button
                     iconBefore={<TrashIcon size="large" appearance="primary"/>}
                     onClick={onDeleteButtonClick}

@@ -24,7 +24,7 @@ const ListItem = styled.li`
 `
 
 const Title = styled.h3`
-    
+    font-size: 18px;
 `
 
 const Image = styled.img`
@@ -33,11 +33,12 @@ const Image = styled.img`
 `
 
 const Date = styled.p`
-    
+    color: gray;
+  font-size: 14px;
 `
 
 const TextContainer = styled.div`
-    
+    margin-left: 10px;
 `
 
 export const PostItem = ({ post, selectPost, selectedPost }) => {

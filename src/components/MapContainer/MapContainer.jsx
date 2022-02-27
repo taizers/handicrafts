@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { map, isEmpty } from 'lodash';
 import Map from '../Map/index';
 
 import Select from '@atlaskit/select';
@@ -19,15 +20,15 @@ const Container = styled.div`
 
 `
 const ReadViewContainer = styled.div`
-    display: 'flex';
-    max-width: '100%';
+    display: flex;
+    max-width: 100%;
 `
 const EditViewContainer = styled.div`
     z-index: 1;
-    position: 'relative';
+    position: relative;
 `
 
-export const MapContainer = ({posts, getPosts}) => {
+export const MapContainer = ({ posts, getPosts }) => {
     const [editValue, setEditValue] = useState([]);
     const [locateValues, setLocateValues] = useState([]);
     const [isRoutesActive, setRoutesActive] = useState(false);
@@ -37,20 +38,23 @@ export const MapContainer = ({posts, getPosts}) => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
         }, []);
 
-    const selectOptions = posts.map((item) => ({ label: item.title, value: item.location }));
+    const selectOptions = [];
+
+    map(posts, (post) => {
+        if (!isEmpty(post.location)) {
+            selectOptions.push({label: post.title, value: post.location});
+        }
+    });
+
+    console.log(editValue);
 
     const onConfirm = (values) => {
-        if (!values) {
-        return;
-        }
-
-        setEditValue(values);
-
+        console.log(values);
         if (values.length > 1) {
+            setEditValue(values);
             setLocateValues(values.map((item) => item.value));
             setRoutesActive(true);
         }
-
     };
 
     return (
@@ -68,22 +72,23 @@ export const MapContainer = ({posts, getPosts}) => {
                 editView={(fieldProps) => (
                 <EditViewContainer>
                     <Select
-                    {...fieldProps}
-                    options={selectOptions}
-                    isMulti
-                    autoFocus
-                    openMenuOnFocus
+                        {...fieldProps}
+                        options={selectOptions}
+                        isMulti
+                        autoFocus
+                        openMenuOnFocus
                     />
                 </EditViewContainer>
                 )}
                 readView={() =>
-                editValue && editValue.length === 0 ? (
+                isEmpty(editValue) ? (
                     <ReadViewContainer
                         style={{
                             fontSize: `${fontSize}px`,
                             height: `${(gridSize * 2.5) / fontSize}em`,
                             lineHeight: `${(gridSize * 2.5) / fontSize}`,
                             padding: `${gridSize}px ${gridSize - 2}px`,
+                            minHeight: '35px',
                         }}
                     >Нажмите чтобы составить маршрут</ReadViewContainer>
                 ) : (

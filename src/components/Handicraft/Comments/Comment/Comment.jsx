@@ -95,8 +95,8 @@ export const Comment = ({ comment, currentUserId, currentUserRole, signedIn, del
                     </DropdownItemGroup>
                 </DropdownMenu>    
             </DropContainer>
-
-            <Avatar src="https://reqres.in/img/faces/2-image.jpg" size="xlarge" />
+            {console.log(comment.avatar)}
+            <Avatar src={comment?.avatar} size="xlarge" />
             <Text>{text}</Text>
 
             {isEdited && <IsEdited>Редактировано</IsEdited>}

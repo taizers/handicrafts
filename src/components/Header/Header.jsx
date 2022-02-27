@@ -88,9 +88,7 @@ const ListGroupItem = styled.li`
   margin-left: 40px;
 `
 
-export const Header = ({ signedIn, userId }) => {
-    let { path, url } = useRouteMatch();
-
+export const Header = ({ user }) => {
     return (
         <HeaderItem>
             <Container className="container">
@@ -129,19 +127,18 @@ export const Header = ({ signedIn, userId }) => {
                             {...props}
                             ref={triggerRef}
                             appearance="circle"
-                            src={signedIn && "https://pbs.twimg.com/profile_images/803832195970433027/aaoG6PJI_400x400.jpg"}
+                            src={user?.avatar}
                             size="large"
                             name="John Doe"
                         />
                     )}
                     >
                     <DropdownItemGroup>
-                        {signedIn && <DropdownItem><Link to={''/*generatePath(pathToProfile, {id: userId})*/}>Профиль</Link></DropdownItem>}
-                        {signedIn && <DropdownItem><Link to={pathToModeration}>Модерация</Link></DropdownItem>}
-                        {signedIn && <DropdownItem><Link to="">Создать</Link></DropdownItem>}
-                        {signedIn && <DropdownItem><Link to="/hc">Выход</Link></DropdownItem>}
-                        {!signedIn && <DropdownItem><Link to={pathToSignIn}>Войти</Link></DropdownItem>}
-                        {!signedIn && <DropdownItem><Link to={pathToSignUp}>Зарегестрироваться</Link></DropdownItem>}
+                        {user && <DropdownItem><Link to={''/*generatePath(pathToProfile, {id: userId})*/}>Профиль</Link></DropdownItem>}
+                        {user && (user.role === 'admin' || user.role === 'owner') && <DropdownItem><Link to={pathToModeration}>Модерация</Link></DropdownItem>}
+                        {user && <DropdownItem><Link to={pathToHome}>Выход</Link></DropdownItem>}
+                        {!user && <DropdownItem><Link to={pathToSignIn}>Войти</Link></DropdownItem>}
+                        {!user && <DropdownItem><Link to={pathToSignUp}>Зарегестрироваться</Link></DropdownItem>}
                     </DropdownItemGroup>
                 </DropdownMenu>    
             </Container>

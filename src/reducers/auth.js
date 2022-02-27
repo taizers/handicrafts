@@ -50,7 +50,7 @@ const reducer = (state = initialState, action) => {
         case AUTH_SUCCESSED:
             return {
                 ...state,
-                user: action.payload,
+                currentUser: action.payload,
                 signedIn: true,
             };
         case GET_USERS_SUCCESSED:

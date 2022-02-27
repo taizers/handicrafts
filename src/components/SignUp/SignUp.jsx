@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import Input from '../Input/Input';
 import { styledButton } from '../../styles/button';
 import CryptoJS from 'crypto-js';
+import Button from '@atlaskit/button';
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
     position: fixed;
@@ -59,7 +61,17 @@ const SignUpButton = styled(styledButton)`
   margin-top: 40px;
 `
 
+const ButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 30px;
+  font-size: 17px;
+  font-weight: bold;
+`
+
 export const SignUp = ({ signUp }) => {
+  let history = useHistory();
+
   const onSubmitSignIn = (evt) => {
     evt.preventDefault();
 
@@ -71,8 +83,10 @@ export const SignUp = ({ signUp }) => {
       };
       signUp(data);
     }
-    
-    
+  }
+
+  const onBackClick = () => {
+    history.goBack();
   }
 
   return (
@@ -81,7 +95,10 @@ export const SignUp = ({ signUp }) => {
         <SignUpInput labelValue="Логин" name="email" type="email" onChangeValue=''/>
         <SignUpInput labelValue="Пароль" name="firstPassword" type="password" onChangeValue=''/>
         <SignUpInput labelValue="Повторите пароль" name="secondPassword" type="password" onChangeValue=''/>
-        <SignUpButton>Зарегистрироваться</SignUpButton>
+        <ButtonsContainer>
+          <Button style={{marginTop: '20px'}} appearance='subtle' onClick={onBackClick}>Назад</Button>
+          <Button type="submit" appearance='primary'>Зарегистрироваться</Button>
+        </ButtonsContainer>
       </SignUpForm>
     </Container>
   );

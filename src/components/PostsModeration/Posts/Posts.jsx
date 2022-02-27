@@ -71,7 +71,7 @@ const getText = (text) => {
 }
 
 export const Posts = ({post, deletePost}) => {
-    const { images, subTitle, title, created_at, id} = post;
+    const { images, subTitle, title, created_at, id } = post;
 
     const onDeletePost = () => {
         deletePost(id);

@@ -18,7 +18,7 @@ const SelectContainer = styled(FieldContainer)`
 `
 
 export const SearchField = ({ search }) => {
-    const [login, setlogin] = useState('');
+    const [login, setLogin] = useState('');
     const [role, setRole] = useState('');
     const [name, setName] = useState('');
 
@@ -37,7 +37,7 @@ export const SearchField = ({ search }) => {
                     {({ fieldProps }) => (
                         <Textfield
                             aria-label="default text field"
-                            onChange={(evt) => (setlogin(evt.currentTarget.value))} />
+                            onChange={(evt) => (setLogin(evt.currentTarget.value))} />
                     )}
                 </Field>
             </FieldContainer>
