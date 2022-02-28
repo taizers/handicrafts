@@ -23,7 +23,15 @@ const SubTitle = styled.h3`
   margin: 20px 0;
 `
 const TextContainer = styled.div`
+  text-align: left;
+  text-indent: 20px;
 
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `
 const Text = styled.p`
   text-indent: 40px;
@@ -37,7 +45,7 @@ const UsefullLinks = styled.ul`
 
 
 const getText = (textList) => {
-    const text = textList.split('/*Enter*/')
+    const text = textList.split('\n\n')
   return <TextContainer>
       {text.map( (item, index) => <Text key={'text' + index}>{item}</Text> )}
     </TextContainer>
@@ -60,7 +68,6 @@ export const Handicraft = ({getPost, getComments, post, comments}) => {
     <Container className="container">
       <Title>{title}</Title>
       <SubTitle>{subTitle}</SubTitle>
-    
       {text && getText(text)}
       <SubTitle>Полезные ссылки</SubTitle>
       {useFullLinks &&

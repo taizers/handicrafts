@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import Avatar from '@atlaskit/avatar';
 
 const Container = styled.div`
     max-width: 60%;
@@ -41,7 +42,7 @@ export const Profile = ({ user, getUser }) => {
 
     return (
         <Container>
-            <UserImage src={user?.avatar}  height="150" width="150" />
+            <Avatar src={user?.avatar} size="xxlarge" />
             <UserLogin>Логин: {user?.login}</UserLogin>
             <UserDisplaiedName>Отображаемое имя: {user?.name}</UserDisplaiedName>
             <UserDisplaiedName>Роль: {user?.role}</UserDisplaiedName>
