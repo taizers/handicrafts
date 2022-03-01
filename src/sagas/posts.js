@@ -1,6 +1,6 @@
 import { call, put, takeEvery, all, fork } from "redux-saga/effects";
 import {
-    getPostsFromTypeApi,
+    getLatestsPostsApi,
     getPostApi,
     getPostsApi,
     deletePostApi,
@@ -13,6 +13,9 @@ import {
     getPostSuccessed,
     setPostsLoading,
     getPostFailed,
+    getLatestsPostsFailed,
+    getLatestsPostsSuccessed,
+    setLatestsPostsLoading,
 } from '../actions/posts';
 
 import {
@@ -21,6 +24,7 @@ import {
     CREATE_POST,
     UPDATE_POST,
     DELETE_POST,
+    GET_LATESTS_POSTS,
 } from '../constants';
 
 function* watchGetPosts() {
@@ -100,6 +104,22 @@ function* createPost({ payload }) {
     }
 }
 
+function* watchGetLatestsPosts() {
+    yield takeEvery(GET_LATESTS_POSTS, getLatestsPosts);
+}
+
+function* getLatestsPosts() {
+    yield setLatestsPostsLoading(true);
+    try {
+        const data = yield call(getLatestsPostsApi);
+        yield put(getLatestsPostsSuccessed(data));
+    } catch (error) {
+        yield getLatestsPostsFailed(error.message);
+    } finally {
+        yield setLatestsPostsLoading(false);
+    }
+}
+
 //export default watchGetHandicraftList;
 
 export default function* rootSaga() {
@@ -109,5 +129,6 @@ export default function* rootSaga() {
         fork(watchDeletePost),
         fork(watchUpdatePost),
         fork(watchCreatePost),
+        fork(watchGetLatestsPosts),
     ]);
 }

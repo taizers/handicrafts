@@ -32,6 +32,12 @@ export const createPostApi = async (post) => {
         .then(response => response.data)
 };
 
+export const getLatestsPostsApi = async () => {
+    return data.posts.slice().splice(0,3);
+ /*   return await axios.get(API_URL + "posts/latests")
+        .then(response => response.data)*/
+};
+
 export const updatePostApi = async ({id, data}) => {
     return await axios.put(API_URL + "posts/" + id, data)
         .then(response => response.data)

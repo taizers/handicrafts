@@ -5,11 +5,19 @@ import {
     SET_POSTS_LOADING,
     SET_CREATE_POST_LOADING,
     SET_CREATE_POST_VISIBLE,
+    GET_LATESTS_POSTS_SUCCESSED,
+    GET_LATESTS_POSTS_FAILED,
+    SET_LATESTS_POSTS_LOADING,
 } from "../constants";
 
 const initialState = {
     posts: [],
     post: {},
+    latests: {
+        posts: [],
+        error: null,
+        isLoading: false,
+    },
     isLoading: false,
     error: null,
     modal: {
@@ -40,6 +48,30 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: action.payload,
+            };
+        case GET_LATESTS_POSTS_SUCCESSED:
+            return {
+                ...state,
+                latests: {
+                    ...state.latests,
+                    posts: action.payload,
+                },
+            };
+        case GET_LATESTS_POSTS_FAILED:
+            return {
+                ...state,
+                latests: {
+                    ...state.latests,
+                    error: action.payload,
+                },
+            };
+        case GET_LATESTS_POSTS_FAILED:
+            return {
+                ...state,
+                latests: {
+                    ...state.latests,
+                    isLoading: action.payload,
+                },
             };
         case SET_CREATE_POST_LOADING:
             return {

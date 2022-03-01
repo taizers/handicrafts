@@ -11,6 +11,10 @@ import {
     UPDATE_POST,
     SET_CREATE_POST_VISIBLE,
     SET_CREATE_POST_LOADING,
+    GET_LATESTS_POSTS,
+    GET_LATESTS_POSTS_FAILED,
+    GET_LATESTS_POSTS_SUCCESSED,
+    SET_LATESTS_POSTS_LOADING,
 } from '../constants';
 
 export const getPosts = (type) => ({
@@ -61,9 +65,28 @@ export const getPostFailed = (data) => ({
     payload: data,
 });
 
+export const getLatestsPosts = () => ({
+    type: GET_LATESTS_POSTS,
+});
+
+export const getLatestsPostsSuccessed = (posts) => ({
+    type: GET_LATESTS_POSTS_SUCCESSED,
+    payload: posts,
+});
+
+export const getLatestsPostsFailed = (error) => ({
+    type: GET_LATESTS_POSTS_FAILED,
+    payload: error,
+});
+
+export const setLatestsPostsLoading = (isLoading) => ({
+    type: SET_LATESTS_POSTS_LOADING,
+    payload: isLoading,
+});
+
 export const setPostsLoading = (isLoading) => ({
     type: SET_POSTS_LOADING,
-    payload: { isLoading },
+    payload: isLoading,
 });
 
 export const setCreatePostVisible = (isVisible) => ({

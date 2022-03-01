@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
+import LastPosts from "./LastPosts/index";
+
 const Container = styled.div`
 `
+
 
 const Title = styled.h2`
   text-transform: uppercase;
@@ -29,6 +32,7 @@ const ListItem = styled.li`
 export const Home = () => {
   return (
     <Container className="container">
+        <LastPosts />
         <Title>Ремёсла Беларуси</Title>
         <SubTitle>
             Какой была Беларусь сотни лет назад? Чем уникальна и самобытна ее культура? Какие традиции белорусов известны во всем мире и чем удивляет наша страна ценителей аутентичного наследия?
