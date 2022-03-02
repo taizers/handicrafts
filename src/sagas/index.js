@@ -4,6 +4,7 @@ import handicraftSaga from './handicrafts';
 import commentsSaga from './comments';
 import authSaga from './auth';
 import postsSaga from './posts';
+import weatherSaga from './weather';
 
 export default function* rootSaga() {
     yield all([
@@ -11,6 +12,7 @@ export default function* rootSaga() {
         authSaga(),
         commentsSaga(),
         postsSaga(),
+        weatherSaga(),
     ]);
 }
   

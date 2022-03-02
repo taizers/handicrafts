@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import LastPosts from "./LastPosts/index";
+import Weather from "./Weather/index";
 
 const Container = styled.div`
 `
@@ -33,6 +34,7 @@ export const Home = () => {
   return (
     <Container className="container">
         <LastPosts />
+        <Weather />
         <Title>Ремёсла Беларуси</Title>
         <SubTitle>
             Какой была Беларусь сотни лет назад? Чем уникальна и самобытна ее культура? Какие традиции белорусов известны во всем мире и чем удивляет наша страна ценителей аутентичного наследия?
