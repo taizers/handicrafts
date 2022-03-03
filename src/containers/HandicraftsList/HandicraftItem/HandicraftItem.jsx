@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { Link, useRouteMatch, generatePath } from 'react-router-dom';
-import { pathToPost } from '../../../constants';
+
+import { isEmpty } from 'lodash';
+import { pathToPost, pathToPosts } from '../../../constants';
 
 const Item = styled.li`
     max-width: 250px;
@@ -32,14 +34,12 @@ const TextContainer = styled.div`
 `
 
 export const HandicraftItem = ({ post }) => {
-    const {id, images, title, createdAt} = post;
-
     return <Item>
-            <Link to={generatePath(pathToPost, {id: id})}>
-                <ItemImage src={images[0]} alt={title} height='100' width='200' />
+            <Link to={post.id ? generatePath(pathToPost, {id: post.id}) : generatePath(pathToPosts, {type: post.value})}>
+                <ItemImage src={!isEmpty(post.images) ? post.images[0] : post.image} alt={post.title ? post.title : post.label} height='100' width='200' />
                 <TextContainer>
-                    <ItemTitle>{title}</ItemTitle>
-                    <Date>{createdAt}</Date>
+                    <ItemTitle>{post.title ? post.title : post.label}</ItemTitle>
+                    {post.createdAt && <Date>{post.createdAt}</Date>}
                 </TextContainer>
             </Link>
         </Item>

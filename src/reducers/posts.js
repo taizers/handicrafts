@@ -8,11 +8,13 @@ import {
     GET_LATESTS_POSTS_SUCCESSED,
     GET_LATESTS_POSTS_FAILED,
     SET_LATESTS_POSTS_LOADING,
+    GET_POSTS_TYPES_SUCCESSED,
 } from "../constants";
 
 const initialState = {
     posts: [],
     post: {},
+    types: [],
     latests: {
         posts: [],
         error: null,
@@ -65,13 +67,18 @@ const reducer = (state = initialState, action) => {
                     error: action.payload,
                 },
             };
-        case GET_LATESTS_POSTS_FAILED:
+        case SET_LATESTS_POSTS_LOADING:
             return {
                 ...state,
                 latests: {
                     ...state.latests,
                     isLoading: action.payload,
                 },
+            };
+        case GET_POSTS_TYPES_SUCCESSED:
+            return {
+                ...state,
+                types: action.payload,
             };
         case SET_CREATE_POST_LOADING:
             return {

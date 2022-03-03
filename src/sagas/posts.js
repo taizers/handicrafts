@@ -6,6 +6,7 @@ import {
     deletePostApi,
     updatePostApi,
     createPostApi,
+    getPostTypesApi,
 } from '../api/posts';
 
 import {
@@ -16,6 +17,7 @@ import {
     getLatestsPostsFailed,
     getLatestsPostsSuccessed,
     setLatestsPostsLoading,
+    getPostsTypesSuccessed,
 } from '../actions/posts';
 
 import {
@@ -25,6 +27,7 @@ import {
     UPDATE_POST,
     DELETE_POST,
     GET_LATESTS_POSTS,
+    GET_POSTS_TYPES,
 } from '../constants';
 
 function* watchGetPosts() {
@@ -120,7 +123,21 @@ function* getLatestsPosts() {
     }
 }
 
-//export default watchGetHandicraftList;
+function* watchGetPostsTypes() {
+    yield takeEvery(GET_POSTS_TYPES, getPostsTypes);
+}
+
+function* getPostsTypes() {
+    yield setPostsLoading(true);
+    try {
+        const data = yield call(getPostTypesApi);
+        yield put(getPostsTypesSuccessed(data));
+    } catch (error) {
+        yield getPostFailed(error.message);
+    } finally {
+        yield setPostsLoading(false);
+    }
+}
 
 export default function* rootSaga() {
     yield all([
@@ -130,5 +147,6 @@ export default function* rootSaga() {
         fork(watchUpdatePost),
         fork(watchCreatePost),
         fork(watchGetLatestsPosts),
+        fork(watchGetPostsTypes),
     ]);
 }

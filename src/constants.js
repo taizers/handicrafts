@@ -71,6 +71,10 @@ export const GET_WEATHER_FAILED = 'GET_WEATHER_FAILED';
 export const SET_WEATHER_LOADING = 'SET_WEATHER_LOADING';
 export const GET_USER_LOCATION = 'GET_USER_LOCATION';
 
+export const GET_POSTS_TYPES = 'GET_POSTS_TYPES';
+export const GET_POSTS_TYPES_SUCCESSED = 'GET_POSTS_TYPES_SUCCESSED';
+export const GET_POSTS_TYPES_FAILED = 'GET_POSTS_TYPES_FAILED';
+
 export const SET_MAIN_PAGE_LOADING = 'SET_MAIN_PAGE_LOADING';
 
 export const pathToMainPage = '/';
@@ -80,6 +84,7 @@ export const pathToSignUp = '/signUp';
 export const pathToProfile = '/profile/:id';
 export const pathToModeration = '/moderation';
 export const pathToPosts= '/posts/:type';
+export const pathToPostsTypes= '/posts';
 export const pathToPost= '/post/:id';
 export const pathToMap = '/map';
 
@@ -87,9 +92,11 @@ export const POSTS_TYPES = [
     {
         label: 'Ремёсла',
         value: 'handicrafts',
+        image: 'https://i7.otzovik.com/2019/05/20/8221024/img/1428726_509889.jpeg'
     },
     {
         label: 'Изделия',
         value: 'goods',
+        image: 'https://www.kem.by/wp-content/uploads/remesla.jpg'
     },
 ];

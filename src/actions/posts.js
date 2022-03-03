@@ -15,7 +15,18 @@ import {
     GET_LATESTS_POSTS_FAILED,
     GET_LATESTS_POSTS_SUCCESSED,
     SET_LATESTS_POSTS_LOADING,
+    GET_POSTS_TYPES,
+    GET_POSTS_TYPES_SUCCESSED,
 } from '../constants';
+
+export const getPostsTypes = () => ({
+    type: GET_POSTS_TYPES,
+});
+
+export const getPostsTypesSuccessed = (types) => ({
+    type: GET_POSTS_TYPES_SUCCESSED,
+    payload: types,
+});
 
 export const getPosts = (type) => ({
     type: GET_POSTS,

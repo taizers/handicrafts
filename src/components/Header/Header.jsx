@@ -8,7 +8,7 @@ import {
     pathToMap,
     pathToHome,
     pathToModeration,
-    pathToPosts, pathToMainPage,
+    pathToPostsTypes,
 } from '../../constants';
 import Avatar from '@atlaskit/avatar';
 import DropdownMenu, { DropdownItem, DropdownItemGroup } from '@atlaskit/dropdown-menu';
@@ -51,41 +51,7 @@ const ListLink = styled(Link)`
   }
 `
 
-const ListLinks = styled.a`
-  font-size: 16px;
-  font-weight: 500;
-  color: black;
-  margin-left: 40px;
-  position: relative;
-
-  &:hover {
-    text-decoration: underline;
-  }
-  
-  &::after {
-    content: '>';
-    rigth: 10px;
-    transform: rotate(90deg);
-  }
-`
-
-const MenuLink = styled(ListLink)`
-    color: black;
-    margin-left: 0;
-`
-
 const ListItem = styled.li`
-`
-
-const ListMenu = styled.p`
-    
-`
-
-const ListGroupItem = styled.li`
-  font-size: 16px;
-  font-weight: 500;
-  align-self: center;
-  margin-left: 40px;
 `
 
 export const Header = ({ user }) => {
@@ -97,24 +63,7 @@ export const Header = ({ user }) => {
                         <ListLink to={pathToHome}>Главная</ListLink>
                     </ListItem>
                     <ListItem>
-                        <DropdownMenu
-                            style={{
-                                zIndex: 501,
-                            }}
-                            placement="bottom"
-                            trigger={({ triggerRef, isSelected, testId, ...providedProps }) => (
-                                <ListLinks
-                                    {...providedProps}
-                                    ref={triggerRef}
-                                >
-                                    Посты
-                                </ListLinks>
-                            )}
-                        >
-                            <DropdownItemGroup>
-                                {POSTS_TYPES.map((item)=>(<DropdownItem key={item.value}><MenuLink key={item.value + 'link'} to={generatePath(pathToPosts, {type: item.value})}>{item.label}</MenuLink></DropdownItem>))}
-                            </DropdownItemGroup>
-                        </DropdownMenu>
+                        <ListLink to={pathToPostsTypes}>Ремёсла</ListLink>
                     </ListItem>
                     <ListItem>
                         <ListLink to={pathToMap}>Карта</ListLink>

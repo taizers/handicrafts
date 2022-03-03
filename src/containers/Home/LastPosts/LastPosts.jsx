@@ -5,7 +5,7 @@ import Button from "@atlaskit/button";
 import {generatePath, Link} from 'react-router-dom';
 
 import LastPost from './LastPost/index';
-import {pathToPosts} from "../../../constants";
+import { pathToPostsTypes } from "../../../constants";
 
 const Container = styled.div`
     display: flex;
@@ -29,7 +29,7 @@ export const LastPosts = ({ latestsPosts, getLatestsPosts }) => {
           <LastPostsList>
               { map(latestsPosts, (post) => <LastPost key={post.id} lastPost={post} />)  }
           </LastPostsList>
-            <Button style={{maxWidth: '200px', alignSelf: 'center'}}  appearance="primary"><Link to={generatePath(pathToPosts, {type: "handicrafts"})}>Посмотреть ещё</Link></Button>
+            <Button style={{maxWidth: '200px', alignSelf: 'center'}}  appearance="primary"><Link to={pathToPostsTypes}>Посмотреть ещё</Link></Button>
       </Container>
   );
 }

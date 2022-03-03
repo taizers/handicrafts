@@ -6,6 +6,7 @@ export const selectPosts = createSelector(postsData, posts => posts.posts);
 export const selectPost = createSelector(postsData, posts => posts.post);
 export const selectPostsIsLoading = createSelector(postsData, posts => posts.isLoading);
 export const selectPostsError = createSelector(postsData, posts => posts.error);
+export const selectPostsTypes = createSelector(postsData, posts => posts.types);
 
 const selectLatests = createSelector(postsData, posts => posts.latests);
 export const selectLatestsPosts = createSelector(selectLatests, latests => latests.posts);

@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import {Link, useParams} from 'react-router-dom';
 import { map } from 'lodash';
-import { styledButton } from '../../styles/button';
-import Icons from '../../components/Icons/Icons';
 import HandicraftItem from './HandicraftItem/index';
 import { useEffect } from 'react';
 

@@ -7,10 +7,12 @@ import {
   pathToPost,
   pathToProfile,
   pathToMainPage,
+  pathToPostsTypes,
   pathToModeration,
 } from '../../constants';
 import Home from '../../containers/Home/index';
-import Header from '../Header/index'
+import Header from '../Header/index';
+import PostsForTypes from '../../containers/PostsForTypes/index';
 import HandicraftsList from '../../containers/HandicraftsList/index';
 import Handicraft from '../../containers/Handicraft/index';
 import MapContainer from '../../containers/MapContainer/index';
@@ -32,6 +34,7 @@ export const Main = () => {
         <Header/>
         <Switch>
           <Route exact path={pathToMap}><MapContainer /></Route>
+          <Route exact path={pathToPostsTypes}><PostsForTypes /></Route>
           <Route exact path={pathToPosts}><HandicraftsList /></Route>
           <Route exact path={pathToPost}><Handicraft /></Route>
           <Route exact path={pathToModeration}><Moderation /></Route>
