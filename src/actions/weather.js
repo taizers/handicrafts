@@ -3,6 +3,7 @@ import {
     GET_WEATHER_SUCCESSED,
     GET_WEATHER_FAILED,
     SET_WEATHER_LOADING,
+    GET_USER_LOCATION,
 } from '../constants';
 
 export const getWeather = (location) => ({
@@ -10,17 +11,19 @@ export const getWeather = (location) => ({
     payload: location,
 });
 
-export const getWeatherSuccessed = (weather, city) => ({
+export const getWeatherSuccessed = (weather) => ({
     type: GET_WEATHER_SUCCESSED,
-    payload: {
-        weather: weather,
-        city: city,
-    },
+    payload: weather,
 });
 
 export const getWeatherFailed = (error) => ({
     type: GET_WEATHER_FAILED,
     payload: error,
+});
+
+export const getUserLocation = (location) => ({
+    type: GET_USER_LOCATION,
+    payload: location,
 });
 
 export const setWeatherLoading = (isLoading) => ({

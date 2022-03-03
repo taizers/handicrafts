@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { map, isEmpty } from 'lodash';
-import Map from '../Map/index';
+import Map from './Map/index';
 
 import Select from '@atlaskit/select';
 import Tag from '@atlaskit/tag';

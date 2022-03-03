@@ -10,9 +10,9 @@ import {
 import { token } from '@atlaskit/tokens';
 
 import Tabs, { Tab, TabList, TabPanel } from '@atlaskit/tabs';
-import CommentModeration from '../CommentModeration/index';
-import PostsModeration from "../PostsModeration/index";
-import UsersModeration from "../UsersModeration/index";
+import CommentModeration from '../../containers/CommentModeration/index';
+import PostsModeration from "../../containers/PostsModeration/index";
+import UsersModeration from "../../containers/UsersModeration/index";
 
 const Container = styled.div`
 `

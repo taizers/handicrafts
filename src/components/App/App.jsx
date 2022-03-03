@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import Main from '../../containers/Main';
+import Main from '../Main';
 import Login from '../Login/index';
 import SignUp from '../SignUp/index';
 import { pathToHome, pathToSignIn, pathToSignUp } from '../../constants';

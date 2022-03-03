@@ -1,31 +1,21 @@
 import { call, put, takeEvery, all, fork } from "redux-saga/effects";
-import { getWeatherApi, getCityName } from '../api/weather';
+import { getWeatherApi } from '../api/weather';
 
 import { getWeatherSuccessed, getWeatherFailed, setWeatherLoading } from '../actions/weather';
 
 import { GET_WEATHER } from '../constants';
 
-let locations = [];
-const getUserLocation = () => (navigator.geolocation ?
-    navigator.geolocation.getCurrentPosition(
-        (position) => [ position.coords.latitude, position.coords.longitude ]
-    ) :
-    [ 53.6884, 23.8258 ]
-);
-
 function* watchGetWeather() {
     yield takeEvery(GET_WEATHER, getWeather);
 }
 
-function* getWeather() {
-    const location = yield getUserLocation();
-    yield console.log(location);
+function* getWeather({ payload }) {
+    yield console.log(payload);
     yield setWeatherLoading(true);
     try {
-        const data = yield call(getWeatherApi, location);
-        const city = yield call(getCityName, location);
-        yield console.log(data, city);
-        yield put(getWeatherSuccessed(data, city));
+        const data = yield call(getWeatherApi, payload);
+        yield console.log(data);
+        yield put(getWeatherSuccessed(data));
     } catch (error) {
         yield console.log(error);
         yield getWeatherFailed(error.message);

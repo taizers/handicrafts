@@ -9,14 +9,13 @@ import {
   pathToMainPage,
   pathToModeration,
 } from '../../constants';
-import Home from '../../components/Home/index';
-import Header from '../../components/Header/index'
-import HandicraftsList from '../HandicraftsList/index';
-import Handicraft from '../../components/Handicraft/index';
-import MapContainer from '../../components/MapContainer/index';
-import Profile from '../../components/Profile/index';
-import Moderation from '../../components/Moderation/index';
-import AuthorizedRoute from '../../Routes/AuthorizedRoute/index';
+import Home from '../../containers/Home/index';
+import Header from '../Header/index'
+import HandicraftsList from '../../containers/HandicraftsList/index';
+import Handicraft from '../../containers/Handicraft/index';
+import MapContainer from '../../containers/MapContainer/index';
+import Profile from '../Profile/index';
+import Moderation from '../Moderation/index';
 
 const Container = styled.div`
   font-size: 16px;

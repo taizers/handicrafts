@@ -1,6 +1,6 @@
 import { Map } from "./Map";
 import { connect } from 'react-redux';
-import { signIn } from '../../actions/auth';
+import { signIn } from '../../../actions/auth';
 
 const mapDispathToProps = (dispath) => {
     return {

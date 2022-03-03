@@ -1,49 +1,48 @@
 import styled from 'styled-components';
 import { useEffect } from 'react';
+import { ceil } from "lodash";
 
 const Container = styled.div`
+    max-width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
 const Title = styled.h3`
+    font-size: 20px;
+    width: 100%;
+    word-wrap: break-word;
+    text-align: center;
 `
 const Temp = styled.h3`
-  font-size: 20px;
+    font-size: 20px;
 `
 
 const Image = styled.img`
+    height: 100px;
+    width: 100px;
 `
 
-export const Weather = ({ getWeather, weather, weatherCity }) => {
-    let arr = [];
-    const updatePosition = (position) => {
-        if (position) {
-            arr = [position.coords.latitude, position.coords.longitude];
-            console.log(arr);
-            return arr;
-        }
-    }
+const Label = styled.div`
+    width: 100%;
+    font-size: 14px;
+    word-wrap: break-word;
+    text-align: center;
+`
 
-    const getLocation = () => {
-        if (navigator.geolocation) {
-            return navigator.geolocation.getCurrentPosition(updatePosition);
-        } else
-        return [ 53.6884, 23.8258 ];
-    };
+export const Weather = ({ getWeather, weather, location }) => {
 
-
-    console.log(getLocation());
   useEffect(() => {
-      getLocation()
-      console.log(arr);
-
-    getWeather(arr);
+    getWeather(location);
   }, []);
-  console.log(weather);
+
   return (
       <Container>
-          <Title>{weatherCity} {getLocation()}</Title>
-          <Temp>{weather && weather.temp_c} °C</Temp>
-          <Image src={weather && weather.condition.icon}/>
+          <Title>{weather && weather.city}</Title>
+          <Image src={weather && `http://openweathermap.org/img/w/${weather.icon}.png`} />
+          <Temp>{weather && ceil(weather.temp, 1)} °C</Temp>
+          <Label>{weather && weather.discription}</Label>
       </Container>
 
   );

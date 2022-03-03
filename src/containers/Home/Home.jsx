@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useEffect } from 'react';
 
 import LastPosts from "./LastPosts/index";
 import Weather from "./Weather/index";
@@ -30,11 +31,29 @@ const ListItem = styled.li`
   margin: 5px 0;
 `
 
-export const Home = () => {
+export const Home = ({ userLocation, getUserLocation }) => {
+  const updatePosition = (position) => {
+      if (position) {
+        getUserLocation([position.coords.latitude, position.coords.longitude]);
+      }
+  }
+  
+  const getLocation = ()  => {
+       if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(updatePosition);
+      } else
+      getUserLocation([ 53.6884, 23.8258 ]);
+  };
+  
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
   return (
     <Container className="container">
         <LastPosts />
-        <Weather />
+        {userLocation && <Weather location={userLocation} />}
         <Title>Ремёсла Беларуси</Title>
         <SubTitle>
             Какой была Беларусь сотни лет назад? Чем уникальна и самобытна ее культура? Какие традиции белорусов известны во всем мире и чем удивляет наша страна ценителей аутентичного наследия?
