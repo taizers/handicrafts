@@ -1,37 +1,34 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Select from '@atlaskit/select';
+import { filter } from 'lodash';
 
 import LastPosts from "./LastPosts/index";
 import Weather from "./Weather/index";
+import Map from './Map/index';
 
 const Container = styled.div`
+  z-index: 500;
 `
 
+const SelectContainer = styled.div`
+  margin-bottom: 50px;
+`
 
 const Title = styled.h2`
   text-transform: uppercase;
   margin-bottom: 30px;
 `
 
-const SubTitle = styled.h3`
-  font-weight: 700;
-  margin: 20px 0;
-`
+export const Home = ({ userLocation, getUserLocation, postsTypes, getPostsTypes, posts, getPosts }) => {
+  const [markers, setSetMarkers] = useState(posts);
 
-const Text = styled.p`
-  margin: 10px 0;
-`
+  useEffect(() => {
+    getLocation();
+    getPostsTypes();
+    getPosts();
+  }, []);
 
-const List = styled.ul`
-  margin-left: 20px;
-`
-
-const ListItem = styled.li`
-  font-weight: 600;
-  margin: 5px 0;
-`
-
-export const Home = ({ userLocation, getUserLocation }) => {
   const updatePosition = (position) => {
       if (position) {
         getUserLocation([position.coords.latitude, position.coords.longitude]);
@@ -44,17 +41,37 @@ export const Home = ({ userLocation, getUserLocation }) => {
       } else
       getUserLocation([ 53.6884, 23.8258 ]);
   };
-  
 
-  useEffect(() => {
-    getLocation();
-  }, []);
+  console.log(markers);
 
   return (
-    <Container className="container">
+    <Container>
+      <Container className="container">
+        <Title>Ремёсла Беларуси</Title>
         <LastPosts />
         {userLocation && <Weather location={userLocation} />}
-        <Title>Ремёсла Беларуси</Title>
+        <SelectContainer>
+          <label htmlFor="selectForMap">Какие типы ремёсел отобразить на карте</label>
+          <Select
+            inputId="selectForMap"
+            options={[
+              { label: 'Все', value: '' },
+              ...postsTypes,
+            ]}
+            onChange={value => {
+              value.value !== '' ?
+              setSetMarkers(filter(posts, (post) => {
+                  if (value.value === post.type) {
+                      return post;
+                  }
+               })): 
+               setSetMarkers(posts);
+            }}
+            placeholder="Выберите категорию"
+          />
+        </SelectContainer>
+    </Container>
+    <Map markers={markers} />
     </Container>
   );
 }

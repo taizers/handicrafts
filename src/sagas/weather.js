@@ -10,14 +10,11 @@ function* watchGetWeather() {
 }
 
 function* getWeather({ payload }) {
-    yield console.log(payload);
     yield setWeatherLoading(true);
     try {
         const data = yield call(getWeatherApi, payload);
-        yield console.log(data);
         yield put(getWeatherSuccessed(data));
     } catch (error) {
-        yield console.log(error);
         yield getWeatherFailed(error.message);
     } finally {
         yield setWeatherLoading(false);

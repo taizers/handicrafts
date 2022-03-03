@@ -21,11 +21,11 @@ export const PostsForTypes = ({ types, getTypes }) => {
     useEffect(() => {
         getTypes()
     }, []);
-    console.log(types);
+
     return (
         <Container className="container">
             <List>
-                {types && map(types, (item) => <HandicraftItem key={item.value} post={item} />)}c
+                {types && map(types, (item) => <HandicraftItem key={item.value} post={item} />)}
             </List>
         </Container>
     );
