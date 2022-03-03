@@ -75,6 +75,12 @@ export const GET_POSTS_TYPES = 'GET_POSTS_TYPES';
 export const GET_POSTS_TYPES_SUCCESSED = 'GET_POSTS_TYPES_SUCCESSED';
 export const GET_POSTS_TYPES_FAILED = 'GET_POSTS_TYPES_FAILED';
 
+export const GET_FEATURE_ACTIONS = 'GET_FEATURE_ACTIONS';
+export const GET_FEATURE_ACTIONS_SUCCESSED = 'GET_FEATURE_ACTIONS_SUCCESSED';
+export const GET_FEATURE_ACTIONS_FAILED = 'GET_FEATURE_ACTIONS_FAILED';
+export const SET_FEATURE_ACTIONS_LOADING= 'SET_FEATURE_ACTIONS_LOADING';
+
+
 export const SET_MAIN_PAGE_LOADING = 'SET_MAIN_PAGE_LOADING';
 
 export const pathToMainPage = '/';
@@ -85,6 +91,7 @@ export const pathToProfile = '/profile/:id';
 export const pathToModeration = '/moderation';
 export const pathToPosts= '/posts/:type';
 export const pathToPostsTypes= '/posts';
+export const pathToFeatureActions= '/feature';
 export const pathToPost= '/post/:id';
 export const pathToMap = '/map';
 
@@ -98,5 +105,10 @@ export const POSTS_TYPES = [
         label: 'Изделия',
         value: 'goods',
         image: 'https://www.kem.by/wp-content/uploads/remesla.jpg'
+    },
+    {
+        label: 'Будущие события',
+        value: 'feature',
+        image: 'https://podolskriamo.ru/files/image/12/44/64/-lg!0421.jpg'
     },
 ];

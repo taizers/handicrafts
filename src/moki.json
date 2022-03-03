@@ -74,6 +74,32 @@
       ],
       "type": "handicrafts",
       "useFullLinks": ["https://www.belarus.by/ru/travel/ethno-tourism/ethnographic-museums","https://www.belarus.by/ru/travel/belarus-life"]
+    },
+    {
+      "id": 4,
+      "title": "Историко-культурный",
+      "subTitle": "subTitle of the post4",
+      "text": "Заславль – один из древнейших городов Беларуси: впервые упоминается в летописях под 1127 годом, но основан намного раньше.\n\nЗдесь сохранились удивительные исторические памятники, на базе которых в 1986 году был создан историко-культурный музей-заповедник \"Заславль\".\n\nСегодня музей-заповедник включает памятники международного и республиканского значения",
+      "createdAt": "2022-02-10",
+      "images": [
+        "http://www.belarus.by/dadvimages/s001274_401444.jpg",
+        "http://www.belarus.by/dadvimages/s001274_626356.jpg"
+      ],
+      "type": "feature",
+      "useFullLinks": ["https://www.belarus.by/ru/travel/ethno-tourism/ethnographic-museums","https://www.belarus.by/ru/travel/belarus-life"]
+    },
+    {
+      "id": 5,
+      "title": "Историко",
+      "subTitle": "subTitle of the post5",
+      "text": "Заславль – один из древнейших городов Беларуси: впервые упоминается в летописях под 1127 годом, но основан намного раньше.\n\nЗдесь сохранились удивительные исторические памятники, на базе которых в 1986 году был создан историко-культурный музей-заповедник \"Заславль\".\n\nСегодня музей-заповедник включает памятники международного и республиканского значения",
+      "createdAt": "2022-02-15",
+      "images": [
+        "http://www.belarus.by/dadvimages/s001274_626356.jpg",
+        "http://www.belarus.by/dadvimages/s001274_626356.jpg"
+      ],
+      "type": "feature",
+      "useFullLinks": ["https://www.belarus.by/ru/travel/ethno-tourism/ethnographic-museums","https://www.belarus.by/ru/travel/belarus-life"]
     }
   ],
   "comments": [

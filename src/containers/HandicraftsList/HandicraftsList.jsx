@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Link, useParams} from 'react-router-dom';
+import { useParams} from 'react-router-dom';
 import { map } from 'lodash';
 import HandicraftItem from './HandicraftItem/index';
 import { useEffect } from 'react';
