@@ -7,6 +7,7 @@ import { filter } from 'lodash';
 import LastPosts from "./LastPosts/index";
 import Weather from "./Weather/index";
 import Map from './Map/index';
+import LanguageSwitсher from "./LanguageSwitсher/index";
 import {pathToPosts, pathToPostsTypes} from "../../constants";
 
 const Container = styled.div`
@@ -38,7 +39,7 @@ export const Home = ({
   const [markers, setSetMarkers] = useState(posts);
 
   useEffect(() => {
-    getLocation();
+      getLocation();
     getPostsTypes();
     getPosts();
     getLatestsPosts();
@@ -58,15 +59,14 @@ export const Home = ({
       getUserLocation([ 53.6884, 23.8258 ]);
   };
 
-  console.log(markers);
-
   return (
-    <Container>
+    <Container className="container">
       <Container className="container">
         <Title>Ремёсла Беларуси</Title>
         <LastPosts key="latestPosts" posts={latestsPosts} path={pathToPostsTypes} title="Недавно добавленные" />
         <LastPosts key="featureActions" posts={featureActions} path={generatePath(pathToPosts, { type: 'feature'})} title="Будущие события" />
         {userLocation && <Weather location={userLocation} />}
+          <LanguageSwitсher />
         <SelectContainer>
           <label htmlFor="selectForMap">Какие типы ремёсел отобразить на карте</label>
           <Select

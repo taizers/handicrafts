@@ -5,6 +5,7 @@ import UsefullLink from './UsefullLink/index';
 import Comments from './Comments/index';
 import SwiftSlider from "react-swift-slider";
 import {map} from "lodash";
+import Map from './Map/index';
 
 const Container = styled.div`
     position: relative;
@@ -75,8 +76,9 @@ export const Handicraft = ({getPost, getComments, post, comments}) => {
           {useFullLinks.map( (item, index) => <UsefullLink link={item} key={"link" + index} />)}
         </UsefullLinks>
       }
-      <SubTitle>Комментарии</SubTitle>
+        {post && <Map marker={post}/>}
         <SwiftSlider data={imagesList} height={600} />
+        <SubTitle>Комментарии</SubTitle>
       <Comments comments={comments} postId={post.id} />
     </Container>
   );

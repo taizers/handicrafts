@@ -50,3 +50,11 @@ li{
 .hidden {
   display: none !important;
 }
+
+.routingMap .leaflet-marker-pane {
+  color: red;
+}
+
+.routingMap .leaflet-marker-pane:last-child {
+  color: green;
+}

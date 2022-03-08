@@ -40,8 +40,8 @@
       "type": "handicrafts",
       "useFullLinks": ["https://www.belarus.by/ru/travel/ethno-tourism/ethnographic-museums","https://www.belarus.by/ru/travel/belarus-life"],
       "location": [
-        "55.75",
-        "37.6167"
+        "52.1229",
+        "26.0951"
       ]
     },
     {
@@ -73,7 +73,11 @@
         "http://www.belarus.by/dadvimages/s001274_626356.jpg"
       ],
       "type": "handicrafts",
-      "useFullLinks": ["https://www.belarus.by/ru/travel/ethno-tourism/ethnographic-museums","https://www.belarus.by/ru/travel/belarus-life"]
+      "useFullLinks": ["https://www.belarus.by/ru/travel/ethno-tourism/ethnographic-museums","https://www.belarus.by/ru/travel/belarus-life"],
+      "location": [
+        "52.4345",
+        "30.9754"
+      ]
     },
     {
       "id": 4,
@@ -86,7 +90,12 @@
         "http://www.belarus.by/dadvimages/s001274_626356.jpg"
       ],
       "type": "feature",
-      "useFullLinks": ["https://www.belarus.by/ru/travel/ethno-tourism/ethnographic-museums","https://www.belarus.by/ru/travel/belarus-life"]
+      "date": "2022-10-10",
+      "useFullLinks": ["https://www.belarus.by/ru/travel/ethno-tourism/ethnographic-museums","https://www.belarus.by/ru/travel/belarus-life"],
+      "location": [
+        "52.09755",
+        "23.68775"
+      ]
     },
     {
       "id": 5,

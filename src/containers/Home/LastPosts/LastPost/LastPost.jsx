@@ -3,6 +3,7 @@ import { generatePath, Link} from "react-router-dom";
 import { pathToPost } from "../../../../constants";
 
 const LastPostItem = styled.li`
+  margin-bottom: 10px;
 `
 
 const LinkItem = styled(Link)`

@@ -5,7 +5,6 @@ import { POSTS_TYPES } from '../constants';
 import { findLast, map } from 'lodash';
 
 export const getPostsApi = async ( type ) => {
-    console.log(data.posts);
     return data.posts;
 /*    if (type) {
         return await axios.get(API_URL + "posts/?type=" + type)

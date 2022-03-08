@@ -18,11 +18,12 @@ import Handicraft from '../../containers/Handicraft/index';
 import MapContainer from '../../containers/MapContainer/index';
 import Profile from '../Profile/index';
 import Moderation from '../Moderation/index';
+import AuthorizedRoute from "../../Routes/AuthorizedRoute/index";
 
 const Container = styled.div`
   font-size: 16px;
   color: var(--main-text);
-  background-color: var(--bg-gray);
+  background-color: #cccccc;
   height: 100vh;
   overflow-y: auto;
 `
@@ -37,8 +38,8 @@ export const Main = () => {
           <Route exact path={pathToPostsTypes}><PostsForTypes /></Route>
           <Route exact path={pathToPosts}><HandicraftsList /></Route>
           <Route exact path={pathToPost}><Handicraft /></Route>
-          <Route exact path={pathToModeration}><Moderation /></Route>
-          <Route exact path={pathToProfile}><Profile /></Route>
+          <AuthorizedRoute exact path={pathToModeration}><Moderation /></AuthorizedRoute>
+          <AuthorizedRoute exact path={pathToProfile}><Profile /></AuthorizedRoute>
           <Route exact path={pathToHome}><Home /></Route>
           <Redirect exact from='/' to={pathToHome}/>
         </Switch>

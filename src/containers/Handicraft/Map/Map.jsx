@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { isEmpty } from "lodash";
 import {
   TileLayer,
   MapContainer,
@@ -9,6 +10,7 @@ import {
 import styled from 'styled-components';
 
 const Container = styled.div`
+  padding: 20px 0;
 `
 
 const Title = styled.h3`
@@ -24,13 +26,14 @@ const maps = {
   base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 };
 
-export const Map = ({ markers }) => {
+export const Map = ({ marker }) => {
   const [map, setMap] = useState(null);
-
+  console.log(marker);
   return (
       <MapContainer
-        center={[53.9, 27.56667]}
-        zoom={6}
+
+        center={!isEmpty(marker.location) ? [+marker.location[0], marker.location[1]] : [53.9, 27.56667]}
+        zoom={10}
         zoomControl={false}
         style={{ height: "80vh", width: "100%", padding: 0, color: 'black', zIndex: 1 }}
         whenCreated={map => setMap(map)}
@@ -39,16 +42,16 @@ export const Map = ({ markers }) => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url={maps.base}
         />
-        {markers && markers.map((post) => 
-          (post.location && <Marker key={`marker-${post.id}`} position={{lat: +post.location[0], lng: +post.location[1]}}>
+        {!isEmpty(marker.location) &&
+            <Marker key={`marker-${marker.id}`} position={{lat: +marker.location[0], lng: +marker.location[1]}}>
             <Popup>
               <Container>
-                <Image src={post.images[0]} />
-              <Title>{post.title}</Title>
+                <Image src={marker.images[0]} />
+              <Title>{marker.title}</Title>
               </Container>
             </Popup>
-          </Marker>)
-        )}
+          </Marker>
+        }
       </MapContainer>
   );
 };

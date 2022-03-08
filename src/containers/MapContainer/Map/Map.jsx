@@ -24,6 +24,7 @@ export const Map = ({locations, isRoutesActive}) => {
         zoomControl={true}
         style={{ height: "80vh", width: "100%", padding: 0, color: 'black', }}
         whenCreated={map => setMap(map)}
+        className="routingMap"
       >
         {isRoutesActive && <RoutingControl points={locations} />}
         <TileLayer

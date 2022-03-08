@@ -11,7 +11,6 @@ const List = styled.ul`
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
     margin-right: -30px;

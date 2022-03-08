@@ -11,6 +11,8 @@ const Container = styled.div`
     justify-content: center;
     max-width: 370px;
     padding: 5px;
+    background-color: #fff;
+    margin-bottom: 20px;
 `
 
 const LastPostsList = styled.ul`

@@ -45,7 +45,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 signedIn: false,
-                user: null,
+                currentUser: null,
             };
         case AUTH_SUCCESSED:
             return {

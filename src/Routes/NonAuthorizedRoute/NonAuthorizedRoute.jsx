@@ -1,13 +1,24 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const NonAuthorizedRoute = ({ signedIn, component, path, exact }) => {
-
-    return !signedIn ? <Route path={path} component={component} exact={exact} /> : (
-        <Redirect to="/" />
-      );
-  ;
-
-};
+const NonAuthorizedRoute = ({ children, signedIn, ...rest }) => {
+    return (
+        <Route
+            {...rest}
+            render={({ location }) => {
+                return signedIn !== true ? (
+                    children
+                ) : (
+                    <Redirect
+                        to={{
+                            pathname: "/",
+                            state: { from: location },
+                        }}
+                    />
+                );
+            }}
+        />
+    );
+}
 
 export default NonAuthorizedRoute;

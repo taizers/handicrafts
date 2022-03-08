@@ -40,8 +40,6 @@ function* getHandicraft({ payload }) {
     }
 }
 
-//export default watchGetHandicraftList;
-
 export default function* rootSaga() {
     yield all([
       fork(watchGetHandicraftList),

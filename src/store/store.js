@@ -6,6 +6,7 @@ import { reducer as comments } from '../reducers/comments';
 import { reducer as posts } from '../reducers/posts';
 import { reducer as weather } from '../reducers/weather';
 import { reducer as feature } from '../reducers/feature';
+import { reducer as language } from '../reducers/language';
 
 const reducer = combineReducers({
     auth,
@@ -15,6 +16,7 @@ const reducer = combineReducers({
     posts,
     weather,
     feature,
+    language,
 });
 
 export default reducer;
