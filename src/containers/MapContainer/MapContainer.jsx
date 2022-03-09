@@ -17,7 +17,7 @@ const fontSize = getFontSize();
 const gridSize = getGridSize();
 
 const Container = styled.div`
-
+  width: 100%;
 `
 
 const MarkerContainer = styled.div`
@@ -26,7 +26,6 @@ const MarkerContainer = styled.div`
   margin-top: 10px;
 `
 const MarkerIcon = styled.img`
-
 `
 
 const MarkerTitle = styled.h3`

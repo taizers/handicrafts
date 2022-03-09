@@ -9,6 +9,9 @@ const LastPostItem = styled.li`
 const LinkItem = styled(Link)`
   display: flex;
   padding-bottom: 10px;
+  overflow: hidden;
+  flex-direction: column;
+  
   &:hover {
     background-color: var(--dark-gray);
     color: white;
@@ -17,18 +20,18 @@ const LinkItem = styled(Link)`
 `
 
 const Image = styled.img`
-  height: 50px;
-  width: 100px;
+  height: 100px;
+  width: 100%;
 `
 
 const TextContainer = styled.div`
-  margin-left: 5px;
   font-weight: 400;
-  max-width: 250px;
+  margin: 8px;
 `
 
 const Title = styled.h3`
   font-size: 14px;
+  word-wrap: break-word;
 `
 const Date = styled.p`
   color: gray;

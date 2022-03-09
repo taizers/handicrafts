@@ -1,17 +1,17 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from '@atlaskit/select';
-import { generatePath } from "react-router-dom";
 import { filter } from 'lodash';
 
-import LastPosts from "./LastPosts/index";
-import Weather from "./Weather/index";
 import Map from './Map/index';
-import LanguageSwitсher from "./LanguageSwitсher/index";
-import {pathToPosts, pathToPostsTypes} from "../../constants";
+import {FormattedMessage} from "react-intl";
 
 const Container = styled.div`
-  z-index: 500;
+  width: 100%;
+`
+const ContainerForSelect = styled.div`
+  position: relative;
+  z-index: 600;
 `
 
 const SelectContainer = styled.div`
@@ -24,51 +24,25 @@ const Title = styled.h2`
 `
 
 export const Home = ({
-                         userLocation,
-                         getUserLocation,
                          postsTypes,
                          getPostsTypes,
                          posts,
                          getPosts,
-                         getLatestsPosts,
-                         latestsPosts,
-                         getFeatureActions,
-                         featureActions,
 
 }) => {
   const [markers, setSetMarkers] = useState(posts);
 
   useEffect(() => {
-      getLocation();
     getPostsTypes();
     getPosts();
-    getLatestsPosts();
-    getFeatureActions();
   }, []);
 
-  const updatePosition = (position) => {
-      if (position) {
-        getUserLocation([position.coords.latitude, position.coords.longitude]);
-      }
-  }
-  
-  const getLocation = ()  => {
-       if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(updatePosition);
-      } else
-      getUserLocation([ 53.6884, 23.8258 ]);
-  };
-
   return (
-    <Container className="container">
-      <Container className="container">
+    <Container>
+      <ContainerForSelect>
         <Title>Ремёсла Беларуси</Title>
-        <LastPosts key="latestPosts" posts={latestsPosts} path={pathToPostsTypes} title="Недавно добавленные" />
-        <LastPosts key="featureActions" posts={featureActions} path={generatePath(pathToPosts, { type: 'feature'})} title="Будущие события" />
-        {userLocation && <Weather location={userLocation} />}
-          <LanguageSwitсher />
         <SelectContainer>
-          <label htmlFor="selectForMap">Какие типы ремёсел отобразить на карте</label>
+          <label htmlFor="selectForMap"><FormattedMessage id="select_categories" /></label>
           <Select
             inputId="selectForMap"
             options={[
@@ -84,10 +58,10 @@ export const Home = ({
                })): 
                setSetMarkers(posts);
             }}
-            placeholder="Выберите категорию"
+            placeholder={<FormattedMessage id="select" />}
           />
         </SelectContainer>
-    </Container>
+    </ContainerForSelect>
     <Map markers={markers} />
     </Container>
   );

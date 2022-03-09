@@ -3,14 +3,13 @@ import { isEmpty } from "lodash";
 import {
   TileLayer,
   MapContainer,
-  LayersControl,
   Marker,
   Popup,
 } from "react-leaflet";
 import styled from 'styled-components';
 
 const Container = styled.div`
-  padding: 20px 0;
+  max-width: 150px;
 `
 
 const Title = styled.h3`
@@ -18,8 +17,8 @@ const Title = styled.h3`
 `
 
 const Image = styled.img`
-  width: 100px;
-  height: 50px;
+  width: 100%;
+  height: 70px;
 `
 
 const maps = {
@@ -28,7 +27,7 @@ const maps = {
 
 export const Map = ({ marker }) => {
   const [map, setMap] = useState(null);
-  console.log(marker);
+
   return (
       <MapContainer
 
@@ -46,8 +45,8 @@ export const Map = ({ marker }) => {
             <Marker key={`marker-${marker.id}`} position={{lat: +marker.location[0], lng: +marker.location[1]}}>
             <Popup>
               <Container>
-                <Image src={marker.images[0]} />
-              <Title>{marker.title}</Title>
+                  <Image src={marker.images[0]} />
+                  <Title>{marker.title}</Title>
               </Container>
             </Popup>
           </Marker>

@@ -47,13 +47,16 @@ const createRoutineMachineLayer = ({ points }) => {
     },
     language: 'ru',
     createMarker: (i, wp, nWps) => {
+      let icon = blueIcon;
+
       if (i === 0) {
-        return L.marker(wp.latLng, {icon: redIcon });
+        icon = redIcon;
       }
       if (i === nWps - 1) {
-        return L.marker(wp.latLng, {icon: greenIcon });
+        icon = greenIcon;
       }
-      return L.marker(wp.latLng, {icon: blueIcon });
+
+      return L.marker(wp.latLng, {icon: icon });
     },
     itineraryClassName: 'markerS',
     addWaypoints: false,

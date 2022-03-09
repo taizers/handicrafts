@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { isEmpty } from "lodash";
-import L from "leaflet";
 import {
   TileLayer,
   MapContainer,
-  LayersControl
 } from "react-leaflet";
-import styled from 'styled-components';
 
 import RoutingControl from './RoutingControl'
 

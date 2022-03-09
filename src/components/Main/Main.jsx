@@ -1,12 +1,11 @@
 import styled from 'styled-components';
-import { Route, Switch, useRouteMatch, Redirect } from 'react-router-dom';
+import {Route, Switch, Redirect, generatePath} from 'react-router-dom';
 import { 
   pathToHome,
   pathToMap,
   pathToPosts,
   pathToPost,
   pathToProfile,
-  pathToMainPage,
   pathToPostsTypes,
   pathToModeration,
 } from '../../constants';
@@ -19,6 +18,11 @@ import MapContainer from '../../containers/MapContainer/index';
 import Profile from '../Profile/index';
 import Moderation from '../Moderation/index';
 import AuthorizedRoute from "../../Routes/AuthorizedRoute/index";
+import Weather from './Weather/index';
+import LastPosts from './LastPosts/index';
+import LanguageSwitсher from './LanguageSwitсher/index';
+import {useEffect} from "react";
+
 
 const Container = styled.div`
   font-size: 16px;
@@ -28,20 +32,66 @@ const Container = styled.div`
   overflow-y: auto;
 `
 
-export const Main = () => {
-  let { path, url } = useRouteMatch();
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+`
+const WrapperForWidgets = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px;
+`
+
+const WrapperForLeftWidgets = styled(WrapperForWidgets)`
+  
+`
+const WrapperForRightWidgets = styled(WrapperForWidgets)`
+  
+`
+
+export const Main = ({ getLatestsPosts, getFeatureActions, getUserLocation, userLocation, latestsPosts, featureActions }) => {
+  useEffect(() => {
+    getLocation();
+    getLatestsPosts();
+    getFeatureActions();
+  }, []);
+
+  const updatePosition = (position) => {
+    if (position) {
+      getUserLocation([position.coords.latitude, position.coords.longitude]);
+    }
+  }
+
+  const getLocation = ()  => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(updatePosition);
+    } else
+      getUserLocation([ 53.6884, 23.8258 ]);
+  };
 
   return <Container>
         <Header/>
-        <Switch>
-          <Route exact path={pathToMap}><MapContainer /></Route>
-          <Route exact path={pathToPostsTypes}><PostsForTypes /></Route>
-          <Route exact path={pathToPosts}><HandicraftsList /></Route>
-          <Route exact path={pathToPost}><Handicraft /></Route>
-          <AuthorizedRoute exact path={pathToModeration}><Moderation /></AuthorizedRoute>
-          <AuthorizedRoute exact path={pathToProfile}><Profile /></AuthorizedRoute>
-          <Route exact path={pathToHome}><Home /></Route>
-          <Redirect exact from='/' to={pathToHome}/>
-        </Switch>
+        <Wrapper className="container">
+          <WrapperForLeftWidgets>
+            <LanguageSwitсher />
+            <LastPosts key="latestPosts" posts={latestsPosts} path={pathToPostsTypes} title="recently_added" />
+          </WrapperForLeftWidgets>
+          <Switch>
+            <Route exact path={pathToMap}><MapContainer /></Route>
+            <Route exact path={pathToPostsTypes}><PostsForTypes /></Route>
+            <Route exact path={pathToPosts}><HandicraftsList /></Route>
+            <Route exact path={pathToPost}><Handicraft /></Route>
+            <AuthorizedRoute exact path={pathToModeration}><Moderation /></AuthorizedRoute>
+            <AuthorizedRoute exact path={pathToProfile}><Profile /></AuthorizedRoute>
+            <Route exact path={pathToHome}><Home /></Route>
+            <Redirect exact from='/' to={pathToHome}/>
+          </Switch>
+          <WrapperForRightWidgets>
+            {userLocation && <Weather location={userLocation} />}
+            <LastPosts key="featureEvents" posts={featureActions} path={generatePath(pathToPosts, { type: 'feature'})} title="future_events" />
+          </WrapperForRightWidgets>
+        </Wrapper>
+
     </Container>
 };

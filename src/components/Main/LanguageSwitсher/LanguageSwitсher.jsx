@@ -5,6 +5,8 @@ import Language from './Language/index';
 import { LOCALES } from "../../../locales/locales";
 
 const Container = styled.div`
+  padding: 20px;
+  background-color: #fff;
 `
 const List = styled.ul`
     display: flex;

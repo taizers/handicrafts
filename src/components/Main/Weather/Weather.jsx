@@ -2,13 +2,18 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { ceil } from "lodash";
 
+const Wrapper = styled.div`
+  background-color: #6699ff;
+  padding: 10px;
+  width: 100%;
+`
+
 const Container = styled.div`
     max-width: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
-    background-color: #6699ff;
+    margin: 0 auto;
 `
 
 const Title = styled.h3`
@@ -44,12 +49,13 @@ export const Weather = ({ getWeather, weather, location }) => {
   }, []);
 
   return (
-      <Container>
-          <Title>{weather && weather.city}</Title>
-          <Image src={weather && `http://openweathermap.org/img/w/${weather.icon}.png`} />
-          <Temp>{weather && ceil(weather.temp, 1)} °C</Temp>
-          <Label>{weather && weather.description}</Label>
-      </Container>
-
+      <Wrapper>
+          <Container>
+              <Title>{weather && weather.city}</Title>
+              <Image src={weather && `http://openweathermap.org/img/w/${weather.icon}.png`} />
+              <Temp>{weather && ceil(weather.temp, 1)} °C</Temp>
+              <Label>{weather && weather.description}</Label>
+          </Container>
+      </Wrapper>
   );
 }

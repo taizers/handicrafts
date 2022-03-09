@@ -5,7 +5,6 @@ import { isEmpty } from 'lodash';
 import { pathToPost, pathToPosts } from '../../../constants';
 
 const Item = styled.li`
-
     max-width: 250px;
     word-wrap: break-word;
     margin-right: 30px;
