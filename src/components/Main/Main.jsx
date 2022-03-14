@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {Route, Switch, Redirect, generatePath} from 'react-router-dom';
+import { Route, Switch, Redirect, generatePath, useRouteMatch } from 'react-router-dom';
 import { 
   pathToHome,
   pathToMap,
@@ -21,7 +21,8 @@ import AuthorizedRoute from "../../Routes/AuthorizedRoute/index";
 import Weather from './Weather/index';
 import LastPosts from './LastPosts/index';
 import LanguageSwitсher from './LanguageSwitсher/index';
-import {useEffect} from "react";
+import { useEffect } from "react";
+import { includes } from 'lodash';
 
 
 const Container = styled.div`
@@ -50,11 +51,12 @@ const WrapperForRightWidgets = styled(WrapperForWidgets)`
   
 `
 
-export const Main = ({ getLatestsPosts, getFeatureActions, getUserLocation, userLocation, latestsPosts, featureActions }) => {
+export const Main = ({ getWidgetsPosts, getUserLocation, userLocation, latestsPosts, featureActions }) => {
+  let { url } = useRouteMatch();
+
   useEffect(() => {
     getLocation();
-    getLatestsPosts();
-    getFeatureActions();
+    getWidgetsPosts();
   }, []);
 
   const updatePosition = (position) => {
@@ -69,14 +71,14 @@ export const Main = ({ getLatestsPosts, getFeatureActions, getUserLocation, user
     } else
       getUserLocation([ 53.6884, 23.8258 ]);
   };
-
+  console.log(url);
   return <Container>
         <Header/>
         <Wrapper className="container">
-          <WrapperForLeftWidgets>
-            <LanguageSwitсher />
-            <LastPosts key="latestPosts" posts={latestsPosts} path={pathToPostsTypes} title="recently_added" />
-          </WrapperForLeftWidgets>
+          {!includes(url, 'profile') && <WrapperForLeftWidgets>
+            <LanguageSwitсher/>
+            <LastPosts key="latestPosts" posts={latestsPosts} path={pathToPostsTypes} title="recently_added"/>
+          </WrapperForLeftWidgets>}
           <Switch>
             <Route exact path={pathToMap}><MapContainer /></Route>
             <Route exact path={pathToPostsTypes}><PostsForTypes /></Route>
@@ -87,10 +89,11 @@ export const Main = ({ getLatestsPosts, getFeatureActions, getUserLocation, user
             <Route exact path={pathToHome}><Home /></Route>
             <Redirect exact from='/' to={pathToHome}/>
           </Switch>
-          <WrapperForRightWidgets>
-            {userLocation && <Weather location={userLocation} />}
-            <LastPosts key="featureEvents" posts={featureActions} path={generatePath(pathToPosts, { type: 'feature'})} title="future_events" />
-          </WrapperForRightWidgets>
+          {!includes(url, 'profile') && <WrapperForRightWidgets>
+            {userLocation && <Weather location={userLocation}/>}
+            <LastPosts key="featureEvents" posts={featureActions} path={generatePath(pathToPosts, {type: 'feature'})}
+                       title="future_events"/>
+          </WrapperForRightWidgets>}
         </Wrapper>
 
     </Container>

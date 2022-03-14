@@ -1,5 +1,5 @@
 import { call, put, takeEvery, all, fork } from "redux-saga/effects";
-import { getFeatureActionsApi } from '../api/feature';
+import { getPostsApi } from '../api/posts';
 import {
     getFeatureActionsSuccessed,
     getFeatureActionsFailed,
@@ -16,7 +16,7 @@ function* watchGetFeatureActions() {
 function* getFeatureActions() {
     yield put(setFeatureActionsLoading(true));
     try {
-        const data = yield call(getFeatureActionsApi);
+        const data = yield call(getPostsApi);
         yield put(getFeatureActionsSuccessed(data));
     } catch (error) {
         yield put(getFeatureActionsFailed(error.message));
@@ -28,6 +28,6 @@ function* getFeatureActions() {
 
 export default function* rootSaga() {
     yield all([
-        fork(watchGetFeatureActions),
+        //fork(watchGetFeatureActions),
     ]);
 }

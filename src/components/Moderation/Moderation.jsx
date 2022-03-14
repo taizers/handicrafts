@@ -13,8 +13,10 @@ import Tabs, { Tab, TabList, TabPanel } from '@atlaskit/tabs';
 import CommentModeration from '../../containers/CommentModeration/index';
 import PostsModeration from "../../containers/PostsModeration/index";
 import UsersModeration from "../../containers/UsersModeration/index";
+import CategoryModeration from "../../containers/CategoryModeration/index";
 
 const Container = styled.div`
+    width: 100%;
 `
 
 export const Moderation = () => {
@@ -30,6 +32,7 @@ export const Moderation = () => {
                     <Tab>Комментарии</Tab>
                     <Tab>Посты</Tab>
                     <Tab>Пользователи</Tab>
+                    <Tab>Категории</Tab>
                 </TabList>
                 <TabPanel>
                     {activeTab === 0 && <CommentModeration />}
@@ -39,6 +42,9 @@ export const Moderation = () => {
                 </TabPanel>
                 <TabPanel>
                     {activeTab === 2 && <UsersModeration />}
+                </TabPanel>
+                <TabPanel>
+                    {activeTab === 3 && <CategoryModeration />}
                 </TabPanel>
             </Tabs>
         </Container>

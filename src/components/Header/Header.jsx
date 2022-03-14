@@ -4,6 +4,7 @@ import { generatePath, Link, useRouteMatch } from 'react-router-dom';
 import Avatar from '@atlaskit/avatar';
 import { FormattedMessage } from 'react-intl'
 import DropdownMenu, { DropdownItem, DropdownItemGroup } from '@atlaskit/dropdown-menu';
+import { isEmpty } from "lodash";
 
 import {
     pathToSignIn,
@@ -72,7 +73,7 @@ const DropdownMenuItem = styled.div`
   }
 `
 
-export const Header = ({ user }) => {
+export const Header = ({ user, userId, logOut }) => {
     return (
         <HeaderItem>
             <Container className="container">
@@ -101,12 +102,13 @@ export const Header = ({ user }) => {
                             />
                         )}
                     >
+                        {console.log(user)}
                         <DropdownItemGroup>
-                            {user && <DropdownItem><Link to={''/*generatePath(pathToProfile, {id: userId})*/}>Профиль</Link></DropdownItem>}
-                            {user && (user.role === 'admin' || user.role === 'owner') && <DropdownItem><Link to={pathToModeration}>Модерация</Link></DropdownItem>}
-                            {user && <DropdownItem><Link to={pathToHome}>Выход</Link></DropdownItem>}
-                            {!user && <DropdownItem><Link to={pathToSignIn}>Войти</Link></DropdownItem>}
-                            {!user && <DropdownItem><Link to={pathToSignUp}>Зарегестрироваться</Link></DropdownItem>}
+                            {userId && <DropdownItem><Link to={generatePath(pathToProfile, {id: userId})}>Профиль</Link></DropdownItem>}
+                            {userId && (user.role === 'admin' || user.role === 'owner' || user.role === 'user') && <DropdownItem><Link to={pathToModeration}>Модерация</Link></DropdownItem>}
+                            {userId && <DropdownItem><Link to={pathToHome} onClick={logOut}>Выход</Link></DropdownItem>}
+                            {!userId && <DropdownItem><Link to={pathToSignIn}>Войти</Link></DropdownItem>}
+                            {!userId && <DropdownItem><Link to={pathToSignUp}>Зарегестрироваться</Link></DropdownItem>}
                         </DropdownItemGroup>
                     </DropdownMenu>
                 </DropdownMenuItem>

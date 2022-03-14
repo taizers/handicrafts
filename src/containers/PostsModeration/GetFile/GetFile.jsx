@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ReactDOM from 'react-dom'
 
 import { FilePond, File, registerPlugin } from 'react-filepond'
 
@@ -19,17 +18,15 @@ const Container = styled.div`
     margin-top: 20px;
 `
 
-export const GetFile = ({files, setFiles}) => {
-
-
+export const GetFile = ({files, setFiles, isMultiply}) => {
     return (
         <Container>
             <FilePond
                 files={files}
                 onupdatefiles={setFiles}
-                allowMultiple={true}
                 maxFiles={5}
-                server="/api"
+                allowMultiple={isMultiply}
+                accepted-file-types="image/jpeg, image/png"
                 name="files"
                 labelIdle='Ператащите изображение либо <span class="filepond--label-action">Откройте</span>'
             />

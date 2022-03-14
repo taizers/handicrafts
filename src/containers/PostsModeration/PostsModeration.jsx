@@ -10,23 +10,29 @@ import PostItem from "./PostItem";
 import AddIcon from "@atlaskit/icon/glyph/add";
 
 const Container = styled.div`
-  padding: 15px;
   width: 100%;
-  height: 72vh;
+  height: 600px;
+  width: 100%;
 `
 
 const PostsContainer = styled(Container)`
   display: flex;
-  margin-top: 20px;
+  margin-top: 20px
 `
 
 const PostsList = styled.ul`
-  padding: 10px;
-  border: black 1px solid;
-  width: 40%;
+  width: 100%;
   height: 100%;
   overflow-y: auto;
 `
+
+const ListContainer = styled.div`
+  border: black 1px solid;
+  padding: 10px;
+  width: 40%;
+  height: 100%;
+`
+
 const Post = styled.div`
   padding: 10px;
   border: black 1px solid;
@@ -36,10 +42,17 @@ const Post = styled.div`
 `
 
 const HeadContainer = styled.div`
-  display: flex;
+    display: flex;
+    flex-direction: column;
 `
 
-export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, createPost }) => {
+const CreateButtonsWrapper = styled.div`
+  display: flex;
+  align-self: flex-end;
+  margin-top: 10px;
+`
+
+export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, createPost, createCategory }) => {
     const [selectedPost, setSelectedPost] = useState();
     const [postsList, setPostsList] = useState();
 
@@ -47,7 +60,7 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, create
         getPosts();
     },[])
 
-    const onShowModal = () => {
+    const onShowPostsModal = () => {
         setVisible(true);
     };
 
@@ -55,7 +68,7 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, create
         const arr = filter(posts, post => {
             if (
                 ((query.title !== "") ? indexOf(toLower(post.title), toLower(query.title)) !== -1 : true ) &&
-                ((query.date !== "") ? post.createdAt == query.date : true )
+                ((query.date !== "") ? post.created_At == query.date : true )
             ) {
                 return post;
             }
@@ -69,29 +82,32 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, create
     );
 
     return (
-        <Container className="container">
+        <Container>
             <HeadContainer>
-                <Button
-                    style={{
-                        alignSelf: 'flex-end',
-                        marginRight: '20px',
-                    }}
-                    iconBefore={<AddIcon size="small"/>}
-                    onClick={onShowModal}
-                    appearance="primary"
-                >
-                    Создать Пост
-                </Button>
                 <Filters search={onSearchPosts} />
+                <CreateButtonsWrapper>
+                    <Button
+                        style={{
+                            alignSelf: 'flex-end',
+                        }}
+                        iconBefore={<AddIcon size="small"/>}
+                        onClick={onShowPostsModal}
+                        appearance="primary"
+                    >
+                        Создать Пост
+                    </Button>
+                </CreateButtonsWrapper>
             </HeadContainer>
 
             <PostsContainer>
-                <PostsList>
-                    {postsList ? getPostsList(postsList) : getPostsList(posts)}
-                </PostsList>
+                <ListContainer>
+                    <PostsList>
+                        {postsList ? getPostsList(postsList) : getPostsList(posts)}
+                    </PostsList>
+                </ListContainer>
                 <Post>{selectedPost && <Posts post={selectedPost}/>}</Post>
             </PostsContainer>
-            {isVisible && <CreateModal setVisible={setVisible} isVisible={isVisible} createPost={createPost} type='post'/>}
+            {isVisible && <CreateModal setVisible={setVisible} isVisible={isVisible} create={createPost} type={'post'}/>}
         </Container>
     );
 }

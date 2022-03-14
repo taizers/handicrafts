@@ -1,17 +1,22 @@
 import { Profile } from "./Profile";
 import { connect } from 'react-redux';
-import { selectUser } from '../../selectors/auth';
-import { getUser } from "../../actions/auth";
+import { selectAuthModalIsVisible, selectAuthModalIsLoading, selectToken, selectUserProfile } from '../../selectors/auth';
+import { changeProfile, getUserProfile, setAuthModalVisible } from "../../actions/auth";
 
 const mapStateToProps = (store) => {
     return {
-        user: selectUser(store),
+        user: selectUserProfile(store),
+        token: selectToken(store),
+        isVisible: selectAuthModalIsVisible(store),
+        isLoading: selectAuthModalIsLoading(store),
     };
 };
 
 const mapDispathToProps = (dispath) => {
     return {
-        getUser: (id) => dispath(getUser(id)),
+        getUserProfile: (id, token) => dispath(getUserProfile(id, token)),
+        setVisible: (data) => dispath(setAuthModalVisible(data)),
+        changeProfile: (data) => dispath(changeProfile(data)),
     }
 };
 

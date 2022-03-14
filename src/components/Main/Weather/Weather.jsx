@@ -42,10 +42,10 @@ const Label = styled.div`
     margin-top: 10px;
 `
 
-export const Weather = ({ getWeather, weather, location }) => {
+export const Weather = ({ getWeather, weather, location, language }) => {
 
   useEffect(() => {
-    getWeather(location);
+    getWeather({location, language});
   }, []);
 
   return (

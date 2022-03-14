@@ -4,6 +4,7 @@ import { map } from 'lodash';
 
 const ListItem = styled.li`
   display: flex;
+  flex-direction: column;
   background-color: ${props =>
     props.selected
     ? 'var(--dark-gray)' : '#C4D4F9'
@@ -28,17 +29,18 @@ const Title = styled.h3`
 `
 
 const Image = styled.img`
-    width: 100px;
-    height: 50px;
+    width: 100%;
+    height: 80px;
 `
 
 const Date = styled.p`
     color: gray;
-  font-size: 14px;
+    font-size: 14px;
+    margin-top: 10px
 `
 
 const TextContainer = styled.div`
-    margin-left: 10px;
+    margin: 5px;
 `
 
 export const PostItem = ({ post, selectPost, selectedPost }) => {

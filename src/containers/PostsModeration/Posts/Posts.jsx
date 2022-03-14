@@ -13,14 +13,13 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     overflow-y: auto;
-      padding-bottom: 100px;
-      display: flex;
-      flex-direction: column;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
 `
 const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding-left: 10px;
     word-break: break-word;
     height: 100%;
     width: 100%;
@@ -44,7 +43,7 @@ const Date = styled.p`
     font-size: 14px;
     padding: 5px;
     color: gray;
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 `
 
 const Image = styled.img`
@@ -86,7 +85,7 @@ export const Posts = ({post, deletePost}) => {
                 <SubTitle>{subTitle}</SubTitle>
                 <Date>{moment(created_at, "YYYYMMDD").locale('ru').fromNow()}</Date>
                 {post.text && getText(post.text)}
-                <SwiftSlider data={imagesList} height={400} />
+                <SwiftSlider data={imagesList} height={300} />
                 <ButtonsContainer>
                     <Button
                         onClick={onDeletePost}
@@ -95,7 +94,6 @@ export const Posts = ({post, deletePost}) => {
                 </ButtonsContainer>
 
             </TextContainer>
-
         </Container>
     );
 }

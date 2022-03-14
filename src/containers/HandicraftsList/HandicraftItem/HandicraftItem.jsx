@@ -9,6 +9,12 @@ const Item = styled.li`
     word-wrap: break-word;
     margin-right: 30px;
     overflow: hidden;
+    
+    &:hover {
+      border-color: #d65a37;
+      -webkit-box-shadow: 3px 10px 29px -10px rgb(0 0 0 / 55%);
+      box-shadow: 3px 10px 29px -10px rgb(0 0 0 / 55%);
+    }
 
     a {
         display: block;

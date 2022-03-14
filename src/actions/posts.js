@@ -16,11 +16,16 @@ import {
     GET_LATESTS_POSTS_SUCCESSED,
     SET_LATESTS_POSTS_LOADING,
     GET_POSTS_TYPES,
-    GET_POSTS_TYPES_SUCCESSED,
+    GET_POSTS_TYPES_SUCCESSED, CREATE_POSTS_TYPE,
+    GET_WIDGETS_POSTS,
 } from '../constants';
 
 export const getPostsTypes = () => ({
     type: GET_POSTS_TYPES,
+});
+
+export const getWidgetsPosts = () => ({
+    type: GET_WIDGETS_POSTS,
 });
 
 export const getPostsTypesSuccessed = (types) => ({
@@ -46,6 +51,11 @@ export const deletePost = (id) => ({
 export const createPost = (post) => ({
     type: CREATE_POST,
     payload: post,
+});
+
+export const createPostsType = (type) => ({
+    type: CREATE_POSTS_TYPE,
+    payload: type,
 });
 
 export const createPostSuccessed = (data) => ({
@@ -107,5 +117,5 @@ export const setCreatePostVisible = (isVisible) => ({
 
 export const setCreatePostLoading = (isLoading) => ({
     type: SET_CREATE_POST_LOADING,
-    payload: {isLoading},
+    payload: isLoading,
 });

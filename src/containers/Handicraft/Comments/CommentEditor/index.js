@@ -1,12 +1,13 @@
 import { CommentEditor } from './CommentEditor';
 import { connect } from 'react-redux';
+import { isEmpty } from "lodash";
 import { createComment, editComment } from '../../../../actions/comments';
-import { selectUserId, selectUserSignedIn } from '../../../../selectors/auth';
+import { selectUserId, selectUser } from '../../../../selectors/auth';
 
 const mapStateToProps = (store) => {
     return {
         currentUserId: selectUserId(store),
-        signedIn: selectUserSignedIn(store),
+        signedIn: !isEmpty(selectUser(store)),
     };
 };
 

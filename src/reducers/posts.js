@@ -30,7 +30,6 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-
         case SET_POSTS_LOADING:
             return {
                 ...state,
@@ -81,6 +80,7 @@ const reducer = (state = initialState, action) => {
                 types: action.payload,
             };
         case SET_CREATE_POST_LOADING:
+            console.log(action);
             return {
                 ...state,
                 modal: {

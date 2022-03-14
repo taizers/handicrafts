@@ -10,15 +10,17 @@ import SearchField from "./SearchField/index";
 import {generatePath, Link} from "react-router-dom";
 import Avatar from '@atlaskit/avatar';
 import {pathToProfile} from "../../constants";
+import TrashIcon from "@atlaskit/icon/glyph/trash";
 
 const Container = styled.div`
-  padding: 20px;
   width: 100%;
 `;
 
 const HeadContainer = styled.div`
   display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
+  width: 100%;
 `;
 
 const head = () => (
@@ -48,6 +50,7 @@ const head = () => (
 const Login = styled(Link)`
   margin-bottom: 10px;
   font-size: 18px;
+  align-self: center;
   color: blue;
 `;
 
@@ -63,6 +66,10 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
     getUsers();
   }, []);
 
+  const onDeleteButtonClick = (evt) => {
+      console.log(evt);
+  }
+
     const rows = (usersListForTable) => (
         map(usersListForTable, (user, index) => ({
             key: `row-${index}-${user.login}`,
@@ -72,8 +79,8 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
                     key: user.login,
                     content: (
                         <LoginWrapper>
-                            <Avatar src={user.avatar} name={user.login} size="medium" />
-                            <Login to={generatePath(pathToProfile, { id: user.id })}>{user.login}</Login>
+                            <Avatar src={user.avatar} name={user.email} size="medium" />
+                            <Login to={generatePath(pathToProfile, { id: user.id })}>{user.email}</Login>
                         </LoginWrapper>
                     ),
                 },
@@ -84,6 +91,15 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
                 {
                     key: user.role,
                     content: user.role,
+                },
+                {
+                    key: user.id,
+                    content: (
+                        <Button
+                            iconBefore={<TrashIcon size="large" appearance="primary"/>}
+                            onClick={onDeleteButtonClick}
+                        ></Button>
+                    ),
                 },
             ],
         }))
@@ -110,19 +126,17 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
   return (
     <Container>
             <HeadContainer>
+                <SearchField search={onSearchUsers} />
                 <Button
                     iconBefore={<AddIcon size="small"/>}
                     appearance="primary"
                     onClick={onShowModal}
                     style={{
                         alignSelf: 'flex-end',
-                        marginRight: '20px',
-
                     }}
                 >
                     Создать Администратора
                 </Button>
-                <SearchField search={onSearchUsers} />
             </HeadContainer>
             <DynamicTable
                 head={head()}
@@ -132,7 +146,12 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
                 loadingSpinnerSize="large"
                 isRankable
             />
-                <CreateModal setVisible={setVisible} isVisible={isVisible} type='user' createUser={createUser}/>
+                <CreateModal
+                    setVisible={setVisible}
+                    isVisible={isVisible}
+                    type='user'
+                    create={createUser}
+                />
     </Container>
   );
 }

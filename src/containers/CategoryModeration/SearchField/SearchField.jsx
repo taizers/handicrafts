@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Button from '@atlaskit/button/standard-button';
 import Textfield from '@atlaskit/textfield';
 import {Field} from "@atlaskit/form";
-import Select from '@atlaskit/select';
 
 const Container = styled.div`
     display: flex;
@@ -12,6 +11,7 @@ const Container = styled.div`
 `
 const FieldContainer = styled.div`
     margin-right: 20px;
+    width: 100%;
 `
 
 const SelectContainer = styled(FieldContainer)`
@@ -19,64 +19,41 @@ const SelectContainer = styled(FieldContainer)`
 `
 
 export const SearchField = ({ search }) => {
-    const [login, setLogin] = useState('');
-    const [role, setRole] = useState('');
-    const [name, setName] = useState('');
+    const [label, setLabel] = useState('');
+    const [value, setValue] = useState('');
 
     const onSearchClick = () => {
-        search({login, role, name});
+        search({label, value});
     }
 
     return (
         <Container>
             <FieldContainer>
                 <Field
-                    label="Логин"
-                    name="login"
+                    label="Название категории"
+                    name="label"
                     defaultValue=""
                 >
                     {({ fieldProps }) => (
                         <Textfield
                             aria-label="default text field"
-                            onChange={(evt) => (setLogin(evt.currentTarget.value))} />
+                            onChange={(evt) => (setLabel(evt.currentTarget.value))} />
                     )}
                 </Field>
             </FieldContainer>
             <FieldContainer>
                 <Field
-                    label="Имя"
-                    name="name"
+                    label="Значение категории"
+                    name="value"
                     defaultValue=""
                 >
                     {({ fieldProps }) => (
                         <Textfield
                             aria-label="default text field"
-                            onChange={(evt) => (setName(evt.currentTarget.value))} />
+                            onChange={(evt) => (setValue(evt.currentTarget.value))} />
                     )}
                 </Field>
             </FieldContainer>
-            <SelectContainer>
-                <Field
-                    label="Роль"
-                    name="role"
-                    defaultValue=""
-                >
-                    {({ fieldProps }) => (
-                        <Select
-                            inputId="role"
-                            options={[
-                                { label: 'Все', value: '' },
-                                { label: 'Пользователь', value: 'user' },
-                                { label: 'Админ', value: 'admin' },
-                                { label: 'Владелец', value: 'owner' },
-                            ]}
-                            placeholder="Все"
-                            isSearchable={false}
-                            onChange={(evt) => setRole(evt.value)}
-                        />
-                    )}
-                </Field>
-            </SelectContainer>
             <Button
                 appearance="primary"
                 onClick={onSearchClick}

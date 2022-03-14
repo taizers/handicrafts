@@ -1,4 +1,4 @@
-import { call, put, takeEvery, all, fork } from "redux-saga/effects";
+import { call, put, takeEvery, all, fork, select } from "redux-saga/effects";
 import {
     getLatestsPostsApi,
     getPostApi,
@@ -6,7 +6,8 @@ import {
     deletePostApi,
     updatePostApi,
     createPostApi,
-    getPostTypesApi,
+    createPostsTypeApi,
+    getPostsTypesApi,
 } from '../api/posts';
 
 import {
@@ -18,6 +19,7 @@ import {
     getLatestsPostsSuccessed,
     setLatestsPostsLoading,
     getPostsTypesSuccessed,
+    setCreatePostLoading,
 } from '../actions/posts';
 
 import {
@@ -28,7 +30,12 @@ import {
     DELETE_POST,
     GET_LATESTS_POSTS,
     GET_POSTS_TYPES,
+    CREATE_POSTS_TYPE,
+    GET_FEATURE_ACTIONS, GET_WIDGETS_POSTS,
 } from '../constants';
+
+import {selectToken} from "../selectors/auth";
+import {getFeatureActionsFailed, getFeatureActionsSuccessed, setFeatureActionsLoading} from "../actions/feature";
 
 function* watchGetPosts() {
     yield takeEvery(GET_POSTS, getPosts);
@@ -67,9 +74,10 @@ function* watchDeletePost() {
 }
 
 function* deletePost({ payload }) {
+    const token = yield select(selectToken);
     yield setPostsLoading(true);
     try {
-        yield call(deletePostApi, payload);
+        yield call(deletePostApi, {payload, token});
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
@@ -97,13 +105,15 @@ function* watchCreatePost() {
 }
 
 function* createPost({ payload }) {
-    yield setPostsLoading(true);
+    yield console.log('l');
+    yield setCreatePostLoading(true);
+    const token = yield select(selectToken);
     try {
-        yield call(createPostApi, payload);
+        yield call(createPostApi, {payload, token});
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
-        yield setPostsLoading(false);
+        yield setCreatePostLoading(false);
     }
 }
 
@@ -130,12 +140,62 @@ function* watchGetPostsTypes() {
 function* getPostsTypes() {
     yield setPostsLoading(true);
     try {
-        const data = yield call(getPostTypesApi);
+        const data = yield call(getPostsTypesApi);
         yield put(getPostsTypesSuccessed(data));
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
         yield setPostsLoading(false);
+    }
+}
+
+function* watchCreatePostsType() {
+    yield takeEvery(CREATE_POSTS_TYPE, createPostsType);
+}
+
+function* createPostsType({ payload }) {
+    const token = yield select(selectToken);
+    yield setCreatePostLoading(true);
+    try {
+        const data = yield call(createPostsTypeApi, { payload, token });
+        yield put(getPostsTypesSuccessed(data));
+    } catch (error) {
+        yield getPostFailed(error.message);
+    } finally {
+        yield setCreatePostLoading(false);
+    }
+}
+
+function* watchGetFeatureActions() {
+    yield takeEvery(GET_FEATURE_ACTIONS, getFeatureActions);
+}
+
+function* getFeatureActions({ payload }) {
+    yield put(setFeatureActionsLoading(true));
+    try {
+        const data = yield call(getPostsApi, payload);
+        yield put(getFeatureActionsSuccessed(data.splice(0, 3)));
+    } catch (error) {
+        yield put(getFeatureActionsFailed(error.message));
+    } finally {
+        yield put(setFeatureActionsLoading(false));
+    }
+}
+
+function* watchGetWidgetsPosts() {
+    yield takeEvery(GET_WIDGETS_POSTS, getWidgetsPosts);
+}
+
+function* getWidgetsPosts() {
+    yield put(setFeatureActionsLoading(true));
+    try {
+        const data = yield call(getPostsApi);
+        yield put(getFeatureActionsSuccessed(data.splice(0, 3)));
+        yield put(getLatestsPostsFailed(data.splice(0, 3)));
+    } catch (error) {
+        yield put(getFeatureActionsFailed(error.message));
+    } finally {
+        yield put(setFeatureActionsLoading(false));
     }
 }
 
@@ -148,5 +208,8 @@ export default function* rootSaga() {
         fork(watchCreatePost),
         fork(watchGetLatestsPosts),
         fork(watchGetPostsTypes),
+        fork(watchCreatePostsType),
+        fork(watchGetFeatureActions),
+        fork(watchGetWidgetsPosts),
     ]);
 }

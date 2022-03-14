@@ -39,8 +39,8 @@ export const Home = ({
 
   return (
     <Container>
-      <ContainerForSelect>
         <Title>Ремёсла Беларуси</Title>
+      <ContainerForSelect>
         <SelectContainer>
           <label htmlFor="selectForMap"><FormattedMessage id="select_categories" /></label>
           <Select

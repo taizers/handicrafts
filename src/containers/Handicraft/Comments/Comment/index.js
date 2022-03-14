@@ -1,13 +1,14 @@
 import { Comment } from './Comment';
-import { selectUserId, selectUserRole, selectUserSignedIn } from '../../../../selectors/auth';
+import { selectUser, selectUserId, selectUserRole } from '../../../../selectors/auth';
 import { connect } from 'react-redux';
 import { editComment, deleteComment } from '../../../../actions/comments';
+import { isEmpty } from "lodash";
 
 const mapStateToProps = (store) => {
     return {
         currentUserId: selectUserId(store),
         currentUserRole: selectUserRole(store),
-        signedIn: selectUserSignedIn(store),
+        signedIn: !isEmpty(selectUser(store)),
     };
 };
 

@@ -1,4 +1,4 @@
-import { 
+import {
     SIGN_IN,
     AUTH_SUCCESSED,
     AUTH_FAILED,
@@ -13,8 +13,16 @@ import {
     DELETE_USER,
     DELETE_USER_SUCCESSED,
     SET_CREATE_MODAL_LOADING,
+    SET_CHANGE_PROFILE_VISIBLE,
+    SET_CHANGE_PROFILE_LOADING,
     SET_CREATE_MODAL_VISIBLE,
+    GET_TOKEN,
     GET_USER_SUCCESSED,
+    GET_USER_PROFILE,
+    GET_USER_PROFILE_SUCCESSED,
+    CHANGE_PROFILE,
+    CHANGE_PROFILE_SUCCESSED,
+    CHANGE_PROFILE_FAILED,
 } from "../constants";
 
 export const signIn = (data) => ({
@@ -32,23 +40,38 @@ export const authFailed = (data) => ({
     payload: data,
 });
 
-export const authSuccessed = (user) => ({
+export const authSuccessed = (user, token) => ({
     type: AUTH_SUCCESSED,
-    payload: user,
+    payload: { user, token },
 });
 
 export const getUsers = () => ({
     type: GET_USERS,
 });
 
-export const getUser = (id) => ({
-    type: GET_USER,
-    payload: id,
+export const getToken = (token) => ({
+    type: GET_TOKEN,
+    payload: token,
 });
 
-export const getUserSuccessed = (user) => ({
-    type: GET_USER_SUCCESSED,
+export const getUser = (id, token) => ({
+    type: GET_USER,
+    payload: { id, token },
+});
+
+export const getUserProfile = (id, token) => ({
+    type: GET_USER_PROFILE,
+    payload: { id, token },
+});
+
+export const getUserProfileSuccessed = (user) => ({
+    type: GET_USER_PROFILE_SUCCESSED,
     payload: user,
+});
+
+export const getUserSuccessed = (user, token) => ({
+    type: GET_USER_SUCCESSED,
+    payload: { user, token },
 });
 
 export const setCreateModalVisible = (isVisible) => ({
@@ -90,5 +113,30 @@ export const logOut = () => ({
 
 export const setAuthLoading = (isLoading) => ({
     type: SET_SIGN_IN_LOADING,
-    payload: { isLoading },
+    payload: isLoading ,
+});
+
+export const changeProfile = (data) => ({
+    type: CHANGE_PROFILE,
+    payload: data ,
+});
+
+export const changeProfileSuccessed = (data) => ({
+    type: CHANGE_PROFILE_SUCCESSED,
+    payload: data ,
+});
+
+export const changeProfileFailed = (error) => ({
+    type: CHANGE_PROFILE_FAILED,
+    payload: error ,
+});
+
+export const setAuthModalLoading = (isLoading) => ({
+    type: SET_CHANGE_PROFILE_LOADING,
+    payload: isLoading ,
+});
+
+export const setAuthModalVisible = (isVisible) => ({
+    type: SET_CHANGE_PROFILE_VISIBLE,
+    payload: isVisible ,
 });

@@ -9,9 +9,10 @@ const Image = styled.img`
     height: 30px;
 `
 
-export const Language = ({ onLanguageClick, language }) => {
+export const Language = ({ setLanguage, language, getWeather, userLocation }) => {
     const onClick = () => {
-        onLanguageClick(language)
+        setLanguage(language);
+        getWeather({language,location: userLocation});
     }
 
     return (

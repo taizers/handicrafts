@@ -4,43 +4,54 @@ import Avatar from "@atlaskit/avatar";
 import Button from "@atlaskit/button";
 import CheckIcon from '@atlaskit/icon/glyph/check';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
+import React from "react";
 
 const Item = styled.li`
   padding: 10px;
+  margin: 10px;
+  background-color: #fff;
   display: flex;
+  flex-direction: column;
+  
+  
+  border: 1px solid #b2b2b2;
+  transition: border-color 0.4s, box-shadow 0.2s, -webkit-box-shadow 0.2s;
+  
+  &:hover {
+    border-color: #d65a37;
+    -webkit-box-shadow: 3px 10px 29px -10px rgb(0 0 0 / 55%);
+    box-shadow: 3px 10px 29px -10px rgb(0 0 0 / 55%);
+  }
 `
 
-const Image = styled.img`
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-`
-
-const Login = styled.h3`
-    color: gray;
+const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-left: 20px;
 `
 
 const Name = styled.p`
     font-size: 20px;
     font-weight: 600;
+    margin-left: 10px;
 `
 
-const TextContainer = styled.div`
-    margin-left: 15px;
+const CommentWrapper = styled.div`
     width: 100%;
 `
 
 const ButtonsContainer = styled.div`
-    margin-left: 15px;
+    margin-top: 20px;
     display: flex;
-    flex-direction: column;
-    
+    align-self: flex-end;
 `
 
 const Text = styled.p`
   text-align: left;
   text-indent: 20px;
-
+  
+  
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -54,14 +65,31 @@ const LinkToPost = styled(Link)`
   margin-bottom: 20px;
   display: inline-block;
   color: blue;
+  text-indent: 20px;
+  
   &:hover {
     text-decoration: underline;
   }
 `
 
-const getText = (text) => {
-    const textList = text.split('/*Enter*/');
-    return textList.map((elem, index) => <Text key={elem+index}>{elem}</Text>)
+const TextContainer = styled.div`
+  text-align: left;
+  text-indent: 20px;
+  word-wrap: break-word;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+`
+
+const getText = (textList) => {
+    const text = textList.split('\n\n')
+    return <TextContainer>
+        {text.map( (item, index) => <Text key={'text' + index}>{item}</Text> )}
+    </TextContainer>
 }
 
 export const Comment = ({ comment, deleteComment, editComment }) => {
@@ -75,23 +103,24 @@ export const Comment = ({ comment, deleteComment, editComment }) => {
 
     return (
         <Item>
-            <Avatar src={comment?.avatar} size="large"/>
-            <TextContainer>
-                <Name>{`${comment.userLogin || ''} ${`(${comment.userName})` || ''} `}</Name>
+            <CommentWrapper>
+                <UserInfo>
+                    <Avatar src={comment?.avatar} size="large"/>
+                    <Name>{`${comment.userLogin || ''} ${`(${comment.userName})` || ''} `}</Name>
+                </UserInfo>
                 <LinkToPost to={'post/' + comment.postId}>{comment.postTitle}</LinkToPost>
                 {comment.text && getText(comment.text)}
-            </TextContainer>
+            </CommentWrapper>
             <ButtonsContainer>
                 {!comment.isApproved &&
                     <Button
                         style={{
-                            marginBottom: '15px',
+                            marginRight: '15px',
                         }}
                         iconBefore={<CheckIcon size="large" appearance="primary" primaryColor="green"/>}
                         onClick={onApproveButtonClick}
                     ></Button>
                 }
-                {console.log(comment)}
                 <Button
                     iconBefore={<TrashIcon size="large" appearance="primary"/>}
                     onClick={onDeleteButtonClick}

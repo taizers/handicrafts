@@ -1,89 +1,42 @@
 import styled from 'styled-components';
 import Input from '../Input/Input';
 import { styledButton } from '../../styles/button';
-import CryptoJS from 'crypto-js';
-import Button from '@atlaskit/button';
 import { useHistory } from "react-router-dom";
+import ButtonGroup from '@atlaskit/button/button-group';
+import LoadingButton from '@atlaskit/button/loading-button';
+import Button from '@atlaskit/button';
+import TextField from '@atlaskit/textfield';
+
+import Form, {
+  ErrorMessage,
+  Field,
+  FormFooter,
+  FormHeader,
+  FormSection,
+  HelperMessage,
+  ValidMessage,
+} from '@atlaskit/form';
+import {FormattedMessage} from "react-intl";
+import React from "react";
 
 const Container = styled.div`
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-`
-
-const SignUpForm = styled.form`
-    width: 400px;
-    height: calc(100vh - 200px);
     display: flex;
-    flex-direction: column;
-    padding: 20px 30px;
-    position: absolute;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: var(--white);
-    border-radius: 20px;
-    justify-content: center;
-    align-items: center;
-    overflow-y: auto;
-    scrollbar-width: none;
+  width: 400px;
+  max-width: 100%;
+  margin: 0 auto;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
 
-    &::-webkit-scrollbar {
-    display: none;
-}
 `
-
-const SignUpInput = styled(Input)`
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    margin: 0 auto;
-    margin-top: 10px;
-    max-width: 70%;
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      display: none;
-      -webkit-appearance: none;
-      margin: 0; 
-    }
-`
-
-const SignUpButton = styled(styledButton)`
-  margin-top: 40px;
-`
-
-const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: column-reverse;
-  margin-top: 30px;
-  font-size: 17px;
-  font-weight: bold;
+const ContainerInner = styled.div`
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 30px;
 `
 
 export const SignUp = ({ signUp }) => {
   let history = useHistory();
-
-  const onSubmitSignIn = (evt) => {
-    evt.preventDefault();
-
-    if (evt.target.elements.firstPassword.value === evt.target.elements.secondPassword.value ) {
-      const data = {
-        login: evt.target.elements.email.value,
-        password: CryptoJS.MD5(evt.target.elements.firstPassword.value).toString(),
-        role: 'user',
-      };
-      signUp(data);
-    }
-  }
 
   const onBackClick = () => {
     history.goBack();
@@ -91,15 +44,146 @@ export const SignUp = ({ signUp }) => {
 
   return (
     <Container>
-      <SignUpForm onSubmit={onSubmitSignIn}>
-        <SignUpInput labelValue="Логин" name="email" type="email" onChangeValue=''/>
-        <SignUpInput labelValue="Пароль" name="firstPassword" type="password" onChangeValue=''/>
-        <SignUpInput labelValue="Повторите пароль" name="secondPassword" type="password" onChangeValue=''/>
-        <ButtonsContainer>
-          <Button style={{marginTop: '20px'}} appearance='subtle' onClick={onBackClick}>Назад</Button>
-          <Button type="submit" appearance='primary'>Зарегистрироваться</Button>
-        </ButtonsContainer>
-      </SignUpForm>
+      <ContainerInner>
+        <Form
+            onSubmit={(data) => {
+              console.log('form data', data);
+              if (data.password === data.password_confirmation) {
+                signUp({data, history});
+              }
+
+            }}
+        >
+          {({ formProps, submitting }) => (
+              <form {...formProps}>
+                <FormHeader
+                    title={<FormattedMessage id={'label_sign_up'}/>}
+                    description="* indicates a required field"
+                />
+                <FormSection>
+                  <Field
+                      aria-required={true}
+                      name={<FormattedMessage id={'label_email'}/>}
+                      label="email"
+                      isRequired
+                      defaultValue=""
+                  >
+                    {({ fieldProps, error }) => (
+                        <>
+                          <TextField autoComplete="off" {...fieldProps} />
+                          {!error && (
+                              <HelperMessage>
+                                You can use letters, numbers and periods.
+                              </HelperMessage>
+                          )}
+                          {error && (
+                              <ErrorMessage>
+                                This username is already in use, try another one.
+                              </ErrorMessage>
+                          )}
+                        </>
+                    )}
+                  </Field>
+                  <Field
+                      aria-required={true}
+                      name="name"
+                      label={<FormattedMessage id={'label_name'}/>}
+                      isRequired
+                      defaultValue=""
+                  >
+                    {({ fieldProps, error }) => (
+                        <>
+                          <TextField autoComplete="off" {...fieldProps} />
+                          {error && (
+                              <ErrorMessage>
+                                This username is already in use, try another one.
+                              </ErrorMessage>
+                          )}
+                        </>
+                    )}
+                  </Field>
+                  <Field
+                      aria-required={true}
+                      name="password"
+                      label={<FormattedMessage id={'label_password'}/>}
+                      defaultValue=""
+                      isRequired
+                      validate={(value) =>
+                          value?.length < 8 ? 'TOO_SHORT' : undefined
+                      }
+                  >
+                    {({ fieldProps, error, valid, meta }) => {
+                      return (
+                          <>
+                            <TextField type="password" {...fieldProps} />
+                            {error && !valid && (
+                                <HelperMessage>
+                                  Use 8 or more characters with a mix of letters, numbers
+                                  and symbols.
+                                </HelperMessage>
+                            )}
+                            {error && (
+                                <ErrorMessage>
+                                  Password needs to be more than 8 characters.
+                                </ErrorMessage>
+                            )}
+                            {valid && meta.dirty ? (
+                                <ValidMessage>Awesome password!</ValidMessage>
+                            ) : null}
+                          </>
+                      );
+                    }}
+                  </Field>
+                  <Field
+                      aria-required={true}
+                      name="password_confirmation"
+                      label={<FormattedMessage id={'label_password_repeat'}/>}
+                      defaultValue=""
+                      isRequired
+                      validate={(value) =>
+                          value?.length < 8 ? 'TOO_SHORT' : undefined
+                      }
+                  >
+                    {({ fieldProps, error, valid, meta }) => {
+                      return (
+                          <>
+                            <TextField type="password" {...fieldProps} />
+                            {error && !valid && (
+                                <HelperMessage>
+                                  Use 8 or more characters with a mix of letters, numbers
+                                  and symbols.
+                                </HelperMessage>
+                            )}
+                            {error && (
+                                <ErrorMessage>
+                                  Password needs to be more than 8 characters.
+                                </ErrorMessage>
+                            )}
+                            {valid && meta.dirty ? (
+                                <ValidMessage>Awesome password!</ValidMessage>
+                            ) : null}
+                          </>
+                      );
+                    }}
+                  </Field>
+                </FormSection>
+
+                <FormFooter>
+                  <ButtonGroup>
+                    <Button appearance="subtle" onClick={onBackClick}>Cancel</Button>
+                    <LoadingButton
+                        type="submit"
+                        appearance="primary"
+                        isLoading={submitting}
+                    >
+                        {<FormattedMessage id={'button_sign_up'}/>}
+                    </LoadingButton>
+                  </ButtonGroup>
+                </FormFooter>
+              </form>
+          )}
+        </Form>
+      </ContainerInner>
     </Container>
   );
 }

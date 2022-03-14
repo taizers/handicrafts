@@ -3,38 +3,55 @@ import { API_URL } from '../constants';
 import data from '../moki.json';
 
 export const signIn = async (payload) => {
-    return await axios.put(API_URL + "login/", {...payload})
+    return await axios.post(API_URL + "login", {...payload})
     .then(response => response.data)
 };
 
 export const signUp = async (payload) => {
-    return await axios.post( API_URL + "login/", {...payload})
+    return await axios.post( API_URL + "register", {...payload})
     .then(response => response.data)
 };
 
-export const getUsersApi = async () => {
-    return data.users
-/*    return await axios.get( API_URL + "user/",)
-        .then(response => response.data)*/
+export const getUsersApi = async (token) => {
+    return await axios.get( API_URL + "users", { headers: { Authorization: `Bearer ${token}` } })
+        .then(response => response.data)
 };
 
-export const getUserApi = async (id) => {
-    return data.users[id];
-/*    return await axios.get( API_URL + "user/", { headers: { Authorization: `Bearer ${token}` } })
-        .then(response => response.data)*/
+export const getUserApi = async (payload) => {
+    const { id, token } = payload;
+    // return await axios.get( API_URL + "users/" + id, { headers: { Authorization: `Bearer ${token}` } })
+    //     .then(response => response.data)
+    const user = await axios.get( API_URL + "users/" + id, { headers: { Authorization: `Bearer ${token}` } })
+        .then(response => response.data)
+    return {...user, role: 'admin' }
 };
 
-export const createUserApi = async ({ user }) => {
-    return await axios.post( API_URL + "user/", user)
+export const createUserApi = async (data) => {
+    console.log(data);
+    const { payload, token } = data;
+    return await axios.post( API_URL + "users", {...payload}, { headers: { Authorization: `Bearer ${token}` }})
     .then(response => response.data)
 };
 
-export const deleteUserApi = async ({ id }) => {
-    return await axios.delete( API_URL + "user/" + id)
+export const changeUserApi = async (data) => {
+    console.log(data);
+    const { payload, token } = data;
+    const formData = new FormData();
+    formData.append('avatar', payload.avatar);
+
+    await axios.put( API_URL + "users/" + payload.user.id + '/avatar', formData, { headers: { Authorization: `Bearer ${token}` }})
+        .then(response => response.data)
+    return await axios.put( API_URL + "users/" + payload.user.id, {...payload.user}, { headers: { Authorization: `Bearer ${token}` }})
     .then(response => response.data)
 };
 
-export const logOutApi = async ({ token }) => {
-    return await axios.post( API_URL + "logout/", { headers: { Authorization: `Bearer ${token}` } })
+export const deleteUserApi = async (payload) => {
+    const { id, token } = payload;
+    return await axios.delete( API_URL + "users" + id, { headers: { Authorization: `Bearer ${token}` } })
+    .then(response => response.data)
+};
+
+export const logOutApi = async (token) => {
+    return await axios.post( API_URL + "logout", { headers: { Authorization: `Bearer ${token}` } })
     .then(response => response.data)
 };

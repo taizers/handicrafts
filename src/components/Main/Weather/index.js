@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 
 import {selectWeather} from "../../../selectors/weather";
 import { getWeather } from "../../../actions/weather";
+import {selectLanguage} from "../../../selectors/language";
 
 const mapStateToProps = (store) => {
     return {
         weather: selectWeather(store),
+        language: selectLanguage(store),
     };
 };
 

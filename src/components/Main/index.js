@@ -1,12 +1,11 @@
 import { Main } from "./Main";
 import { connect } from 'react-redux';
 import { selectIsMainPageLoading } from '../../selectors/main';
-import {selectLatestsPosts} from "../../selectors/posts";
-import {selectUserLocation} from "../../selectors/weather";
-import {selectFeatureActions} from "../../selectors/feature";
-import {getUserLocation} from "../../actions/weather";
-import {getLatestsPosts} from "../../actions/posts";
-import {getFeatureActions} from "../../actions/feature";
+import { selectLatestsPosts } from "../../selectors/posts";
+import { selectUserLocation } from "../../selectors/weather";
+import { selectFeatureActions } from "../../selectors/feature";
+import { getUserLocation } from "../../actions/weather";
+import { getWidgetsPosts } from "../../actions/posts";
 
 const mapStateToProps = (store) => {
     return {
@@ -20,8 +19,7 @@ const mapStateToProps = (store) => {
 const mapDispathToProps = (dispath) => {
     return {
         getUserLocation: (location) => dispath(getUserLocation(location)),
-        getLatestsPosts: () => dispath(getLatestsPosts()),
-        getFeatureActions: () => dispath(getFeatureActions()),
+        getWidgetsPosts: () => dispath(getWidgetsPosts()),
     }
 };
 

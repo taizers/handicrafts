@@ -12,11 +12,11 @@ const List = styled.ul`
     display: flex;
 `
 
-export const LanguageSwitсher = ({ setLanguage }) => {
+export const LanguageSwitсher = ({ setLanguage, getWeather, userLocation }) => {
   return (
       <Container>
           <List>
-              {map(LOCALES, (locale) => <Language key={locale} onLanguageClick={setLanguage} language={locale} />)}
+              {map(LOCALES, (locale) => <Language key={locale} setLanguage={setLanguage} userLocation={userLocation} getWeather={getWeather} language={locale} />)}
           </List>
       </Container>
   );

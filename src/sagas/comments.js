@@ -1,4 +1,4 @@
-import { call, put, takeEvery, all, fork } from "redux-saga/effects";
+import { call, put, takeEvery, all, fork, select } from "redux-saga/effects";
 import { getCommentsApi, deleteCommentApi, editCommentApi, createCommentApi } from '../api/comments';
 import {
     getCommentsSuccessed,
@@ -9,15 +9,17 @@ import {
     getComments as getCommentsRequest,
 } from '../actions/comments';
 import { GET_COMMENTS, DELETE_COMMENT, EDIT_COMMENT, CREATE_COMMENT } from '../constants';
+import {selectToken} from "../selectors/auth";
 
 function* watchGetComments() {
     yield takeEvery(GET_COMMENTS, getComments);
 }
 
-function* getComments({ payload }) {
+function* getComments() {
+    const token = yield select(selectToken);
     yield put(setCommentsLoading(true));
     try {
-        const comments = yield call(getCommentsApi, payload);
+        const comments = yield call(getCommentsApi, token);
         yield put(getCommentsSuccessed(comments));
     } catch (error) {
         yield put(getCommentsFailed(error.message));
@@ -31,9 +33,10 @@ function* watchDeleteComment() {
 }
 
 function* deleteComment({ payload }) {
+    const token = yield select(selectToken);
     yield put(setCommentsLoading(true));
     try {
-        yield call(deleteCommentApi, payload);
+        yield call(deleteCommentApi, {payload, token});
         yield put(deleteCommentSuccessed(payload));
     } catch (error) {
         yield put(getCommentsFailed(error.message));
@@ -47,9 +50,10 @@ function* watchEditComment() {
 }
 
 function* editComment({ payload }) {
+    const token = yield select(selectToken);
     yield put(setCommentsLoading(true));
     try {
-        yield call(editCommentApi, payload);
+        yield call(editCommentApi, {payload, token});
 
     } catch (error) {
         yield put(getCommentsFailed(error.message));
@@ -63,9 +67,10 @@ function* watchCreateComment() {
 }
 
 function* createComment({ payload }) {
+    const token = yield select(selectToken);
     yield put(setCommentsLoading(true));
     try {
-        yield call(createCommentApi, payload);
+        yield call(createCommentApi, {payload, token});
         yield put(getCommentsRequest(payload.postId));
         yield put(createCommentSuccessed(payload));
     } catch (error) {

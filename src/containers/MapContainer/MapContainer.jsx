@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { map, isEmpty } from 'lodash';
 import Map from './Map/index';
@@ -12,6 +12,7 @@ import {
 } from '@atlaskit/theme/constants';
 
 import InlineEdit from '@atlaskit/inline-edit';
+import {FormattedMessage} from "react-intl";
 
 const fontSize = getFontSize();
 const gridSize = getGridSize();
@@ -101,7 +102,7 @@ export const MapContainer = ({ posts, getPosts, userPosition, getUserLocation })
             >
                 <InlineEdit
                     defaultValue={editValue}
-                    label="Точки маршрута"
+                    label={<FormattedMessage id={'points_of_route'} />}
                     editView={(fieldProps) => (
                         <EditViewContainer>
                             <Select
@@ -123,7 +124,7 @@ export const MapContainer = ({ posts, getPosts, userPosition, getUserLocation })
                                     padding: `${gridSize}px ${gridSize - 2}px`,
                                     minHeight: '35px',
                                 }}
-                            >Нажмите чтобы составить маршрут</ReadViewContainer>
+                            >{<FormattedMessage id={'select_route'} />}</ReadViewContainer>
                         ) : (
                             <div style={{padding: `${gridSize / 2}px`}}>
                                 <Group>
@@ -140,14 +141,14 @@ export const MapContainer = ({ posts, getPosts, userPosition, getUserLocation })
                 <MarkerContainer>
                     <MarkerIcon
                         src="https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png"
-                        alt="Начальная точка маршрута"
+                        alt={<FormattedMessage id={'start_point_of_route'} />}
                     />
                     <MarkerTitle> - Начальная точка маршрута</MarkerTitle>
                 </MarkerContainer>
                 <MarkerContainer>
                     <MarkerIcon
                         src="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-green.png"
-                        alt="Конечная точка маршрута"
+                        alt={<FormattedMessage id={'end_point_of_route'} />}
                     />
                     <MarkerTitle> - Конечная точка маршрута</MarkerTitle>
                 </MarkerContainer>

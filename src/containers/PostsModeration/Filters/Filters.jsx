@@ -11,16 +11,17 @@ import Textfield from '@atlaskit/textfield';
 
 const Container = styled.div`
     display: flex;
+  justify-content: space-between;
     width: 100%;
 `
 
 const FieldContainer = styled.div`
   margin-right: 20px;
+  width: 60%;
 `
 
 const DateFieldContainer = styled(FieldContainer)`
-    min-width: 150px;
-    
+  width: 40%;
 `
 
 

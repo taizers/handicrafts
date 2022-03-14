@@ -19,9 +19,10 @@ export const App = ({ getUser, locale, setLanguage }) => {
 
   useEffect(()=>{
     const token = document.cookie.match(/token=(.+?)(;|$)/);
+    const userId = document.cookie.match(/userId=(.+?)(;|$)/);
     const language = document.cookie.match(/locale=(.+?)(;|$)/);
 
-    token && getUser(token[1]);
+    token && userId && getUser(userId[1], token[1]);
     language && setLanguage(language[1]);
   },[]);
 
@@ -41,13 +42,9 @@ export const App = ({ getUser, locale, setLanguage }) => {
       <IntlProvider messages={messages[locale]} locale={locale} defaultLocale={LOCALES.RUSSIAN}>
           <>
             <Switch>
-
-
               <NonAuthorizedRoute exact path={pathToSignIn}><Login /></NonAuthorizedRoute>
               <NonAuthorizedRoute exact path={pathToSignUp}><SignUp /></NonAuthorizedRoute>
-
               <Route path='/'><Main /></Route>
-
             </Switch>
             <FlagGroup onDismissed={handleDismiss}>
               {flags.map((flagId) => {
