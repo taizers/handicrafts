@@ -64,7 +64,7 @@ export const messages = {
         enter_post_text: 'Enter post text',
         enter_links: 'Enter links separated by spaces',
 
-        modal_profile_title: 'Change Profile',
+        modal_profile_title: 'Change Profile Data',
         modal_users_title: 'Create Admin',
         modal_posts_title: 'Create Post',
         modal_types_title: 'Create Category',
@@ -139,14 +139,14 @@ export const messages = {
         enter_post_text: 'Введите текст поста',
         enter_links: 'Введите ссылки через пробел',
 
-        modal_profile_title: 'Изменить Профиль',
+        modal_profile_title: 'Изменить Данные Профиля',
         modal_users_title: 'Создать Администратора',
         modal_posts_title: 'Создать Пост',
         modal_types_title: 'Создать Категорию',
 
         comments: 'Комментарии',
         posts: 'Посты',
-        users: 'Пользовтаели',
+        users: 'Пользователи',
         categories: 'Категории',
         photo: 'Фотография',
         all: 'Все',
@@ -214,7 +214,7 @@ export const messages = {
         enter_post_text: 'Увядзіце тэкст посту',
         enter_links: 'Увядзіце спасылкі праз прабел',
 
-        modal_profile_title: 'Змяніць Профіль',
+        modal_profile_title: 'Змяніць Данныя Профілю',
         modal_users_title: 'Стварыць Адміністратара',
         modal_posts_title: 'Стварыць Пост',
         modal_types_title: 'Стварыць Катэгорыю',

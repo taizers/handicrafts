@@ -11,6 +11,7 @@ import {generatePath, Link} from "react-router-dom";
 import Avatar from '@atlaskit/avatar';
 import {pathToProfile} from "../../constants";
 import TrashIcon from "@atlaskit/icon/glyph/trash";
+import {FormattedMessage} from "react-intl";
 
 const Container = styled.div`
   width: 100%;
@@ -131,7 +132,7 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
                         alignSelf: 'flex-end',
                     }}
                 >
-                    Создать Администратора
+                    <FormattedMessage id='button_create_admin' />
                 </Button>
             </HeadContainer>
             <DynamicTable

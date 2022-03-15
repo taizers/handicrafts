@@ -10,6 +10,7 @@ import SearchField from "./SearchField/index";
 import {generatePath, Link} from "react-router-dom";
 import {API_IMAGE_URL, pathToProfile} from "../../constants";
 import TrashIcon from "@atlaskit/icon/glyph/trash";
+import {FormattedMessage} from "react-intl";
 
 const Container = styled.div`
   width: 100%;
@@ -126,7 +127,7 @@ export const CategoryModeration = ({ getCategories, categories, deleteCategory, 
                     onClick={onShowModal}
                     appearance="primary"
                 >
-                    Создать Категорию
+                    <FormattedMessage id="button_create_category" />
                 </Button>
             </HeadContainer>
             {categories && <DynamicTable

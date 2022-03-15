@@ -104,7 +104,7 @@ export const Header = ({ user, userId, logOut }) => {
                         {console.log(user)}
                         <DropdownItemGroup>
                             {userId && <DropdownItem><Link to={generatePath(pathToProfile, {id: userId})}>{<FormattedMessage id={'nav_link_profile'}/>}</Link></DropdownItem>}
-                            {userId && (user.role === 'admin' || user.role === 'owner' || user.role === 'user') && <DropdownItem><Link to={pathToModeration}>{<FormattedMessage id={'nav_link_moderation'}/>}</Link></DropdownItem>}
+                            {userId && (user.role === 'admin' || user.role === 'owner') && <DropdownItem><Link to={pathToModeration}>{<FormattedMessage id={'nav_link_moderation'}/>}</Link></DropdownItem>}
                             {userId && <DropdownItem><Link to={pathToHome} onClick={logOut}>{<FormattedMessage id={'nav_link_LogOut'}/>}</Link></DropdownItem>}
                             {!userId && <DropdownItem><Link to={pathToSignIn}>{<FormattedMessage id={'nav_link_sign_in'} />}</Link></DropdownItem>}
                             {!userId && <DropdownItem><Link to={pathToSignUp}>{<FormattedMessage id={'nav_link_sign_up'} />}</Link></DropdownItem>}

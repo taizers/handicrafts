@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { generatePath, Link} from "react-router-dom";
-import { pathToPost } from "../../../../constants";
+import {API_IMAGE_URL, pathToPost} from "../../../../constants";
 
 const LastPostItem = styled.li`
   margin-bottom: 10px;
@@ -30,7 +30,7 @@ const TextContainer = styled.div`
 `
 
 const Title = styled.h3`
-  font-size: 14px;
+  font-size: 15px;
   word-wrap: break-word;
 `
 const Date = styled.p`
@@ -43,10 +43,10 @@ export const LastPost = ({ lastPost }) => {
   return (
       <LastPostItem>
           <LinkItem to={generatePath(pathToPost, {id: lastPost.id})}>
-              <Image src={lastPost.images[0]} />
+              <Image src={`${API_IMAGE_URL}${lastPost.images[0].image}`} alt={lastPost.title} />
               <TextContainer>
                   <Title>{lastPost.title}</Title>
-                  <Date>{lastPost.createdAt}</Date>
+                  <Date>{lastPost.created_at}</Date>
               </TextContainer>
           </LinkItem>
       </LastPostItem>

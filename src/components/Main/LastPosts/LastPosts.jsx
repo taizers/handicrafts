@@ -30,7 +30,6 @@ const Title = styled.h3`
 `
 
 export const LastPosts = ({ posts, path, title }) => {
-
   return (
       <Container>
           <Title><FormattedMessage id={title} /></Title>

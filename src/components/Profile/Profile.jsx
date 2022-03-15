@@ -35,7 +35,7 @@ const TextContainer = styled.div`
   margin-bottom: 20px;
 `
 
-export const Profile = ({ user, getUserProfile, token, changeProfile, isVisible, setVisible }) => {
+export const Profile = ({ user, getUserProfile, token, changeProfile, isVisible, setVisible, authUserId }) => {
     let { id } = useParams();
 
     useEffect(()=> {
@@ -54,7 +54,7 @@ export const Profile = ({ user, getUserProfile, token, changeProfile, isVisible,
                 <UserDisplayedName>{<FormattedMessage id={'label_name'}/>}: {user?.name}</UserDisplayedName>
                 <UserDisplayedName>{<FormattedMessage id={'label_role'}/>}: {user?.role}</UserDisplayedName>
             </TextContainer>
-            <Button appearance='primary' onClick={onClick}>{<FormattedMessage id={'button_change'}/>}</Button>
+            {authUserId === user?.id && <Button appearance='primary' onClick={onClick}>{<FormattedMessage id={'button_change'}/>}</Button>}
             {isVisible && <CreateModal submitButtonLabel='button_change' setVisible={setVisible} isVisible={isVisible} create={changeProfile} type='profile' />}
         </Container>
     );

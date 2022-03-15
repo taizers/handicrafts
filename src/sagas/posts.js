@@ -190,8 +190,9 @@ function* getWidgetsPosts() {
     yield put(setFeatureActionsLoading(true));
     try {
         const data = yield call(getPostsApi);
-        yield put(getFeatureActionsSuccessed(data.splice(0, 3)));
-        yield put(getLatestsPostsFailed(data.splice(0, 3)));
+        const copy = data.splice(0, 3);
+        yield put(getFeatureActionsSuccessed(copy));
+        yield put(getLatestsPostsSuccessed(copy));
     } catch (error) {
         yield put(getFeatureActionsFailed(error.message));
     } finally {
