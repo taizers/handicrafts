@@ -37,7 +37,7 @@ export const LastPosts = ({ posts, path, title }) => {
           <LastPostsList>
               { map(posts, (post) => <LastPost key={post.id} lastPost={post} />)  }
           </LastPostsList>
-            <Button style={{maxWidth: '200px', alignSelf: 'center'}}  appearance="primary"><Link to={path}>Посмотреть ещё</Link></Button>
+            <Button style={{maxWidth: '200px', alignSelf: 'center'}}  appearance="primary"><Link to={path}>{<FormattedMessage id={'button_show_more'}/>}</Link></Button>
       </Container>
   );
 }

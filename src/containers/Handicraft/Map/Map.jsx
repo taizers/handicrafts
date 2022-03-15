@@ -31,7 +31,7 @@ export const Map = ({ marker }) => {
   return (
       <MapContainer
 
-        center={!isEmpty(marker.location) ? [+marker.location[0], marker.location[1]] : [53.9, 27.56667]}
+        center={!isEmpty(marker.longitude) ? [+marker.latitude, marker.longitude] : [53.9, 27.56667]}
         zoom={10}
         zoomControl={false}
         style={{ height: "80vh", width: "100%", padding: 0, color: 'black', zIndex: 1 }}
@@ -41,11 +41,11 @@ export const Map = ({ marker }) => {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url={maps.base}
         />
-        {!isEmpty(marker.location) &&
-            <Marker key={`marker-${marker.id}`} position={{lat: +marker.location[0], lng: +marker.location[1]}}>
+        {marker.longitude && marker.latitude &&
+            <Marker key={`marker-${marker.id}`} position={{lat: +marker.latitude, lng: +marker.longitude}}>
             <Popup>
               <Container>
-                  <Image src={marker.images[0]} />
+                  <Image src={marker.images[0].image} />
                   <Title>{marker.title}</Title>
               </Container>
             </Popup>

@@ -4,10 +4,10 @@ import 'moment/locale/ru';
 import SwiftSlider from 'react-swift-slider'
 
 import Button from '@atlaskit/button';
-import SelectClearIcon from '@atlaskit/icon/glyph/select-clear'
-import {map} from "lodash";
+import { map } from "lodash";
 import React from "react";
-import GetFile from "../GetFile/index";
+import { API_IMAGE_URL } from "../../../constants";
+import { FormattedMessage } from "react-intl";
 
 const Container = styled.div`
     width: 100%;
@@ -64,36 +64,40 @@ const Text = styled.p`
   user-select: none;
 `
 
-const getText = (text) => {
-    const textList = text.split('/*Enter*/');
-    return textList.map((elem, index) => <Text key={elem+index}>{elem}</Text>)
+const getText = (textList) => {
+    const text = textList.split('\n\n')
+    return <TextContainer>
+        {text.map( (item, index) => <Text key={'text' + index}>{item}</Text> )}
+    </TextContainer>
 }
 
-export const Posts = ({post, deletePost}) => {
-    const { images, subTitle, title, created_at, id } = post;
+export const Posts = ({post, deletePost, language}) => {
+    const { images, content, subtitle, title, created_at, id } = post;
 
     const onDeletePost = () => {
         deletePost(id);
     }
 
-    const imagesList = map(images, (item, index)=> ({id: index, src: item}));
+    const imagesList = map(images, (item, index)=> ({id: index, src: `${API_IMAGE_URL}${item.image}`}));
 
     return (
         <Container>
-            <TextContainer>
+            {post && <TextContainer>
                 <Title>{title}</Title>
-                <SubTitle>{subTitle}</SubTitle>
-                <Date>{moment(created_at, "YYYYMMDD").locale('ru').fromNow()}</Date>
-                {post.text && getText(post.text)}
-                <SwiftSlider data={imagesList} height={300} />
+                <SubTitle>{subtitle}</SubTitle>
+                <Date>{moment(created_at, "YYYYMMDD").locale(language).fromNow()}</Date>
+                {getText(content)}
+                <SwiftSlider data={imagesList} height={200}/>
                 <ButtonsContainer>
                     <Button
                         onClick={onDeletePost}
                         appearance="primary"
-                    >Удалить</Button>
+                    >
+                        <FormattedMessage id="button_delete"/>
+                    </Button>
                 </ButtonsContainer>
 
-            </TextContainer>
+            </TextContainer>}
         </Container>
     );
 }

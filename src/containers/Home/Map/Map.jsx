@@ -7,7 +7,7 @@ import {
   Popup,
 } from "react-leaflet";
 import styled from 'styled-components';
-import { pathToPost } from "../../../constants";
+import {API_IMAGE_URL, pathToPost} from "../../../constants";
 
 const Container = styled.div`
   max-width: 150px;
@@ -45,11 +45,11 @@ export const Map = ({ markers }) => {
           url={maps.base}
         />
         {markers && markers.map((post) => 
-          (post.location && <Marker key={`marker-${post.id}`} position={{lat: +post.location[0], lng: +post.location[1]}}>
+          (post.longitude && post.latitude && <Marker key={`marker-${post.id}`} position={{lat: +post.latitude, lng: +post.longitude}}>
             <Popup>
               <Container>
                 <LinkToPost to={generatePath(pathToPost, {id: post.id})}>
-                  <Image src={post.images[0]} />
+                  <Image src={`${API_IMAGE_URL}${post.images[0].image}`} />
                   <Title>{post.title}</Title>
                 </LinkToPost>
               </Container>

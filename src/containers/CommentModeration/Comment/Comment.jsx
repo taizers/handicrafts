@@ -86,7 +86,7 @@ const TextContainer = styled.div`
 `
 
 const getText = (textList) => {
-    const text = textList.split('\n\n')
+    const text = textList.split('\r\n')
     return <TextContainer>
         {text.map( (item, index) => <Text key={'text' + index}>{item}</Text> )}
     </TextContainer>
@@ -105,14 +105,14 @@ export const Comment = ({ comment, deleteComment, editComment }) => {
         <Item>
             <CommentWrapper>
                 <UserInfo>
-                    <Avatar src={comment?.avatar} size="large"/>
-                    <Name>{`${comment.userLogin || ''} ${`(${comment.userName})` || ''} `}</Name>
+                    <Avatar src={comment?.user.avatar} size="large"/>
+                    <Name>{`${comment.user.email || ''} ${`(${comment.user.name})` || ''} `}</Name>
                 </UserInfo>
-                <LinkToPost to={'post/' + comment.postId}>{comment.postTitle}</LinkToPost>
+                <LinkToPost to={'post/' + comment.post_id}>{comment.postTitle}</LinkToPost>
                 {comment.text && getText(comment.text)}
             </CommentWrapper>
             <ButtonsContainer>
-                {!comment.isApproved &&
+                {!comment.moderated &&
                     <Button
                         style={{
                             marginRight: '15px',

@@ -8,6 +8,7 @@ import Filters from './Filters/index';
 import Posts from './Posts/index';
 import PostItem from "./PostItem";
 import AddIcon from "@atlaskit/icon/glyph/add";
+import {FormattedMessage} from "react-intl";
 
 const Container = styled.div`
   width: 100%;
@@ -68,7 +69,7 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, create
         const arr = filter(posts, post => {
             if (
                 ((query.title !== "") ? indexOf(toLower(post.title), toLower(query.title)) !== -1 : true ) &&
-                ((query.date !== "") ? post.created_At == query.date : true )
+                ((query.date !== "") ? post.created_at == query.date : true )
             ) {
                 return post;
             }
@@ -94,7 +95,7 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, create
                         onClick={onShowPostsModal}
                         appearance="primary"
                     >
-                        Создать Пост
+                        <FormattedMessage id="button_create_post" />
                     </Button>
                 </CreateButtonsWrapper>
             </HeadContainer>

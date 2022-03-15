@@ -44,9 +44,9 @@ export const deleteCommentSuccessed = () => ({
     type: DELETE_COMMENT_SUCCESSED,
 });
 
-export const createComment = (comment) => ({
+export const createComment = (data) => ({
     type: CREATE_COMMENT,
-    payload: comment,
+    payload: data,
 });
 
 export const createCommentSuccessed = () => ({

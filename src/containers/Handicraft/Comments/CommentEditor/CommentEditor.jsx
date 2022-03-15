@@ -19,38 +19,33 @@ const EditCommentButton = styled(styledButton)`
 const EditCommentContainer = styled.div`
 `
 
-export const CommentEditor = ({ comment, postId, createComment, editComment, currentUserId, signedIn }) => {
+export const CommentEditor = ({ comment, postId, createComment, editComment, signedIn }) => {
     let [commentText, setCommentText] = useState('');
 
- /*    useEffect(() => {
-
-    },[]) */
-
     const onCreateComment = () => {
-      const createdComment = {
-        postId: postId,
+      const comment = {
         text: commentText,
         isEdited: false,
-        userId: currentUserId,
+        isModerated: false,
       };
 
-      createComment(createdComment);
+      createComment({comment, postId});
     };
 
     const onChangeComment = () => {
-      const changedComment = {
+      const commentData = {
         text: commentText,
         isEdited: true,
       };
 
-      editComment(changedComment);
+      editComment({comment: commentData, postId, commentId: comment.id});
     };
 
     return (
       <EditCommentContainer>
           <CommentEditorArea defaultValue={comment?.text} placeholder={signedIn ? "Введите ваш комментарий" : "Авторизуйтесь чтобы написать комментарий"} onChange={(evt) => setCommentText(evt.currentTarget.value)}>
           </CommentEditorArea>
-          {signedIn && <EditCommentButton onClick={comment ? onCreateComment : onChangeComment}>Отправить</EditCommentButton>}
+          <EditCommentButton disable={!signedIn} onClick={!comment ? onCreateComment : onChangeComment}>Отправить</EditCommentButton>
       </EditCommentContainer>
     );
 }

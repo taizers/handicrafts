@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Link, useRouteMatch, generatePath } from 'react-router-dom';
 
-import { isEmpty } from 'lodash';
-import { pathToPost, pathToPosts } from '../../../constants';
+import { isArray, isEmpty } from 'lodash';
+import { pathToPost, pathToPosts, API_IMAGE_URL } from '../../../constants';
 
 const Item = styled.li`
     max-width: 250px;
@@ -57,13 +57,13 @@ const ImageWrapper = styled.div`
 
 export const HandicraftItem = ({ post }) => {
     return <Item>
-            <Link to={post.id ? generatePath(pathToPost, {id: post.id}) : generatePath(pathToPosts, {type: post.value})}>
+            <Link to={post.title ? generatePath(pathToPost, {id: post.id}) : generatePath(pathToPosts, {type: post.value})}>
             <ImageWrapper>
-                <ItemImage src={!isEmpty(post.images) ? post.images[0] : post.image} alt={post.title ? post.title : post.label} height='100' width='200' />
+                <ItemImage src={isArray(post?.images) ? `${API_IMAGE_URL}${post?.images[0].image}` : `${API_IMAGE_URL}${post?.image}`} alt={post.title ? post.title : post.label} height='100' width='200' />
             </ImageWrapper>    
                 <TextContainer>
                     <ItemTitle>{post.title ? post.title : post.label}</ItemTitle>
-                    {post.createdAt && <Date>{post.createdAt}</Date>}
+                    {post.created_at && <Date>{post.created_at}</Date>}
                 </TextContainer>
             </Link>
         </Item>

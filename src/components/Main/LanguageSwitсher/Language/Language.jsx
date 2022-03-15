@@ -3,10 +3,12 @@ import { flags } from '../../../../locales/locales';
 
 const ListItem = styled.li`
     margin: 5px;
+    min-width: 40px;
+  border: solid black 1px;
 `
 const Image = styled.img`
-    width: 50px;
-    height: 30px;
+    width: 40px;
+    height: 25px;
 `
 
 export const Language = ({ setLanguage, language, getWeather, userLocation }) => {

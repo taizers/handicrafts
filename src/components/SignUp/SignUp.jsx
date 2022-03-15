@@ -63,8 +63,8 @@ export const SignUp = ({ signUp }) => {
                 <FormSection>
                   <Field
                       aria-required={true}
-                      name={<FormattedMessage id={'label_email'}/>}
-                      label="email"
+                      name="email"
+                      label={<FormattedMessage id={'label_email'}/>}
                       isRequired
                       defaultValue=""
                   >

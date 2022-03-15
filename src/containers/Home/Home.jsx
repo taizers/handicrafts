@@ -36,30 +36,36 @@ export const Home = ({
     getPostsTypes();
     getPosts();
   }, []);
-
+    console.log(postsTypes);
   return (
     <Container>
         <Title>Ремёсла Беларуси</Title>
       <ContainerForSelect>
         <SelectContainer>
           <label htmlFor="selectForMap"><FormattedMessage id="select_categories" /></label>
-          <Select
-            inputId="selectForMap"
-            options={[
-              { label: 'Все', value: '' },
-              ...postsTypes,
-            ]}
-            onChange={value => {
-              value.value !== '' ?
-              setSetMarkers(filter(posts, (post) => {
-                  if (value.value === post.type) {
-                      return post;
-                  }
-               })): 
-               setSetMarkers(posts);
-            }}
-            placeholder={<FormattedMessage id="select" />}
-          />
+            {postsTypes && <Select
+                inputId="selectForMap"
+                options={[
+                    {label: <FormattedMessage id='all'/>, value: ''},
+                    ...postsTypes,
+                ]}
+                onChange={value => {
+                    console.log(value.value);
+                    console.log(filter(posts, (post) => {
+                        if (value.value === post.type.value) {
+                            return post;
+                        }
+                    }));
+                    value.value !== '' ?
+                        setSetMarkers(filter(posts, (post) => {
+                            if (value.value === post.type.value) {
+                                return post;
+                            }
+                        })) :
+                        setSetMarkers(posts);
+                }}
+                placeholder={<FormattedMessage id="select"/>}
+            />}
         </SelectContainer>
     </ContainerForSelect>
     <Map markers={markers} />

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Route, Switch, Redirect, generatePath, useRouteMatch } from 'react-router-dom';
+import { Route, Switch, Redirect, generatePath, useRouteMatch, useLocation } from 'react-router-dom';
 import { 
   pathToHome,
   pathToMap,
@@ -52,7 +52,7 @@ const WrapperForRightWidgets = styled(WrapperForWidgets)`
 `
 
 export const Main = ({ getWidgetsPosts, getUserLocation, userLocation, latestsPosts, featureActions }) => {
-  let { url } = useRouteMatch();
+  let location = useLocation();
 
   useEffect(() => {
     getLocation();
@@ -71,11 +71,11 @@ export const Main = ({ getWidgetsPosts, getUserLocation, userLocation, latestsPo
     } else
       getUserLocation([ 53.6884, 23.8258 ]);
   };
-  console.log(url);
+
   return <Container>
         <Header/>
         <Wrapper className="container">
-          {!includes(url, 'profile') && <WrapperForLeftWidgets>
+          {!includes(location.pathname, 'moderation') && !includes(location.pathname, 'profile') && <WrapperForLeftWidgets>
             <LanguageSwitсher/>
             <LastPosts key="latestPosts" posts={latestsPosts} path={pathToPostsTypes} title="recently_added"/>
           </WrapperForLeftWidgets>}
@@ -89,7 +89,7 @@ export const Main = ({ getWidgetsPosts, getUserLocation, userLocation, latestsPo
             <Route exact path={pathToHome}><Home /></Route>
             <Redirect exact from='/' to={pathToHome}/>
           </Switch>
-          {!includes(url, 'profile') && <WrapperForRightWidgets>
+          {!includes(location.pathname, 'moderation') && !includes(location.pathname, 'profile') && <WrapperForRightWidgets>
             {userLocation && <Weather location={userLocation}/>}
             <LastPosts key="featureEvents" posts={featureActions} path={generatePath(pathToPosts, {type: 'feature'})}
                        title="future_events"/>

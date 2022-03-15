@@ -13,7 +13,7 @@ const mapStateToProps = (store) => {
 
 const mapDispathToProps = (dispath) => {
     return {
-        createComment: (comment) => dispath(createComment(comment)),
+        createComment: (data) => dispath(createComment(data)),
         editComment: (comment) => dispath(editComment(comment)),
     }
 };

@@ -30,6 +30,12 @@ export const deletePostApi = async (data) => {
         .then(response => response.data)
 };
 
+export const deletePostTypeApi = async (data) => {
+    const { payload, token } = data;
+    return await axios.delete(API_URL + "types/" + payload, { headers: { Authorization: `Bearer ${token}` }})
+        .then(response => response.data)
+};
+
 export const createPostApi = async (data) => {
     const { payload, token } = data;
     const formData = new FormData();

@@ -4,18 +4,8 @@ import Button from '@atlaskit/button/standard-button';
 import MoreVerticalIcon from '@atlaskit/icon/glyph/more-vertical';
 import DropdownMenu, { DropdownItem, DropdownItemGroup } from '@atlaskit/dropdown-menu';
 import Avatar from '@atlaskit/avatar';
-
-const Text = styled.p`
-    text-align: left;
-    text-indent: 20px;
-
-    -webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-`
+import {API_IMAGE_URL} from "../../../../constants";
+import React from "react";
 
 const IsEdited = styled.p`
     position: absolute;
@@ -47,11 +37,35 @@ const DropContainer = styled.div`
     right: 10px;
 `
 
-export const Comment = ({ comment, currentUserId, currentUserRole, signedIn, deleteComment, moderateComment, editingComment, isNotEdit }) => {
-    const { text, userId, isEdited, id, moderated } = comment;
+const TextContainer = styled.div`
+  text-align: left;
+  text-indent: 20px;
 
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+`
+
+const Text = styled.p`
+  text-indent: 40px;
+  margin: 10px 0;
+  font-size: 17px;
+`
+const getText = (textList) => {
+    const text = textList.split('\r\n')
+    return <TextContainer>
+        {text.map( (item, index) => <Text key={'text' + index}>{item}</Text> )}
+    </TextContainer>
+}
+
+export const Comment = ({ commentData, currentUserId, currentUserRole, deleteComment, moderateComment, editingComment, isNotEdit }) => {
+    const { text, user, edited, id, moderated, created_at, updated_at, post_id } = commentData;
+    console.log(commentData);
     const onDeleteButtonClick = () => {
-        deleteComment(id);
+        deleteComment({postId: post_id, commentId: id});
     };
 
     const onEditButtonClick = () => {
@@ -63,10 +77,10 @@ export const Comment = ({ comment, currentUserId, currentUserRole, signedIn, del
     };
 
     const onModeratedButtonClick = () => {
-        const commentData = {
+        const comment = {
             moderated: true,
         }
-        moderateComment(commentData);
+        moderateComment({comment, postId: post_id, commentId: id});
     };
 
     const onCopyButtonClick = () => {
@@ -89,17 +103,16 @@ export const Comment = ({ comment, currentUserId, currentUserRole, signedIn, del
                 >
                     <DropdownItemGroup size="small">
                         <DropdownItem size="small" onClick={onCopyButtonClick}>Копировать</DropdownItem>
-                        {((userId === currentUserId) && !isNotEdit) && <DropdownItem onClick={onEditButtonClick}>Изменить</DropdownItem>}
-                        {((currentUserRole === 'admin') || (currentUserRole === 'owner') || (userId === currentUserId)) && <DropdownItem onClick={onDeleteButtonClick}>Удалить</DropdownItem>}
+                        {((user.id === currentUserId) && !isNotEdit) && <DropdownItem onClick={onEditButtonClick}>Изменить</DropdownItem>}
+                        {((currentUserRole === 'admin') || (currentUserRole === 'owner') || (user.id === currentUserId)) && <DropdownItem onClick={onDeleteButtonClick}>Удалить</DropdownItem>}
                         {(((currentUserRole === 'admin') || (currentUserRole === 'owner')) && !moderated) && <DropdownItem onClick={onModeratedButtonClick}>Одобрить</DropdownItem>}
                     </DropdownItemGroup>
                 </DropdownMenu>    
             </DropContainer>
-            {console.log(comment.avatar)}
-            <Avatar src={comment?.avatar} size="xlarge" />
-            <Text>{text}</Text>
+            <Avatar src={`${API_IMAGE_URL}${user.avatar}`} size="xlarge" />
+            {getText(text)}
 
-            {isEdited && <IsEdited>Редактировано</IsEdited>}
+            {edited && <IsEdited>Редактировано</IsEdited>}
         </CommentItem>
     );
 }

@@ -4,14 +4,16 @@ import Button from '@atlaskit/button/standard-button';
 import Textfield from '@atlaskit/textfield';
 import {Field} from "@atlaskit/form";
 import Select from '@atlaskit/select';
+import {FormattedMessage} from "react-intl";
 
 const Container = styled.div`
     display: flex;
-  width: 100%;
-  margin-bottom: 20px;
+      width: 100%;
+      margin-bottom: 20px;
 `
 const FieldContainer = styled.div`
     margin-right: 20px;
+    width: 100%;
 `
 
 const SelectContainer = styled(FieldContainer)`
@@ -31,7 +33,7 @@ export const SearchField = ({ search }) => {
         <Container>
             <FieldContainer>
                 <Field
-                    label="Логин"
+                    label={<FormattedMessage id='label_email'/>}
                     name="login"
                     defaultValue=""
                 >
@@ -44,7 +46,7 @@ export const SearchField = ({ search }) => {
             </FieldContainer>
             <FieldContainer>
                 <Field
-                    label="Имя"
+                    label={<FormattedMessage id='label_name'/>}
                     name="name"
                     defaultValue=""
                 >
@@ -57,7 +59,7 @@ export const SearchField = ({ search }) => {
             </FieldContainer>
             <SelectContainer>
                 <Field
-                    label="Роль"
+                    label={<FormattedMessage id='label_role'/>}
                     name="role"
                     defaultValue=""
                 >
@@ -84,7 +86,7 @@ export const SearchField = ({ search }) => {
                     marginLeft: '20px',
                     alignSelf: 'flex-end',
                 }}
-            >Найти</Button>
+            ><FormattedMessage id='button_search'/></Button>
         </Container>
     );
 }

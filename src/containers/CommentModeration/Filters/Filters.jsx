@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import React, {Fragment, useState} from 'react';
-import { isEmpty, values } from "lodash";
+import React, { useState } from 'react';
 
 import Button from '@atlaskit/button/standard-button';
-import Form, { Field, FormFooter } from '@atlaskit/form';
+import { Field } from '@atlaskit/form';
 
 import Textfield from '@atlaskit/textfield';
+import {FormattedMessage} from "react-intl";
 
 const Container = styled.div`
     display: flex;
@@ -15,8 +15,8 @@ const Container = styled.div`
 
 const FieldContainer = styled.div`
   margin-right: 20px;
+  width: 100%;
 `
-
 
 export const Filters = ({ search }) => {
     const [userLogin, setLogin] = useState("");
@@ -33,7 +33,7 @@ export const Filters = ({ search }) => {
         <Container>
             <FieldContainer>
                 <Field
-                    label="Логин"
+                    label={<FormattedMessage id='label_email'/>}
                     name="login"
                     defaultValue=""
                     style={{
@@ -49,7 +49,7 @@ export const Filters = ({ search }) => {
             </FieldContainer>
             <FieldContainer>
                 <Field
-                    label="Пост"
+                    label={<FormattedMessage id='label_post'/>}
                     name="post"
                     defaultValue=""
                 >
@@ -65,7 +65,7 @@ export const Filters = ({ search }) => {
             </FieldContainer>
             <FieldContainer>
                 <Field
-                    label="Комментарий"
+                    label={<FormattedMessage id='label_comment'/>}
                     name="comment"
                     defaultValue=""
                     style={{
@@ -87,7 +87,7 @@ export const Filters = ({ search }) => {
                     marginLeft: '20px',
                     alignSelf: 'flex-end',
                 }}
-            >Найти</Button>
+            >{<FormattedMessage id='button_search'/>}</Button>
         </Container>
   );
 }

@@ -4,8 +4,9 @@ import React, { useEffect } from 'react';
 import UsefullLink from './UsefullLink/index';
 import Comments from './Comments/index';
 import SwiftSlider from "react-swift-slider";
-import {map} from "lodash";
+import { map, isEmpty } from "lodash";
 import Map from './Map/index';
+import {API_IMAGE_URL} from "../../constants";
 
 const Container = styled.div`
     position: relative;
@@ -34,52 +35,50 @@ const TextContainer = styled.div`
   -ms-user-select: none;
   user-select: none;
 `
-const Text = styled.p`
-  text-indent: 40px;
-  margin: 10px 0;
-  font-size: 17px;
-`
 
 const UsefullLinks = styled.ul`
 
 `
 
-
+const Text = styled.p`
+  text-indent: 40px;
+  margin: 10px 0;
+  font-size: 17px;
+`
 const getText = (textList) => {
-    const text = textList.split('\n\n')
+    const text = textList.split('\r\n')
   return <TextContainer>
       {text.map( (item, index) => <Text key={'text' + index}>{item}</Text> )}
     </TextContainer>
 }
 
-export const Handicraft = ({getPost, getComments, post, comments}) => {
-    const { title, subTitle, text, useFullLinks, images } = post;
+export const Handicraft = ({getPost, post}) => {
+    const { title, subtitle, content, links, images, comments } = post;
 
     let { id } = useParams(); 
 
     useEffect(() => {
       getPost(id);
-      getComments(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const imagesList = map(images, (item, index)=> ({id: index, src: item}));
+    const imagesList = map(images, (item, index)=> ({id: index, src: `${API_IMAGE_URL}${item.image}`}));
 
   return (
     <Container className="container">
       <Title>{title}</Title>
-      <SubTitle>{subTitle}</SubTitle>
-      {text && getText(text)}
+      <SubTitle>{subtitle}</SubTitle>
+      {content && getText(content)}
       <SubTitle>Полезные ссылки</SubTitle>
-      {useFullLinks &&
+      {links &&
         <UsefullLinks>
-          {useFullLinks.map( (item, index) => <UsefullLink link={item} key={"link" + index} />)}
+          {links.map( (item, index) => <UsefullLink link={item.link} key={"link" + index} />)}
         </UsefullLinks>
       }
         {post && <Map marker={post}/>}
-        <SwiftSlider data={imagesList} height={600} />
+        {images && <SwiftSlider data={imagesList} height={400}/>}
         <SubTitle>Комментарии</SubTitle>
-      <Comments comments={comments} postId={post.id} />
+        <Comments comments={comments} postId={post.id}/>
     </Container>
   );
 }

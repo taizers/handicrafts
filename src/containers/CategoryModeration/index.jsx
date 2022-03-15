@@ -1,7 +1,7 @@
 import { CategoryModeration } from './CategoryModeration';
 import { connect } from 'react-redux';
-import {createPostsType, getPostsTypes, setCreatePostVisible} from "../../actions/posts";
-import {selectCreateUserPostIsVisible, selectPostsTypes, selectCreateUserPostIsLoading} from "../../selectors/posts";
+import { createPostsType, getPostsTypes, setCreatePostVisible,deletePostType } from "../../actions/posts";
+import { selectCreateUserPostIsVisible, selectPostsTypes, selectCreateUserPostIsLoading } from "../../selectors/posts";
 import {setCreateModalVisible} from "../../actions/auth";
 
 const mapDispathToProps = (dispath) => {
@@ -9,6 +9,7 @@ const mapDispathToProps = (dispath) => {
         getCategories: () => dispath(getPostsTypes()),
         setVisible: (data) => dispath(setCreatePostVisible(data)),
         createCategory: data => dispath(createPostsType(data)),
+        deleteCategory: id => dispath(deletePostType(id)),
     }
 };
 

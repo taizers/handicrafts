@@ -57,17 +57,13 @@ const Image = styled.img`
   height: 75px;
 `;
 
-export const CategoryModeration = ({ getCategories, categories, deleteUser, isVisible, setVisible, createCategory }) => {
+export const CategoryModeration = ({ getCategories, categories, deleteCategory, isVisible, setVisible, createCategory }) => {
     const [categoriesList, setCategoriesList] = useState();
 
 
     useEffect(() => {
         getCategories();
     }, []);
-
-    const onDeleteButtonClick = (evt) => {
-        console.log(evt);
-    }
 
     const rows = (categoriesForTable) => (
         map(categoriesForTable, (category, index) => ({
@@ -93,7 +89,7 @@ export const CategoryModeration = ({ getCategories, categories, deleteUser, isVi
                     content: (
                         <Button
                             iconBefore={<TrashIcon size="large" appearance="primary"/>}
-                            onClick={onDeleteButtonClick}
+                            onClick={() => deleteCategory(category.id)}
                         ></Button>
                     ),
                 },

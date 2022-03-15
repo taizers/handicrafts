@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
-import { generatePath, Link, useRouteMatch } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import Avatar from '@atlaskit/avatar';
 import { FormattedMessage } from 'react-intl'
 import DropdownMenu, { DropdownItem, DropdownItemGroup } from '@atlaskit/dropdown-menu';
-import { isEmpty } from "lodash";
 
 import {
     pathToSignIn,
@@ -104,11 +103,11 @@ export const Header = ({ user, userId, logOut }) => {
                     >
                         {console.log(user)}
                         <DropdownItemGroup>
-                            {userId && <DropdownItem><Link to={generatePath(pathToProfile, {id: userId})}>Профиль</Link></DropdownItem>}
-                            {userId && (user.role === 'admin' || user.role === 'owner' || user.role === 'user') && <DropdownItem><Link to={pathToModeration}>Модерация</Link></DropdownItem>}
-                            {userId && <DropdownItem><Link to={pathToHome} onClick={logOut}>Выход</Link></DropdownItem>}
-                            {!userId && <DropdownItem><Link to={pathToSignIn}>Войти</Link></DropdownItem>}
-                            {!userId && <DropdownItem><Link to={pathToSignUp}>Зарегестрироваться</Link></DropdownItem>}
+                            {userId && <DropdownItem><Link to={generatePath(pathToProfile, {id: userId})}>{<FormattedMessage id={'nav_link_profile'}/>}</Link></DropdownItem>}
+                            {userId && (user.role === 'admin' || user.role === 'owner' || user.role === 'user') && <DropdownItem><Link to={pathToModeration}>{<FormattedMessage id={'nav_link_moderation'}/>}</Link></DropdownItem>}
+                            {userId && <DropdownItem><Link to={pathToHome} onClick={logOut}>{<FormattedMessage id={'nav_link_LogOut'}/>}</Link></DropdownItem>}
+                            {!userId && <DropdownItem><Link to={pathToSignIn}>{<FormattedMessage id={'nav_link_sign_in'} />}</Link></DropdownItem>}
+                            {!userId && <DropdownItem><Link to={pathToSignUp}>{<FormattedMessage id={'nav_link_sign_up'} />}</Link></DropdownItem>}
                         </DropdownItemGroup>
                     </DropdownMenu>
                 </DropdownMenuItem>

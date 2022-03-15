@@ -14,73 +14,69 @@ import {FormattedMessage} from "react-intl";
 
 const data = {
     user: {
-        title: <FormattedMessage id={'button_create_admin'} />,
+        title: 'button_create_admin',
         fields: [
             {
-                label: <FormattedMessage id={'label_email'} />,
+                label: 'label_email',
                 name: 'email',
                 required: true,
-                placeholder: 'example@example.com',
                 errorMessage: 'error',
             },
             {
-                label: <FormattedMessage id={'label_password'} />,
+                label: 'label_password',
                 name: 'password',
                 required: true,
-                placeholder: 'password',
                 errorMessage: 'error',
                 type: 'password'
             },
             {
-                label: <FormattedMessage id={'label_password_repeat'} />,
+                label: 'label_password_repeat',
                 name: 'password_confirmation',
                 required: true,
-                placeholder: 'password',
                 errorMessage: 'error',
                 type: 'password'
             },
             {
-                label: <FormattedMessage id={'label_name'} />,
+                label: 'label_name',
                 name: 'name',
                 required: true,
-                placeholder: 'Имя',
                 errorMessage: 'error',
             },
         ],
     },
     post: {
-        title: <FormattedMessage id={'button_create_post'} />,
+        title: 'button_create_post',
         fields: [
             {
-                label: <FormattedMessage id={'label_title'} />,
+                label: 'label_title',
                 name: 'title',
                 required: true,
                 errorMessage: 'error',
             },
             {
-                label: <FormattedMessage id={'label_subtitle'} />,
+                label: 'label_subtitle',
                 name: 'subtitle',
                 errorMessage: 'error',
             },
             {
-                label: <FormattedMessage id={'label_usefully_links'} />,
+                label: 'label_usefully_links',
                 name: 'links',
                 errorMessage: 'error',
-                helperMessage: 'введите ссылки через пробел'
+                helperMessage: 'enter_links'
             },
         ],
     },
     category: {
-        title: <FormattedMessage id={'modal_types_title'} />,
+        title: 'modal_types_title',
         fields: [
             {
-                label: <FormattedMessage id={'label_category_label'} />,
+                label: 'label_category_label',
                 name: 'label',
                 required: true,
                 errorMessage: 'error',
             },
             {
-                label: <FormattedMessage id={'label_link_on_EN'} />,
+                label: 'label_link_on_EN',
                 name: 'value',
                 required: true,
                 errorMessage: 'error',
@@ -88,22 +84,30 @@ const data = {
         ],
     },
     profile: {
-        title: <FormattedMessage id={'modal_profile_title'} />,
+        title: 'modal_profile_title',
         fields: [
             {
-                label: <FormattedMessage id={'label_name'} />,
+                label: 'label_name',
                 name: 'name',
                 errorMessage: 'error',
             },
             {
-                label: <FormattedMessage id={'label_password'} />,
-                name: 'password',
+                label: 'label_old_password',
+                name: 'old_password',
                 errorMessage: 'error',
+                type: 'password'
             },
             {
-                label: <FormattedMessage id={'label_password_repeat'} />,
-                name: 'password_confirmation',
+                label: 'label_new_password',
+                name: 'new_password',
                 errorMessage: 'error',
+                type: 'password'
+            },
+            {
+                label: 'label_new_password_repeat',
+                name: 'new_password_confirmation',
+                errorMessage: 'error',
+                type: 'password'
             },
         ],
     },
@@ -122,7 +126,7 @@ export const CreateModal = ({
     const [files, setFiles] = useState([]);
     const [currentPosition, setCurrentPosition] = useState();
     const modalvalues = data[type];
-    console.log(files);
+
     const onCloseModal = () => {
         setVisible(false);
     };
@@ -133,17 +137,17 @@ export const CreateModal = ({
         switch (type) {
             case 'post':
                 const { title, subtitle, content, date, type, links } = data;
-                console.log([files.map((item)=> item.file)]);
+
                 const images = files.map((item)=> item.file);
                 creatingItem = {
                     title,
                     subtitle,
                     content,
-                    date: type?.value === 'feature' ? date : '',
+                    date,
                     links: links?.split(' '),
                     type_id: type?.id,
-                    longitude: !!currentPosition && currentPosition[0].toString(),
-                    latitude: !!currentPosition && currentPosition[1].toString(),
+                    longitude: !!currentPosition && currentPosition[1].toString(),
+                    latitude: !!currentPosition && currentPosition[0].toString(),
                     images,
                 };
                 break;
@@ -156,7 +160,7 @@ export const CreateModal = ({
                             name,
                             password,
                             password_confirmation,
-                            role: 'owner',
+                            role: 'admin',
                         };
                     }
                 }
@@ -172,13 +176,14 @@ export const CreateModal = ({
                 };
                 break;
             case 'profile':
-                const { name, password, password_confirmation } = data;
-                if (password === password_confirmation) {
+                const { name, old_password, new_password, new_password_confirmation } = data;
+                if (new_password === new_password_confirmation) {
                     creatingItem = {
                         user: {
                                 name,
-                                password,
-                                password_confirmation,
+                                old_password,
+                                new_password,
+                                new_password_confirmation,
                         },
                         avatar: files[0].file,
                     };
@@ -193,7 +198,7 @@ export const CreateModal = ({
     const getCreateUserFields = () => {
         return <ModalBody>
             {modalvalues.fields.map((field)=>(
-                <Field key={field.label} label={field.label} name={field.name}>
+                <Field key={field.label} label={<FormattedMessage id={field.label} />} name={field.name}>
                     {({ fieldProps }) => (
                         <Fragment>
                             <Textfield
@@ -203,8 +208,8 @@ export const CreateModal = ({
                                 aria-required={field.required || false}
                                 {...fieldProps}
                             />
-                            <ErrorMessage>{field.errorMessage}</ErrorMessage>
-                            {field.helperMessage && <HelperMessage>{field.helperMessage}</HelperMessage>}
+                            <ErrorMessage>{field?.errorMessage}</ErrorMessage>
+                            {field?.helperMessage && <HelperMessage><FormattedMessage id={field?.helperMessage} /></HelperMessage>}
                         </Fragment>
                     )}
                 </Field>
@@ -214,9 +219,10 @@ export const CreateModal = ({
     }
 
     const getCreatePostFields = () => {
+        console.log(modalvalues);
         return <ModalBody>
             {modalvalues.fields.map((field)=>(
-                <Field key={field.label} label={field.label} name={field.name}>
+                <Field key={field.label} label={<FormattedMessage id={field.label} />} name={field.name}>
                     {({ fieldProps }) => (
                         <Fragment>
                             <Textfield
@@ -234,7 +240,6 @@ export const CreateModal = ({
                 {({ fieldProps }) => (
                     <Fragment>
                         <TextArea
-                            placeholder=<FormattedMessage id={'enter_post_text'} />
                             aria-required={true}
                             {...fieldProps}
                         />
@@ -242,7 +247,7 @@ export const CreateModal = ({
                 )}
             </Field>
             <Map currentPosition={currentPosition} setCurrentPosition={setCurrentPosition} />
-            <Field style={{marginTop: '10px'}} label={<FormattedMessage id={'label_post_type'} />} name="type" onChange={evt => console.log(evt)} >
+            <Field style={{marginTop: '10px'}} label={<FormattedMessage id='label_post_type' />} name="type" onChange={evt => console.log(evt)} >
                 {({ fieldProps }) => (
                     <Select
                         inputId="type"
@@ -253,7 +258,7 @@ export const CreateModal = ({
                 )}
             </Field>
 
-            <Field label={<FormattedMessage id={'select_date'}/>} name="date" isRequired={true}>
+            <Field label={<FormattedMessage id='select_date' />} name="date" isRequired={true}>
                 {({fieldProps}) => (
                     <DatePicker {...fieldProps} />
                 )}
@@ -265,7 +270,7 @@ export const CreateModal = ({
     const getChangeProfileFields = () => {
         return <ModalBody>
             {modalvalues.fields.map((field)=>(
-                <Field key={field.label} label={field.label} name={field.name}>
+                <Field key={field.label} label={<FormattedMessage id={field.label} />} name={field.name}>
                     {({ fieldProps }) => (
                         <Fragment>
                             <Textfield
@@ -292,13 +297,13 @@ export const CreateModal = ({
                        {({ formProps }) => (
                                <form id="createModal" {...formProps}>
                                    <ModalHeader>
-                                       <ModalTitle>{modalvalues.title}</ModalTitle>
+                                       <ModalTitle><FormattedMessage id={modalvalues.title} /></ModalTitle>
                                    </ModalHeader>
                                    {(type === 'user' || type === 'category') && getCreateUserFields()}
                                    {(type === 'post') && getCreatePostFields()}
                                    {(type === 'profile') && getChangeProfileFields()}
                                    <ModalFooter>
-                                       <p style={{marginRight: 'auto'}}>* - Обязательный параметр</p>
+                                       <p style={{marginRight: 'auto'}}><FormattedMessage id='required_field' /></p>
                                        <Button appearance="subtle" onClick={onCloseModal}>
                                            <FormattedMessage id={closeButtonLabel} />
                                        </Button>

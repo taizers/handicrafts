@@ -73,8 +73,8 @@ export const MapContainer = ({ posts, getPosts, userPosition, getUserLocation })
         const selectOptions = [];
         selectOptions.push({label: 'Моё местоположение', value: userPosition});
         map(posts, (post) => {
-            if (!isEmpty(post.location)) {
-                selectOptions.push({label: post.title, value: post.location});
+            if (!isEmpty(post.latitude)) {
+                selectOptions.push({label: post.title, value: [post.latitude, post.longitude]});
             }
         });
         return selectOptions;
@@ -143,14 +143,14 @@ export const MapContainer = ({ posts, getPosts, userPosition, getUserLocation })
                         src="https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png"
                         alt={<FormattedMessage id={'start_point_of_route'} />}
                     />
-                    <MarkerTitle> - Начальная точка маршрута</MarkerTitle>
+                    <MarkerTitle> - {<FormattedMessage id={'start_point_of_route'} />}</MarkerTitle>
                 </MarkerContainer>
                 <MarkerContainer>
                     <MarkerIcon
                         src="https://cdn.jsdelivr.net/gh/pointhi/leaflet-color-markers@master/img/marker-icon-green.png"
                         alt={<FormattedMessage id={'end_point_of_route'} />}
                     />
-                    <MarkerTitle> - Конечная точка маршрута</MarkerTitle>
+                    <MarkerTitle> - {<FormattedMessage id={'end_point_of_route'} />}</MarkerTitle>
                 </MarkerContainer>
             </SelectorContainer>}
             <Map locations={locateValues} isRoutesActive={isRoutesActive} />

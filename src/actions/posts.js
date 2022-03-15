@@ -17,7 +17,7 @@ import {
     SET_LATESTS_POSTS_LOADING,
     GET_POSTS_TYPES,
     GET_POSTS_TYPES_SUCCESSED, CREATE_POSTS_TYPE,
-    GET_WIDGETS_POSTS,
+    GET_WIDGETS_POSTS, DELETE_POST_TYPE, DELETE_POST_TYPE_SUCCESSED,
 } from '../constants';
 
 export const getPostsTypes = () => ({
@@ -83,6 +83,16 @@ export const getPostSuccessed = (data) => ({
 
 export const getPostFailed = (data) => ({
     type: GET_POSTS_FAILED,
+    payload: data,
+});
+
+export const deletePostType = (id) => ({
+    type: DELETE_POST_TYPE,
+    payload: id,
+});
+
+export const deletePostTypeSuccessed = (data) => ({
+    type: DELETE_POST_TYPE_SUCCESSED,
     payload: data,
 });
 

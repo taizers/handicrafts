@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Comment from './Comment/index';
 import CommentEditor from './CommentEditor/index';
 import { useState } from 'react';
+import {isEmpty} from "lodash";
 
 const CommentsList = styled.ul`
     text-align: center;
@@ -19,7 +20,7 @@ export const Comments = ({ comments, postId }) => {
 
     return (
         <CommentsList>
-            {comments.map( (item, index) => <Comment editingComment={setCurrentEditingComment} comment={item} key={'comment' + index} /> )}
+            {!isEmpty(comments) && comments.map( (item, index) => <Comment editingComment={setCurrentEditingComment} commentData={item} key={'comment' + index} /> )}
             <CommentEditor comment={currentEditComment}  postId={postId} />
         </CommentsList>
     );

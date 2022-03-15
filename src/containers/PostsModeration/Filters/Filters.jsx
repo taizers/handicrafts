@@ -8,6 +8,7 @@ import Button from '@atlaskit/button/standard-button';
 import Form, { Field, FormFooter } from '@atlaskit/form';
 
 import Textfield from '@atlaskit/textfield';
+import {FormattedMessage} from "react-intl";
 
 const Container = styled.div`
     display: flex;
@@ -39,7 +40,7 @@ export const Filters = ({ search }) => {
         <Container>
             <FieldContainer>
                 <Field
-                    label="Заголовок"
+                    label={<FormattedMessage id='label_title'/>}
                     name="title"
                     defaultValue=""
                 >
@@ -54,7 +55,7 @@ export const Filters = ({ search }) => {
             <DateFieldContainer>
                 <Field
                     name="date"
-                    label="Дата"
+                    label={<FormattedMessage id='label_date'/>}
                     isRequired={false}
                     defaultValue=""
                 >
@@ -79,7 +80,7 @@ export const Filters = ({ search }) => {
                     marginLeft: '20px',
                     alignSelf: 'flex-end',
                 }}
-            >Найти</Button>
+            ><FormattedMessage id='button_search'/></Button>
         </Container>
   );
 }

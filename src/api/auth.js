@@ -19,11 +19,8 @@ export const getUsersApi = async (token) => {
 
 export const getUserApi = async (payload) => {
     const { id, token } = payload;
-    // return await axios.get( API_URL + "users/" + id, { headers: { Authorization: `Bearer ${token}` } })
-    //     .then(response => response.data)
-    const user = await axios.get( API_URL + "users/" + id, { headers: { Authorization: `Bearer ${token}` } })
+    return await axios.get( API_URL + "users/" + id, { headers: { Authorization: `Bearer ${token}` } })
         .then(response => response.data)
-    return {...user, role: 'admin' }
 };
 
 export const createUserApi = async (data) => {
@@ -39,15 +36,15 @@ export const changeUserApi = async (data) => {
     const formData = new FormData();
     formData.append('avatar', payload.avatar);
 
-    await axios.put( API_URL + "users/" + payload.user.id + '/avatar', formData, { headers: { Authorization: `Bearer ${token}` }})
+    await axios.post( API_URL + 'user/avatar', formData, { headers: { Authorization: `Bearer ${token}` }})
         .then(response => response.data)
-    return await axios.put( API_URL + "users/" + payload.user.id, {...payload.user}, { headers: { Authorization: `Bearer ${token}` }})
+    return await axios.put( API_URL + "user", {...payload.user}, { headers: { Authorization: `Bearer ${token}` }})
     .then(response => response.data)
 };
 
-export const deleteUserApi = async (payload) => {
-    const { id, token } = payload;
-    return await axios.delete( API_URL + "users" + id, { headers: { Authorization: `Bearer ${token}` } })
+export const deleteUserApi = async (data) => {
+    const { payload, token } = data;
+    return await axios.delete( API_URL + "users/" + payload, { headers: { Authorization: `Bearer ${token}` } })
     .then(response => response.data)
 };
 

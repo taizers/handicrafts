@@ -62,13 +62,9 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
     const [usersList, setUsersList] = useState();
 
 
-  useEffect(()=>{
-    getUsers();
-  }, []);
-
-  const onDeleteButtonClick = (evt) => {
-      console.log(evt);
-  }
+    useEffect(()=>{
+        getUsers();
+    }, []);
 
     const rows = (usersListForTable) => (
         map(usersListForTable, (user, index) => ({
@@ -97,7 +93,7 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
                     content: (
                         <Button
                             iconBefore={<TrashIcon size="large" appearance="primary"/>}
-                            onClick={onDeleteButtonClick}
+                            onClick={() => deleteUser(user.id)}
                         ></Button>
                     ),
                 },

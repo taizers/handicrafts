@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { API_IMAGE_URL } from "../../../constants";
 import { map } from 'lodash';
 
 
@@ -50,10 +51,10 @@ export const PostItem = ({ post, selectPost, selectedPost }) => {
 
     return (
         <ListItem selected={post?.id === selectedPost?.id} onClick={onPostClick}>
-            <Image src={post.images[0]} alt={post.title} />
+            <Image src={`${API_IMAGE_URL}${post.images[0].image}`} alt={post.title} />
             <TextContainer>
                 <Title>{post.title}</Title>
-                <Date>{post.createdAt}</Date>
+                <Date>{post.created_at}</Date>
             </TextContainer>
 
         </ListItem>

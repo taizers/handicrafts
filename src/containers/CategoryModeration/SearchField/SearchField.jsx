@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Button from '@atlaskit/button/standard-button';
 import Textfield from '@atlaskit/textfield';
 import {Field} from "@atlaskit/form";
+import {FormattedMessage} from "react-intl";
 
 const Container = styled.div`
     display: flex;
@@ -30,7 +31,7 @@ export const SearchField = ({ search }) => {
         <Container>
             <FieldContainer>
                 <Field
-                    label="Название категории"
+                    label={<FormattedMessage id='label_category_label'/>}
                     name="label"
                     defaultValue=""
                 >
@@ -43,7 +44,7 @@ export const SearchField = ({ search }) => {
             </FieldContainer>
             <FieldContainer>
                 <Field
-                    label="Значение категории"
+                    label={<FormattedMessage id='label_category_value'/>}
                     name="value"
                     defaultValue=""
                 >
@@ -61,7 +62,7 @@ export const SearchField = ({ search }) => {
                     marginLeft: '20px',
                     alignSelf: 'flex-end',
                 }}
-            >Найти</Button>
+            >{<FormattedMessage id='button_search'/>}</Button>
         </Container>
     );
 }
