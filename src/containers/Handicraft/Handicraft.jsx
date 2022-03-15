@@ -19,6 +19,11 @@ const Container = styled.div`
 const Title = styled.h2`
   font-size: 30px;
 `
+
+const SliderContainer = styled.div`
+  margin: 30px 0;
+  position: static;
+`
 const SubTitle = styled.h3`
   font-size: 18px;
   font-weight: bold;
@@ -76,7 +81,9 @@ export const Handicraft = ({getPost, post}) => {
         </UsefullLinks>
       }
         {post && <Map marker={post}/>}
-        {images && <SwiftSlider data={imagesList} height={400}/>}
+        <SliderContainer>
+          {images && <SwiftSlider data={imagesList} height={400}/>}
+        </SliderContainer>
         <SubTitle>Комментарии</SubTitle>
         <Comments comments={comments} postId={post.id}/>
     </Container>

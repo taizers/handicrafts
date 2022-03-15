@@ -18,7 +18,11 @@ import {
     deleteUserSuccessed,
     setCreateModalVisible,
     setCreateModalLoading,
-    getUserSuccessed, getUserProfileSuccessed, setChangeProfileLoading, setAuthModalLoading,
+    getUserSuccessed, 
+    getUserProfileSuccessed, 
+    setChangeProfileLoading, 
+    setAuthModalLoading,
+    getUsers as getUsersQuery,
 } from '../actions/auth';
 import {
     SIGN_IN,
@@ -92,9 +96,9 @@ function* createUser({ payload }) {
     yield console.log(payload);
     yield put(setCreateModalLoading(true));
     try {
-        const userData = yield call(createUserApi, { payload, token});
-        yield put(createUserSuccessed(userData));
+        yield call(createUserApi, { payload, token});
         yield put(setCreateModalVisible(false));
+        yield put(getUsersQuery());
     } catch (error) {
         yield put(authFailed(error.message));
     } finally {

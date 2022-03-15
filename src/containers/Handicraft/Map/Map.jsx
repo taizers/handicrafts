@@ -8,19 +8,6 @@ import {
 } from "react-leaflet";
 import styled from 'styled-components';
 
-const Container = styled.div`
-  max-width: 150px;
-`
-
-const Title = styled.h3`
-  font-size: 14px;
-`
-
-const Image = styled.img`
-  width: 100%;
-  height: 70px;
-`
-
 const maps = {
   base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 };
@@ -43,12 +30,6 @@ export const Map = ({ marker }) => {
         />
         {marker.longitude && marker.latitude &&
             <Marker key={`marker-${marker.id}`} position={{lat: +marker.latitude, lng: +marker.longitude}}>
-            <Popup>
-              <Container>
-                  <Image src={marker.images[0].image} />
-                  <Title>{marker.title}</Title>
-              </Container>
-            </Popup>
           </Marker>
         }
       </MapContainer>

@@ -1,7 +1,6 @@
 import { CreateModal } from './CreateModal';
 import { connect } from 'react-redux';
-import {selectCreateUserPostIsLoading, selectPostsTypes} from "../../../selectors/posts";
-import {selectCreateUserModalIsLoading} from "../../../selectors/auth";
+import { selectPostsTypes } from "../../../selectors/posts";
 
 const mapDispathToProps = (dispath) => {
     return {
@@ -10,7 +9,6 @@ const mapDispathToProps = (dispath) => {
 
 const mapStateToProps = (store) => {
     return {
-        isLoading: selectCreateUserModalIsLoading(store),
         types: selectPostsTypes(store),
     };
 };

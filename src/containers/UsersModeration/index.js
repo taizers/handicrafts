@@ -1,7 +1,7 @@
 import { UsersModeration } from "./UsersModeration";
 import { connect } from 'react-redux';
 import {createUser, deleteUser, getUsers, setCreateModalVisible} from '../../actions/auth';
-import {selectCreateUserModalIsVisible, selectToken, selectUserRole, selectUsers} from "../../selectors/auth";
+import {selectAuthModalIsLoading, selectAuthModalIsVisible, selectUserRole, selectUsers} from "../../selectors/auth";
 
 const mapDispathToProps = (dispath) => {
     return {
@@ -16,7 +16,8 @@ const mapStateToProps = (store) => {
     return {
         users: selectUsers(store),
         role: selectUserRole(store),
-        isVisible: selectCreateUserModalIsVisible(store),
+        isVisible: selectAuthModalIsVisible(store),
+        isLoading: selectAuthModalIsLoading(store),
     };
 };
 

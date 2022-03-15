@@ -53,7 +53,7 @@ const CreateButtonsWrapper = styled.div`
   margin-top: 10px;
 `
 
-export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, createPost, createCategory }) => {
+export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, isLoading, createPost }) => {
     const [selectedPost, setSelectedPost] = useState();
     const [postsList, setPostsList] = useState();
 
@@ -108,7 +108,7 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, create
                 </ListContainer>
                 <Post>{selectedPost && <Posts post={selectedPost}/>}</Post>
             </PostsContainer>
-            {isVisible && <CreateModal setVisible={setVisible} isVisible={isVisible} create={createPost} type={'post'}/>}
+            {isVisible && <CreateModal setVisible={setVisible} isLoading={isLoading} isVisible={isVisible} create={createPost} type={'post'}/>}
         </Container>
     );
 }

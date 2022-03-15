@@ -20,14 +20,16 @@ import {
     getLatestsPostsSuccessed,
     setLatestsPostsLoading,
     getPostsTypesSuccessed,
-    setCreatePostLoading, deletePostTypeSuccessed,
+    setCreatePostLoading, 
+    getPostsTypes as getCategories,
+    setCreatePostVisible,
+    getPosts as getPostsQuery,
 } from '../actions/posts';
 
 import {
     GET_POSTS,
     GET_POST,
     CREATE_POST,
-    UPDATE_POST,
     DELETE_POST,
     GET_LATESTS_POSTS,
     GET_POSTS_TYPES,
@@ -43,14 +45,14 @@ function* watchGetPosts() {
 }
 
 function* getPosts({ payload }) {
-    yield setPostsLoading(true);
+    yield put(setPostsLoading(true));
     try {
         const data = yield call(getPostsApi, payload);
         yield put(getPostsSuccessed(data));
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
-        yield setPostsLoading(false);
+        yield put(setPostsLoading(false));
     }
 }
 
@@ -59,14 +61,14 @@ function* watchGetPost() {
 }
 
 function* getPost({ payload }) {
-    yield setPostsLoading(true);
+    yield put(setPostsLoading(true));
     try {
         const data = yield call(getPostApi, payload);
         yield put(getPostSuccessed(data));
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
-        yield setPostsLoading(false);
+        yield put(setPostsLoading(false));
     }
 }
 
@@ -76,44 +78,32 @@ function* watchDeletePost() {
 
 function* deletePost({ payload }) {
     const token = yield select(selectToken);
-    yield setPostsLoading(true);
+    yield put(setPostsLoading(true));
     try {
         yield call(deletePostApi, {payload, token});
+        yield put(getPostsQuery());
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
-        yield setPostsLoading(false);
+        yield put(setPostsLoading(false));
     }
 }
-
-// function* watchUpdatePost() {
-//     yield takeEvery(UPDATE_POST, updatePost);
-// }
-//
-// function* updatePost({ payload }) {
-//     yield setPostsLoading(true);
-//     try {
-//         yield call(updatePostApi, payload);
-//     } catch (error) {
-//         yield getPostFailed(error.message);
-//     } finally {
-//         yield setPostsLoading(false);
-//     }
-// }
 
 function* watchCreatePost() {
     yield takeEvery(CREATE_POST, createPost);
 }
 
 function* createPost({ payload }) {
-    yield setCreatePostLoading(true);
+    yield put(setCreatePostLoading(true));
     const token = yield select(selectToken);
     try {
         yield call(createPostApi, {payload, token});
+        yield put(setCreatePostVisible(false));
+        yield put(getPostsQuery());
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
-        yield setCreatePostLoading(false);
+        yield put(setCreatePostLoading(false));
     }
 }
 
@@ -122,14 +112,14 @@ function* watchGetLatestsPosts() {
 }
 
 function* getLatestsPosts() {
-    yield setLatestsPostsLoading(true);
+    yield put(setLatestsPostsLoading(true));
     try {
         const data = yield call(getLatestsPostsApi);
         yield put(getLatestsPostsSuccessed(data));
     } catch (error) {
         yield getLatestsPostsFailed(error.message);
     } finally {
-        yield setLatestsPostsLoading(false);
+        yield put(setLatestsPostsLoading(false));
     }
 }
 
@@ -138,14 +128,14 @@ function* watchGetPostsTypes() {
 }
 
 function* getPostsTypes() {
-    yield setPostsLoading(true);
+    yield put(setPostsLoading(true));
     try {
         const data = yield call(getPostsTypesApi);
         yield put(getPostsTypesSuccessed(data));
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
-        yield setPostsLoading(false);
+        yield put(setPostsLoading(false));
     }
 }
 
@@ -155,14 +145,15 @@ function* watchCreatePostsType() {
 
 function* createPostsType({ payload }) {
     const token = yield select(selectToken);
-    yield setCreatePostLoading(true);
+    yield put(setCreatePostLoading(true));
     try {
-        const data = yield call(createPostsTypeApi, { payload, token });
-        yield put(getPostsTypesSuccessed(data));
+        yield call(createPostsTypeApi, { payload, token });
+        yield put(getCategories());
+        yield put(setCreatePostVisible(false));
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
-        yield setCreatePostLoading(false);
+        yield put(setCreatePostLoading(false));
     }
 }
 
@@ -208,8 +199,8 @@ function* deletePostType({ payload }) {
     const token = yield select(selectToken);
     yield put(setPostsLoading(true));
     try {
-        const data = yield call(deletePostTypeApi, {payload, token});
-        yield put(deletePostTypeSuccessed(data));
+        yield call(deletePostTypeApi, {payload, token});
+        yield put(getPostsQuery());
     } catch (error) {
         yield put(getPostFailed(error.message));
     } finally {
@@ -222,7 +213,6 @@ export default function* rootSaga() {
         fork(watchGetPosts),
         fork(watchGetPost),
         fork(watchDeletePost),
-        // fork(watchUpdatePost),
         fork(watchCreatePost),
         fork(watchGetLatestsPosts),
         fork(watchGetPostsTypes),

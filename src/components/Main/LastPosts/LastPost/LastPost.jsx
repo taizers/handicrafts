@@ -4,6 +4,7 @@ import {API_IMAGE_URL, pathToPost} from "../../../../constants";
 
 const LastPostItem = styled.li`
   margin-bottom: 10px;
+  min-width: 180px;
 `
 
 const LinkItem = styled(Link)`

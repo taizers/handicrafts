@@ -189,6 +189,8 @@ export const CreateModal = ({
                     };
                 }
                 break;
+            default: 
+                break
         }
 
         console.log(creatingItem);

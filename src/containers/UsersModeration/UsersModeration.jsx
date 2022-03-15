@@ -59,7 +59,7 @@ const LoginWrapper = styled.div`
   display: flex;
 `;
 
-export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, setVisible, createUser }) => {
+export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, isLoading, setVisible, createUser }) => {
     const [usersList, setUsersList] = useState();
 
 
@@ -143,12 +143,13 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
                 loadingSpinnerSize="large"
                 isRankable
             />
-                <CreateModal
-                    setVisible={setVisible}
-                    isVisible={isVisible}
-                    type='user'
-                    create={createUser}
-                />
+            {isVisible && <CreateModal
+                setVisible={setVisible}
+                isVisible={isVisible}
+                isLoading={isLoading}
+                type='user'
+                create={createUser}
+            />}
     </Container>
   );
 }

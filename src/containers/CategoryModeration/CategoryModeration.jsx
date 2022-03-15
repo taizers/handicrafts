@@ -58,7 +58,7 @@ const Image = styled.img`
   height: 75px;
 `;
 
-export const CategoryModeration = ({ getCategories, categories, deleteCategory, isVisible, setVisible, createCategory }) => {
+export const CategoryModeration = ({ getCategories, categories, deleteCategory, isVisible, setVisible, createCategory, isLoading }) => {
     const [categoriesList, setCategoriesList] = useState();
 
 
@@ -138,7 +138,7 @@ export const CategoryModeration = ({ getCategories, categories, deleteCategory, 
                 loadingSpinnerSize="large"
                 isRankable
             />}
-            <CreateModal setVisible={setVisible} isVisible={isVisible} type='category' create={createCategory}/>
+            {isVisible && <CreateModal setVisible={setVisible} isVisible={isVisible} isLoading={isLoading} type='category' create={createCategory}/>}
         </Container>
     );
 }

@@ -6,7 +6,7 @@ import { findLast, map } from 'lodash';
 
 export const getPostsApi = async ( payload ) => {
     if (payload) {
-        return await axios.get(API_URL + "posts/?type=" + payload)
+        return await axios.get(API_URL + "posts?type=" + payload)
             .then(response => response.data)
     }else {
         return await axios.get(API_URL + "posts")

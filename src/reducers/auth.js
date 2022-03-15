@@ -84,22 +84,6 @@ const reducer = (state = initialState, action) => {
                     isVisible: action.payload,
                 },
             };
-        case SET_CHANGE_PROFILE_LOADING:
-            return {
-                ...state,
-                modal: {
-                    ...state.modal,
-                    isLoading: action.payload,
-                },
-            };
-        case SET_CHANGE_PROFILE_VISIBLE:
-            return {
-                ...state,
-                modal: {
-                    ...state.modal,
-                    isVisible: action.payload,
-                },
-            };
         default:
             return state;
     }

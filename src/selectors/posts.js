@@ -14,5 +14,5 @@ export const selectLatestsError = createSelector(selectLatests, latests => lates
 export const selectLatestsLoading = createSelector(selectLatests, latests => latests.isLoading);
 
 const selectCreatePostModal = createSelector(postsData, posts => posts.modal)
-export const selectCreateUserPostIsVisible = createSelector(selectCreatePostModal, modal => modal.isVisible);
-export const selectCreateUserPostIsLoading = createSelector(selectCreatePostModal, modal => modal.isLoading);
+export const selectCreatePostIsVisible = createSelector(selectCreatePostModal, modal => modal.isVisible);
+export const selectCreatePostIsLoading = createSelector(selectCreatePostModal, modal => modal.isLoading);
