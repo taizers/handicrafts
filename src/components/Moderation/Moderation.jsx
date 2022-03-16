@@ -1,13 +1,5 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
-import { ReactNode } from 'react';
-
-import { N20, N200 } from '@atlaskit/theme/colors';
-import {
-  borderRadius as getBorderRadius,
-  gridSize as getGridSize,
-} from '@atlaskit/theme/constants';
-import { token } from '@atlaskit/tokens';
+import { useState } from 'react';
 
 import Tabs, { Tab, TabList, TabPanel } from '@atlaskit/tabs';
 import CommentModeration from '../../containers/CommentModeration/index';
