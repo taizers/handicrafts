@@ -21,7 +21,7 @@ export const Comments = ({ comments, postId }) => {
     return (
         <CommentsList>
             {!isEmpty(comments) && comments.map( (item, index) => <Comment editingComment={setCurrentEditingComment} commentData={item} key={'comment' + index} /> )}
-            <CommentEditor comment={currentEditComment}  postId={postId} />
+            <CommentEditor comment={currentEditComment}  postId={postId} setCurrentEditComment={setCurrentEditComment} />
         </CommentsList>
     );
 }

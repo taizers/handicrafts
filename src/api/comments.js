@@ -1,7 +1,5 @@
 import axios from 'axios';
 import {API_URL} from "../constants";
-import data from '../moki.json';
-import {filter, forIn, isArray} from "lodash";
 
 export const getCommentsApi = async (token) => {
     return await axios.get( API_URL + "comments",
@@ -11,7 +9,7 @@ export const getCommentsApi = async (token) => {
 
 export const deleteCommentApi = async (data) => {
     const { payload, token } = data;
-    return await axios.delete(API_URL + "posts/" + payload.postId + "/comments/" + payload.commentId,
+    return await axios.delete(API_URL + "post/" + payload.postId + "/comments/" + payload.commentId,
         { headers: { Authorization: `Bearer ${token}` }})
     .then(response => response.data)
 };
@@ -19,7 +17,7 @@ export const deleteCommentApi = async (data) => {
 export const editCommentApi = async (data) => {
     const { payload, token } = data;
     console.log(payload);
-    return await axios.put(API_URL + "posts/" + payload.postId + "/comments/" + payload.commentId,
+    return await axios.put(API_URL + "post/" + payload.postId + "/comments/" + payload.commentId,
         { ...payload.comment },
         { headers: { Authorization: `Bearer ${token}` }})
     .then(response => response.data)

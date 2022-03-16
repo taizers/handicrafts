@@ -51,12 +51,12 @@ const WrapperForRightWidgets = styled(WrapperForWidgets)`
   
 `
 
-export const Main = ({ getWidgetsPosts, getUserLocation, userLocation, latestsPosts, featureActions }) => {
+export const Main = ({ getPosts, getUserLocation, userLocation, latestsPosts, featureActions }) => {
   let location = useLocation();
 
   useEffect(() => {
     getLocation();
-    getWidgetsPosts();
+    getPosts();
   }, []);
 
   const updatePosition = (position) => {

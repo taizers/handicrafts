@@ -1,51 +1,62 @@
-import styled from 'styled-components';
-import { styledButton } from '../../../../styles/button';
-import { useState, useEffect } from 'react';
+import Button from '@atlaskit/button';
+import React, { Fragment } from 'react';
+import Form, { Field, FormFooter, HelperMessage } from '@atlaskit/form';
 
-const CommentEditorArea = styled.textarea`
-  width: 100%;
-  min-height: 100px;
-  margin-top: 20px;
-  margin-bottom: 5px;
-  background-color: transparent;
-  border-color: white;
-  padding: 10px 10px;
-`
+import TextArea from '@atlaskit/textarea';
 
-const EditCommentButton = styled(styledButton)`
-  margin-left: auto;
-`
-
-const EditCommentContainer = styled.div`
-`
-
-export const CommentEditor = ({ comment, postId, createComment, editComment, signedIn }) => {
-    let [commentText, setCommentText] = useState('');
-
-    const onCreateComment = () => {
-      const comment = {
-        text: commentText,
-        isEdited: false,
-        isModerated: false,
-      };
-
-      createComment({comment, postId});
-    };
-
-    const onChangeComment = () => {
-      const commentData = {
-        text: commentText,
-        isEdited: true,
-      };
-
-      editComment({comment: commentData, postId, commentId: comment.id});
-    };
-
+export const CommentEditor = ({ comment, postId, createComment, editComment, signedIn, setCurrentEditComment }) => {  
     return (
-      <EditCommentContainer>
-          <CommentEditorArea defaultValue={comment?.text} placeholder={signedIn ? "Введите ваш комментарий" : "Авторизуйтесь чтобы написать комментарий"} onChange={(evt) => setCommentText(evt.currentTarget.value)}>
-          </CommentEditorArea>
-          <EditCommentButton disable={!signedIn} onClick={!comment ? onCreateComment : onChangeComment}>Отправить</EditCommentButton>
-      </EditCommentContainer>
+      <Form
+        onSubmit={(formState) => {
+          if (comment?.id) {
+            const data = {
+              text: formState.text,
+              edited: true,
+            };
+      
+            editComment({comment: data, postId, commentId: comment.id});
+          } else {
+          const data = {
+            text: formState.text,
+            edited: false,
+            moderated: false,
+          };
+    
+          createComment({comment: data, postId});
+        }
+        }
+        }
+      >
+        {({ formProps }) => (
+          <form {...formProps}>
+            <Field label="Field label" name="text">
+              {({ fieldProps }) => (
+                <Fragment>
+                  <TextArea
+                    placeholder={comment?.text ? comment.text : ''}
+                    style={
+                      {
+                        fontSize: '16px',
+                      }
+                    }
+                    {...fieldProps}
+                  />
+                  <HelperMessage>
+                    Help or instruction text goes here
+                  </HelperMessage>
+                </Fragment>
+              )}
+            </Field>
+            <FormFooter>
+            {comment?.id && <Button type="button" appearance="subtle" onClick={() => setCurrentEditComment('')}>
+              Отменить
+            </Button>}
+            {signedIn && <Button type="submit" appearance="primary">
+              Отправить
+            </Button>}
+            </FormFooter>
+          </form>
+        )}
+      </Form>
     );
 }

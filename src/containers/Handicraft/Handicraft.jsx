@@ -70,7 +70,7 @@ export const Handicraft = ({getPost, post}) => {
     const imagesList = map(images, (item, index)=> ({id: index, src: `${API_IMAGE_URL}${item.image}`}));
 
   return (
-    <Container className="container">
+    <Container>
       <Title>{title}</Title>
       <SubTitle>{subtitle}</SubTitle>
       {content && getText(content)}
@@ -80,7 +80,7 @@ export const Handicraft = ({getPost, post}) => {
           {links.map( (item, index) => <UsefullLink link={item.link} key={"link" + index} />)}
         </UsefullLinks>
       }
-        {post && <Map marker={post}/>}
+        {post?.title && <Map marker={post}/>}
         <SliderContainer>
           {images && <SwiftSlider data={imagesList} height={400}/>}
         </SliderContainer>

@@ -24,10 +24,6 @@ export const getPostsTypes = () => ({
     type: GET_POSTS_TYPES,
 });
 
-export const getWidgetsPosts = () => ({
-    type: GET_WIDGETS_POSTS,
-});
-
 export const getPostsTypesSuccessed = (types) => ({
     type: GET_POSTS_TYPES_SUCCESSED,
     payload: types,

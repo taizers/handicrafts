@@ -5,7 +5,7 @@ import { selectLatestsPosts } from "../../selectors/posts";
 import { selectUserLocation } from "../../selectors/weather";
 import { selectFeatureActions } from "../../selectors/feature";
 import { getUserLocation } from "../../actions/weather";
-import { getWidgetsPosts } from "../../actions/posts";
+import { getPosts } from "../../actions/posts";
 
 const mapStateToProps = (store) => {
     return {
@@ -19,7 +19,7 @@ const mapStateToProps = (store) => {
 const mapDispathToProps = (dispath) => {
     return {
         getUserLocation: (location) => dispath(getUserLocation(location)),
-        getWidgetsPosts: () => dispath(getWidgetsPosts()),
+        getPosts: () => dispath(getPosts()),
     }
 };
 

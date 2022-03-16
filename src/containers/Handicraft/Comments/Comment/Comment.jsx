@@ -40,6 +40,9 @@ const DropContainer = styled.div`
 const TextContainer = styled.div`
   text-align: left;
   text-indent: 20px;
+  word-wrap: break-word;
+  max-width: 85%;
+  padding-left: 10px;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;

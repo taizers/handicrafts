@@ -116,9 +116,7 @@ const data = {
 export const CreateModal = ({
                                 setVisible,
                                 type,
-                                isVisible,
                                 create,
-                                isLoading,
                                 types,
                                 submitButtonLabel = 'button_create',
                                 closeButtonLabel = 'button_close',
@@ -194,7 +192,7 @@ export const CreateModal = ({
         }
 
         console.log(creatingItem);
-        create(creatingItem);
+        creatingItem && create(creatingItem);
     }
 
     const getCreateUserFields = () => {
@@ -292,8 +290,6 @@ export const CreateModal = ({
 
    return (
        <ModalTransition>
-
-           {isVisible && (
                <Modal onClose={onCloseModal}>
                    <Form onSubmit={(data) => onSubmitForm(data)}>
                        {({ formProps }) => (
@@ -313,17 +309,10 @@ export const CreateModal = ({
                                            <FormattedMessage id={submitButtonLabel} />
                                        </Button>
                                    </ModalFooter>
-
                                </form>
-
                        )}
                     </Form>
-
                </Modal>
-
-           )}
-           {console.log(isLoading)}
-           {isLoading && <Loader isLoading={isLoading}/>}
        </ModalTransition>
    );
  }

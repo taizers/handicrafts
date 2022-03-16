@@ -23,7 +23,7 @@ export const Map = ({locations, isRoutesActive}) => {
         whenCreated={map => setMap(map)}
         className="routingMap"
       >
-        {isRoutesActive && <RoutingControl points={locations} />}
+        {isRoutesActive && locations.lentgth !==0 && <RoutingControl points={locations} />}
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url={maps.base}

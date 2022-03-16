@@ -17,11 +17,10 @@ export const Map = ({ marker }) => {
 
   return (
       <MapContainer
-
-        center={!isEmpty(marker.longitude) ? [+marker.latitude, marker.longitude] : [53.9, 27.56667]}
+        center={[+marker.latitude, +marker.longitude]}
         zoom={10}
         zoomControl={false}
-        style={{ height: "80vh", width: "100%", padding: 0, color: 'black', zIndex: 1 }}
+        style={{ height: "60vh", width: "100%", padding: 0, color: 'black', zIndex: 1 }}
         whenCreated={map => setMap(map)}
       >
         <TileLayer

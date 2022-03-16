@@ -1,4 +1,6 @@
 import { call, put, takeEvery, all, fork, select } from "redux-saga/effects";
+import moment from "moment";
+
 import {
     getLatestsPostsApi,
     getPostApi,
@@ -34,7 +36,8 @@ import {
     GET_LATESTS_POSTS,
     GET_POSTS_TYPES,
     CREATE_POSTS_TYPE,
-    GET_FEATURE_ACTIONS, GET_WIDGETS_POSTS, DELETE_POST_TYPE,
+    GET_FEATURE_ACTIONS,
+    DELETE_POST_TYPE,
 } from '../constants';
 
 import {selectToken} from "../selectors/auth";
@@ -49,6 +52,12 @@ function* getPosts({ payload }) {
     try {
         const data = yield call(getPostsApi, payload);
         yield put(getPostsSuccessed(data));
+        const features = yield data.slice().filter(post => post.type?.value === 'feature').sort((a, b) => moment(b.date, 'YYYY.MM.DD') - moment(a.date, 'YYYY.MM.DD')).splice(0,3);
+        const latests = yield data.slice().sort((a, b) => moment(b.created_at, 'DD.MM.YY') - moment(a.created_at, 'DD.MM.YY')).reverse().splice(0,3);
+        yield console.log(features);
+        yield console.log(latests);
+        yield put(getFeatureActionsSuccessed(features));
+        yield put(getLatestsPostsSuccessed(latests));
     } catch (error) {
         yield getPostFailed(error.message);
     } finally {
@@ -173,24 +182,6 @@ function* getFeatureActions({ payload }) {
     }
 }
 
-function* watchGetWidgetsPosts() {
-    yield takeEvery(GET_WIDGETS_POSTS, getWidgetsPosts);
-}
-
-function* getWidgetsPosts() {
-    yield put(setFeatureActionsLoading(true));
-    try {
-        const data = yield call(getPostsApi);
-        const copy = data.splice(0, 3);
-        yield put(getFeatureActionsSuccessed(copy));
-        yield put(getLatestsPostsSuccessed(copy));
-    } catch (error) {
-        yield put(getFeatureActionsFailed(error.message));
-    } finally {
-        yield put(setFeatureActionsLoading(false));
-    }
-}
-
 function* watchDeletePostType() {
     yield takeEvery(DELETE_POST_TYPE, deletePostType);
 }
@@ -201,6 +192,7 @@ function* deletePostType({ payload }) {
     try {
         yield call(deletePostTypeApi, {payload, token});
         yield put(getPostsQuery());
+        yield put(getCategories());
     } catch (error) {
         yield put(getPostFailed(error.message));
     } finally {
@@ -218,7 +210,6 @@ export default function* rootSaga() {
         fork(watchGetPostsTypes),
         fork(watchCreatePostsType),
         fork(watchGetFeatureActions),
-        fork(watchGetWidgetsPosts),
         fork(watchDeletePostType),
     ]);
 }

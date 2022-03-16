@@ -10,6 +10,7 @@ import SearchField from "./SearchField/index";
 import {generatePath, Link} from "react-router-dom";
 import Avatar from '@atlaskit/avatar';
 import {pathToProfile} from "../../constants";
+import Loader from '../../components/Loader';
 import TrashIcon from "@atlaskit/icon/glyph/trash";
 import {FormattedMessage} from "react-intl";
 
@@ -145,11 +146,10 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
             />
             {isVisible && <CreateModal
                 setVisible={setVisible}
-                isVisible={isVisible}
-                isLoading={isLoading}
                 type='user'
                 create={createUser}
             />}
+            <Loader visible={isLoading}/>
     </Container>
   );
 }

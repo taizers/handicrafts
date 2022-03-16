@@ -1,36 +1,28 @@
-import styled, { css } from "styled-components";
-import LoadingOverlay from "react-loading-overlay";
+import styled from "styled-components";
+import Spinner from '@atlaskit/spinner';
 
-const DarkBackground = styled.div`
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 999; /* Sit on top */
+const LoaderWrapper = styled.div`
+  align-items: center;
+  background: rgba(0, 0, 0, 0.1);
+  display: flex;
+  height: 100%;
+  justify-content: center;
   left: 0;
+  position: absolute;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  width: 100%;
+  z-index: 999999999999999999999999;
+`
 
-  ${props =>
-    props.disappear &&
-    css`
-      display: block; /* show */
-    `}
-`;
+export const Loader = ({ visible }) => {
+    console.log(visible);
+    if (visible) {
+      return (
+        <LoaderWrapper>
+          <Spinner size="large" />
+        </LoaderWrapper>
+      );
+    }
 
-export const Loader = ({ isLoading }) => {
-    console.log(isLoading);
-    return (
-        <DarkBackground disappear={!isLoading}>
-            <LoadingOverlay
-                active={true}
-                // spinner={<BounceLoader />}
-                spinner={true}
-                text="Loading your content..."
-            >
-            </LoadingOverlay>
-        </DarkBackground>
-    );
+    return null;
 }

@@ -94,11 +94,15 @@ const getText = (textList) => {
 
 export const Comment = ({ comment, deleteComment, editComment }) => {
     const onDeleteButtonClick = () => {
-        deleteComment(comment.id);
+        deleteComment({postId: comment.post_id, commenId:comment.id});
     };
 
     const onApproveButtonClick = () => {
-        editComment({isApproved: true});
+        editComment({
+            postId: comment.post_id, 
+            commenId:comment.id, 
+            comment:{moderated: true}
+        });
     };
 
     return (
@@ -106,7 +110,7 @@ export const Comment = ({ comment, deleteComment, editComment }) => {
             <CommentWrapper>
                 <UserInfo>
                     <Avatar src={comment?.user.avatar} size="large"/>
-                    <Name>{`${comment.user.email || ''} ${`(${comment.user.name})` || ''} `}</Name>
+                    <Name>{`${comment.user.email} ${`(${comment.user.name})`}`}</Name>
                 </UserInfo>
                 <LinkToPost to={'post/' + comment.post_id}>{comment.postTitle}</LinkToPost>
                 {comment.text && getText(comment.text)}

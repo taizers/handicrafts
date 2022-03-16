@@ -1,8 +1,5 @@
 import axios from 'axios';
 import { API_URL } from "../constants";
-import data from '../moki.json';
-import { POSTS_TYPES } from '../constants';
-import { findLast, map } from 'lodash';
 
 export const getPostsApi = async ( payload ) => {
     if (payload) {
