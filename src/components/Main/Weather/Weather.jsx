@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 import { ceil } from "lodash";
 
 const Wrapper = styled.div`
-  background-color: #6699ff;
-  padding: 10px;
-  width: 100%;
+    background-color: #81bee5;
+    padding: 10px;
+    width: 80%;
+    border-radius: 25px;
 `
 
 const Container = styled.div`
@@ -35,7 +36,7 @@ const Image = styled.img`
 
 const Label = styled.div`
     width: 100%;
-    font-size: 14px;
+    font-size: 16px;
     word-wrap: break-word;
     text-align: center;
     color: #ccccff;

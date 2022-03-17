@@ -14,14 +14,10 @@ import {
     authFailed,
     setAuthLoading,
     getUsersSuccessed,
-    createUserSuccessed,
     deleteUserSuccessed,
     setCreateModalVisible,
-    setCreateModalLoading,
-    getUserSuccessed, 
     getUserProfileSuccessed, 
-    setChangeProfileLoading, 
-    setAuthModalLoading,
+    setCreateModalLoading,
     getUsers as getUsersQuery,
 } from '../actions/auth';
 import {
@@ -178,14 +174,14 @@ function* watchChangeUserSettings() {
 
 function* changeUserSettings({ payload }) {
     const token = yield select(selectToken);
-    yield put(setAuthModalLoading(true));
+    yield put(setCreateModalLoading(true));
     try {
         const userData = yield call(changeUserApi, {payload, token});
         yield put(getUserProfileSuccessed(userData));
     } catch (error) {
         yield put(authFailed(error.message));
     } finally {
-        yield put(setAuthModalLoading(false));
+        yield put(setCreateModalLoading(false));
     }
 }
 

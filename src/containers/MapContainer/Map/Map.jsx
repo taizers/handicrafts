@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { isEmpty } from "lodash";
 import {
   TileLayer,
@@ -11,19 +11,21 @@ const maps = {
   base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 };
 
-export const Map = ({locations, isRoutesActive}) => {
-  const [map, setMap] = useState(null);
 
+
+export const Map = ({ locations }) => {
+
+  const getRoutes = () => {
+      return <RoutingControl points={locations}/>;
+  };
   return (
       <MapContainer
-        center={!isEmpty(locations[0]) ? locations[0] : [53.9000000, 27.5666700]}
+        center={!isEmpty(locations) ? locations[0] : [53.9000000, 27.5666700]}
         zoom={8}
-        zoomControl={true}
-        style={{ height: "80vh", width: "100%", padding: 0, color: 'black', }}
-        whenCreated={map => setMap(map)}
+        style={{ height: "70vh", width: "100%", padding: '10px', color: 'black', }}
         className="routingMap"
       >
-        {isRoutesActive && locations.lentgth !==0 && <RoutingControl points={locations} />}
+        {getRoutes()}
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url={maps.base}

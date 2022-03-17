@@ -30,13 +30,13 @@ export const Home = ({
                          getPosts,
 
 }) => {
-  const [markers, setSetMarkers] = useState(posts);
+  const [markers, setSetMarkers] = useState();
 
   useEffect(() => {
     getPostsTypes();
     getPosts();
   }, []);
-    console.log(postsTypes);
+
   return (
     <Container>
         <Title>Ремёсла Беларуси</Title>
@@ -50,12 +50,6 @@ export const Home = ({
                     ...postsTypes,
                 ]}
                 onChange={value => {
-                    console.log(value.value);
-                    console.log(filter(posts, (post) => {
-                        if (value.value === post.type.value) {
-                            return post;
-                        }
-                    }));
                     value.value !== '' ?
                         setSetMarkers(filter(posts, (post) => {
                             if (value.value === post.type.value) {

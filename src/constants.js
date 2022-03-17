@@ -1,5 +1,6 @@
 export const API_URL = 'http://46.101.183.227/api/';
 export const API_IMAGE_URL = 'http://46.101.183.227/storage/';
+export const API_AVATAR_IMAGE_URL = 'http://46.101.183.227/storage/avatars/';
 
 export const GET_POSTS = 'GET_POSTS';
 export const GET_WIDGETS_POSTS = 'GET_WIDGETS_POSTS';

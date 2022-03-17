@@ -141,7 +141,7 @@ export const CreateModal = ({
                     title,
                     subtitle,
                     content,
-                    date,
+                    date: date ? date : null,
                     links: links?.split(' '),
                     type_id: type?.id,
                     longitude: !!currentPosition && currentPosition[1].toString(),
@@ -219,7 +219,6 @@ export const CreateModal = ({
     }
 
     const getCreatePostFields = () => {
-        console.log(modalvalues);
         return <ModalBody>
             {modalvalues.fields.map((field)=>(
                 <Field key={field.label} label={<FormattedMessage id={field.label} />} name={field.name}>
@@ -236,7 +235,7 @@ export const CreateModal = ({
 
                     )}
                 </Field>))}
-            <Field style={{marginBottom: '10px'}} label={<FormattedMessage id={'label_post_text'} />} name="content">
+            <Field style={{marginBottom: '40px'}} label={<FormattedMessage id={'label_post_text'} />} name="content">
                 {({ fieldProps }) => (
                     <Fragment>
                         <TextArea

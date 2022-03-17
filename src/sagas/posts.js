@@ -1,5 +1,6 @@
 import { call, put, takeEvery, all, fork, select } from "redux-saga/effects";
 import moment from "moment";
+import { toast } from 'react-toastify';
 
 import {
     getLatestsPostsApi,
@@ -27,6 +28,11 @@ import {
     setCreatePostVisible,
     getPosts as getPostsQuery,
 } from '../actions/posts';
+
+import { 
+    toastSuccess,
+    toastError,
+} from '../actions/toasts';
 
 import {
     GET_POSTS,
@@ -59,7 +65,7 @@ function* getPosts({ payload }) {
         yield put(getFeatureActionsSuccessed(features));
         yield put(getLatestsPostsSuccessed(latests));
     } catch (error) {
-        yield getPostFailed(error.message);
+        yield put(toastError(error.message));
     } finally {
         yield put(setPostsLoading(false));
     }
@@ -75,7 +81,7 @@ function* getPost({ payload }) {
         const data = yield call(getPostApi, payload);
         yield put(getPostSuccessed(data));
     } catch (error) {
-        yield getPostFailed(error.message);
+        yield put(toastError(error.message));
     } finally {
         yield put(setPostsLoading(false));
     }
@@ -92,7 +98,7 @@ function* deletePost({ payload }) {
         yield call(deletePostApi, {payload, token});
         yield put(getPostsQuery());
     } catch (error) {
-        yield getPostFailed(error.message);
+        yield put(toastError(error.message));
     } finally {
         yield put(setPostsLoading(false));
     }
@@ -109,8 +115,9 @@ function* createPost({ payload }) {
         yield call(createPostApi, {payload, token});
         yield put(setCreatePostVisible(false));
         yield put(getPostsQuery());
+        yield put(toastSuccess());
     } catch (error) {
-        yield getPostFailed(error.message);
+        yield put(toastError(error.message));
     } finally {
         yield put(setCreatePostLoading(false));
     }
@@ -126,7 +133,7 @@ function* getLatestsPosts() {
         const data = yield call(getLatestsPostsApi);
         yield put(getLatestsPostsSuccessed(data));
     } catch (error) {
-        yield getLatestsPostsFailed(error.message);
+        yield put(toastError(error.message));
     } finally {
         yield put(setLatestsPostsLoading(false));
     }
@@ -142,7 +149,7 @@ function* getPostsTypes() {
         const data = yield call(getPostsTypesApi);
         yield put(getPostsTypesSuccessed(data));
     } catch (error) {
-        yield getPostFailed(error.message);
+        yield put(toastError(error.message));
     } finally {
         yield put(setPostsLoading(false));
     }
@@ -159,8 +166,9 @@ function* createPostsType({ payload }) {
         yield call(createPostsTypeApi, { payload, token });
         yield put(getCategories());
         yield put(setCreatePostVisible(false));
+        yield put(toastSuccess());
     } catch (error) {
-        yield getPostFailed(error.message);
+        yield put(toastError(error.message));
     } finally {
         yield put(setCreatePostLoading(false));
     }
@@ -176,7 +184,7 @@ function* getFeatureActions({ payload }) {
         const data = yield call(getPostsApi, payload);
         yield put(getFeatureActionsSuccessed(data.splice(0, 3)));
     } catch (error) {
-        yield put(getFeatureActionsFailed(error.message));
+        yield put(toastError(error.message));
     } finally {
         yield put(setFeatureActionsLoading(false));
     }
@@ -193,8 +201,9 @@ function* deletePostType({ payload }) {
         yield call(deletePostTypeApi, {payload, token});
         yield put(getPostsQuery());
         yield put(getCategories());
+        yield put(toastSuccess());
     } catch (error) {
-        yield put(getPostFailed(error.message));
+        yield put(toastError(error.message));
     } finally {
         yield put(setPostsLoading(false));
     }

@@ -8,10 +8,11 @@ const Container = styled.div`
 `
 
 const List = styled.ul`
-    margin: 20px auto;
+    margin: 20px 0;
     margin-right: -30px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 `
 
 export const PostsForTypes = ({ types, getTypes }) => {

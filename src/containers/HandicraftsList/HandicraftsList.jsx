@@ -8,9 +8,9 @@ const Container = styled.div`
 `
 
 const List = styled.ul`
-    margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     margin-top: 20px;
     margin-bottom: 20px;
     margin-right: -30px;
@@ -20,13 +20,12 @@ export const HandicraftsList = ({ getPosts, posts }) => {
     let { type } = useParams();
     useEffect(() => {
         getPosts(type);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
-
-    return <Container className="container">
+    return <Container>
         <List>
-            {map(posts, (item, index) => <HandicraftItem key={index + item.title} post={item}/>)}
+            {map(type ? posts.filter((post) => !!post.type) : posts,
+            (item, index) => <HandicraftItem key={index + item.title} post={item}/>)}
         </List>
     </Container>
 };

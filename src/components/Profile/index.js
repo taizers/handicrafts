@@ -7,7 +7,7 @@ import {
     selectUserProfile,
     selectUserId
 } from '../../selectors/auth';
-import { changeProfile, getUserProfile, setAuthModalVisible } from "../../actions/auth";
+import { changeProfile, getUserProfile, setCreateModalVisible } from "../../actions/auth";
 
 const mapStateToProps = (store) => {
     return {
@@ -22,7 +22,7 @@ const mapStateToProps = (store) => {
 const mapDispathToProps = (dispath) => {
     return {
         getUserProfile: (id, token) => dispath(getUserProfile(id, token)),
-        setVisible: (data) => dispath(setAuthModalVisible(data)),
+        setVisible: (data) => dispath(setCreateModalVisible(data)),
         changeProfile: (data) => dispath(changeProfile(data)),
     }
 };

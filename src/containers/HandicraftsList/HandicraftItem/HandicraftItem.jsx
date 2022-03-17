@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { Link, useRouteMatch, generatePath } from 'react-router-dom';
-
+import moment from 'moment';
 import { isArray, isEmpty } from 'lodash';
+
 import { pathToPost, pathToPosts, API_IMAGE_URL } from '../../../constants';
 
 const Item = styled.li`
@@ -9,6 +10,7 @@ const Item = styled.li`
     word-wrap: break-word;
     margin-right: 30px;
     overflow: hidden;
+    margin-bottom: 20px;
     
     &:hover {
       border-color: #d65a37;
@@ -63,7 +65,7 @@ export const HandicraftItem = ({ post }) => {
             </ImageWrapper>    
                 <TextContainer>
                     <ItemTitle>{post.title ? post.title : post.label}</ItemTitle>
-                    {post.created_at && <Date>{post.created_at}</Date>}
+                    <Date>{post.date && `Будет ${moment(post.date).format('LL')}`}</Date>
                 </TextContainer>
             </Link>
         </Item>

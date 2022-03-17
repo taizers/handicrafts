@@ -4,7 +4,7 @@ import Button from '@atlaskit/button/standard-button';
 import MoreVerticalIcon from '@atlaskit/icon/glyph/more-vertical';
 import DropdownMenu, { DropdownItem, DropdownItemGroup } from '@atlaskit/dropdown-menu';
 import Avatar from '@atlaskit/avatar';
-import {API_IMAGE_URL} from "../../../../constants";
+import {API_AVATAR_IMAGE_URL} from "../../../../constants";
 import React from "react";
 
 const IsEdited = styled.p`
@@ -66,7 +66,7 @@ const getText = (textList) => {
 
 export const Comment = ({ commentData, currentUserId, currentUserRole, deleteComment, moderateComment, editingComment, isNotEdit }) => {
     const { text, user, edited, id, moderated, created_at, updated_at, post_id } = commentData;
-    console.log(commentData);
+
     const onDeleteButtonClick = () => {
         deleteComment({postId: post_id, commentId: id});
     };
@@ -112,7 +112,7 @@ export const Comment = ({ commentData, currentUserId, currentUserRole, deleteCom
                     </DropdownItemGroup>
                 </DropdownMenu>    
             </DropContainer>
-            <Avatar src={`${API_IMAGE_URL}${user.avatar}`} size="xlarge" />
+            <Avatar src={`${API_AVATAR_IMAGE_URL}${user.avatar}`} size="xlarge" />
             {getText(text)}
 
             {edited && <IsEdited>Редактировано</IsEdited>}

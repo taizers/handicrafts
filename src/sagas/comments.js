@@ -8,6 +8,7 @@ import {
     setCommentsLoading,
     getComments as getCommentsRequest,
 } from '../actions/comments';
+import { getPost } from "../actions/posts";
 import { GET_COMMENTS, DELETE_COMMENT, EDIT_COMMENT, CREATE_COMMENT } from '../constants';
 import {selectToken} from "../selectors/auth";
 
@@ -34,10 +35,12 @@ function* watchDeleteComment() {
 
 function* deleteComment({ payload }) {
     const token = yield select(selectToken);
+    yield console.log(payload);
     yield put(setCommentsLoading(true));
     try {
         yield call(deleteCommentApi, {payload, token});
-        yield put(deleteCommentSuccessed(payload));
+        yield put(getCommentsRequest());
+        yield put(getPost(payload.postId));
     } catch (error) {
         yield put(getCommentsFailed(error.message));
     } finally {
@@ -54,7 +57,8 @@ function* editComment({ payload }) {
     yield put(setCommentsLoading(true));
     try {
         yield call(editCommentApi, {payload, token});
-
+        yield put(getCommentsRequest());
+        yield put(getPost(payload.postId));
     } catch (error) {
         yield put(getCommentsFailed(error.message));
     } finally {
@@ -71,8 +75,7 @@ function* createComment({ payload }) {
     yield put(setCommentsLoading(true));
     try {
         yield call(createCommentApi, {payload, token});
-        yield put(getCommentsRequest(payload.postId));
-        yield put(createCommentSuccessed(payload));
+        yield put(getPost(payload.postId));
     } catch (error) {
         yield put(getCommentsFailed(error.message));
     } finally {

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Route, Switch, Redirect, generatePath, useRouteMatch, useLocation } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { 
   pathToHome,
   pathToMap,
@@ -28,7 +29,7 @@ import { includes } from 'lodash';
 const Container = styled.div`
   font-size: 16px;
   color: var(--main-text);
-  background-color: #cccccc;
+  background-color: #e1edf4;
   height: 100vh;
   overflow-y: auto;
 `
@@ -74,7 +75,7 @@ export const Main = ({ getPosts, getUserLocation, userLocation, latestsPosts, fe
 
   return <Container>
         <Header/>
-        <Wrapper className="container">
+        <Wrapper>
           {!includes(location.pathname, 'moderation') && !includes(location.pathname, 'profile') && <WrapperForLeftWidgets>
             <LanguageSwitсher/>
             <LastPosts key="latestPosts" posts={latestsPosts} path={pathToPostsTypes} title="recently_added"/>
@@ -95,6 +96,6 @@ export const Main = ({ getPosts, getUserLocation, userLocation, latestsPosts, fe
                        title="future_events"/>
           </WrapperForRightWidgets>}
         </Wrapper>
-
+        <ToastContainer/>
     </Container>
 };

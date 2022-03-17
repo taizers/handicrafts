@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Avatar from '@atlaskit/avatar';
 import Button from '@atlaskit/button'
 import { FormattedMessage } from "react-intl";
+import { API_AVATAR_IMAGE_URL } from '../../constants';
 
 import CreateModal from "../../containers/PostsModeration/CreateModal/index";
 
@@ -48,14 +49,14 @@ export const Profile = ({ user, getUserProfile, token, changeProfile, isVisible,
 
     return (
         <Container>
-            <Avatar src={user?.avatar} size="xxlarge" />
+            <Avatar src={`${API_AVATAR_IMAGE_URL}${user?.avatar}`} size="xxlarge" />
             <TextContainer>
                 <UserLogin><FormattedMessage id={'label_email'}/>: {user?.email}</UserLogin>
                 <UserDisplayedName>{<FormattedMessage id={'label_name'}/>}: {user?.name}</UserDisplayedName>
                 <UserDisplayedName>{<FormattedMessage id={'label_role'}/>}: {user?.role}</UserDisplayedName>
             </TextContainer>
             {authUserId === user?.id && <Button appearance='primary' onClick={onClick}>{<FormattedMessage id={'button_change'}/>}</Button>}
-            {isVisible && <CreateModal submitButtonLabel='button_change' setVisible={setVisible} isVisible={isVisible} isLoading={isLoading} create={changeProfile} type='profile' />}
+            {isVisible && <CreateModal submitButtonLabel='button_change' setVisible={setVisible} isLoading={isLoading} create={changeProfile} type='profile' />}
         </Container>
     );
 };

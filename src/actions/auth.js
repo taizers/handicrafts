@@ -130,13 +130,3 @@ export const changeProfileFailed = (error) => ({
     type: CHANGE_PROFILE_FAILED,
     payload: error ,
 });
-
-export const setAuthModalLoading = (isLoading) => ({
-    type: SET_CHANGE_PROFILE_LOADING,
-    payload: isLoading ,
-});
-
-export const setAuthModalVisible = (isVisible) => ({
-    type: SET_CHANGE_PROFILE_VISIBLE,
-    payload: isVisible ,
-});

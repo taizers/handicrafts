@@ -6,6 +6,8 @@ import CheckIcon from '@atlaskit/icon/glyph/check';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
 import React from "react";
 
+import { API_AVATAR_IMAGE_URL } from '../../../constants';
+
 const Item = styled.li`
   padding: 10px;
   margin: 10px;
@@ -94,14 +96,14 @@ const getText = (textList) => {
 
 export const Comment = ({ comment, deleteComment, editComment }) => {
     const onDeleteButtonClick = () => {
-        deleteComment({postId: comment.post_id, commenId:comment.id});
+        deleteComment({postId: comment.post_id, commentId: comment.id});
     };
 
     const onApproveButtonClick = () => {
         editComment({
             postId: comment.post_id, 
-            commenId:comment.id, 
-            comment:{moderated: true}
+            commentId: comment.id, 
+            comment: {moderated: true}
         });
     };
 
@@ -109,7 +111,7 @@ export const Comment = ({ comment, deleteComment, editComment }) => {
         <Item>
             <CommentWrapper>
                 <UserInfo>
-                    <Avatar src={comment?.user.avatar} size="large"/>
+                    <Avatar src={`${API_AVATAR_IMAGE_URL}${comment?.user.avatar}`} size="large"/>
                     <Name>{`${comment.user.email} ${`(${comment.user.name})`}`}</Name>
                 </UserInfo>
                 <LinkToPost to={'post/' + comment.post_id}>{comment.postTitle}</LinkToPost>

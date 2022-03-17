@@ -33,7 +33,7 @@ export const CommentEditor = ({ comment, postId, createComment, editComment, sig
               {({ fieldProps }) => (
                 <Fragment>
                   <TextArea
-                    placeholder={comment?.text ? comment.text : ''}
+                    defaultValue={comment?.text ? comment.text : ''}
                     style={
                       {
                         fontSize: '16px',

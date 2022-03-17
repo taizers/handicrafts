@@ -49,7 +49,6 @@ const EditViewContainer = styled.div`
 export const MapContainer = ({ posts, getPosts, userPosition, getUserLocation }) => {
     const [editValue, setEditValue] = useState([]);
     const [locateValues, setLocateValues] = useState([]);
-    const [isRoutesActive, setRoutesActive] = useState(false);
 
     useEffect(() => {
         getPosts();
@@ -77,18 +76,16 @@ export const MapContainer = ({ posts, getPosts, userPosition, getUserLocation })
                 selectOptions.push({label: post.title, value: [post.latitude, post.longitude]});
             }
         });
-        return selectOptions;
+        return selectOptions.slice();
     }
 
     const onConfirm = (values) => {
-        setRoutesActive(false);
-        setEditValue([]);
-        setLocateValues([]);
+        setEditValue(null);
+        setLocateValues(null);
 
         if (values.length > 1) {
             setEditValue(values);
             setLocateValues(values.map((item) => item.value));
-            setRoutesActive(true);
         }
     };
 
@@ -153,7 +150,7 @@ export const MapContainer = ({ posts, getPosts, userPosition, getUserLocation })
                     <MarkerTitle> - {<FormattedMessage id={'end_point_of_route'} />}</MarkerTitle>
                 </MarkerContainer>
             </SelectorContainer>}
-            <Map locations={locateValues} isRoutesActive={isRoutesActive} />
+            <Map locations={locateValues} />
         </Container>
     );
 }

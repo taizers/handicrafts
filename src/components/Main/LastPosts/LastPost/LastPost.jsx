@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { generatePath, Link} from "react-router-dom";
+import moment from "moment";
+
 import {API_IMAGE_URL, pathToPost} from "../../../../constants";
 
 const LastPostItem = styled.li`
@@ -47,7 +49,7 @@ export const LastPost = ({ lastPost }) => {
               <Image src={`${API_IMAGE_URL}${lastPost.images[0].image}`} alt={lastPost.title} />
               <TextContainer>
                   <Title>{lastPost.title}</Title>
-                  <Date>{lastPost.created_at}</Date>
+                  <Date>{lastPost.date ? `Пройдёт ${moment(lastPost.date).format('LL')}` : `Опубликовано ${moment(lastPost.created_at).format('LLL')}`}</Date>
               </TextContainer>
           </LinkItem>
       </LastPostItem>

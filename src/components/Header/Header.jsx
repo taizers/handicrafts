@@ -13,11 +13,12 @@ import {
     pathToHome,
     pathToModeration,
     pathToPostsTypes,
+    API_AVATAR_IMAGE_URL,
 } from '../../constants';
 
 const HeaderItem = styled.header`
   font-size: 18px;
-  background-color: #6666ff;
+  background-color: #75c3f4;
   padding: 10px 0;
   margin-bottom: 30px;
 `
@@ -46,18 +47,19 @@ const MainMenuList = styled.ul`
 const ListLink = styled(Link)`
   font-size: 16px;
   font-weight: 600;
-  color: #cccccc;
+  color: #fff;
   margin-left: 40px;
   text-transform: uppercase;
   padding: 5px 10px;
   
   &:hover {
-    border: solid white 1px;
+    border-bottom: solid white 3px;
+    border-top: solid white 3px;
   }
+
   @media (max-width: 768px) {
     margin-left: 0;
   }
-
 `
 
 const ListItem = styled.li`
@@ -95,7 +97,7 @@ export const Header = ({ user, userId, logOut }) => {
                                 {...props}
                                 ref={triggerRef}
                                 appearance="circle"
-                                src={user?.avatar}
+                                src={`${API_AVATAR_IMAGE_URL}${user?.avatar}`}
                                 size="large"
                                 name="John Doe"
                             />
