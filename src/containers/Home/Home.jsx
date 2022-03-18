@@ -20,7 +20,10 @@ const SelectContainer = styled.div`
 
 const Title = styled.h2`
   text-transform: uppercase;
+  display: block;
+  font-weight: 500;
   margin-bottom: 30px;
+  margin-top: 10px;
 `
 
 export const Home = ({

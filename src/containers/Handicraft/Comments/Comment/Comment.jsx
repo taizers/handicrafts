@@ -26,7 +26,7 @@ const CommentItem = styled.li`
     background-color: white;
     color: black;
     padding: 20px 20px;
-    margin-top: 30px;
+    margin-bottom: 20px;
     display: flex;
     position: relative;
 `
@@ -40,9 +40,8 @@ const DropContainer = styled.div`
 const TextContainer = styled.div`
   text-align: left;
   text-indent: 20px;
-  word-wrap: break-word;
-  max-width: 85%;
-  padding-left: 10px;
+  padding: 0 10px;
+  width: 100%;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -56,6 +55,7 @@ const Text = styled.p`
   text-indent: 40px;
   margin: 10px 0;
   font-size: 17px;
+  word-wrap: break-word; 
 `
 const getText = (textList) => {
     const text = textList.split('\r\n')

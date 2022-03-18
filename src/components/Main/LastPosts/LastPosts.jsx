@@ -15,6 +15,10 @@ const Container = styled.div`
     background-color: #fff;
     margin: 15px 0;
     max-width: 220px;
+
+    @media (max-width: 768px) {
+        display: none;
+    }
 `
 
 const LastPostsList = styled.ul`

@@ -29,7 +29,7 @@ export const CommentEditor = ({ comment, postId, createComment, editComment, sig
       >
         {({ formProps }) => (
           <form {...formProps}>
-            <Field label="Field label" name="text">
+            <Field name="text">
               {({ fieldProps }) => (
                 <Fragment>
                   <TextArea
@@ -37,13 +37,11 @@ export const CommentEditor = ({ comment, postId, createComment, editComment, sig
                     style={
                       {
                         fontSize: '16px',
+                        height: '100px',
                       }
                     }
                     {...fieldProps}
                   />
-                  <HelperMessage>
-                    Help or instruction text goes here
-                  </HelperMessage>
                 </Fragment>
               )}
             </Field>

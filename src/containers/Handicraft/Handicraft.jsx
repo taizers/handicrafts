@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import{ useParams } from 'react-router-dom';
 import React, { useEffect } from 'react';
+import moment from 'moment';
 import UsefullLink from './UsefullLink/index';
 import Comments from './Comments/index';
 import SwiftSlider from "react-swift-slider";
@@ -18,16 +19,19 @@ const Container = styled.div`
 `
 const Title = styled.h2`
   font-size: 30px;
+  text-indent: 40px;
 `
 
 const SliderContainer = styled.div`
-  margin: 30px 0;
+  margin-top: 30px;
+  margin-bottom: 50px;
   position: static;
 `
 const SubTitle = styled.h3`
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   margin: 20px 0;
+  text-indent: 40px;
 `
 const TextContainer = styled.div`
   text-align: left;
@@ -44,6 +48,15 @@ const TextContainer = styled.div`
 const UsefullLinks = styled.ul`
 
 `
+const Image = styled.img`
+
+`
+const Date = styled.p`
+  color: gray;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-indent: 40px;
+`
 
 const Text = styled.p`
   text-indent: 40px;
@@ -58,7 +71,7 @@ const getText = (textList) => {
 }
 
 export const Handicraft = ({getPost, post}) => {
-    const { title, subtitle, content, links, images, comments } = post;
+    const { title, subtitle, content, links, images, comments, date, created_at } = post;
 
     let { id } = useParams(); 
 
@@ -67,12 +80,21 @@ export const Handicraft = ({getPost, post}) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const imagesList = map(images, (item, index)=> ({id: index, src: `${API_IMAGE_URL}${item.image}`}));
+    const getImagesList = () => {
+      const arr = [];
+      map(images, (item, index)=> {
+        arr.push({id: index, src: `${API_IMAGE_URL}${item.image}`});
+      });
+      return arr;
+    }
+    
 
   return (
     <Container>
       <Title>{title}</Title>
-      <SubTitle>{subtitle}</SubTitle>
+      {date ? <Date>Состоится {moment(date).format('LL')}</Date> : <Date>Опубликовано {moment(created_at).format('LL')}</Date>}
+      {images && <Image src={`${API_IMAGE_URL}${images[0].image}`} />}
+      {subtitle && <SubTitle>{subtitle}</SubTitle>}
       {content && getText(content)}
       <SubTitle>Полезные ссылки</SubTitle>
       {links &&
@@ -81,9 +103,10 @@ export const Handicraft = ({getPost, post}) => {
         </UsefullLinks>
       }
         {post?.title && <Map marker={post}/>}
-        <SliderContainer>
-          {images && <SwiftSlider data={imagesList} height={400}/>}
-        </SliderContainer>
+        {images?.length > 1 && 
+          <SliderContainer>
+            <SwiftSlider data={getImagesList()} height={400}/>
+          </SliderContainer>}
         <SubTitle>Комментарии</SubTitle>
         <Comments comments={comments} postId={post.id}/>
     </Container>

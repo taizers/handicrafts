@@ -49,6 +49,6 @@ export const deleteUserApi = async (data) => {
 };
 
 export const logOutApi = async (token) => {
-    return await axios.post( API_URL + "logout", { headers: { Authorization: `Bearer ${token}` } })
-    .then(response => response.data)
+    // return await axios.post( API_URL + "logout", { headers: { Authorization: `Bearer ${token}` } })
+    // .then(response => response.data)
 };

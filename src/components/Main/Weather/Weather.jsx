@@ -6,7 +6,12 @@ const Wrapper = styled.div`
     background-color: #81bee5;
     padding: 10px;
     width: 80%;
+    max-width: 200px;
     border-radius: 25px;
+    
+    @media (max-width: 768px) {
+        display: none;
+    }
 `
 
 const Container = styled.div`

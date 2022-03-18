@@ -37,6 +37,11 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin: 0 15px;
+  }
 `
 const WrapperForWidgets = styled.div`
   display: flex;

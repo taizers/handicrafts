@@ -6,9 +6,9 @@ import {isEmpty} from "lodash";
 
 const CommentsList = styled.ul`
     text-align: center;
+    word-break: break-word;
     margin: 20px auto;
-    max-width: 800px;
-    margin-top: 100px;
+    width: 85%;
 `
 
 export const Comments = ({ comments, postId }) => {
