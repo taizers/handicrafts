@@ -1,5 +1,5 @@
 import Button from '@atlaskit/button';
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import Form, { Field, FormFooter, HelperMessage } from '@atlaskit/form';
 
 import TextArea from '@atlaskit/textarea';
@@ -21,9 +21,11 @@ export const CommentEditor = ({ comment, postId, createComment, editComment, sig
             edited: false,
             moderated: false,
           };
-    
+          
           createComment({comment: data, postId});
         }
+        console.log('ds');
+        setCurrentEditComment('');
         }
         }
       >
@@ -33,7 +35,7 @@ export const CommentEditor = ({ comment, postId, createComment, editComment, sig
               {({ fieldProps }) => (
                 <Fragment>
                   <TextArea
-                    defaultValue={comment?.text ? comment.text : ''}
+                    defaultValue={comment?.text || ''}
                     style={
                       {
                         fontSize: '16px',

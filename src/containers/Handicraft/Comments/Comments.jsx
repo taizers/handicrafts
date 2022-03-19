@@ -12,15 +12,17 @@ const CommentsList = styled.ul`
 `
 
 export const Comments = ({ comments, postId }) => {
-    let [currentEditComment, setCurrentEditComment] = useState();
+    let [currentEditComment, setCurrentEditComment] = useState('');
 
     const setCurrentEditingComment = (comment) => {
         setCurrentEditComment(comment);
     };
 
+    const commentsList = comments?.filter((comment)=> comment.moderated === true);
+
     return (
         <CommentsList>
-            {!isEmpty(comments) && comments.map( (item, index) => <Comment editingComment={setCurrentEditingComment} commentData={item} key={'comment' + index} /> )}
+            {!isEmpty(commentsList) && commentsList.map( (item, index) => <Comment editingComment={setCurrentEditingComment} commentData={item} key={'comment' + index} /> )}
             <CommentEditor comment={currentEditComment}  postId={postId} setCurrentEditComment={setCurrentEditComment} />
         </CommentsList>
     );

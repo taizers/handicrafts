@@ -23,14 +23,11 @@ export const CommentModeration = ({ comments, getComments, deleteComment, editCo
     }, []);
 
     const onSearchUsers = (query) => {
-
-
-
         const arr = filter(comments, comment => {
-            console.log(((query.userLogin !== "") ? indexOf(toLower(comment.userLogin), toLower(query.userLogin)) !== -1 : true ));
+            console.log((query.userLogin !== "") ? indexOf(toLower(comment.user.email), toLower(query.userLogin)) !== -1 : true );
+            console.log((query.text !== "") ? indexOf(toLower(comment.text), toLower(query.text)) !== -1 : true );
             if (
                 ((query.userLogin !== "") ? indexOf(toLower(comment.user.email), toLower(query.userLogin)) !== -1 : true ) &&
-                /*((query.postTitle !== "") ? indexOf(toLower(comment.postTitle), toLower(query.postTitle)) !== -1 : true ) &&*/
                 ((query.text !== "") ? indexOf(toLower(comment.text), toLower(query.text)) !== -1 : true )
             ) {
                 return comment;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Route, Switch, Redirect, generatePath, useRouteMatch, useLocation } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import { 
   pathToHome,
   pathToMap,
@@ -101,6 +100,5 @@ export const Main = ({ getPosts, getUserLocation, userLocation, latestsPosts, fe
                        title="future_events"/>
           </WrapperForRightWidgets>}
         </Wrapper>
-        <ToastContainer/>
     </Container>
 };

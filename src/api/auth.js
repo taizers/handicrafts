@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../constants';
 import data from '../moki.json';
+import { isEmpty, isUndefined } from 'lodash';
 
 export const signIn = async (payload) => {
     return await axios.post(API_URL + "login", {...payload})
@@ -34,12 +35,16 @@ export const changeUserApi = async (data) => {
     console.log(data);
     const { payload, token } = data;
     const formData = new FormData();
-    formData.append('avatar', payload.avatar);
+    if (!isUndefined(payload.avatar)) {
+        formData.append('avatar', payload.avatar);
 
-    await axios.post( API_URL + 'user/avatar', formData, { headers: { Authorization: `Bearer ${token}` }})
+        await axios.post( API_URL + 'user/avatar', formData, { headers: { Authorization: `Bearer ${token}` }})
+            .then(response => response.data)
+    }
+    if (!isEmpty(payload.user)) {
+        return await axios.put( API_URL + "user", {...payload.user}, { headers: { Authorization: `Bearer ${token}` }})
         .then(response => response.data)
-    return await axios.put( API_URL + "user", {...payload.user}, { headers: { Authorization: `Bearer ${token}` }})
-    .then(response => response.data)
+    }
 };
 
 export const deleteUserApi = async (data) => {

@@ -30,7 +30,7 @@ const PostsList = styled.ul`
 const ListContainer = styled.div`
   border: black 1px solid;
   padding: 10px;
-  width: 40%;
+  width: 30%;
   height: 100%;
 `
 

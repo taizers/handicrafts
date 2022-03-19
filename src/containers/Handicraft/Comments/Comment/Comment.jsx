@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import toast from 'react-hot-toast';
 
 import Button from '@atlaskit/button/standard-button';
 import MoreVerticalIcon from '@atlaskit/icon/glyph/more-vertical';
@@ -89,7 +90,7 @@ export const Comment = ({ commentData, currentUserId, currentUserRole, deleteCom
     const onCopyButtonClick = () => {
         navigator.clipboard.writeText(text);
     };
-
+    
     return (
         <CommentItem>
             <DropContainer>

@@ -7,6 +7,8 @@ import TextArea from '@atlaskit/textarea';
 import Select from '@atlaskit/select';
 import { DatePicker } from '@atlaskit/datetime-picker';
 import Loader from '../../../components/Loader/index';
+import { isEmpty } from 'lodash';
+import toast from 'react-hot-toast';
 
 import Map from './Map/index';
 import GetFile from "../GetFile/index";
@@ -139,15 +141,30 @@ export const CreateModal = ({
                 const images = files.map((item)=> item.file);
                 creatingItem = {
                     title,
-                    subtitle,
                     content,
-                    date: date ? date : null,
-                    links: links?.split(' '),
                     type_id: type?.id,
                     longitude: !!currentPosition && currentPosition[1].toString(),
                     latitude: !!currentPosition && currentPosition[0].toString(),
                     images,
                 };
+                if (subtitle) {
+                    creatingItem = {
+                        ...creatingItem,
+                        subtitle,
+                    }
+                }
+                if (date) {
+                    creatingItem = {
+                        ...creatingItem,
+                        date
+                    }
+                }
+                if (!isEmpty(links)) {
+                    creatingItem = {
+                        ...creatingItem,
+                        links: links?.split(' '),
+                    }
+                }
                 break;
             case 'user': {
                 {
@@ -175,22 +192,37 @@ export const CreateModal = ({
                 break;
             case 'profile':
                 const { name, old_password, new_password, new_password_confirmation } = data;
-                if (new_password === new_password_confirmation) {
+                creatingItem = { user: {} };
+                if (old_password && new_password === new_password_confirmation) {
                     creatingItem = {
                         user: {
-                                name,
                                 old_password,
                                 new_password,
                                 new_password_confirmation,
                         },
+                    };
+                }
+                console.log(name);
+                if (files[0]?.file !== undefined) {
+                    creatingItem = {
+                        ...creatingItem,
                         avatar: files[0].file,
+                    };
+                }
+                if (name) {
+                    creatingItem = {
+                        ...creatingItem,
+                        user: {
+                            ...creatingItem.user,
+                            name,
+                    },
                     };
                 }
                 break;
             default: 
                 break
         }
-
+        
         console.log(creatingItem);
         creatingItem && create(creatingItem);
     }

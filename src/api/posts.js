@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_URL } from "../constants";
+import { isEmpty } from 'lodash';
 
 export const getPostsApi = async ( payload ) => {
     if (payload) {
@@ -36,18 +37,25 @@ export const deletePostTypeApi = async (data) => {
 export const createPostApi = async (data) => {
     const { payload, token } = data;
     const formData = new FormData();
-    payload.links.forEach((item) => {
-        formData.append('links[]', item);
-    })
+    if (!isEmpty(payload.links)) {
+        payload.links.forEach((item) => {
+            formData.append('links[]', item);
+        })
+    }
+    if (!isEmpty(payload.subtitle)) {
+        formData.append('subtitle', payload.subtitle);
+    }
+    if (!isEmpty(payload.date)) {
+        formData.append('date', payload.date);
+    }
+
     payload.images.forEach((item) => {
         formData.append('images[]', item);
     })
     formData.append('content', payload.content);
     formData.append('title', payload.title);
-    formData.append('subtitle', payload.subtitle);
     formData.append('latitude', payload.latitude);
     formData.append('longitude', payload.longitude);
-    formData.append('date', payload.date);
     formData.append('type_id', payload.type_id);
     return await axios.post(API_URL + "posts", formData, { headers: { Authorization: `Bearer ${token}` }})
         .then(response => response.data)
@@ -59,7 +67,7 @@ export const createPostsTypeApi = async (data) => {
     formData.append('image', payload.image);
     formData.append('label', payload.label);
     formData.append('value', payload.value);
-    console.log(formData)
+
     return await axios.post(API_URL + "types", formData, { headers: { Authorization: `Bearer ${token}` }})
         .then(response => response.data)
 };

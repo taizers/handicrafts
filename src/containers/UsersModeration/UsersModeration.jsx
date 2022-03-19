@@ -110,7 +110,7 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
   const onSearchUsers = (query) => {
       const arr = filter(users, user => {
           if (
-              ((query.login !== "") ? indexOf(toLower(user.login), toLower(query.login)) !== -1 : true ) &&
+              ((query.login !== "") ? indexOf(toLower(user.email), toLower(query.login)) !== -1 : true ) &&
               ((query.role !== "") ? user.role  === query.role : true ) &&
               ((query.name !== "") ? indexOf(toLower(user.name), toLower(query.name)) !== -1 : true )
           ) {

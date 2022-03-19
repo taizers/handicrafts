@@ -11,6 +11,7 @@ import {
 import { getPost } from "../actions/posts";
 import { GET_COMMENTS, DELETE_COMMENT, EDIT_COMMENT, CREATE_COMMENT } from '../constants';
 import {selectToken} from "../selectors/auth";
+import toast from 'react-hot-toast';
 
 function* watchGetComments() {
     yield takeEvery(GET_COMMENTS, getComments);
@@ -23,7 +24,7 @@ function* getComments() {
         const comments = yield call(getCommentsApi, token);
         yield put(getCommentsSuccessed(comments));
     } catch (error) {
-        yield put(getCommentsFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setCommentsLoading(false));
     }
@@ -41,8 +42,9 @@ function* deleteComment({ payload }) {
         yield call(deleteCommentApi, {payload, token});
         yield put(getCommentsRequest());
         yield put(getPost(payload.postId));
+        yield toast.success("Удалено");
     } catch (error) {
-        yield put(getCommentsFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setCommentsLoading(false));
     }
@@ -59,8 +61,9 @@ function* editComment({ payload }) {
         yield call(editCommentApi, {payload, token});
         yield put(getCommentsRequest());
         yield put(getPost(payload.postId));
+        yield toast.success("Редактировано");
     } catch (error) {
-        yield put(getCommentsFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setCommentsLoading(false));
     }
@@ -76,8 +79,9 @@ function* createComment({ payload }) {
     try {
         yield call(createCommentApi, {payload, token});
         yield put(getPost(payload.postId));
+        yield toast.success("Создано");
     } catch (error) {
-        yield put(getCommentsFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setCommentsLoading(false));
     }

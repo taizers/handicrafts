@@ -1,6 +1,6 @@
 import { call, put, takeEvery, all, fork, select } from "redux-saga/effects";
 import moment from "moment";
-import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 import {
     getLatestsPostsApi,
@@ -29,11 +29,6 @@ import {
     getPosts as getPostsQuery,
 } from '../actions/posts';
 
-import { 
-    toastSuccess,
-    toastError,
-} from '../actions/toasts';
-
 import {
     GET_POSTS,
     GET_POST,
@@ -60,12 +55,11 @@ function* getPosts({ payload }) {
         yield put(getPostsSuccessed(data));
         const features = yield data.slice().filter(post => post.type?.value === 'feature').sort((a, b) => moment(b.date, 'YYYY.MM.DD') - moment(a.date, 'YYYY.MM.DD')).splice(0,3);
         const latests = yield data.slice().sort((a, b) => moment(b.created_at, 'DD.MM.YY') - moment(a.created_at, 'DD.MM.YY')).reverse().splice(0,3);
-        yield console.log(features);
-        yield console.log(latests);
+
         yield put(getFeatureActionsSuccessed(features));
         yield put(getLatestsPostsSuccessed(latests));
     } catch (error) {
-        yield put(toastError(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setPostsLoading(false));
     }
@@ -81,7 +75,7 @@ function* getPost({ payload }) {
         const data = yield call(getPostApi, payload);
         yield put(getPostSuccessed(data));
     } catch (error) {
-        yield put(toastError(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setPostsLoading(false));
     }
@@ -97,8 +91,9 @@ function* deletePost({ payload }) {
     try {
         yield call(deletePostApi, {payload, token});
         yield put(getPostsQuery());
+        yield toast.success("Удалено");
     } catch (error) {
-        yield put(toastError(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setPostsLoading(false));
     }
@@ -115,9 +110,9 @@ function* createPost({ payload }) {
         yield call(createPostApi, {payload, token});
         yield put(setCreatePostVisible(false));
         yield put(getPostsQuery());
-        yield put(toastSuccess());
+        yield toast.success("Создано");
     } catch (error) {
-        yield put(toastError(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setCreatePostLoading(false));
     }
@@ -133,7 +128,7 @@ function* getLatestsPosts() {
         const data = yield call(getLatestsPostsApi);
         yield put(getLatestsPostsSuccessed(data));
     } catch (error) {
-        yield put(toastError(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setLatestsPostsLoading(false));
     }
@@ -149,7 +144,7 @@ function* getPostsTypes() {
         const data = yield call(getPostsTypesApi);
         yield put(getPostsTypesSuccessed(data));
     } catch (error) {
-        yield put(toastError(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setPostsLoading(false));
     }
@@ -166,9 +161,9 @@ function* createPostsType({ payload }) {
         yield call(createPostsTypeApi, { payload, token });
         yield put(getCategories());
         yield put(setCreatePostVisible(false));
-        yield put(toastSuccess());
+        yield toast.success("Создано");
     } catch (error) {
-        yield put(toastError(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setCreatePostLoading(false));
     }
@@ -184,7 +179,7 @@ function* getFeatureActions({ payload }) {
         const data = yield call(getPostsApi, payload);
         yield put(getFeatureActionsSuccessed(data.splice(0, 3)));
     } catch (error) {
-        yield put(toastError(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setFeatureActionsLoading(false));
     }
@@ -201,9 +196,10 @@ function* deletePostType({ payload }) {
         yield call(deletePostTypeApi, {payload, token});
         yield put(getPostsQuery());
         yield put(getCategories());
-        yield put(toastSuccess());
+        yield toast.success("Удалено");
+
     } catch (error) {
-        yield put(toastError(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setPostsLoading(false));
     }

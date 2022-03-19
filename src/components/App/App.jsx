@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import {IntlProvider} from "react-intl";
+import { Toaster } from 'react-hot-toast';
 
 import Main from '../Main';
 import Login from '../Login/index';
@@ -28,6 +29,7 @@ export const App = ({ getUser, locale, setLanguage }) => {
               <NonAuthorizedRoute exact path={pathToSignUp}><SignUp /></NonAuthorizedRoute>
               <Route path='/'><Main /></Route>
             </Switch>
+            <Toaster />
           </>
         </IntlProvider>
     )

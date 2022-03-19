@@ -5,6 +5,7 @@ import { getWeatherSuccessed, getWeatherFailed, setWeatherLoading } from '../act
 
 import { GET_WEATHER } from '../constants';
 import {selectLanguage} from "../selectors/language";
+import toast from 'react-hot-toast';
 
 function* watchGetWeather() {
     yield takeEvery(GET_WEATHER, getWeather);
@@ -16,7 +17,7 @@ function* getWeather({ payload }) {
         const data = yield call(getWeatherApi, payload);
         yield put(getWeatherSuccessed(data));
     } catch (error) {
-        yield getWeatherFailed(error.message);
+        yield toast.error(error.message);
     } finally {
         yield setWeatherLoading(false);
     }

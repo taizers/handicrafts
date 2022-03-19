@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { API_IMAGE_URL } from "../../../constants";
 import { map } from 'lodash';
+import moment from 'moment';
 
 
 const ListItem = styled.li`
   display: flex;
   flex-direction: column;
+  width: 100%;
   background-color: ${props =>
     props.selected
     ? 'var(--dark-gray)' : '#C4D4F9'
@@ -16,7 +18,6 @@ const ListItem = styled.li`
   };
   padding: 10px;
   margin-bottom: 10px;
-  width: 100%;
   
   &:hover{
     background-color: var(--dark-gray);
@@ -54,8 +55,8 @@ export const PostItem = ({ post, selectPost, selectedPost }) => {
             <Image src={`${API_IMAGE_URL}${post.images[0].image}`} alt={post.title} />
             <TextContainer>
                 <Title>{post.title}</Title>
-                <Date>{post.created_at}</Date>
-            </TextContainer>
+                <Date>{moment(post.created_at).format('LL')}</Date>
+            </TextContainer>    
 
         </ListItem>
     );

@@ -20,11 +20,10 @@ const FieldContainer = styled.div`
 
 export const Filters = ({ search }) => {
     const [userLogin, setLogin] = useState("");
-    const [postTitle, setPost] = useState("");
     const [text, setText] = useState("");
 
     const onSearchClick = () => {
-        const query = {userLogin, postTitle, text};
+        const query = {userLogin, text};
 
         search(query);
     }
@@ -44,22 +43,6 @@ export const Filters = ({ search }) => {
                         <Textfield
                             aria-label="default text field"
                             onChange={(evt) => setLogin(evt.currentTarget.value)} />
-                    )}
-                </Field>
-            </FieldContainer>
-            <FieldContainer>
-                <Field
-                    label={<FormattedMessage id='label_post'/>}
-                    name="post"
-                    defaultValue=""
-                >
-                    {({ fieldProps }) => (
-                        <Textfield
-                            style={{
-                                paddingRight: '20px',
-                            }}
-                            aria-label="default text field"
-                            onChange={(evt) => setPost(evt.currentTarget.value)} />
                     )}
                 </Field>
             </FieldContainer>

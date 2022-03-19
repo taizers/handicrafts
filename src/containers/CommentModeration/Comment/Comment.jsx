@@ -5,6 +5,7 @@ import Button from "@atlaskit/button";
 import CheckIcon from '@atlaskit/icon/glyph/check';
 import TrashIcon from '@atlaskit/icon/glyph/trash';
 import React from "react";
+import moment from 'moment';
 
 import { API_AVATAR_IMAGE_URL } from '../../../constants';
 
@@ -41,6 +42,11 @@ const Name = styled.p`
 
 const CommentWrapper = styled.div`
     width: 100%;
+`
+
+const Date = styled.p`
+    color: gray;
+    font-size: 14px;
 `
 
 const ButtonsContainer = styled.div`
@@ -87,6 +93,8 @@ const TextContainer = styled.div`
   user-select: none;
 `
 
+
+
 const getText = (textList) => {
     const text = textList.split('\r\n')
     return <TextContainer>
@@ -115,6 +123,7 @@ export const Comment = ({ comment, deleteComment, editComment }) => {
                     <Name>{`${comment.user.email} ${`(${comment.user.name})`}`}</Name>
                 </UserInfo>
                 <LinkToPost to={'post/' + comment.post_id}>{comment.postTitle}</LinkToPost>
+                <Date>{moment(comment.created_at).format('LL')}</Date>
                 {comment.text && getText(comment.text)}
             </CommentWrapper>
             <ButtonsContainer>

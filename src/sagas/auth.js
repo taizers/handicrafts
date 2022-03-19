@@ -30,6 +30,7 @@ import {
     DELETE_USER, GET_USER_PROFILE, CHANGE_PROFILE,
 } from "../constants";
 import {selectToken} from "../selectors/auth";
+import toast from 'react-hot-toast';
 
 function* watchSignIn() {
     yield takeEvery(SIGN_IN, signInUser);
@@ -43,7 +44,7 @@ function* signInUser({ payload }) {
         yield document.cookie = `userId=${userData.user.id}`;
         yield put(authSuccessed(userData.user, userData.access_token));
     } catch (error) {
-        yield put(authFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setAuthLoading(false));
     }
@@ -60,7 +61,7 @@ function* signUpUser({ payload }) {
         yield call(signUp, payload.data);
         yield payload.history.push('/login');
     } catch (error) {
-        yield put(authFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setAuthLoading(false));
     }
@@ -77,7 +78,7 @@ function* getUsers() {
         const userData = yield call(getUsersApi, token);
         yield put(getUsersSuccessed(userData));
     } catch (error) {
-        yield put(authFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setAuthLoading(false));
     }
@@ -95,8 +96,9 @@ function* createUser({ payload }) {
         yield call(createUserApi, { payload, token});
         yield put(setCreateModalVisible(false));
         yield put(getUsersQuery());
+        yield toast.success("Создано");
     } catch (error) {
-        yield put(authFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setCreateModalLoading(false));
     }
@@ -112,8 +114,9 @@ function* deleteUser({ payload }) {
     try {
         const userData = yield call(deleteUserApi, { payload, token });
         yield put(deleteUserSuccessed(userData));
+        yield toast.success("Удалено");
     } catch (error) {
-        yield put(authFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setAuthLoading(false));
     }
@@ -129,7 +132,7 @@ function* logOut() {
     try {
         yield call(logOutApi, token);
     } catch (error) {
-        yield put(authFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setAuthLoading(false));
     }
@@ -146,7 +149,7 @@ function* getUser({ payload }) {
         yield console.log(userData);
         yield put(authSuccessed(userData, payload.token));
     } catch (error) {
-        yield put(authFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setAuthLoading(false));
     }
@@ -162,7 +165,7 @@ function* getUserProfile({ payload }) {
         const userData = yield call(getUserApi, payload);
         yield put(getUserProfileSuccessed(userData));
     } catch (error) {
-        yield put(authFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setAuthLoading(false));
     }
@@ -178,8 +181,9 @@ function* changeUserSettings({ payload }) {
     try {
         const userData = yield call(changeUserApi, {payload, token});
         yield put(getUserProfileSuccessed(userData));
+        yield toast.success("Редактировано");
     } catch (error) {
-        yield put(authFailed(error.message));
+        yield toast.error(error.message);
     } finally {
         yield put(setCreateModalLoading(false));
     }
