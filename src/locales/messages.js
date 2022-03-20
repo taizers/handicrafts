@@ -69,6 +69,11 @@ export const messages = {
         modal_posts_title: 'Create Post',
         modal_types_title: 'Create Category',
 
+        toast_deleted: 'Deleted',
+        toast_created: 'Created',
+        toast_edited: 'Edited',
+        toast_saved: 'Saved',
+
         comments: 'Comments',
         posts: 'Posts',
         users: 'Users',
@@ -144,6 +149,11 @@ export const messages = {
         modal_posts_title: 'Создать Пост',
         modal_types_title: 'Создать Категорию',
 
+        toast_deleted: 'Удалено',
+        toast_created: 'Создано',
+        toast_edited: 'Редактировано',
+        toast_saved: 'Сохранено',
+
         comments: 'Комментарии',
         posts: 'Посты',
         users: 'Пользователи',
@@ -218,6 +228,11 @@ export const messages = {
         modal_users_title: 'Стварыць Адміністратара',
         modal_posts_title: 'Стварыць Пост',
         modal_types_title: 'Стварыць Катэгорыю',
+
+        toast_deleted: 'Выдалена',
+        toast_created: 'Створана',
+        toast_edited: 'Рэдагавана',
+        toast_saved: 'Захавана',
 
         comments: 'Каментарыі',
         posts: 'Пасты',

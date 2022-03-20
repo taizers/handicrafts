@@ -47,6 +47,9 @@ const CommentWrapper = styled.div`
 const Date = styled.p`
     color: gray;
     font-size: 14px;
+    text-indent: 20px;
+    margin-top: 5px;
+    margin-bottom: 15px;
 `
 
 const ButtonsContainer = styled.div`
@@ -122,8 +125,8 @@ export const Comment = ({ comment, deleteComment, editComment }) => {
                     <Avatar src={`${API_AVATAR_IMAGE_URL}${comment?.user.avatar}`} size="large"/>
                     <Name>{`${comment.user.email} ${`(${comment.user.name})`}`}</Name>
                 </UserInfo>
-                <LinkToPost to={'post/' + comment.post_id}>{comment.postTitle}</LinkToPost>
-                <Date>{moment(comment.created_at).format('LL')}</Date>
+                {/*<LinkToPost to={'post/' + comment.post_id}>{comment.postTitle}</LinkToPost>*/}
+                <Date>{moment(comment.created_at).format('LLL')}</Date>
                 {comment.text && getText(comment.text)}
             </CommentWrapper>
             <ButtonsContainer>

@@ -1,4 +1,5 @@
 import { call, put, takeEvery, all, fork, select } from "redux-saga/effects";
+import { FormattedMessage } from 'react-intl';
 import {
     signIn,
     signUp,
@@ -96,7 +97,7 @@ function* createUser({ payload }) {
         yield call(createUserApi, { payload, token});
         yield put(setCreateModalVisible(false));
         yield put(getUsersQuery());
-        yield toast.success("Создано");
+        yield toast.success(<FormattedMessage id='toast_created' />);
     } catch (error) {
         yield toast.error(error.message);
     } finally {
@@ -114,7 +115,7 @@ function* deleteUser({ payload }) {
     try {
         const userData = yield call(deleteUserApi, { payload, token });
         yield put(deleteUserSuccessed(userData));
-        yield toast.success("Удалено");
+        yield toast.success(<FormattedMessage id='toast_deleted' />);
     } catch (error) {
         yield toast.error(error.message);
     } finally {
@@ -146,7 +147,6 @@ function* getUser({ payload }) {
     yield put(setAuthLoading(true));
     try {
         const userData = yield call(getUserApi, payload);
-        yield console.log(userData);
         yield put(authSuccessed(userData, payload.token));
     } catch (error) {
         yield toast.error(error.message);
@@ -181,7 +181,7 @@ function* changeUserSettings({ payload }) {
     try {
         const userData = yield call(changeUserApi, {payload, token});
         yield put(getUserProfileSuccessed(userData));
-        yield toast.success("Редактировано");
+        yield toast.success(<FormattedMessage id='toast_saved' />);
     } catch (error) {
         yield toast.error(error.message);
     } finally {

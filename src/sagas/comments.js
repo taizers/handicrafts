@@ -1,5 +1,6 @@
 import { call, put, takeEvery, all, fork, select } from "redux-saga/effects";
 import { getCommentsApi, deleteCommentApi, editCommentApi, createCommentApi } from '../api/comments';
+import { FormattedMessage } from 'react-intl';
 import {
     getCommentsSuccessed,
     getCommentsFailed,
@@ -42,7 +43,7 @@ function* deleteComment({ payload }) {
         yield call(deleteCommentApi, {payload, token});
         yield put(getCommentsRequest());
         yield put(getPost(payload.postId));
-        yield toast.success("Удалено");
+        yield toast.success(<FormattedMessage id='toast_deleted' />);
     } catch (error) {
         yield toast.error(error.message);
     } finally {
@@ -61,7 +62,7 @@ function* editComment({ payload }) {
         yield call(editCommentApi, {payload, token});
         yield put(getCommentsRequest());
         yield put(getPost(payload.postId));
-        yield toast.success("Редактировано");
+        yield toast.success(<FormattedMessage id='toast_edited' />);
     } catch (error) {
         yield toast.error(error.message);
     } finally {
@@ -79,7 +80,7 @@ function* createComment({ payload }) {
     try {
         yield call(createCommentApi, {payload, token});
         yield put(getPost(payload.postId));
-        yield toast.success("Создано");
+        yield toast.success(<FormattedMessage id='toast_created' />);
     } catch (error) {
         yield toast.error(error.message);
     } finally {

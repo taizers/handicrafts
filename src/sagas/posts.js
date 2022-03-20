@@ -1,6 +1,7 @@
 import { call, put, takeEvery, all, fork, select } from "redux-saga/effects";
 import moment from "moment";
 import toast from 'react-hot-toast';
+import { FormattedMessage } from 'react-intl'
 
 import {
     getLatestsPostsApi,
@@ -91,7 +92,7 @@ function* deletePost({ payload }) {
     try {
         yield call(deletePostApi, {payload, token});
         yield put(getPostsQuery());
-        yield toast.success("Удалено");
+        yield toast.success(<FormattedMessage id='toast_deleted' />);
     } catch (error) {
         yield toast.error(error.message);
     } finally {
@@ -110,7 +111,7 @@ function* createPost({ payload }) {
         yield call(createPostApi, {payload, token});
         yield put(setCreatePostVisible(false));
         yield put(getPostsQuery());
-        yield toast.success("Создано");
+        yield toast.success(<FormattedMessage id='toast_created' />);
     } catch (error) {
         yield toast.error(error.message);
     } finally {
@@ -161,7 +162,7 @@ function* createPostsType({ payload }) {
         yield call(createPostsTypeApi, { payload, token });
         yield put(getCategories());
         yield put(setCreatePostVisible(false));
-        yield toast.success("Создано");
+        yield toast.success(<FormattedMessage id='toast_created' />);
     } catch (error) {
         yield toast.error(error.message);
     } finally {
@@ -196,7 +197,7 @@ function* deletePostType({ payload }) {
         yield call(deletePostTypeApi, {payload, token});
         yield put(getPostsQuery());
         yield put(getCategories());
-        yield toast.success("Удалено");
+        yield toast.success(<FormattedMessage id='toast_deleted' />);
 
     } catch (error) {
         yield toast.error(error.message);
