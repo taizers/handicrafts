@@ -44,7 +44,6 @@ export const Login = ({signIn}) => {
             <ContainerInner>
                 <Form
                     onSubmit={(data) => {
-                        console.log('form data', data);
                         signIn(data);
                     }}
                 >
@@ -52,29 +51,20 @@ export const Login = ({signIn}) => {
                         <form {...formProps}>
                             <FormHeader
                                 title={<FormattedMessage id={'label_sign_in'}/>}
-                                description="* indicates a required field"
+                                description={<FormattedMessage id='required_field' />}
                             />
                             <FormSection>
                                 <Field
                                     aria-required={true}
                                     name="email"
-                                    label="email"
+                                    label={<FormattedMessage id={'label_email'}/>}
                                     isRequired
                                     defaultValue=""
                                 >
                                     {({ fieldProps, error }) => (
                                         <>
                                             <TextField autoComplete="off" {...fieldProps} />
-                                            {!error && (
-                                                <HelperMessage>
-                                                    You can use letters, numbers and periods.
-                                                </HelperMessage>
-                                            )}
-                                            {error && (
-                                                <ErrorMessage>
-                                                    This username is already in use, try another one.
-                                                </ErrorMessage>
-                                            )}
+                                
                                         </>
                                     )}
                                 </Field>
@@ -92,20 +82,7 @@ export const Login = ({signIn}) => {
                                         return (
                                             <>
                                                 <TextField type="password" {...fieldProps} />
-                                                {error && !valid && (
-                                                    <HelperMessage>
-                                                        Use 8 or more characters with a mix of letters, numbers
-                                                        and symbols.
-                                                    </HelperMessage>
-                                                )}
-                                                {error && (
-                                                    <ErrorMessage>
-                                                        Password needs to be more than 8 characters.
-                                                    </ErrorMessage>
-                                                )}
-                                                {valid && meta.dirty ? (
-                                                    <ValidMessage>Awesome password!</ValidMessage>
-                                                ) : null}
+                                            
                                             </>
                                         );
                                     }}
@@ -114,7 +91,7 @@ export const Login = ({signIn}) => {
 
                             <FormFooter>
                                 <ButtonGroup>
-                                    <Button appearance="subtle" onClick={onBackClick}>Cancel</Button>
+                                    <Button appearance="subtle" onClick={onBackClick}>{<FormattedMessage id={'label_cansel'}/>}</Button>
                                     <LoadingButton
                                         type="submit"
                                         appearance="primary"

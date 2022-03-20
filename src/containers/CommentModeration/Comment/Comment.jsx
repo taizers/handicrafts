@@ -60,7 +60,7 @@ const ButtonsContainer = styled.div`
 
 const Text = styled.p`
   text-align: left;
-  text-indent: 20px;
+  text-indent: 40px;
   
   
   -webkit-touch-callout: none;

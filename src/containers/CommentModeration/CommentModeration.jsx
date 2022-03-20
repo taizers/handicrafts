@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { map, toLower, indexOf, isUndefined, filter } from 'lodash';
+import { map, toLower, indexOf, isUndefined, filter, toString } from 'lodash';
 import React, {useEffect, useState} from 'react';
 import Comment from './Comment/index'
 import Filters from './Filters/index';
@@ -23,17 +23,10 @@ export const CommentModeration = ({ comments, getComments, deleteComment, editCo
     }, []);
 
     const onSearchUsers = (query) => {
-        console.log(query);
         const arr = filter(comments, comment => {
-            console.log((query.userLogin !== "") ? indexOf(toLower(comment.user.email), toLower(query.userLogin)) !== -1 : true );
-            console.log((query.text !== "") ? indexOf(toLower(comment.text), toLower(query.text)) !== -1 : true );
-            console.log(comment.text);
-            console.log(query.text);
-            console.log(indexOf(toLower(comment.text), toLower(query.text), 0));
-
             if (
-                ((query.userLogin !== "") ? indexOf(toLower(comment.user.email), toLower(query.userLogin)) !== -1 : true ) &&
-                ((query.text !== "") ? indexOf(toLower(comment.text), toLower(query.text)) !== -1 : true )
+                ((query.userLogin !== "") ? toLower(comment.user.email).indexOf(toLower(toString(query.userLogin))) !== -1 : true ) &&
+                ((query.text !== "") ? toLower(comment.text).indexOf(toLower(toString(query.text))) !== -1 : true )
             ) {
                 return comment;
             }

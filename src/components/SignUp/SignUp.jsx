@@ -6,6 +6,7 @@ import ButtonGroup from '@atlaskit/button/button-group';
 import LoadingButton from '@atlaskit/button/loading-button';
 import Button from '@atlaskit/button';
 import TextField from '@atlaskit/textfield';
+import { toast } from 'react-hot-toast';
 
 import Form, {
   ErrorMessage,
@@ -50,6 +51,8 @@ export const SignUp = ({ signUp }) => {
               console.log('form data', data);
               if (data.password === data.password_confirmation) {
                 signUp({data, history});
+              } else {
+                toast.error(<FormattedMessage id={'label_password_not_equal'}/>);
               }
 
             }}
@@ -58,7 +61,7 @@ export const SignUp = ({ signUp }) => {
               <form {...formProps}>
                 <FormHeader
                     title={<FormattedMessage id={'label_sign_up'}/>}
-                    description="* indicates a required field"
+                    description={<FormattedMessage id='required_field' />}
                 />
                 <FormSection>
                   <Field
@@ -71,16 +74,6 @@ export const SignUp = ({ signUp }) => {
                     {({ fieldProps, error }) => (
                         <>
                           <TextField autoComplete="off" {...fieldProps} />
-                          {!error && (
-                              <HelperMessage>
-                                You can use letters, numbers and periods.
-                              </HelperMessage>
-                          )}
-                          {error && (
-                              <ErrorMessage>
-                                This username is already in use, try another one.
-                              </ErrorMessage>
-                          )}
                         </>
                     )}
                   </Field>
@@ -94,11 +87,6 @@ export const SignUp = ({ signUp }) => {
                     {({ fieldProps, error }) => (
                         <>
                           <TextField autoComplete="off" {...fieldProps} />
-                          {error && (
-                              <ErrorMessage>
-                                This username is already in use, try another one.
-                              </ErrorMessage>
-                          )}
                         </>
                     )}
                   </Field>
@@ -116,20 +104,6 @@ export const SignUp = ({ signUp }) => {
                       return (
                           <>
                             <TextField type="password" {...fieldProps} />
-                            {error && !valid && (
-                                <HelperMessage>
-                                  Use 8 or more characters with a mix of letters, numbers
-                                  and symbols.
-                                </HelperMessage>
-                            )}
-                            {error && (
-                                <ErrorMessage>
-                                  Password needs to be more than 8 characters.
-                                </ErrorMessage>
-                            )}
-                            {valid && meta.dirty ? (
-                                <ValidMessage>Awesome password!</ValidMessage>
-                            ) : null}
                           </>
                       );
                     }}
@@ -148,20 +122,6 @@ export const SignUp = ({ signUp }) => {
                       return (
                           <>
                             <TextField type="password" {...fieldProps} />
-                            {error && !valid && (
-                                <HelperMessage>
-                                  Use 8 or more characters with a mix of letters, numbers
-                                  and symbols.
-                                </HelperMessage>
-                            )}
-                            {error && (
-                                <ErrorMessage>
-                                  Password needs to be more than 8 characters.
-                                </ErrorMessage>
-                            )}
-                            {valid && meta.dirty ? (
-                                <ValidMessage>Awesome password!</ValidMessage>
-                            ) : null}
                           </>
                       );
                     }}
@@ -170,7 +130,7 @@ export const SignUp = ({ signUp }) => {
 
                 <FormFooter>
                   <ButtonGroup>
-                    <Button appearance="subtle" onClick={onBackClick}>Cancel</Button>
+                    <Button appearance="subtle" onClick={onBackClick}>{<FormattedMessage id={'label_cansel'}/>}</Button>
                     <LoadingButton
                         type="submit"
                         appearance="primary"

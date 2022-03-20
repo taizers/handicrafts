@@ -4,6 +4,7 @@ import Button from '@atlaskit/button';
 import {filter, indexOf, isEmpty, map, toLower} from 'lodash';
 import CreateModal from "./CreateModal";
 import Filters from './Filters/index';
+import moment from 'moment';
 
 import Posts from './Posts/index';
 import PostItem from "./PostItem";
@@ -66,10 +67,11 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, isLoad
     };
 
     const onSearchPosts = (query) => {
+        console.log(query.date);
         const arr = filter(posts, post => {
             if (
-                ((query.title !== "") ? indexOf(toLower(post.title), toLower(query.title)) !== -1 : true ) &&
-                ((query.date !== "") ? post.created_at == query.date : true )
+                ((query.title !== "") ? toLower(post.title).indexOf(toLower(query.title)) !== -1 : true ) &&
+                ((query.date !== "") ? moment(post.created_at).format('L') === moment(query.date).format('L') : true )
             ) {
                 return post;
             }
@@ -79,7 +81,7 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, isLoad
     };
 
     const getPostsList = posts => map(posts, post =>
-        <PostItem selectedPost={selectedPost} selectPost={setSelectedPost} post={post} key={`post ${post.title}`} />
+        <PostItem selectedPost={selectedPost} selectPost={setSelectedPost} post={post} key={`post ${post.id}`} />
     );
 
     return (

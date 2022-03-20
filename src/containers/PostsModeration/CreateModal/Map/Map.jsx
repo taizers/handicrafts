@@ -27,8 +27,9 @@ export const Map = ({ setCurrentPosition, currentPosition }) => {
       <MapContainer
         center={[53.9000000, 27.5666700]}
         zoom={6}
-        zoomControl={true}
-        style={{ height: "250px", width: "100%", padding: 0, color: 'black', }}
+        zoomControl={false}
+
+        style={{ height: "250px", zIndex: '1', width: "100%", padding: 0, color: 'black', }}
         className="routingMap"
       >
           <MyComponent />

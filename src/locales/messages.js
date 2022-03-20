@@ -17,7 +17,7 @@ export const messages = {
         future_events: 'Future events',
         select_categories: 'Select categories',
         select: 'Select...',
-        select_date: 'Select date(if need)',
+        select_date: 'Select date',
         select_post_type: 'Select post type',
         points_of_route: 'Points Of Route',
         start_point_of_route: 'Start point',
@@ -60,6 +60,7 @@ export const messages = {
         label_old_password: 'Old Password',
         label_new_password: 'New Password',
         label_new_password_repeat: 'Repeat New Password',
+        label_cansel: 'Cansel',
 
         enter_post_text: 'Enter post text',
         enter_links: 'Enter links separated by spaces',
@@ -73,6 +74,7 @@ export const messages = {
         toast_created: 'Created',
         toast_edited: 'Edited',
         toast_saved: 'Saved',
+        password_not_equal: 'Passwords is not equal',
 
         comments: 'Comments',
         posts: 'Posts',
@@ -97,7 +99,7 @@ export const messages = {
         future_events: 'Будущие мероприятия',
         select_categories: 'Выберите категории',
         select: 'Выберите...',
-        select_date: 'Выберите дату(если необходимо)',
+        select_date: 'Выберите дату',
         select_post_type: 'Выберите тип поста',
         points_of_route: 'Точки маршрута',
         start_point_of_route: 'Начальная точка маршрута',
@@ -140,6 +142,7 @@ export const messages = {
         label_old_password: 'Старый пароль',
         label_new_password: 'Новый пароль',
         label_new_password_repeat: 'Повторите новый пароль',
+        label_cansel: 'Назад',
 
         enter_post_text: 'Введите текст поста',
         enter_links: 'Введите ссылки через пробел',
@@ -153,6 +156,7 @@ export const messages = {
         toast_created: 'Создано',
         toast_edited: 'Редактировано',
         toast_saved: 'Сохранено',
+        password_not_equal: 'Пароли не совпадают',
 
         comments: 'Комментарии',
         posts: 'Посты',
@@ -177,7 +181,7 @@ export const messages = {
         future_events: 'Будучыя мерапрыемствы',
         select_categories: 'Выберыце катэгорыі',
         select: 'Выберыце...',
-        select_date: 'Выберыце дату (калі неабходна)',
+        select_date: 'Выберыце дату',
         select_post_type: 'Абярыце тып посту',
         points_of_route: 'Пункты маршруту',
         start_point_of_route: 'Пачатковы пункт маршруту',
@@ -219,6 +223,7 @@ export const messages = {
         label_sign_in: 'Увайсці',
         label_old_password: 'Стары пароль',
         label_new_password: 'Новы пароль',
+        label_cansel: 'Назад',
         label_new_password_repeat: 'Паўтарыце новы пароль',
 
         enter_post_text: 'Увядзіце тэкст посту',
@@ -233,6 +238,7 @@ export const messages = {
         toast_created: 'Створана',
         toast_edited: 'Рэдагавана',
         toast_saved: 'Захавана',
+        password_not_equal: 'Паролі не супадаюць',
 
         comments: 'Каментарыі',
         posts: 'Пасты',

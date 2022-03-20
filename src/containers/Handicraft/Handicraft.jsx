@@ -5,7 +5,7 @@ import moment from 'moment';
 import UsefullLink from './UsefullLink/index';
 import Comments from './Comments/index';
 import SwiftSlider from "react-swift-slider";
-import { map, isEmpty } from "lodash";
+import { map, isEmpty, isUndefined } from "lodash";
 import Map from './Map/index';
 import {API_IMAGE_URL} from "../../constants";
 
@@ -93,8 +93,8 @@ export const Handicraft = ({getPost, post}) => {
     <Container>
       <Title>{title}</Title>
       {date ? <Date>Состоится {moment(date).format('LL')}</Date> : <Date>Опубликовано {moment(created_at).format('LL')}</Date>}
-      {images && <Image src={`${API_IMAGE_URL}${images[0].image}`} />}
-      {subtitle && <SubTitle>{subtitle}</SubTitle>}
+      {images && <Image src={`${API_IMAGE_URL}${images[0]?.image}`} />}
+      {!isEmpty(subtitle) && subtitle !== 'undefined' && <SubTitle>{subtitle}</SubTitle>}
       {content && getText(content)}
       <SubTitle>Полезные ссылки</SubTitle>
       {links &&

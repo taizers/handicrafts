@@ -4,7 +4,7 @@ import 'moment/locale/ru';
 import SwiftSlider from 'react-swift-slider'
 
 import Button from '@atlaskit/button';
-import { map } from "lodash";
+import { map, isEmpty } from "lodash";
 import React from "react";
 import { API_IMAGE_URL } from "../../../constants";
 import { FormattedMessage } from "react-intl";
@@ -84,10 +84,10 @@ export const Posts = ({post, deletePost, language}) => {
         <Container>
             {post && <TextContainer>
                 <Title>{title}</Title>
-                <SubTitle>{subtitle}</SubTitle>
+                {subtitle && subtitle !== 'undefined' &&<SubTitle>{subtitle}</SubTitle>}
                 <Date>{moment(created_at, "YYYYMMDD").locale(language).fromNow()}</Date>
                 {getText(content)}
-                <SwiftSlider data={imagesList} height={200}/>
+                {!isEmpty(imagesList) && <SwiftSlider data={imagesList} height={300}/>}
                 <ButtonsContainer>
                     <Button
                         onClick={onDeletePost}

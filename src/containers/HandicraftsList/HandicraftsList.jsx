@@ -25,7 +25,7 @@ export const HandicraftsList = ({ getPosts, posts }) => {
     return <Container>
         <List>
             {map(type ? posts.filter((post) => !!post.type) : posts,
-            (item, index) => <HandicraftItem key={index + item.title} post={item}/>)}
+            (item, index) => <HandicraftItem key={index + item.id} post={item}/>)}
         </List>
     </Container>
 };

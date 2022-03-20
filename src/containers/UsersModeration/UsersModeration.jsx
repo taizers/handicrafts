@@ -13,6 +13,7 @@ import {pathToProfile} from "../../constants";
 import Loader from '../../components/Loader';
 import TrashIcon from "@atlaskit/icon/glyph/trash";
 import {FormattedMessage} from "react-intl";
+import { API_AVATAR_IMAGE_URL } from '../../constants';
 
 const Container = styled.div`
   width: 100%;
@@ -60,9 +61,20 @@ const LoginWrapper = styled.div`
   display: flex;
 `;
 
+
+
 export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, isLoading, setVisible, createUser }) => {
     const [usersList, setUsersList] = useState();
 
+    const getButton = (id, userRole) => {
+
+        if (userRole !== 'owner' || userRole === 'user' || (role === 'owner' && userRole === 'admin')) {
+            return <Button
+            iconBefore={<TrashIcon size="large" appearance="primary"/>}
+            onClick={() => deleteUser(id)}
+            ></Button>
+        }
+    }
 
     useEffect(()=>{
         getUsers();
@@ -77,7 +89,7 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
                     key: user.login,
                     content: (
                         <LoginWrapper>
-                            <Avatar src={user.avatar} name={user.email} size="medium" />
+                            <Avatar src={`${API_AVATAR_IMAGE_URL}${user.avatar}`} name={user.email} size="medium" />
                             <Login to={generatePath(pathToProfile, { id: user.id })}>{user.email}</Login>
                         </LoginWrapper>
                     ),
@@ -92,12 +104,7 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
                 },
                 {
                     key: user.id,
-                    content: (
-                        <Button
-                            iconBefore={<TrashIcon size="large" appearance="primary"/>}
-                            onClick={() => deleteUser(user.id)}
-                        ></Button>
-                    ),
+                    content: getButton(user.id, user.role),
                 },
             ],
         }))
@@ -110,9 +117,9 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
   const onSearchUsers = (query) => {
       const arr = filter(users, user => {
           if (
-              ((query.login !== "") ? indexOf(toLower(user.email), toLower(query.login)) !== -1 : true ) &&
+              ((query.login !== "") ? toLower(user.email).indexOf(toLower(query.login)) !== -1 : true ) &&
               ((query.role !== "") ? user.role  === query.role : true ) &&
-              ((query.name !== "") ? indexOf(toLower(user.name), toLower(query.name)) !== -1 : true )
+              ((query.name !== "") ? toLower(user.name).indexOf(toLower(query.name)) !== -1 : true )
           ) {
               return user;
           }
@@ -125,7 +132,7 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
     <Container>
             <HeadContainer>
                 <SearchField search={onSearchUsers} />
-                <Button
+                {role === 'owner' && <Button
                     iconBefore={<AddIcon size="small"/>}
                     appearance="primary"
                     onClick={onShowModal}
@@ -134,7 +141,7 @@ export const UsersModeration = ({ getUsers, users, deleteUser, role, isVisible, 
                     }}
                 >
                     <FormattedMessage id='button_create_admin' />
-                </Button>
+                </Button>}
             </HeadContainer>
             <DynamicTable
                 head={head()}

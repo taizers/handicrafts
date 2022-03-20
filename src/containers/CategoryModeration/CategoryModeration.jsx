@@ -105,8 +105,8 @@ export const CategoryModeration = ({ getCategories, categories, deleteCategory, 
     const onSearchCategories = (query) => {
         const arr = filter(categories, category => {
             if (
-                ((query.label !== "") ? indexOf(toLower(category.label), toLower(query.label)) !== -1 : true) &&
-                ((query.value !== "") ? indexOf(toLower(category.value), toLower(query.value)) !== -1 : true)
+                ((query.label !== "") ? toLower(category.label).indexOf(toLower(query.label)) !== -1 : true) &&
+                ((query.value !== "") ? toLower(category.value).indexOf(toLower(query.value)) !== -1 : true)
             ) {
                 return category;
             }

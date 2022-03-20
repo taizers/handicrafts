@@ -9,10 +9,19 @@ import { DatePicker } from '@atlaskit/datetime-picker';
 import Loader from '../../../components/Loader/index';
 import { isEmpty } from 'lodash';
 import toast from 'react-hot-toast';
+import styled from 'styled-components';
+import moment from 'moment';
 
 import Map from './Map/index';
 import GetFile from "../GetFile/index";
 import {FormattedMessage} from "react-intl";
+
+const ContainerText = styled.div`
+    margin-bottom: 30px;
+`
+const ContainerDate = styled.div`
+    margin-bottom: 30px;
+`
 
 const data = {
     user: {
@@ -122,18 +131,24 @@ export const CreateModal = ({
                                 types,
                                 submitButtonLabel = 'button_create',
                                 closeButtonLabel = 'button_close',
+                                locale = 'ru-RU',
 }) => {
     const [files, setFiles] = useState([]);
     const [currentPosition, setCurrentPosition] = useState();
+    const [dateVisible, setDateVisible] = useState();
+    const [date, setDate] = useState();
+    const [category, setCategory] = useState();
     const modalvalues = data[type];
 
+    const dateNow = Date.now();
+    console.log(moment(dateNow, "MM-DD-YYYY"));
     const onCloseModal = () => {
         setVisible(false);
     };
 
     const onSubmitForm = (data) => {
         let creatingItem = null;
-
+        console.log(data);
         switch (type) {
             case 'post':
                 const { title, subtitle, content, date, type, links } = data;
@@ -177,6 +192,8 @@ export const CreateModal = ({
                             password_confirmation,
                             role: 'admin',
                         };
+                    } else {
+                        toast.error(<FormattedMessage id='toast.password_not_equal' />);
                     }
                 }
             }
@@ -201,6 +218,8 @@ export const CreateModal = ({
                                 new_password_confirmation,
                         },
                     };
+                } else {
+                    toast.error(<FormattedMessage id='toast.password_not_equal' />);
                 }
                 console.log(name);
                 if (files[0]?.file !== undefined) {
@@ -223,14 +242,13 @@ export const CreateModal = ({
                 break
         }
         
-        console.log(creatingItem);
         creatingItem && create(creatingItem);
     }
 
     const getCreateUserFields = () => {
         return <ModalBody>
             {modalvalues.fields.map((field)=>(
-                <Field key={field.label} label={<FormattedMessage id={field.label} />} name={field.name}>
+                <Field key={field.label} isRequired={field.required || false} label={<FormattedMessage id={field.label} />} name={field.name}>
                     {({ fieldProps }) => (
                         <Fragment>
                             <Textfield
@@ -240,7 +258,6 @@ export const CreateModal = ({
                                 aria-required={field.required || false}
                                 {...fieldProps}
                             />
-                            <ErrorMessage>{field?.errorMessage}</ErrorMessage>
                             {field?.helperMessage && <HelperMessage><FormattedMessage id={field?.helperMessage} /></HelperMessage>}
                         </Fragment>
                     )}
@@ -253,7 +270,7 @@ export const CreateModal = ({
     const getCreatePostFields = () => {
         return <ModalBody>
             {modalvalues.fields.map((field)=>(
-                <Field key={field.label} label={<FormattedMessage id={field.label} />} name={field.name}>
+                <Field key={field.label} isRequired={field.required || false} label={<FormattedMessage id={field.label} />} name={field.name}>
                     {({ fieldProps }) => (
                         <Fragment>
                             <Textfield
@@ -262,40 +279,54 @@ export const CreateModal = ({
 
                                 {...fieldProps}
                             />
-                            <ErrorMessage>{field.errorMessage}</ErrorMessage>
                         </Fragment>
 
                     )}
                 </Field>))}
-            <Field style={{marginBottom: '40px'}} label={<FormattedMessage id={'label_post_text'} />} name="content">
-                {({ fieldProps }) => (
+
+                <Field 
+                style={{marginTop: '10px'}} 
+                label={<FormattedMessage id='label_post_type' />} 
+                name="type"
+                defaultValue={null}
+                isRequired
+                validate={(value) =>  { setCategory(value); value?.value === 'feature' ? setDateVisible(true):setDateVisible(false)}} 
+            >
+                {({ fieldProps, error }) => (
                     <Fragment>
-                        <TextArea
-                            aria-required={true}
+                        <Select
+                            inputId="type"
+                            options={types}
+                            placeholder="Выберете тип поста"
                             {...fieldProps}
                         />
                     </Fragment>
                 )}
             </Field>
-            <Map currentPosition={currentPosition} setCurrentPosition={setCurrentPosition} />
-            <Field style={{marginTop: '10px'}} label={<FormattedMessage id='label_post_type' />} name="type" onChange={evt => console.log(evt)} >
-                {({ fieldProps }) => (
-                    <Select
-                        inputId="type"
-                        options={types}
-                        placeholder="Выберете тип поста"
-                        {...fieldProps}
-                    />
-                )}
-            </Field>
 
-            <Field label={<FormattedMessage id='select_date' />} name="date" isRequired={true}>
+            {dateVisible && <Field isRequired validate={(value) =>  setDate(value)}   label={<FormattedMessage id='select_date' />} name="date" >
                 {({fieldProps}) => (
-                    <DatePicker {...fieldProps} />
+                    <ContainerDate>
+                        <DatePicker loclae={locale} minDate={moment(dateNow, "MM-DD-YYYY")} onChange={(evt) => console.log(evt)} {...fieldProps} />
+                    </ContainerDate>
+                )}
+            </Field>}
+            <Field 
+                label={<FormattedMessage id={'label_post_text'} />} 
+                isRequired
+                name="content"
+            >
+                {({ fieldProps, error }) => (
+                    <ContainerText>
+                        <TextArea
+                            aria-required={true}
+                            {...fieldProps}
+                        />
+                    </ContainerText>
                 )}
             </Field>
-
             <GetFile files={files} setFiles={setFiles} isMultiply />
+            <Map currentPosition={currentPosition} setCurrentPosition={setCurrentPosition} />
         </ModalBody>
     }
     const getChangeProfileFields = () => {
@@ -307,10 +338,8 @@ export const CreateModal = ({
                             <Textfield
                                 placeholder={field.placeholder ? field.placeholder : ''}
                                 type={field.type ? field.type : ''}
-
                                 {...fieldProps}
                             />
-                            <ErrorMessage>{field.errorMessage}</ErrorMessage>
                         </Fragment>
 
                     )}
@@ -319,7 +348,7 @@ export const CreateModal = ({
         </ModalBody>
     }
 
-   return (
+    return (
        <ModalTransition>
                <Modal onClose={onCloseModal}>
                    <Form onSubmit={(data) => onSubmitForm(data)}>
@@ -336,7 +365,7 @@ export const CreateModal = ({
                                        <Button appearance="subtle" onClick={onCloseModal}>
                                            <FormattedMessage id={closeButtonLabel} />
                                        </Button>
-                                       <Button type="submit" appearance="primary" autoFocus>
+                                       <Button isDisabled={(type === 'post' && (isEmpty(files) || isEmpty(currentPosition) || (dateVisible && isEmpty(date)) || isEmpty(category))) || (type === 'user' && isEmpty(files)) || (type === 'category' && isEmpty(files)) } type="submit" appearance="primary" autoFocus>
                                            <FormattedMessage id={submitButtonLabel} />
                                        </Button>
                                    </ModalFooter>
