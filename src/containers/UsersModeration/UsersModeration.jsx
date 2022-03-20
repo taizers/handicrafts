@@ -31,19 +31,19 @@ const head = () => (
         cells: [
             {
                 key: "login",
-                content: "Логин",
+                content: <FormattedMessage id='label_email' />,
                 isSortable: true,
                 width: 25,
             },
             {
                 key: "name",
-                content: "Имя",
+                content: <FormattedMessage id='label_name' />,
                 isSortable: true,
                 width: 25,
             },
             {
                 key: "role",
-                content: "Роль",
+                content: <FormattedMessage id='label_role' />,
                 isSortable: true,
                 width: 25,
             },

@@ -28,19 +28,19 @@ const head = () => (
         cells: [
             {
                 key: "label",
-                content: "Название",
+                content: <FormattedMessage id='label_category_label' />,
                 isSortable: true,
                 width: 25,
             },
             {
                 key: "value",
-                content: "Значение",
+                content: <FormattedMessage id='label_category_value' />,
                 isSortable: true,
                 width: 25,
             },
             {
                 key: "image",
-                content: "Фото",
+                content: <FormattedMessage id='photo' />,
                 isSortable: true,
                 width: 25,
             },
