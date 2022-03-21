@@ -32,7 +32,7 @@ const Title = styled.h3`
 
 const Image = styled.img`
     width: 100%;
-    height: 80px;
+    height: 150px;
 `
 
 const Date = styled.p`
@@ -52,7 +52,7 @@ export const PostItem = ({ post, selectPost, selectedPost }) => {
 
     return (
         <ListItem selected={post?.id === selectedPost?.id} onClick={onPostClick}>
-            <Image src={`${API_IMAGE_URL}${post?.images[0]?.image}`} alt={post?.title} />
+            <Image src={`${API_IMAGE_URL}${post?.images[0]?.image}`}  alt={post?.title} />
             <TextContainer>
                 <Title>{post?.title}</Title>
                 <Date>{moment(post?.created_at).format('LL')}</Date>

@@ -9,7 +9,7 @@ import { API_AVATAR_IMAGE_URL } from '../../constants';
 import CreateModal from "../../containers/PostsModeration/CreateModal/index";
 
 const Container = styled.div` 
-    width: 100%;
+    width: 60%;
     background-color: white;
     display: flex;
       flex-direction: column;

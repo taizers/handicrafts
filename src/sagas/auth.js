@@ -12,7 +12,6 @@ import {
 } from '../api/auth';
 import {
     authSuccessed,
-    authFailed,
     setAuthLoading,
     getUsersSuccessed,
     deleteUserSuccessed,
@@ -56,7 +55,6 @@ function* watchSignUp() {
 }
 
 function* signUpUser({ payload }) {
-    yield console.log(payload);
     yield put(setAuthLoading(true));
     try {
         yield call(signUp, payload.data);
@@ -115,6 +113,7 @@ function* deleteUser({ payload }) {
     try {
         const userData = yield call(deleteUserApi, { payload, token });
         yield put(deleteUserSuccessed(userData));
+        yield put(getUsersQuery());
         yield toast.success(<FormattedMessage id='toast_deleted' />);
     } catch (error) {
         yield toast.error(error.message);

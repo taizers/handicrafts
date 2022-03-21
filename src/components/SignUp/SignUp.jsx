@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import Input from '../Input/Input';
-import { styledButton } from '../../styles/button';
 import { useHistory } from "react-router-dom";
 import ButtonGroup from '@atlaskit/button/button-group';
 import LoadingButton from '@atlaskit/button/loading-button';
@@ -9,13 +7,10 @@ import TextField from '@atlaskit/textfield';
 import { toast } from 'react-hot-toast';
 
 import Form, {
-  ErrorMessage,
   Field,
   FormFooter,
   FormHeader,
   FormSection,
-  HelperMessage,
-  ValidMessage,
 } from '@atlaskit/form';
 import {FormattedMessage} from "react-intl";
 import React from "react";

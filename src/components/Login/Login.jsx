@@ -2,13 +2,10 @@ import styled from 'styled-components';
 import Button from '@atlaskit/button';
 import { useHistory } from "react-router-dom";
 import Form, {
-    ErrorMessage,
     Field,
     FormFooter,
     FormHeader,
     FormSection,
-    HelperMessage,
-    ValidMessage
 } from "@atlaskit/form";
 import TextField from "@atlaskit/textfield";
 import ButtonGroup from "@atlaskit/button/button-group";
@@ -64,7 +61,6 @@ export const Login = ({signIn}) => {
                                     {({ fieldProps, error }) => (
                                         <>
                                             <TextField autoComplete="off" {...fieldProps} />
-                                
                                         </>
                                     )}
                                 </Field>
@@ -78,11 +74,10 @@ export const Login = ({signIn}) => {
                                         value?.length < 8 ? 'TOO_SHORT' : undefined
                                     }
                                 >
-                                    {({ fieldProps, error, valid, meta }) => {
+                                    {({ fieldProps }) => {
                                         return (
                                             <>
                                                 <TextField type="password" {...fieldProps} />
-                                            
                                             </>
                                         );
                                     }}

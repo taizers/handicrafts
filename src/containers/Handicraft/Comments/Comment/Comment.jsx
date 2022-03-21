@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import toast from 'react-hot-toast';
+import moment from 'moment';
 
 import Button from '@atlaskit/button/standard-button';
 import MoreVerticalIcon from '@atlaskit/icon/glyph/more-vertical';
@@ -28,6 +29,7 @@ const CommentItem = styled.li`
     color: black;
     padding: 20px 20px;
     margin-bottom: 20px;
+    padding-bottom: 40px;
     display: flex;
     position: relative;
 `
@@ -36,6 +38,15 @@ const DropContainer = styled.div`
     position: absolute;
     top: 10px;
     right: 10px;
+`
+const CreatedDate = styled.div`
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    color: gray;
+    font-size: 14px;
+    width: 140px;
+    word-wrap: break-word; 
 `
 
 const TextContainer = styled.div`
@@ -115,7 +126,7 @@ export const Comment = ({ commentData, currentUserId, currentUserRole, deleteCom
             </DropContainer>
             <Avatar src={`${API_AVATAR_IMAGE_URL}${user.avatar}`} size="xlarge" />
             {getText(text)}
-
+            <CreatedDate>Опубликовано: {moment(created_at).format('LLL')}</CreatedDate>
             {edited && <IsEdited>Редактировано</IsEdited>}
         </CommentItem>
     );

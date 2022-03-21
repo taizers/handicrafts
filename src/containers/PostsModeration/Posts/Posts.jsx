@@ -21,7 +21,6 @@ const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
     word-break: break-word;
-    height: 100%;
     width: 100%;
 `
 const ButtonsContainer = styled.div`
@@ -65,7 +64,7 @@ const Text = styled.p`
 `
 
 const getText = (textList) => {
-    const text = textList.split('\n\n')
+    const text = textList.split('\r\n')
     return <TextContainer>
         {text.map( (item, index) => <Text key={'text' + index}>{item}</Text> )}
     </TextContainer>

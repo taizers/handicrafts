@@ -29,7 +29,9 @@ export const App = ({ getUser, locale, setLanguage }) => {
               <NonAuthorizedRoute exact path={pathToSignUp}><SignUp /></NonAuthorizedRoute>
               <Route path='/'><Main /></Route>
             </Switch>
-            <Toaster />
+            <Toaster 
+              position="bottom-left"
+            />
           </>
         </IntlProvider>
     )

@@ -365,7 +365,7 @@ export const CreateModal = ({
                                        <Button appearance="subtle" onClick={onCloseModal}>
                                            <FormattedMessage id={closeButtonLabel} />
                                        </Button>
-                                       <Button isDisabled={(type === 'post' && (isEmpty(files) || isEmpty(currentPosition) || (dateVisible && isEmpty(date)) || isEmpty(category))) || (type === 'user' && isEmpty(files)) || (type === 'category' && isEmpty(files)) } type="submit" appearance="primary" autoFocus>
+                                       <Button isDisabled={(type === 'post' && (isEmpty(files) || isEmpty(currentPosition) || (dateVisible && isEmpty(date)) || isEmpty(category))) || (type === 'category' && isEmpty(files)) } type="submit" appearance="primary" autoFocus>
                                            <FormattedMessage id={submitButtonLabel} />
                                        </Button>
                                    </ModalFooter>

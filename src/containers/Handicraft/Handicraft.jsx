@@ -49,7 +49,7 @@ const UsefullLinks = styled.ul`
 
 `
 const Image = styled.img`
-
+  margin: 0 auto;
 `
 const Date = styled.p`
   color: gray;
