@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/handicrafts/react-gh-pages/static/css/main.57720180.css",
+    "main.js": "/handicrafts/react-gh-pages/static/js/main.d300dee0.js",
+    "index.html": "/handicrafts/react-gh-pages/index.html",
+    "main.57720180.css.map": "/handicrafts/react-gh-pages/static/css/main.57720180.css.map",
+    "main.d300dee0.js.map": "/handicrafts/react-gh-pages/static/js/main.d300dee0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.57720180.css",
+    "static/js/main.d300dee0.js"
+  ]
+}
