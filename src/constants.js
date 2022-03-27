@@ -1,6 +1,6 @@
-export const API_URL = 'http://api.handicrafts-belarus.website/api/';
-export const API_IMAGE_URL = 'http://api.handicrafts-belarus.website/storage/';
-export const API_AVATAR_IMAGE_URL = 'http://api.handicrafts-belarus.website/storage/avatars/';
+export const API_URL = 'https://api.handicrafts-belarus.website/api/';
+export const API_IMAGE_URL = 'https://api.handicrafts-belarus.website/storage/';
+export const API_AVATAR_IMAGE_URL = 'https://api.handicrafts-belarus.website/storage/avatars/';
 
 export const GET_POSTS = 'GET_POSTS';
 export const GET_WIDGETS_POSTS = 'GET_WIDGETS_POSTS';
