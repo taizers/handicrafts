@@ -2,7 +2,6 @@ import { CategoryModeration } from './CategoryModeration';
 import { connect } from 'react-redux';
 import { createPostsType, getPostsTypes, setCreatePostVisible,deletePostType } from "../../actions/posts";
 import { selectCreatePostIsVisible, selectPostsTypes, selectCreatePostIsLoading } from "../../selectors/posts";
-import {setCreateModalVisible} from "../../actions/auth";
 
 const mapDispathToProps = (dispath) => {
     return {

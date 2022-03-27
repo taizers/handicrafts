@@ -8,7 +8,6 @@ import {
     getPostApi,
     getPostsApi,
     deletePostApi,
-    updatePostApi,
     createPostApi,
     createPostsTypeApi,
     getPostsTypesApi,
@@ -19,8 +18,6 @@ import {
     getPostsSuccessed,
     getPostSuccessed,
     setPostsLoading,
-    getPostFailed,
-    getLatestsPostsFailed,
     getLatestsPostsSuccessed,
     setLatestsPostsLoading,
     getPostsTypesSuccessed,
@@ -28,6 +25,7 @@ import {
     getPostsTypes as getCategories,
     setCreatePostVisible,
     getPosts as getPostsQuery,
+    clearPostDetails,
 } from '../actions/posts';
 
 import {
@@ -43,7 +41,7 @@ import {
 } from '../constants';
 
 import {selectToken} from "../selectors/auth";
-import {getFeatureActionsFailed, getFeatureActionsSuccessed, setFeatureActionsLoading} from "../actions/feature";
+import { getFeatureActionsSuccessed, setFeatureActionsLoading } from "../actions/feature";
 
 function* watchGetPosts() {
     yield takeEvery(GET_POSTS, getPosts);
@@ -91,6 +89,7 @@ function* deletePost({ payload }) {
     yield put(setPostsLoading(true));
     try {
         yield call(deletePostApi, {payload, token});
+        yield put(clearPostDetails());
         yield put(getPostsQuery());
         yield toast.success(<FormattedMessage id='toast_deleted' />);
     } catch (error) {

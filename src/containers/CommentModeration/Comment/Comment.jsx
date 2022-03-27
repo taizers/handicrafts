@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
 import Avatar from "@atlaskit/avatar";
 import Button from "@atlaskit/button";
 import CheckIcon from '@atlaskit/icon/glyph/check';
@@ -69,18 +68,6 @@ const Text = styled.p`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-`
-
-const LinkToPost = styled(Link)`
-  margin-top: 10px;
-  margin-bottom: 20px;
-  display: inline-block;
-  color: blue;
-  text-indent: 20px;
-  
-  &:hover {
-    text-decoration: underline;
-  }
 `
 
 const TextContainer = styled.div`

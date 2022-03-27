@@ -95,7 +95,7 @@ export const SignUp = ({ signUp }) => {
                           value?.length < 8 ? 'TOO_SHORT' : undefined
                       }
                   >
-                    {({ fieldProps, error, valid, meta }) => {
+                    {({ fieldProps }) => {
                       return (
                           <>
                             <TextField type="password" {...fieldProps} />

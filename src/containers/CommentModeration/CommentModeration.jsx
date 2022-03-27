@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { map, toLower, indexOf, isUndefined, filter, toString } from 'lodash';
+import { map, toLower, filter, toString } from 'lodash';
 import React, {useEffect, useState} from 'react';
 import Comment from './Comment/index'
 import Filters from './Filters/index';

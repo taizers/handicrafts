@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { isEmpty } from "lodash";
 import {
   TileLayer,
@@ -10,8 +10,6 @@ import RoutingControl from './RoutingControl'
 const maps = {
   base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 };
-
-
 
 export const Map = ({ locations }) => {
 

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import toast from 'react-hot-toast';
 import moment from 'moment';
 
 import Button from '@atlaskit/button/standard-button';
@@ -77,7 +76,7 @@ const getText = (textList) => {
 }
 
 export const Comment = ({ commentData, currentUserId, currentUserRole, deleteComment, moderateComment, editingComment, isNotEdit }) => {
-    const { text, user, edited, id, moderated, created_at, updated_at, post_id } = commentData;
+    const { text, user, edited, id, moderated, created_at, post_id } = commentData;
 
     const onDeleteButtonClick = () => {
         deleteComment({postId: post_id, commentId: id});

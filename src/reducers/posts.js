@@ -9,6 +9,7 @@ import {
     GET_LATESTS_POSTS_FAILED,
     SET_LATESTS_POSTS_LOADING,
     GET_POSTS_TYPES_SUCCESSED,
+    CLEAR_POST_DETAILS,
 } from "../constants";
 
 const initialState = {
@@ -39,6 +40,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.payload,
+            };
+        case CLEAR_POST_DETAILS:
+            return {
+                ...state,
+                post: {},
             };
         case GET_POST_SUCCESSED:
             return {

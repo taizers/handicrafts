@@ -1,10 +1,9 @@
-import { call, put, takeEvery, all, fork, select } from "redux-saga/effects";
+import { call, put, takeEvery, all, fork } from "redux-saga/effects";
 import { getWeatherApi } from '../api/weather';
 
-import { getWeatherSuccessed, getWeatherFailed, setWeatherLoading } from '../actions/weather';
+import { getWeatherSuccessed, setWeatherLoading } from '../actions/weather';
 
 import { GET_WEATHER } from '../constants';
-import {selectLanguage} from "../selectors/language";
 import toast from 'react-hot-toast';
 
 function* watchGetWeather() {

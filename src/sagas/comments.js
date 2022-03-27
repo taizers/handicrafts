@@ -3,9 +3,6 @@ import { getCommentsApi, deleteCommentApi, editCommentApi, createCommentApi } fr
 import { FormattedMessage } from 'react-intl';
 import {
     getCommentsSuccessed,
-    getCommentsFailed,
-    deleteCommentSuccessed,
-    createCommentSuccessed,
     setCommentsLoading,
     getComments as getCommentsRequest,
 } from '../actions/comments';

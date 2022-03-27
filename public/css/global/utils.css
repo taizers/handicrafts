@@ -55,3 +55,7 @@ li{
   left: 1px;
   top: 0;
 }
+
+.filepond--credits {
+  display: none;
+}

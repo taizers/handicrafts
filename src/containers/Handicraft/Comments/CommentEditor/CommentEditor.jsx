@@ -1,6 +1,6 @@
 import Button from '@atlaskit/button';
-import React, { Fragment, useState } from 'react';
-import Form, { Field, FormFooter, HelperMessage } from '@atlaskit/form';
+import React, { Fragment } from 'react';
+import Form, { Field, FormFooter } from '@atlaskit/form';
 
 import TextArea from '@atlaskit/textarea';
 

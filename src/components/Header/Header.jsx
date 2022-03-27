@@ -54,7 +54,6 @@ const ListLink = styled(Link)`
   
   &:hover {
     border-bottom: solid white 3px;
-    border-top: solid white 3px;
   }
 
   @media (max-width: 768px) {

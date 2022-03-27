@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import Button from '@atlaskit/button';
-import {filter, indexOf, isEmpty, map, toLower} from 'lodash';
+import {filter, map, toLower} from 'lodash';
 import CreateModal from "./CreateModal";
 import Filters from './Filters/index';
 import moment from 'moment';

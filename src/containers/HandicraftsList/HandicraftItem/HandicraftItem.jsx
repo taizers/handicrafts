@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Link, useRouteMatch, generatePath } from 'react-router-dom';
+import { Link, generatePath } from 'react-router-dom';
 import moment from 'moment';
-import { isArray, isEmpty } from 'lodash';
+import { isArray } from 'lodash';
 
 import { pathToPost, pathToPosts, API_IMAGE_URL } from '../../../constants';
 

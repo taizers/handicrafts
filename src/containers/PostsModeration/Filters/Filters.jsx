@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import React, {Fragment, useState} from 'react';
-import { isEmpty, values } from "lodash";
 import { DatePicker } from '@atlaskit/datetime-picker';
 import { parseISO } from 'date-fns'
 
 import Button from '@atlaskit/button/standard-button';
-import Form, { Field, FormFooter } from '@atlaskit/form';
+import { Field } from '@atlaskit/form';
 
 import Textfield from '@atlaskit/textfield';
 import {FormattedMessage} from "react-intl";

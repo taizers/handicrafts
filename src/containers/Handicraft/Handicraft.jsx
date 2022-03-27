@@ -5,7 +5,7 @@ import moment from 'moment';
 import UsefullLink from './UsefullLink/index';
 import Comments from './Comments/index';
 import SwiftSlider from "react-swift-slider";
-import { map, isEmpty, isUndefined } from "lodash";
+import { map, isEmpty } from "lodash";
 import Map from './Map/index';
 import {API_IMAGE_URL} from "../../constants";
 

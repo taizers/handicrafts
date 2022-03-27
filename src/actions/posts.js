@@ -16,8 +16,11 @@ import {
     GET_LATESTS_POSTS_SUCCESSED,
     SET_LATESTS_POSTS_LOADING,
     GET_POSTS_TYPES,
-    GET_POSTS_TYPES_SUCCESSED, CREATE_POSTS_TYPE,
-    GET_WIDGETS_POSTS, DELETE_POST_TYPE, DELETE_POST_TYPE_SUCCESSED,
+    GET_POSTS_TYPES_SUCCESSED,
+    CREATE_POSTS_TYPE,
+    DELETE_POST_TYPE,
+    DELETE_POST_TYPE_SUCCESSED,
+    CLEAR_POST_DETAILS,
 } from '../constants';
 
 export const getPostsTypes = () => ({
@@ -47,6 +50,10 @@ export const deletePost = (id) => ({
 export const createPost = (post) => ({
     type: CREATE_POST,
     payload: post,
+});
+
+export const clearPostDetails = () => ({
+    type: CLEAR_POST_DETAILS,
 });
 
 export const createPostsType = (type) => ({

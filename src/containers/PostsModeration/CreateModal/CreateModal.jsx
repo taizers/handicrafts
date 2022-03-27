@@ -1,12 +1,11 @@
 import Modal, {ModalBody, ModalFooter, ModalHeader, ModalTitle, ModalTransition} from "@atlaskit/modal-dialog";
-import Form, {Field, FormFooter, HelperMessage, ErrorMessage} from "@atlaskit/form";
+import Form, { Field, HelperMessage } from "@atlaskit/form";
 import React, {Fragment, useState} from "react";
 import Textfield from "@atlaskit/textfield";
 import Button from "@atlaskit/button";
 import TextArea from '@atlaskit/textarea';
 import Select from '@atlaskit/select';
 import { DatePicker } from '@atlaskit/datetime-picker';
-import Loader from '../../../components/Loader/index';
 import { isEmpty } from 'lodash';
 import toast from 'react-hot-toast';
 import styled from 'styled-components';

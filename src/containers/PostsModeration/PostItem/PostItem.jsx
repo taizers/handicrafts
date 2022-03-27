@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { API_IMAGE_URL } from "../../../constants";
-import { map } from 'lodash';
 import moment from 'moment';
 
 

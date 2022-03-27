@@ -1,8 +1,8 @@
-import React, {useEffect, useState, Fragment} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Button from "@atlaskit/button";
 import AddIcon from '@atlaskit/icon/glyph/add';
-import {toLower, isEmpty, values, filter, indexOf, map} from 'lodash';
+import {toLower, isEmpty, filter, map} from 'lodash';
 import DynamicTable from '@atlaskit/dynamic-table';
 
 import CreateModal from "../PostsModeration/CreateModal";

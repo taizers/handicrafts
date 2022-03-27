@@ -15,10 +15,6 @@ const FieldContainer = styled.div`
     width: 100%;
 `
 
-const SelectContainer = styled(FieldContainer)`
-    min-width: 150px;
-`
-
 export const SearchField = ({ search }) => {
     const [label, setLabel] = useState('');
     const [value, setValue] = useState('');

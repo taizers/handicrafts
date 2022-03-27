@@ -30,6 +30,7 @@ const Container = styled.div`
   color: var(--main-text);
   background-color: #e1edf4;
   height: 100vh;
+  margin-bottom: 20px;
   overflow-y: auto;
 `
 

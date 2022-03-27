@@ -1,14 +1,13 @@
-import React, {useEffect, useState, Fragment} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Button from "@atlaskit/button";
 import AddIcon from '@atlaskit/icon/glyph/add';
-import {toLower, isEmpty, values, filter, indexOf, map} from 'lodash';
+import {toLower, isEmpty, filter, map} from 'lodash';
 import DynamicTable from '@atlaskit/dynamic-table';
 
 import CreateModal from "../PostsModeration/CreateModal";
 import SearchField from "./SearchField/index";
-import {generatePath, Link} from "react-router-dom";
-import {API_IMAGE_URL, pathToProfile} from "../../constants";
+import {API_IMAGE_URL} from "../../constants";
 import TrashIcon from "@atlaskit/icon/glyph/trash";
 import {FormattedMessage} from "react-intl";
 
@@ -45,13 +44,7 @@ const head = () => (
                 width: 25,
             },
         ]
-    });
-
-const Login = styled(Link)`
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: blue;
-`;
+});
 
 const Image = styled.img`
   width: 100px;

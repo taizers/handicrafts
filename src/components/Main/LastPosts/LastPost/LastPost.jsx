@@ -42,10 +42,10 @@ const Date = styled.p`
   margin-top: 5px;
 `
 
-export const LastPost = ({ lastPost }) => {
+export const LastPost = ({ lastPost, getPost }) => {
   return (
       <LastPostItem>
-          <LinkItem to={generatePath(pathToPost, {id: lastPost.id})}>
+          <LinkItem to={generatePath(pathToPost, {id: lastPost.id})} onClick={() => getPost(lastPost.id)}>
               <Image src={`${API_IMAGE_URL}${lastPost?.images[0]?.image}`} alt={lastPost?.title} />
               <TextContainer>
                   <Title>{lastPost?.title}</Title>

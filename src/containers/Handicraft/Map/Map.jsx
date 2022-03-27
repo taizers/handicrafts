@@ -1,12 +1,9 @@
 import React, { useState } from "react";
-import { isEmpty } from "lodash";
 import {
   TileLayer,
   MapContainer,
   Marker,
-  Popup,
 } from "react-leaflet";
-import styled from 'styled-components';
 
 const maps = {
   base: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

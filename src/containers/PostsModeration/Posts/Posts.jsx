@@ -13,7 +13,6 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    padding-bottom: 100px;
     display: flex;
     flex-direction: column;
 `
@@ -43,11 +42,6 @@ const Date = styled.p`
     padding: 5px;
     color: gray;
     margin-bottom: 30px;
-`
-
-const Image = styled.img`
-    width: 200px;
-    height: 100px;
 `
 
 const Text = styled.p`

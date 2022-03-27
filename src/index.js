@@ -9,8 +9,6 @@ import reducer from './store/store';
 import rootSaga from './sagas/index';
 import history from "./history";
 import App from '../src/components/App/index';
-import { LOCALES } from "./locales/locales";
-
 
 const init = () => {
   const sagaMiddleware = createSagaMiddleware();

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { API_URL } from '../constants';
-import data from '../moki.json';
 import { isEmpty, isUndefined } from 'lodash';
 
 export const signIn = async (payload) => {
