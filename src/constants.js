@@ -1,6 +1,6 @@
-export const API_URL = 'http://46.101.183.227/api/';
-export const API_IMAGE_URL = 'http://46.101.183.227/storage/';
-export const API_AVATAR_IMAGE_URL = 'http://46.101.183.227/storage/avatars/';
+export const API_URL = 'http://api.handicrafts-belarus.website/api/';
+export const API_IMAGE_URL = 'http://api.handicrafts-belarus.website/storage/';
+export const API_AVATAR_IMAGE_URL = 'http://api.handicrafts-belarus.website/storage/avatars/';
 
 export const GET_POSTS = 'GET_POSTS';
 export const GET_WIDGETS_POSTS = 'GET_WIDGETS_POSTS';
@@ -115,21 +115,3 @@ export const pathToPostsTypes= '/posts';
 export const pathToFeatureActions= '/feature';
 export const pathToPost= '/post/:id';
 export const pathToMap = '/map';
-
-export const POSTS_TYPES = [
-    {
-        label: 'Ремёсла',
-        value: 'handicrafts',
-        image: 'https://i7.otzovik.com/2019/05/20/8221024/img/1428726_509889.jpeg'
-    },
-    {
-        label: 'Изделия',
-        value: 'goods',
-        image: 'https://www.kem.by/wp-content/uploads/remesla.jpg'
-    },
-    {
-        label: 'Будущие события',
-        value: 'feature',
-        image: 'https://podolskriamo.ru/files/image/12/44/64/-lg!0421.jpg'
-    },
-];
