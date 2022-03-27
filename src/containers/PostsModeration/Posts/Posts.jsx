@@ -78,7 +78,7 @@ export const Posts = ({post, deletePost, language}) => {
             {post && <TextContainer>
                 <Title>{title}</Title>
                 {subtitle && subtitle !== 'undefined' &&<SubTitle>{subtitle}</SubTitle>}
-                <Date>{moment(created_at, "YYYYMMDD").locale(language).fromNow()}</Date>
+                <Date>{moment(created_at).locale(language).format('LL')}</Date>
                 {getText(content)}
                 {!isEmpty(imagesList) && <SwiftSlider data={imagesList} height={300}/>}
                 <ButtonsContainer>

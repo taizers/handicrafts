@@ -89,7 +89,7 @@ function* watchCreateUser() {
 
 function* createUser({ payload }) {
     const token = yield select(selectToken);
-    yield console.log(payload);
+
     yield put(setCreateModalLoading(true));
     try {
         yield call(createUserApi, { payload, token});

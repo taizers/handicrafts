@@ -24,14 +24,12 @@ export const getUserApi = async (payload) => {
 };
 
 export const createUserApi = async (data) => {
-    console.log(data);
     const { payload, token } = data;
     return await axios.post( API_URL + "users", {...payload}, { headers: { Authorization: `Bearer ${token}` }})
     .then(response => response.data)
 };
 
 export const changeUserApi = async (data) => {
-    console.log(data);
     const { payload, token } = data;
     const formData = new FormData();
     if (!isUndefined(payload.avatar)) {

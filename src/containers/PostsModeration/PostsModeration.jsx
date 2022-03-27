@@ -67,7 +67,6 @@ export const PostsModeration = ({ posts, getPosts, setVisible, isVisible, isLoad
     };
 
     const onSearchPosts = (query) => {
-        console.log(query.date);
         const arr = filter(posts, post => {
             if (
                 ((query.title !== "") ? toLower(post.title).indexOf(toLower(query.title)) !== -1 : true ) &&

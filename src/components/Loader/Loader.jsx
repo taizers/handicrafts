@@ -15,7 +15,6 @@ const LoaderWrapper = styled.div`
 `
 
 export const Loader = ({ visible }) => {
-    console.log(visible);
     if (visible) {
       return (
         <LoaderWrapper>

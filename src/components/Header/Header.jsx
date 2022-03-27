@@ -102,7 +102,6 @@ export const Header = ({ user, userId, logOut }) => {
                             />
                         )}
                     >
-                        {console.log(user)}
                         <DropdownItemGroup>
                             {userId && <DropdownItem><Link to={generatePath(pathToProfile, {id: userId})}>{<FormattedMessage id={'nav_link_profile'}/>}</Link></DropdownItem>}
                             {userId && (user.role === 'admin' || user.role === 'owner') && <DropdownItem><Link to={pathToModeration}>{<FormattedMessage id={'nav_link_moderation'}/>}</Link></DropdownItem>}

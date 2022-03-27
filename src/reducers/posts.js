@@ -86,7 +86,6 @@ const reducer = (state = initialState, action) => {
                 types: action.payload,
             };
         case SET_CREATE_POST_LOADING:
-            console.log(action);
             return {
                 ...state,
                 modal: {

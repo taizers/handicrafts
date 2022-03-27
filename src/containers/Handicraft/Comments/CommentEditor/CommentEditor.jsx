@@ -24,7 +24,6 @@ export const CommentEditor = ({ comment, postId, createComment, editComment, sig
           
           createComment({comment: data, postId});
         }
-        console.log('ds');
         setCurrentEditComment('');
         }
         }

@@ -15,7 +15,6 @@ export const Map = ({ setCurrentPosition, currentPosition }) => {
     const MyComponent = () => {
         const map = useMapEvents({
             click: (e) => {
-                console.log([e.latlng.lat,e.latlng.lng]);
                 setCurrentPosition([e.latlng.lat,e.latlng.lng]);
             },
         })

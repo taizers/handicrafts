@@ -34,7 +34,7 @@ function* watchDeleteComment() {
 
 function* deleteComment({ payload }) {
     const token = yield select(selectToken);
-    yield console.log(payload);
+
     yield put(setCommentsLoading(true));
     try {
         yield call(deleteCommentApi, {payload, token});

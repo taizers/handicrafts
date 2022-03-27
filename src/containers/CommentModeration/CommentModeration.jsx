@@ -31,7 +31,7 @@ export const CommentModeration = ({ comments, getComments, deleteComment, editCo
                 return comment;
             }
         });
-        console.log(arr);
+
         setCommentsList(arr);
     };
 

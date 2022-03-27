@@ -140,14 +140,14 @@ export const CreateModal = ({
     const modalvalues = data[type];
 
     const dateNow = Date.now();
-    console.log(moment(dateNow, "MM-DD-YYYY"));
+
     const onCloseModal = () => {
         setVisible(false);
     };
 
     const onSubmitForm = (data) => {
         let creatingItem = null;
-        console.log(data);
+
         switch (type) {
             case 'post':
                 const { title, subtitle, content, date, type, links } = data;
@@ -220,7 +220,6 @@ export const CreateModal = ({
                 } else {
                     toast.error(<FormattedMessage id='toast.password_not_equal' />);
                 }
-                console.log(name);
                 if (files[0]?.file !== undefined) {
                     creatingItem = {
                         ...creatingItem,
@@ -291,7 +290,7 @@ export const CreateModal = ({
                 isRequired
                 validate={(value) =>  { setCategory(value); value?.value === 'feature' ? setDateVisible(true):setDateVisible(false)}} 
             >
-                {({ fieldProps, error }) => (
+                {({ fieldProps }) => (
                     <Fragment>
                         <Select
                             inputId="type"

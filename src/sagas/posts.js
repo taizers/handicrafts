@@ -52,11 +52,6 @@ function* getPosts({ payload }) {
     try {
         const data = yield call(getPostsApi, payload);
         yield put(getPostsSuccessed(data));
-        const features = yield data.slice().filter(post => post.type?.value === 'feature').sort((a, b) => moment(b.date, 'YYYY.MM.DD') - moment(a.date, 'YYYY.MM.DD')).splice(0,3);
-        const latests = yield data.slice().sort((a, b) => moment(b.created_at, 'DD.MM.YY') - moment(a.created_at, 'DD.MM.YY')).reverse().splice(0,3);
-
-        yield put(getFeatureActionsSuccessed(features));
-        yield put(getLatestsPostsSuccessed(latests));
     } catch (error) {
         yield toast.error(error.message);
     } finally {
@@ -126,7 +121,8 @@ function* getLatestsPosts() {
     yield put(setLatestsPostsLoading(true));
     try {
         const data = yield call(getLatestsPostsApi);
-        yield put(getLatestsPostsSuccessed(data));
+        const latests = yield data.slice().sort((a, b) => moment(b.created_at, 'DD.MM.YY') - moment(a.created_at, 'DD.MM.YY')).reverse().splice(0,3);
+        yield put(getLatestsPostsSuccessed(latests));
     } catch (error) {
         yield toast.error(error.message);
     } finally {
@@ -177,7 +173,8 @@ function* getFeatureActions({ payload }) {
     yield put(setFeatureActionsLoading(true));
     try {
         const data = yield call(getPostsApi, payload);
-        yield put(getFeatureActionsSuccessed(data.splice(0, 3)));
+        const features = yield data.slice().filter(post => post.type?.value === 'feature').sort((a, b) => moment(b.date, 'YYYY.MM.DD') - moment(a.date, 'YYYY.MM.DD')).splice(0,3);
+        yield put(getFeatureActionsSuccessed(features));
     } catch (error) {
         yield toast.error(error.message);
     } finally {

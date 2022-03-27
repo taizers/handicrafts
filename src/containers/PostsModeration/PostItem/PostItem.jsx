@@ -44,7 +44,7 @@ const TextContainer = styled.div`
     margin: 5px;
 `
 
-export const PostItem = ({ post, selectPost, selectedPost }) => {
+export const PostItem = ({ post, selectPost, selectedPost, language }) => {
     const onPostClick = () => {
         selectPost(post);
     }
@@ -54,7 +54,7 @@ export const PostItem = ({ post, selectPost, selectedPost }) => {
             <Image src={`${API_IMAGE_URL}${post?.images[0]?.image}`}  alt={post?.title} />
             <TextContainer>
                 <Title>{post?.title}</Title>
-                <Date>{moment(post?.created_at).format('LL')}</Date>
+                <Date>{moment(post?.created_at).locale(language).format('LL')}</Date>
             </TextContainer>    
 
         </ListItem>

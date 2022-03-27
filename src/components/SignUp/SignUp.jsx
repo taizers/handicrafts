@@ -43,7 +43,6 @@ export const SignUp = ({ signUp }) => {
       <ContainerInner>
         <Form
             onSubmit={(data) => {
-              console.log('form data', data);
               if (data.password === data.password_confirmation) {
                 signUp({data, history});
               } else {

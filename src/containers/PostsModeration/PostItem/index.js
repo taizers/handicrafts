@@ -1,6 +1,8 @@
 import { PostItem } from "./PostItem";
 import { connect } from 'react-redux';
 
+import {selectLanguage} from "../../../selectors/language";
+
 const mapDispathToProps = (dispath) => {
     return {
     }
@@ -8,6 +10,7 @@ const mapDispathToProps = (dispath) => {
 
 const mapStateToProps = (store) => {
     return {
+        language: selectLanguage(store).split(0,2),
     };
 };
 
